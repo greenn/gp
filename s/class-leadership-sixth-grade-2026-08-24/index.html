@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Практическая система классного руководства в шестом классе: второй год</title>
+<meta name="description" content="Практический отчёт о втором году классного руководства и работе с шестым классом.">
+<style>
+:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;background:Canvas;color:CanvasText;font:17px/1.68 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}main{max-width:980px;margin:0 auto;padding:34px 22px 80px}nav{margin:0 0 30px;font-size:14px}nav a{color:inherit}.doc{max-width:900px}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;margin:.2em 0 .45em}h2{font-size:1.65rem;margin-top:2.1em;border-top:1px solid color-mix(in srgb,CanvasText 18%,transparent);padding-top:1em}h3{font-size:1.23rem;margin-top:1.8em}p,li{max-width:82ch}blockquote{margin:1.2em 0;padding:.2em 1em;border-left:4px solid color-mix(in srgb,CanvasText 30%,transparent);background:color-mix(in srgb,CanvasText 4%,transparent)}table{border-collapse:collapse;width:100%;min-width:680px}th,td{text-align:left;vertical-align:top;border:1px solid color-mix(in srgb,CanvasText 18%,transparent);padding:9px 11px}th{background:color-mix(in srgb,CanvasText 7%,transparent)}.table-wrap{overflow-x:auto;margin:1.2em 0}.muted{opacity:.68}.loading{padding:40px 0}.mermaid{overflow-x:auto}.source-link{display:inline-block;margin-top:24px;font-size:14px}
+</style>
+</head>
+<body><main>
+<nav><a href="../../">← GPT Output</a></nav>
+<article id="content" class="doc"><div class="loading">Загрузка отчёта…</div></article>
+<a class="source-link" href="report.md">Markdown-исходник</a>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const root=document.getElementById('content');
+try{
+  const r=await fetch('./report.md');
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const md=await r.text();
+  root.innerHTML=marked.parse(md);
+  root.querySelectorAll('table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+  root.querySelectorAll('pre code.language-mermaid').forEach(code=>{const pre=code.parentElement;const div=document.createElement('div');div.className='mermaid';div.textContent=code.textContent;pre.replaceWith(div)});
+  mermaid.initialize({startOnLoad:false,securityLevel:'loose',theme:'default'});
+  await mermaid.run({querySelector:'.mermaid'});
+}catch(e){root.innerHTML='<h1>Отчёт</h1><p>Не удалось загрузить Markdown. Откройте <a href="report.md">исходный файл</a>.</p>'}
+</script>
+</body>
+</html>
