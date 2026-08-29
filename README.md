@@ -11,5 +11,6 @@
 
 ## Публикации
 
+- [`dv/whrg-2026/blank/ui/`](./dv/whrg-2026/blank/ui/) — адаптивный концепт интерфейса результатов World Humanoid Robot Games 2026.
 - [`ш/class-leadership-sixth-grade-2026-08-24/`](./ш/class-leadership-sixth-grade-2026-08-24/) — практическая система классного руководства в шестом классе: второй год.
 - [`ds/codex-model-report-2026-08-20/`](./ds/codex-model-report-2026-08-20/) — сравнение экономичности моделей Codex при недельном токен-бюджете.
