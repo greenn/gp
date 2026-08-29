@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#8d91df">
+  <title>WHRG 2026 · Team</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./team.css">
+</head>
+<body>
+  <main class="app-shell team-shell">
+    <header class="team-topbar">
+      <a class="back-link" href="./">← Все результаты</a>
+      <div class="team-top-actions">
+        <a class="data-download" href="./teams.json" download>teams.json ↓</a>
+        <button id="downloadTeamJson" class="data-download buttonlike" type="button">JSON команды ↓</button>
+      </div>
+    </header>
+
+    <section id="teamHero" class="team-hero glass-card">
+      <div class="team-loading">Загрузка профиля команды…</div>
+    </section>
+
+    <section id="teamContent" class="team-content" hidden>
+      <section class="team-main-column">
+        <article id="whrgCard" class="detail-card glass-card"></article>
+        <article id="robotCard" class="detail-card glass-card"></article>
+        <article id="resultsCard" class="detail-card glass-card"></article>
+      </section>
+      <aside class="team-side-column">
+        <article id="galleryCard" class="detail-card glass-card"></article>
+        <article id="sourcesCard" class="detail-card glass-card"></article>
+      </aside>
+    </section>
+
+    <section id="notFound" class="team-not-found glass-card" hidden>
+      <h1>Команда не найдена</h1>
+      <p>В текущем наборе результатов такой команды нет.</p>
+      <a class="back-link" href="./">Вернуться к результатам</a>
+    </section>
+  </main>
+  <script src="./data.js"></script>
+  <script src="./team.js"></script>
+</body>
+</html>

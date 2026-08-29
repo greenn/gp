@@ -1,0 +1,135 @@
+{
+  "updated": "2026-08-29",
+  "note": "Curated team metadata layered on top of WHRG 2026 results in data.js. If a team is absent here, team.html builds a generic profile from the event results.",
+  "teams": [
+    {
+      "id": "spqr-sapienza",
+      "name": "SPQR · Sapienza University of Rome",
+      "aliases": ["SPQR Team", "SPQR", "SPQR · Sapienza University of Rome"],
+      "country": "IT",
+      "countryName": "Italy",
+      "city": "Rome",
+      "organization": "Sapienza University of Rome · DIAG",
+      "type": "University research team",
+      "founded": 1998,
+      "website": "https://spqr.diag.uniroma1.it/",
+      "summary": "Italian RoboCup team from Sapienza University of Rome. At WHRG 2026 it reached the final of the 5v5 Large Division and won silver, losing 10–1 to Tsinghua Hephaestus.",
+      "whrg2026": {
+        "event": "Football · 5×5 Large Division",
+        "place": 2,
+        "medal": "silver",
+        "finalOpponent": "Tsinghua Hephaestus",
+        "finalScore": "1–10",
+        "note": "Maker Faire Rome described SPQR as the only non-Chinese team to reach the semifinals of this bracket."
+      },
+      "peopleAtBeijing": ["Vincenzo Suriani", "Valerio Spagnoli", "Michele Brienza", "Eugenio Bugli", "John Marcelo"],
+      "robots": {
+        "whrgPlatform": "Booster T2",
+        "whrgCount": null,
+        "whrgCountNote": "The event was 5×5. SPQR publicly said it was using new Booster T2 robots in Beijing, but the exact number of T2 units in the delegation was not stated in the sources used here.",
+        "otherPlatforms": [
+          "NAO v6 — SPQR's Standard Platform League setup is described as a team of 7 NAO v6 robots.",
+          "Booster T1 — the March 2026 RoboCup team description stated that SPQR owned one competition-ready T1 before the later T2 deployment."
+        ]
+      },
+      "robotSpecs": {
+        "model": "Booster T2 family",
+        "scopeNote": "Manufacturer-level T2 specifications; the exact SPQR edition/configuration used at WHRG 2026 is not independently confirmed.",
+        "height": "~1.4 m",
+        "weight": "~42–43 kg",
+        "dof": "31",
+        "legDof": "6 per leg",
+        "armDof": "7 per arm",
+        "waistDof": "3",
+        "headDof": "2",
+        "maxJointTorque": "140 N·m",
+        "walkingSpeed": "up to 3 m/s",
+        "battery": "48 V · 10 Ah",
+        "walkingEndurance": "~2 h continuous walking",
+        "maxDualArmPayload": "10 kg",
+        "vision": "Binocular head camera + binocular abdominal camera",
+        "compute": "Education: 375 TOPS; Pro: Jetson Thor T5000, 2,070 TFLOPS (manufacturer specification)"
+      },
+      "images": [
+        {
+          "kind": "robot",
+          "url": "https://www.booster.tech/_astro/specification-t2-p3.ChyF-VA9_Z1rD17K.webp",
+          "caption": "Booster T2 platform — the model SPQR said it used in Beijing for WHRG 2026.",
+          "credit": "Booster Robotics",
+          "sourceUrl": "https://www.booster.tech/booster-t2/"
+        },
+        {
+          "kind": "team-history",
+          "url": "https://spqr.diag.uniroma1.it/assets/publications/cover.png",
+          "caption": "SPQR humanoid soccer robot from the team's official site. This image shows an earlier NAO-based setup, not the WHRG 2026 T2 hardware.",
+          "credit": "SPQR Team",
+          "sourceUrl": "https://spqr.diag.uniroma1.it/"
+        }
+      ],
+      "sources": [
+        {"label": "SPQR Team · Beijing update", "url": "https://it.linkedin.com/company/spqr-team", "note": "SPQR states it is in Beijing using new Booster T2 robots."},
+        {"label": "ANSA · WHRG 2026 silver", "url": "https://www.ansa.it/canale_legalita_scuola/notizie/universita_news/2026/08/28/maker-faire-rome-arriva-il-torneo-di-calcio-internazionale-per-robot-umanoidi_d6a13b5b-c3a5-4dd0-8838-0d0b500cef52.html", "note": "Silver medal and Beijing representatives."},
+        {"label": "Ta Kung Pao · 5v5 final", "url": "https://www.tkww.hk/epaper/view/newsDetail/2092679801201627136.html", "note": "Tsinghua Hephaestus beat SPQR 10–1; article says SPQR used robots from Booster Robotics."},
+        {"label": "Booster · T2 specifications", "url": "https://www.booster.tech/booster-t2/", "note": "Manufacturer specifications for the T2 platform."},
+        {"label": "RoboCup HSL · SPQR 2026 TDP", "url": "https://hsl.robocup.org/wp-content/uploads/2026/03/SPQR_Team-tdp-697e8ec26728a.pdf", "note": "Team structure and earlier T1 ownership."}
+      ]
+    },
+    {
+      "id": "tsinghua-hephaestus",
+      "name": "Tsinghua Hephaestus",
+      "aliases": ["Tsinghua Hephaestus", "Tsinghua Huoshen"],
+      "country": "CN",
+      "countryName": "China",
+      "city": "Beijing",
+      "organization": "Tsinghua University · Department of Automation",
+      "type": "University research team",
+      "founded": 2004,
+      "website": "https://tsinghuahephaestus.com/",
+      "summary": "Tsinghua University humanoid football team and WHRG 2026 champion of the 5v5 Large Division.",
+      "whrg2026": {"event": "Football · 5×5 Large Division", "place": 1, "medal": "gold", "finalOpponent": "SPQR · Sapienza University of Rome", "finalScore": "10–1"},
+      "robots": {"whrgPlatform": null, "whrgCount": null, "whrgCountNote": "The sources used for this project confirm the team and result, but not a precise WHRG 2026 hardware configuration. Tsinghua Hephaestus used Booster T1 at RoboCup 2026."},
+      "sources": [
+        {"label": "Tsinghua University · team background", "url": "https://www.tsinghua.edu.cn/en/info/1245/14899.htm"},
+        {"label": "Ta Kung Pao · WHRG final", "url": "https://www.tkww.hk/epaper/view/newsDetail/2092679801201627136.html"},
+        {"label": "Booster · RoboCup 2026 platforms", "url": "https://www.booster.tech/about-us/"}
+      ]
+    },
+    {
+      "id": "gmo-robots",
+      "name": "GMO Robots",
+      "aliases": ["GMO Robots"],
+      "country": "JP",
+      "countryName": "Japan",
+      "organization": "GMO Internet Group / GMO AI & Robotics",
+      "type": "Corporate robotics team",
+      "website": "https://humanoid-lab.gmo/en/",
+      "summary": "Japanese humanoid robotics program. In the published WHRG 2026 1500 m protocol, GMO Robots placed 7th in 7:43.89.",
+      "whrg2026": {"event": "Athletics · 1500 m", "place": 7, "result": "7:43.89"},
+      "robots": {"whrgPlatform": null, "whrgCount": null, "whrgCountNote": "GMO operates several humanoid platforms, but the exact model used for this WHRG 1500 m result is not confirmed in the sources currently attached to the project."},
+      "sources": [
+        {"label": "GMO Humanoid Lab", "url": "https://humanoid-lab.gmo/en/"},
+        {"label": "WHRG result protocol", "url": "https://robopodium.com/results"}
+      ]
+    },
+    {
+      "id": "hku-smash",
+      "name": "HKU SMASH",
+      "aliases": ["HKU SMASH"],
+      "country": "HK",
+      "countryName": "Hong Kong, China",
+      "organization": "The University of Hong Kong",
+      "type": "University team",
+      "summary": "HKU SMASH won silver in the WHRG 2026 1×1 table-tennis event.",
+      "whrg2026": {"event": "Table Tennis · 1×1", "place": 2, "medal": "silver"},
+      "robots": {"whrgPlatform": "AgiBot-based competition robot", "whrgCount": null, "whrgCountNote": "Xinhua photographs show the HKU SMASH robot wearing AgiBot branding; the exact commercial model/configuration is not identified in the caption."},
+      "images": [
+        {"kind": "competition", "url": "https://english.news.cn/20260824/1b0366732305406694896cdbc8f141d2/202608241b0366732305406694896cdbc8f141d2_20260824e5c654c051c84e90bd19aed7a2efeacb.jpg", "caption": "HKU SMASH competing in table tennis at WHRG 2026.", "credit": "Xinhua / Sun Fei", "sourceUrl": "https://english.news.cn/20260824/1b0366732305406694896cdbc8f141d2/c.html"},
+        {"kind": "competition", "url": "https://english.news.cn/20260824/1b0366732305406694896cdbc8f141d2/202608241b0366732305406694896cdbc8f141d2_20260824248432863533498192c3ee8570a1f07a.jpg", "caption": "Close view of the HKU SMASH robot during a WHRG 2026 match.", "credit": "Xinhua / Sun Fei", "sourceUrl": "https://english.news.cn/20260824/1b0366732305406694896cdbc8f141d2/c.html"}
+      ],
+      "sources": [
+        {"label": "Xinhua · WHRG 2026 photo report", "url": "https://english.news.cn/20260824/1b0366732305406694896cdbc8f141d2/c.html"},
+        {"label": "WHRG result coverage", "url": "https://app.xinhuanet.com/news/article.html?articleId=2026082632c843335abf4055bcab366458287a46"}
+      ]
+    }
+  ]
+}
