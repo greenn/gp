@@ -1,0 +1,22 @@
+{
+  "updated": "2026-08-29",
+  "note": "Additional real-world team and robot photography. Each image keeps its original source URL and credit. A photo may illustrate the team's wider humanoid program when the exact WHRG competition unit is not confirmed; captions state this explicitly.",
+  "teams": {
+    "gmo-robots": [
+      {
+        "kind": "team",
+        "url": "https://ai-robotics.gmo/wp/wp-content/uploads/2026/06/05_gmo_robots.jpg",
+        "caption": "GMO Robots: участники легкоатлетической команды GMO Internet Group и гуманоид проекта на беговой дорожке. Это официальный снимок проекта GMO Robots.",
+        "credit": "GMO AI & Robotics / GMO Internet Group",
+        "sourceUrl": "https://ai-robotics.gmo/en/news/article/gmo-unitree/"
+      },
+      {
+        "kind": "robot",
+        "url": "https://robotstart.info/imgs/zoom1/102531.jpg",
+        "caption": "Гуманоид в GMO Humanoid Lab в Сибуе. Реальный робот из исследовательской программы GMO; точное соответствие аппарату, бежавшему 1500 м на WHRG 2026, не подтверждено.",
+        "credit": "RobotStart · GMO Humanoid Lab",
+        "sourceUrl": "https://robotstart.info/article/2026/04/09/381768.html"
+      }
+    ]
+  }
+}
