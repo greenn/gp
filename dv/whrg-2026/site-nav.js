@@ -2,7 +2,7 @@
   const root = document.getElementById('siteNav');
   if (!root) return;
   const active = root.dataset.active || '';
-  const VERSION = '0.0.30';
+  const VERSION = '0.0.31';
   window.WHRG_VERSION = VERSION;
   const links = [
     ['./','Результаты','home'],

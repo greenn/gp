@@ -1,0 +1,4 @@
+version: 0.0.31
+date: 2026-08-29
+rule: increment patch for each same-day change; on a new change-day increment minor and reset patch to 1
+note: exact generated Tiangong hero image is now used on the main page
