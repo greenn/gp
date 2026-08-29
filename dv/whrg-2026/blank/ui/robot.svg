@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 860" role="img" aria-labelledby="title desc">
+  <title id="title">Tiangong Ultra inspired humanoid robot</title>
+  <desc id="desc">Stylized silver humanoid competition robot for the WHRG 2026 dashboard concept.</desc>
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".36" stop-color="#dbe7ff"/>
+      <stop offset=".72" stop-color="#98abd1"/>
+      <stop offset="1" stop-color="#eef4ff"/>
+    </linearGradient>
+    <linearGradient id="metalDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#27324d"/>
+      <stop offset=".55" stop-color="#11182b"/>
+      <stop offset="1" stop-color="#475678"/>
+    </linearGradient>
+    <linearGradient id="visor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14203d"/>
+      <stop offset=".65" stop-color="#050915"/>
+      <stop offset="1" stop-color="#283b65"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8e7dff"/>
+      <stop offset=".52" stop-color="#61d8ff"/>
+      <stop offset="1" stop-color="#a9efff"/>
+    </linearGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#3a2d73" flood-opacity=".28"/>
+    </filter>
+  </defs>
+
+  <ellipse cx="300" cy="815" rx="202" ry="27" fill="#6369c6" opacity=".18"/>
+
+  <g filter="url(#shadow)">
+    <!-- head -->
+    <path d="M215 78 Q310 22 405 80 L430 153 Q421 223 354 248 L274 248 Q204 222 190 153Z" fill="url(#metal)" stroke="#edf6ff" stroke-width="5"/>
+    <path d="M223 103 Q307 65 393 104 L404 161 Q387 205 348 219 L278 218 Q234 204 213 159Z" fill="url(#visor)"/>
+    <path d="M244 151 L290 142 L281 164 L246 170Z" fill="url(#blue)" filter="url(#glow)"/>
+    <path d="M377 151 L331 142 L340 164 L375 170Z" fill="url(#blue)" filter="url(#glow)"/>
+    <circle cx="202" cy="142" r="26" fill="url(#metalDark)" stroke="#9ee7ff" stroke-width="5"/>
+    <circle cx="418" cy="142" r="26" fill="url(#metalDark)" stroke="#9ee7ff" stroke-width="5"/>
+    <path d="M270 237 L350 237 L364 286 L256 286Z" fill="url(#metalDark)"/>
+
+    <!-- torso -->
+    <path d="M208 278 Q309 238 413 281 L458 411 Q446 527 382 580 L241 580 Q174 522 160 410Z" fill="url(#metal)" stroke="#f6f9ff" stroke-width="5"/>
+    <path d="M245 300 Q310 274 377 301 L397 422 Q382 486 347 515 L274 515 Q237 486 222 423Z" fill="#eef3ff" opacity=".9"/>
+    <path d="M263 341 L357 341 L369 397 L251 397Z" fill="url(#metalDark)" opacity=".94"/>
+    <path d="M272 357 L348 357" stroke="url(#blue)" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+    <text x="310" y="435" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#425278">TIANGONG</text>
+    <text x="310" y="464" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#6b78a0">ULTRA</text>
+    <text x="310" y="495" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#6c66c8">01</text>
+
+    <!-- left shoulder and arm -->
+    <path d="M177 298 Q112 304 77 359 L105 432 Q153 425 190 390 L214 323Z" fill="url(#metal)" stroke="#f4f8ff" stroke-width="4"/>
+    <path d="M99 422 Q64 457 53 548 L101 575 Q143 508 148 438Z" fill="url(#metalDark)"/>
+    <path d="M63 536 Q42 608 70 671 L117 658 Q126 592 102 548Z" fill="url(#metal)" stroke="#eff5ff" stroke-width="4"/>
+    <path d="M73 664 Q64 710 96 741 L130 715 Q127 678 112 654Z" fill="url(#metalDark)"/>
+    <path d="M94 731 Q84 760 104 790 L131 782 L146 748 L130 717Z" fill="url(#metal)"/>
+
+    <!-- right shoulder and arm -->
+    <path d="M443 299 Q507 307 544 360 L517 431 Q468 426 431 391 L407 324Z" fill="url(#metal)" stroke="#f4f8ff" stroke-width="4"/>
+    <path d="M519 420 Q555 460 567 548 L519 575 Q477 509 472 438Z" fill="url(#metalDark)"/>
+    <path d="M557 536 Q580 607 552 671 L504 658 Q495 592 519 548Z" fill="url(#metal)" stroke="#eff5ff" stroke-width="4"/>
+    <path d="M547 664 Q556 709 524 741 L490 715 Q493 679 508 654Z" fill="url(#metalDark)"/>
+    <path d="M526 729 Q544 760 526 792 L495 783 L480 749 L491 716Z" fill="url(#metal)"/>
+
+    <!-- hips -->
+    <path d="M230 570 L390 570 L414 642 Q365 680 310 681 Q252 680 205 642Z" fill="url(#metalDark)"/>
+    <path d="M255 585 L365 585 L375 626 Q342 650 310 650 Q276 650 245 626Z" fill="url(#metal)"/>
+
+    <!-- legs -->
+    <path d="M228 631 Q190 684 181 766 L235 792 Q277 724 285 657Z" fill="url(#metal)" stroke="#f3f7ff" stroke-width="4"/>
+    <path d="M392 631 Q430 684 439 766 L385 792 Q343 724 335 657Z" fill="url(#metal)" stroke="#f3f7ff" stroke-width="4"/>
+    <path d="M180 758 L235 781 L224 829 L153 829 Q151 793 180 758Z" fill="url(#metalDark)"/>
+    <path d="M440 758 L385 781 L396 829 L467 829 Q469 793 440 758Z" fill="url(#metalDark)"/>
+
+    <!-- accent seams -->
+    <path d="M184 360 L131 385 M436 360 L489 385 M215 535 L268 552 M405 535 L352 552" stroke="#82dfff" stroke-width="3" opacity=".7"/>
+    <circle cx="310" cy="264" r="7" fill="#7edfff" filter="url(#glow)"/>
+  </g>
+</svg>
