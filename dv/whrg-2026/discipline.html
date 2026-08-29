@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#8d91df">
+  <title>WHRG 2026 · Дисциплина</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./discipline.css">
+</head>
+<body>
+  <main class="app-shell discipline-shell">
+    <header class="discipline-topbar">
+      <a class="back-link" href="./">← Результаты</a>
+      <a class="back-link" href="./disciplines.html">Все 51 дисциплина</a>
+    </header>
+
+    <section id="disciplineHero" class="discipline-hero glass-card">
+      <div class="discipline-loading">Загрузка дисциплины…</div>
+    </section>
+
+    <section id="disciplineContent" class="discipline-content" hidden>
+      <section class="discipline-main">
+        <article id="descriptionCard" class="detail-card glass-card"></article>
+        <article id="placementsCard" class="detail-card glass-card"></article>
+      </section>
+      <aside class="discipline-side">
+        <article id="factsCard" class="detail-card glass-card"></article>
+        <article id="sourceCard" class="detail-card glass-card"></article>
+      </aside>
+    </section>
+
+    <section id="disciplineNotFound" class="discipline-not-found glass-card" hidden>
+      <h1>Дисциплина не найдена</h1>
+      <a class="back-link" href="./disciplines.html">Открыть полный список</a>
+    </section>
+  </main>
+  <script src="./data.js"></script>
+  <script src="./extras.js"></script>
+  <script src="./discipline-info.js"></script>
+  <script src="./discipline.js"></script>
+</body>
+</html>
