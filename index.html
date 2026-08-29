@@ -5,34 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GPT Output</title>
 <style>
-body{margin:0;background:#fff;color:#1f2328;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}main{max-width:860px;margin:0 auto;padding:48px 24px}h1{font-size:2rem;margin-bottom:.3em}.muted{color:#59636e}.card{display:block;margin:24px 0;padding:20px;border:1px solid #d0d7de;border-radius:10px;text-decoration:none;color:inherit}.card:hover{background:#f6f8fa}.card h2{margin:0 0 6px;font-size:1.2rem}.path{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9rem;color:#59636e}</style>
+:root{--ink:#1f2328;--muted:#59636e;--line:#d0d7de;--soft:#f6f8fa;--accent:#0969da}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}main{max-width:860px;margin:0 auto;padding:48px 24px}h1{font-size:2rem;margin:0 0 .3em}.muted{color:var(--muted);margin:0}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 10px}.filter{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);padding:7px 12px;cursor:pointer;font:600 14px/1.2 inherit}.filter:hover{border-color:var(--accent);color:var(--accent)}.filter[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:#fff}.filter-count{opacity:.72;font-weight:500}.result{min-height:1.5em;margin:0 0 4px;color:var(--muted);font-size:.9rem}.card{display:block;position:relative;margin:20px 0;padding:20px 72px 20px 20px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit;transition:background .15s,border-color .15s}.card:hover{background:var(--soft);border-color:#8c959f}.card[hidden]{display:none}.card::after{content:attr(data-tag);position:absolute;right:18px;top:18px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;color:var(--muted);font:600 .75rem/1 ui-monospace,SFMono-Regular,Consolas,monospace}.card h2{margin:0 0 6px;font-size:1.2rem}.path{margin-top:10px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9rem;color:var(--muted)}@media(max-width:480px){main{padding:32px 16px}.card{padding:18px 18px 18px 18px}.card::after{position:static;display:inline-block;margin-bottom:10px;float:right}.card h2{clear:both}}
+</style>
 </head>
 <body><main>
 <h1>GPT Output</h1>
 <p class="muted">Публичные материалы, подготовленные GPT.</p>
-<a class="card" href="dv/kulibin/">
-<h2>Иван Кулибин — механик и изобретатель</h2>
-<div>Информационная страница о проекте однопролётного моста через Неву, часах-яйце, самокатке и водоходе; с историческими изображениями и музейными моделями.</div>
-<div class="path">dv/kulibin/</div>
-</a>
-<a class="card" href="dv/slobodchikov_isaev_illustrations_catalog/">
-<h2>Слободчиков и Исаев — каталог иллюстраций</h2>
-<div>24 схемы и таблицы из работ по психологии развития и психологии человека, с поиском и ссылками на страницы книг.</div>
-<div class="path">dv/slobodchikov_isaev_illustrations_catalog/</div>
-</a>
-<a class="card" href="dv/whrg-2026/">
-<h2>WHRG 2026 — интерактивные результаты</h2>
-<div>51 дисциплина World Humanoid Robot Games 2026: реальные опубликованные места, категории, фильтры и отдельный просмотр результатов команд не из Китая.</div>
-<div class="path">dv/whrg-2026/</div>
-</a>
-<a class="card" href="ш/class-leadership-sixth-grade-2026-08-24/">
-<h2>Практическая система классного руководства в шестом классе: второй год</h2>
-<div>Приоритеты второго года, дисциплина, самостоятельность, родители, рабочая нагрузка и дорожная карта 6 класса.</div>
-<div class="path">ш/class-leadership-sixth-grade-2026-08-24/</div>
-</a>
-<a class="card" href="ds/codex-model-report-2026-08-20/">
-<h2>Сравнение экономичности моделей Codex</h2>
-<div>Отчёт по Sol, Terra, Luna, GPT‑5.5, GPT‑5.4 и GPT‑5.4 Mini.</div>
-<div class="path">ds/codex-model-report-2026-08-20/</div>
-</a>
-</main></body></html>
+<nav class="filters" aria-label="Фильтр публикаций" id="filters"></nav>
+<p class="result" id="result" aria-live="polite"></p>
+<section id="publications" aria-label="Публикации">
+<a class="card" href="dv/kulibin/"><h2>Иван Кулибин — механик и изобретатель</h2><div>Информационная страница о проекте однопролётного моста через Неву, часах-яйце, самокатке и водоходе; с историческими изображениями и музейными моделями.</div><div class="path">dv/kulibin/</div></a>
+<a class="card" href="dv/slobodchikov_isaev_illustrations_catalog/"><h2>Слободчиков и Исаев — каталог иллюстраций</h2><div>24 схемы и таблицы из работ по психологии развития и психологии человека, с поиском и ссылками на страницы книг.</div><div class="path">dv/slobodchikov_isaev_illustrations_catalog/</div></a>
+<a class="card" href="dv/whrg-2026/"><h2>WHRG 2026 — интерактивные результаты</h2><div>51 дисциплина World Humanoid Robot Games 2026: реальные опубликованные места, категории, фильтры и отдельный просмотр результатов команд не из Китая.</div><div class="path">dv/whrg-2026/</div></a>
+<a class="card" href="ш/class-leadership-sixth-grade-2026-08-24/"><h2>Практическая система классного руководства в шестом классе: второй год</h2><div>Приоритеты второго года, дисциплина, самостоятельность, родители, рабочая нагрузка и дорожная карта 6 класса.</div><div class="path">ш/class-leadership-sixth-grade-2026-08-24/</div></a>
+<a class="card" href="ds/codex-model-report-2026-08-20/"><h2>Сравнение экономичности моделей Codex</h2><div>Отчёт по Sol, Terra, Luna, GPT‑5.5, GPT‑5.4 и GPT‑5.4 Mini.</div><div class="path">ds/codex-model-report-2026-08-20/</div></a>
+</section>
+</main>
+<script>
+const cards=[...document.querySelectorAll('.card')];
+const filters=document.querySelector('#filters');
+const result=document.querySelector('#result');
+const tags=new Map();
+cards.forEach(card=>{const tag=card.getAttribute('href').split('/').filter(Boolean)[0];card.dataset.tag=tag;tags.set(tag,(tags.get(tag)||0)+1)});
+function makeButton(tag,label,total){const button=document.createElement('button');button.className='filter';button.type='button';button.dataset.filter=tag;button.innerHTML=`${label} <span class="filter-count">${total}</span>`;return button}
+filters.append(makeButton('all','Все',cards.length));
+[...tags].sort(([a],[b])=>a.localeCompare(b,'ru')).forEach(([tag,total])=>filters.append(makeButton(tag,tag,total)));
+function setFilter(tag,{writeHash=true}={}){const selected=tags.has(tag)?tag:'all';let shown=0;cards.forEach(card=>{const visible=selected==='all'||card.dataset.tag===selected;card.hidden=!visible;if(visible)shown++});filters.querySelectorAll('.filter').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===selected)));result.textContent=selected==='all'?`Все публикации: ${shown}`:`Раздел «${selected}»: ${shown}`;if(writeHash)history.replaceState(null,'',selected==='all'?location.pathname:`#${encodeURIComponent(selected)}`)}
+filters.addEventListener('click',event=>{const button=event.target.closest('.filter');if(button)setFilter(button.dataset.filter)});
+setFilter(decodeURIComponent(location.hash.slice(1)||'all'),{writeHash:false});
+</script>
+</body></html>
