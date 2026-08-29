@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6f68a5">
+  <title>WHRG 2026 — Results UI</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M11 13 24 6l13 7 2 15-7 10-8 4-8-4-7-10 2-15Z" fill="rgba(255,255,255,.28)" stroke="white" stroke-width="2"/><path d="m15 19 9-5 9 5-2 9-7 4-7-4-2-9Z" fill="#40507a"/><path d="m18 21 5-1-2 4-4 1 1-4Zm12 0-5-1 2 4 4 1-1-4Z" fill="#92e2ff"/></svg>
+        </div>
+        <div><h1>WHRG 2026</h1><p>World Humanoid Robot Games</p></div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11 12 4l9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>Overview</button>
+        <button class="nav-btn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="7" r="3"/><path d="M2 21c0-4 2-7 6-7s6 3 6 7M16 4v5m-2-2h4M15 13l4 4m0-4-4 4"/></svg>Results</button>
+        <button class="nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 10h18"/></svg>Schedule</button>
+        <button class="nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 5h8M9 3h6v4H9zM6 7c0 5 2 8 6 8s6-3 6-8M12 15v4M8 21h8"/></svg>Teams</button>
+        <button class="nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="5"/><path d="m9 12-2 9 5-3 5 3-2-9"/></svg>Medals</button>
+      </nav>
+
+      <div class="top-actions">
+        <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" placeholder="Search teams, events…" aria-label="Search results"></label>
+        <button class="icon-btn" aria-label="Notifications">🔔</button>
+        <div class="avatar" aria-label="Profile">🤖</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="robot-stage">
+        <div class="edition-tag"><i></i> Featured robot · Beijing 2026</div>
+        <img class="robot-art" src="./robot.svg" alt="Stylized Tiangong Ultra humanoid robot">
+      </div>
+
+      <div class="radar-panel" aria-label="Performance overview">
+        <div class="radar-wrap">
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <defs><linearGradient id="radarStroke" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".48" stop-color="#b8a4ff"/><stop offset="1" stop-color="#79ddff"/></linearGradient></defs>
+            <circle class="radar-grid" cx="200" cy="200" r="142"/><circle class="radar-grid" cx="200" cy="200" r="105"/><circle class="radar-grid" cx="200" cy="200" r="69"/>
+            <path class="radar-axis" d="M200 58v284M77 129l246 142M77 271l246-142"/>
+            <polygon class="radar-shape" points="200,77 317,132 307,263 200,318 91,266 101,131"/>
+          </svg>
+          <div class="rank-number">01</div>
+          <div class="metric m-top">100m<strong>8.64 s</strong></div>
+          <div class="metric m-ne">Balance<strong>9.4</strong></div>
+          <div class="metric m-se">Agility<strong>9.1</strong></div>
+          <div class="metric m-bottom">Finals<strong>06</strong></div>
+          <div class="metric m-sw">Speed<strong>11.6 m/s</strong></div>
+          <div class="metric m-nw">Stability<strong>9.6</strong></div>
+        </div>
+      </div>
+
+      <section class="profile">
+        <h2>Tiangong Ultra</h2>
+        <div class="teamline"><span class="team-crest">TGR</span> Beijing Humanoid Robot Innovation Center</div>
+        <div class="headline-stats">
+          <article class="stat-card primary"><div class="stat-icon">🏅</div><div class="stat-label">Featured</div><div class="stat-value">#01</div></article>
+          <article class="stat-card"><div class="stat-icon">🏆</div><div class="stat-label">Finals</div><div class="stat-value">06</div></article>
+          <article class="stat-card light"><div class="stat-icon">📈</div><div class="stat-label">100m</div><div class="stat-value">8.64s</div></article>
+        </div>
+        <div class="info-grid">
+          <article class="info-card"><div class="mini-icon">↕</div><div><small>Height</small><b>Humanoid class</b></div></article>
+          <article class="info-card"><div class="mini-icon">⚙</div><div><small>Type</small><b>Full-size robot</b></div></article>
+          <article class="info-card"><div class="mini-icon">🏃</div><div><small>Category</small><b>Track & field</b></div></article>
+          <article class="info-card"><div class="mini-icon flag">🇨🇳</div><div><small>Country</small><b>China</b></div></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="results-area">
+      <section class="glass-card table-card">
+        <div class="filters-row">
+          <div class="tabs" aria-label="Result period">
+            <button class="tab live">Live</button>
+            <button class="tab">Yesterday</button>
+            <button class="tab active">Today</button>
+            <button class="tab">Upcoming</button>
+            <button class="tab">Archived</button>
+          </div>
+          <button class="filter-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></svg>Filters</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="results-table">
+            <thead><tr><th>Date</th><th>Event</th><th>Result</th><th>Score / Time</th><th>Notes</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>26 Aug 2026</td><td><div class="event-cell"><span class="event-icon">🏃</span><div><b>100m Sprint</b><small>Final</small></div></div></td><td><span class="badge win">Win</span></td><td><span class="score">8.64 s</span><span class="badge record">PB</span></td><td>Track final</td><td class="medal">🥇</td></tr>
+              <tr><td>25 Aug 2026</td><td><div class="event-cell"><span class="event-icon">🏃</span><div><b>400m</b><small>Final</small></div></div></td><td><span class="badge win">Final</span></td><td><span class="score">—</span></td><td>Performance run</td><td class="medal">🏅</td></tr>
+              <tr><td>24 Aug 2026</td><td><div class="event-cell"><span class="event-icon">⚽</span><div><b>Football 3v3</b><small>Showcase</small></div></div></td><td><span class="badge win">Played</span></td><td><span class="score">2 – 1</span></td><td>Team event</td><td class="medal">•</td></tr>
+              <tr><td>24 Aug 2026</td><td><div class="event-cell"><span class="event-icon">🥋</span><div><b>Wushu</b><small>Final</small></div></div></td><td><span class="badge win">Final</span></td><td><span class="score">9.48</span></td><td>Judge score</td><td class="medal">🏅</td></tr>
+              <tr><td>23 Aug 2026</td><td><div class="event-cell"><span class="event-icon">🤸</span><div><b>Obstacle Run</b><small>Heat</small></div></div></td><td><span class="badge win">Qualified</span></td><td><span class="score">—</span></td><td>Autonomous run</td><td class="medal">•</td></tr>
+              <tr><td>22 Aug 2026</td><td><div class="event-cell"><span class="event-icon">🏃</span><div><b>4×100m Relay</b><small>Final</small></div></div></td><td><span class="badge second">2nd</span></td><td><span class="score">—</span></td><td>Team China</td><td class="medal">🥈</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-footer"><span>Showing 1–6 prototype rows</span><button class="view-btn">View full results ›</button></div>
+      </section>
+
+      <aside class="glass-card recent-card">
+        <div class="section-title"><h3>Recent Matches</h3><button>View all</button></div>
+        <div class="match-list">
+          <article class="match"><div><small>100m Sprint · Final</small><b>Tiangong Ultra</b><br><b>Field</b></div><div class="match-score">8.64 s</div><button class="play" aria-label="Open result">▶</button></article>
+          <article class="match"><div><small>Football 3v3 · Final</small><b>Unitree G1 FC</b><br><b>HUBO United</b></div><div class="match-score green">2 – 1</div><button class="play" aria-label="Open result">▶</button></article>
+          <article class="match"><div><small>Wushu · Final</small><b>Fourier GR-2</b><br><b>Booster T1</b></div><div class="match-score">9.48</div><button class="play" aria-label="Open result">▶</button></article>
+          <article class="match"><div><small>Table Tennis · Final</small><b>AGIBOT</b><br><b>Open field</b></div><div class="match-score green">4 – 2</div><button class="play" aria-label="Open result">▶</button></article>
+        </div>
+        <div class="recent-footer"><span>All recent results</span><span>›</span></div>
+      </aside>
+    </section>
+
+    <div class="prototype">UI concept · partial prototype data</div>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
