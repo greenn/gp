@@ -5,6 +5,7 @@
   const hero = document.getElementById('teamHero');
   const content = document.getElementById('teamContent');
   const notFound = document.getElementById('notFound');
+
   const countryNames = {CN:'Китай',JP:'Япония',IT:'Италия',HK:'Гонконг, Китай',DE:'Германия',BR:'Бразилия',US:'США',KR:'Южная Корея',NL:'Нидерланды',AU:'Австралия'};
   const flags = {CN:'🇨🇳',JP:'🇯🇵',IT:'🇮🇹',HK:'🇭🇰',DE:'🇩🇪',BR:'🇧🇷',US:'🇺🇸',KR:'🇰🇷',NL:'🇳🇱',AU:'🇦🇺'};
   const clean = value => String(value ?? '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
@@ -24,7 +25,7 @@
     if (!matches.length) return null;
     const first = matches[0].p;
     return {
-      id: null,
+      id:null,
       name,
       aliases:[name],
       country:first.country || null,
@@ -35,6 +36,14 @@
       robots:{whrgPlatform:first.robot || null,whrgCount:null,whrgCountNote:'Точное количество роботов и аппаратная конфигурация пока не подтверждены отдельным источником.'},
       sources:[]
     };
+  }
+
+  function mergeMedia(team, mediaMap) {
+    const extra = mediaMap?.[team.id] || mediaMap?.[team.name] || [];
+    if (!extra.length) return team;
+    const seen = new Set((team.images || []).map(x => x.url));
+    team.images = [...(team.images || []), ...extra.filter(x => x?.url && !seen.has(x.url))];
+    return team;
   }
 
   function medalClass(rank){return rank===1?'gold':rank===2?'silver':rank===3?'bronze':''}
@@ -77,6 +86,7 @@
     document.getElementById('whrgCard').innerHTML = `
       <h2>WHRG 2026</h2>
       ${cards.length ? `<div class="fact-grid">${cards.map(([k,v])=>`<div class="fact"><small>${clean(k)}</small><strong>${clean(v)}</strong></div>`).join('')}</div>` : '<p>Расширенная карточка результата пока не заполнена.</p>'}
+      ${w?.result ? `<p class="notice"><b>Результат:</b> ${clean(w.result)}</p>` : ''}
       ${w?.note ? `<p class="notice">${clean(w.note)}</p>` : ''}
       ${robot.whrgCountNote ? `<h3>Сколько роботов</h3><p>${clean(robot.whrgCountNote)}</p>` : ''}
       ${people.length ? `<h3>Представители команды в Пекине</h3><div class="people-list">${people.map(x=>`<span class="person-pill">${clean(x)}</span>`).join('')}</div>` : ''}`;
@@ -85,9 +95,7 @@
   function renderRobot(team) {
     const r = team.robots || {};
     const specs = team.robotSpecs || null;
-    const specLabels = {
-      height:'Высота',weight:'Масса',dof:'Степени свободы',legDof:'Нога',armDof:'Рука',waistDof:'Талия',headDof:'Голова',maxJointTorque:'Пиковый момент',walkingSpeed:'Скорость ходьбы',battery:'Батарея',walkingEndurance:'Ходьба',maxDualArmPayload:'Нагрузка двух рук',vision:'Зрение',compute:'Вычисления'
-    };
+    const specLabels = {height:'Высота',weight:'Масса',dof:'Степени свободы',legDof:'Нога',armDof:'Рука',waistDof:'Талия',headDof:'Голова',maxJointTorque:'Пиковый момент',walkingSpeed:'Скорость ходьбы',battery:'Батарея',walkingEndurance:'Ходьба',maxDualArmPayload:'Нагрузка двух рук',vision:'Зрение',compute:'Вычисления'};
     let html = `<h2>Роботы и характеристики</h2>`;
     html += `<div class="fact-grid"><div class="fact"><small>Платформа WHRG</small><strong>${clean(r.whrgPlatform || 'не подтверждена')}</strong></div><div class="fact"><small>Количество</small><strong>${r.whrgCount ?? 'нет точных данных'}</strong></div>${specs?.model ? `<div class="fact"><small>Модель данных</small><strong>${clean(specs.model)}</strong></div>`:''}</div>`;
     if (specs) {
@@ -96,7 +104,7 @@
     } else {
       html += `<p>Отдельные технические характеристики для этой команды пока не привязаны к надёжному источнику.</p>`;
     }
-    if (r.otherPlatforms?.length) html += `<h3>Другие платформы SPQR</h3>${r.otherPlatforms.map(x=>`<p>• ${clean(x)}</p>`).join('')}`;
+    if (r.otherPlatforms?.length) html += `<h3>Другие платформы</h3>${r.otherPlatforms.map(x=>`<p>• ${clean(x)}</p>`).join('')}`;
     document.getElementById('robotCard').innerHTML = html;
   }
 
@@ -111,10 +119,10 @@
     const images = team.images || [];
     const box = document.getElementById('galleryCard');
     if (!images.length) {
-      box.innerHTML = `<h2>Изображения</h2><p>Для этой команды пока нет изображения, которое можно уверенно связать с ней или её платформой.</p>`;
+      box.innerHTML = `<h2>Реальные фотографии</h2><p>Для этой команды пока нет фотографии, которую можно уверенно связать с ней или её платформой.</p>`;
       return;
     }
-    box.innerHTML = `<h2>Изображения</h2><div class="gallery">${images.map((img,i)=>`<figure class="gallery-item"><img class="${img.kind==='robot'?'object-contain':''}" src="${clean(img.url)}" alt="${clean(img.caption || team.name)}" loading="lazy" referrerpolicy="no-referrer"><figcaption class="gallery-caption"><b>${clean(img.credit || '')}</b><p>${clean(img.caption || '')}</p><div class="gallery-actions"><a href="${clean(img.url)}" target="_blank" rel="noopener">открыть файл ↗</a>${img.sourceUrl?`<a href="${clean(img.sourceUrl)}" target="_blank" rel="noopener">первоисточник ↗</a>`:''}</div></figcaption></figure>`).join('')}</div><p class="notice">Фото загружаются с сайтов первоисточников. Их URL также сохранены в teams.json; проект не выдаёт сторонние фотографии за собственные.</p>`;
+    box.innerHTML = `<h2>Реальные фотографии</h2><div class="gallery">${images.map(img=>`<figure class="gallery-item"><img class="${img.kind==='robot'?'object-contain':''}" src="${clean(img.url)}" alt="${clean(img.caption || team.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').classList.add('image-error');this.style.display='none'"><figcaption class="gallery-caption"><b>${clean(img.credit || '')}</b><p>${clean(img.caption || '')}</p><div class="gallery-actions"><a href="${clean(img.url)}" target="_blank" rel="noopener">открыть фото ↗</a>${img.sourceUrl?`<a href="${clean(img.sourceUrl)}" target="_blank" rel="noopener">первоисточник ↗</a>`:''}</div></figcaption></figure>`).join('')}</div><p class="notice">Это реальные фотографии из указанных источников. Если снимок относится к программе команды, но не подтверждён как точный аппарат WHRG 2026, это отдельно указано в подписи.</p>`;
   }
 
   function renderSources(team) {
@@ -126,12 +134,22 @@
     return {...team,results:matches.map(({event,p})=>({eventId:event.id,type:event.type,category:event.category,event:event.name,rank:p.rank,result:p.result||null,robot:p.robot||null,note:p.note||null,source:event.source||null}))};
   }
 
+  async function loadJson(url, fallback) {
+    try {
+      const r = await fetch(url,{cache:'no-store'});
+      return r.ok ? await r.json() : fallback;
+    } catch (_) { return fallback; }
+  }
+
   async function init() {
     if (!requested) { hero.hidden=true; notFound.hidden=false; return; }
-    let curated=[];
-    try { const r=await fetch('./teams.json',{cache:'no-store'}); if(r.ok) curated=(await r.json()).teams||[]; } catch(e) {}
+    const [curatedData, mediaData] = await Promise.all([
+      loadJson('./teams.json',{teams:[]}),
+      loadJson('./team-media.json',{teams:{}})
+    ]);
+    const curated = curatedData.teams || [];
     const cur = curated.find(t => [t.name,...(t.aliases||[])].some(a => norm(a)===norm(requested)));
-    const team = cur || genericTeam(requested);
+    const team = mergeMedia(cur || genericTeam(requested), mediaData.teams || {});
     if (!team) { hero.hidden=true; notFound.hidden=false; return; }
     const matches = findRawTeam(team.name,team.aliases||[]);
     document.title = `${team.name} · WHRG 2026`;
@@ -144,7 +162,12 @@
     content.hidden=false;
     document.getElementById('downloadTeamJson').addEventListener('click',()=>{
       const blob=new Blob([JSON.stringify(mergedDownload(team,matches),null,2)],{type:'application/json;charset=utf-8'});
-      const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=(team.id||team.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'team')+'.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download=(team.id||team.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'team')+'.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
     });
   }
 
