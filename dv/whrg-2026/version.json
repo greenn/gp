@@ -1,0 +1,7 @@
+{
+  "version": "0.0.30",
+  "date": "2026-08-29",
+  "daily_revision": 30,
+  "day_series": 0,
+  "rule": "Increment patch for each WHRG change on the same date. On the next date increment minor and reset patch to 1."
+}
