@@ -44,7 +44,8 @@ jobs:
           pre { white-space: pre-wrap; font-size: 8pt; background: #f6f8fa; padding: 7pt; }
           code { font-family: "DejaVu Sans Mono", monospace; }
           '''
-          template = '<!doctype html><html lang="ru"><meta charset="utf-8"><style>' + css + '</style><body>{}</body></html>'
+          prefix = '<!doctype html><html lang="ru"><meta charset="utf-8"><style>' + css + '</style><body>'
+          suffix = '</body></html>'
           docs = [
               ('source/vpr-math-6.md', 'vpr-math-6.pdf'),
               ('source/vpr-math-7.md', 'vpr-math-7.pdf'),
@@ -52,7 +53,7 @@ jobs:
           for src, dest in docs:
               md = (root / src).read_text(encoding='utf-8')
               body = markdown.markdown(md, extensions=['tables', 'fenced_code'])
-              HTML(string=template.format(body), base_url=str(root.resolve())).write_pdf(out / dest)
+              HTML(string=prefix + body + suffix, base_url=str(root.resolve())).write_pdf(out / dest)
       - name: Commit PDFs
         run: |
           git config user.name 'github-actions[bot]'
