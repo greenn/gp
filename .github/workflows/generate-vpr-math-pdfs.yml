@@ -1,0 +1,66 @@
+name: Generate VPR math PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/generate-vpr-math-pdfs.yml'
+      - 'ш/мат/vpr-math-6-7-plan-2026-09-01/source/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install renderer
+        run: pip install markdown weasyprint
+      - name: Build PDFs
+        shell: python
+        run: |
+          from pathlib import Path
+          import markdown
+          from weasyprint import HTML
+
+          root = Path('ш/мат/vpr-math-6-7-plan-2026-09-01')
+          out = root / 'pdf'
+          out.mkdir(parents=True, exist_ok=True)
+          css = '''
+          @page { size: A4; margin: 18mm 16mm; }
+          body { font-family: "DejaVu Sans", sans-serif; font-size: 10.5pt; line-height: 1.48; color: #1f2328; }
+          h1 { font-size: 22pt; margin: 0 0 12pt; }
+          h2 { font-size: 16pt; margin-top: 20pt; }
+          h3 { font-size: 13pt; margin-top: 16pt; }
+          p, li { orphans: 3; widows: 3; }
+          table { width: 100%; border-collapse: collapse; font-size: 8pt; margin: 10pt 0 14pt; }
+          th, td { border: 0.5pt solid #b7bec7; padding: 4pt; vertical-align: top; }
+          th { background: #f6f8fa; }
+          pre { white-space: pre-wrap; font-size: 8pt; background: #f6f8fa; padding: 7pt; }
+          code { font-family: "DejaVu Sans Mono", monospace; }
+          '''
+          template = '<!doctype html><html lang="ru"><meta charset="utf-8"><style>' + css + '</style><body>{}</body></html>'
+          docs = [
+              ('source/vpr-math-6.md', 'vpr-math-6.pdf'),
+              ('source/vpr-math-7.md', 'vpr-math-7.pdf'),
+          ]
+          for src, dest in docs:
+              md = (root / src).read_text(encoding='utf-8')
+              body = markdown.markdown(md, extensions=['tables', 'fenced_code'])
+              HTML(string=template.format(body), base_url=str(root.resolve())).write_pdf(out / dest)
+      - name: Commit PDFs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 'ш/мат/vpr-math-6-7-plan-2026-09-01/pdf/'
+          if git diff --cached --quiet; then
+            echo 'No PDF changes'
+          else
+            git commit -m 'Add PDF copies for VPR math publication'
+            git push
+          fi
