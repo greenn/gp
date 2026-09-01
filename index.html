@@ -1,22 +1,14 @@
 <!doctype html>
 <html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GPT Output</title>
-<style>
-:root{--ink:#1f2328;--muted:#59636e;--line:#d0d7de;--soft:#f6f8fa;--accent:#0969da}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.55 system-ui}main{max-width:860px;margin:auto;padding:48px 24px}.muted,.path{color:var(--muted)}.card{display:block;margin:20px 0;padding:20px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit}.card:hover{background:var(--soft)}h2{margin:0 0 8px;font-size:1.2rem}
-</style>
-</head>
-<body><main>
-<h1>GPT Output</h1>
-<p class="muted">Публичные материалы, подготовленные GPT.</p>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GPT Output</title>
+<style>:root{--ink:#1f2328;--muted:#59636e;--line:#d0d7de;--soft:#f6f8fa;--accent:#0969da}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.55 system-ui}main{max-width:860px;margin:auto;padding:48px 24px}.muted,.path{color:var(--muted)}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filter{border:1px solid var(--line);background:white;border-radius:999px;padding:7px 12px}.filter[aria-pressed=true]{background:var(--accent);color:white}.card{display:block;margin:20px 0;padding:20px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit}.card:hover{background:var(--soft)}.card[hidden]{display:none}</style></head>
+<body><main><h1>GPT Output</h1><p class="muted">Публичные материалы, подготовленные GPT.</p><nav id="filters" class="filters"></nav><p id="result" class="muted"></p>
 <section>
-<a class="card" href="dv/kulibin/"><h2>Иван Кулибин — механик и изобретатель</h2><div>Историческая информационная страница о проектах Кулибина.</div><div class="path">dv/kulibin/</div></a>
-<a class="card" href="dv/slobodchikov_isaev_illustrations_catalog/"><h2>Слободчиков и Исаев — каталог иллюстраций</h2><div>Схемы и таблицы из работ по психологии развития.</div><div class="path">dv/slobodchikov_isaev_illustrations_catalog/</div></a>
-<a class="card" href="dv/whrg-2026/"><h2>WHRG 2026 — интерактивные результаты</h2><div>Результаты World Humanoid Robot Games 2026.</div><div class="path">dv/whrg-2026/</div></a>
-<a class="card" href="ш/class-leadership-sixth-grade-2026-08-24/"><h2>Практическая система классного руководства в шестом классе</h2><div>Материалы по организации работы класса.</div><div class="path">ш/class-leadership-sixth-grade-2026-08-24/</div></a>
-<a class="card" href="ds/codex-model-report-2026-08-20/"><h2>Сравнение экономичности моделей Codex</h2><div>Отчёт по моделям и режимам работы.</div><div class="path">ds/codex-model-report-2026-08-20/</div></a>
-<a class="card" href="r/lowest-domain-cost-ru.html"><h2>Минимальная стоимость покупки и продления домена .ru</h2><div>Сравнение регистраторов, цен продления и бесплатных альтернатив .tk, .pp.ua, .is-a.dev и других зон.</div><div class="path">r/lowest-domain-cost-ru.html</div></a>
-</section>
-</main></body></html>
+<a class="card" href="dv/kulibin/"><h2>Иван Кулибин — механик и изобретатель</h2><div>Историческая информационная страница.</div><div class="path">dv/kulibin/</div></a>
+<a class="card" href="dv/slobodchikov_isaev_illustrations_catalog/"><h2>Слободчиков и Исаев — каталог иллюстраций</h2><div>Схемы и таблицы.</div><div class="path">dv/slobodchikov_isaev_illustrations_catalog/</div></a>
+<a class="card" href="dv/whrg-2026/"><h2>WHRG 2026 — интерактивные результаты</h2><div>Результаты соревнований.</div><div class="path">dv/whrg-2026/</div></a>
+<a class="card" href="ш/class-leadership-sixth-grade-2026-08-24/"><h2>Практическая система классного руководства</h2><div>Материалы по работе класса.</div><div class="path">ш/class-leadership-sixth-grade-2026-08-24/</div></a>
+<a class="card" href="ds/codex-model-report-2026-08-20/"><h2>Сравнение экономичности моделей Codex</h2><div>Отчёт по моделям.</div><div class="path">ds/codex-model-report-2026-08-20/</div></a>
+<a class="card" href="r/lowest-domain-cost-ru.html"><h2>Минимальная стоимость покупки и продления домена .ru</h2><div>Регистраторы, цены продления и бесплатные доменные зоны.</div><div class="path">r/lowest-domain-cost-ru.html</div></a>
+</section></main>
+<script>const cards=[...document.querySelectorAll('.card')],f=document.querySelector('#filters'),r=document.querySelector('#result'),tags=new Map();cards.forEach(c=>{let t=c.href.split('/').filter(Boolean).at(-2)||c.href.split('/').filter(Boolean)[0];c.dataset.tag=t;tags.set(t,(tags.get(t)||0)+1)});function b(t,n){let x=document.createElement('button');x.className='filter';x.textContent=n+' '+(tags.get(n)||cards.length);x.dataset.f=t;return x}f.append(b('all','Все'));tags.forEach((v,k)=>f.append(b(k,k)));function set(t){let n=0;cards.forEach(c=>{let s=t==='all'||c.dataset.tag===t;c.hidden=!s;if(s)n++});f.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===t));r.textContent='Показано: '+n}f.onclick=e=>e.target.dataset.f&&set(e.target.dataset.f);set('all');</script></body></html>
