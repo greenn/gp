@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Расписание 2026–2027</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#dfe4ec;--accent:#315efb;--warn:#9a6700}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:1050px;margin:auto;padding:28px 18px 60px}
+h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}
+.sub{color:var(--muted);margin:0 0 22px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}
+.meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.day{margin-top:20px}
+.day h2{font-size:21px;margin:0 0 9px}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+.lesson{font-weight:700;width:72px}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#3046a5;font-size:13px}
+.low{color:var(--warn)}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+details{margin-top:12px}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+a{color:var(--accent)}
+@media(max-width:700px){.filters{grid-template-columns:1fr}.panel{padding:13px}main{padding:20px 12px 45px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Расписание 2026–2027</h1>
+<p class="sub">Интерактивная версия расписания, распознанного с фотографии.</p>
+
+<section class="panel">
+  <div class="filters">
+    <div><label for="teacher">Учитель</label><select id="teacher"></select></div>
+    <div><label for="class">Класс</label><select id="class"></select></div>
+    <div><label for="day">День</label><select id="day"></select></div>
+  </div>
+  <div class="meta" style="margin-top:13px">
+    <span id="count"></span>
+    <span>«7» = 7А/7Б не удалось уверенно различить</span>
+  </div>
+</section>
+
+<div id="out"></div>
+
+<section class="panel note">
+  <strong>О точности:</strong> это первая рабочая версия базы. Данные вручную перенесены с фотографии и могут содержать ошибки.
+  <details><summary>Что считается неоднозначным</summary>
+    <ul>
+      <li>7А и 7Б в части рукописных ячеек записаны как «7».</li>
+      <li>У учителей русского и литературы конкретный предмет в отдельной ячейке на исходнике не указан.</li>
+      <li>Для Коляго Т.И. предмет определяется по классу и предоставленному списку предметов.</li>
+    </ul>
+  </details>
+  <p><a href="./schedule.json">Открыть JSON-базу</a></p>
+</section>
+</main>
+
+<script>
+(async()=>{
+ const db=await fetch('./schedule.json').then(r=>r.json());
+ const $=id=>document.getElementById(id);
+ const teacher=$('teacher'), cls=$('class'), day=$('day'), out=$('out'), count=$('count');
+
+ function option(value,text){const o=document.createElement('option');o.value=value;o.textContent=text;return o}
+ teacher.append(option('','Все учителя'));
+ db.teachers.forEach(t=>teacher.append(option(String(t.id),`${t.name} — ${t.subjects.join(', ')}`)));
+
+ const classes=[...new Set(db.entries.map(x=>x.class))].sort((a,b)=>{
+   const na=parseInt(a), nb=parseInt(b); return na-nb || a.localeCompare(b,'ru');
+ });
+ cls.append(option('','Все классы'));
+ classes.forEach(c=>cls.append(option(c,c==='7'?'7 класс (А/Б не различено)':`${c} класс`)));
+
+ day.append(option('','Вся неделя'));
+ db.days.forEach(d=>day.append(option(d,d)));
+
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const tm=new Map(db.teachers.map(t=>[t.id,t]));
+
+ function render(){
+   const tid=teacher.value, c=cls.value, d=day.value;
+   let rows=db.entries.filter(x=>(!tid||String(x.teacherId)===tid)&&(!c||x.class===c)&&(!d||x.day===d));
+   rows.sort((a,b)=>db.days.indexOf(a.day)-db.days.indexOf(b.day)||a.lesson-b.lesson||a.teacherId-b.teacherId);
+   count.textContent=`Найдено занятий: ${rows.length}`;
+   out.innerHTML='';
+   const days=d?[d]:db.days;
+   for(const dd of days){
+     const rr=rows.filter(x=>x.day===dd);
+     if(!rr.length) continue;
+     const sec=document.createElement('section'); sec.className='day';
+     sec.innerHTML=`<h2>${esc(dd)}</h2><div class="table-wrap"><table><thead><tr>
+       <th>Урок</th><th>Класс</th><th>Предмет</th><th>Учитель</th>
+     </tr></thead><tbody></tbody></table></div>`;
+     const tb=sec.querySelector('tbody');
+     rr.forEach(x=>{
+       const t=tm.get(x.teacherId);
+       const tr=document.createElement('tr');
+       tr.innerHTML=`<td class="lesson">${x.lesson}</td>
+         <td><span class="badge${x.confidence==='low'?' low':''}">${esc(x.class)}</span></td>
+         <td>${esc(x.subject)}${x.note?`<div class="note">${esc(x.note)}</div>`:''}</td>
+         <td>${esc(t?.name||'')}</td>`;
+       tb.append(tr);
+     });
+     out.append(sec);
+   }
+   if(!out.children.length) out.innerHTML='<div class="panel empty">По выбранным фильтрам занятий не найдено.</div>';
+   const q=new URLSearchParams();
+   if(tid)q.set('teacher',tid); if(c)q.set('class',c); if(d)q.set('day',d);
+   history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:''));
+ }
+ const q=new URLSearchParams(location.search);
+ if(q.get('teacher')) teacher.value=q.get('teacher');
+ if(q.get('class')) cls.value=q.get('class');
+ if(q.get('day')) day.value=q.get('day');
+ [teacher,cls,day].forEach(x=>x.addEventListener('change',render));
+ render();
+})().catch(e=>{
+ document.getElementById('out').innerHTML='<div class="panel empty">Не удалось загрузить schedule.json</div>';
+ console.error(e);
+});
+</script>
+</body>
+</html>
