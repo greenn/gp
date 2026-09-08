@@ -5,63 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Расписание 2026–2027</title>
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#dfe4ec;--accent:#315efb;--warn:#9a6700}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:1050px;margin:auto;padding:28px 18px 60px}h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}.sub{color:var(--muted);margin:0 0 22px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}
-.meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:14px}.day{margin-top:20px}.day h2{font-size:21px;margin:0 0 9px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff}
-table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}tr:last-child td{border-bottom:0}
-.lesson{font-weight:700;width:72px}.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#3046a5;font-size:13px}.low{color:var(--warn)}.empty{padding:30px;text-align:center;color:var(--muted)}.note{font-size:14px;color:var(--muted)}details{margin-top:12px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}a{color:var(--accent)}
-@media(max-width:700px){.filters{grid-template-columns:1fr}.panel{padding:13px}main{padding:20px 12px 45px}}
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#dfe4ec;--accent:#315efb;--soft:#eef2ff;--warn:#9a6700}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}main{max-width:1080px;margin:auto;padding:28px 18px 60px}h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}.sub{color:var(--muted);margin:0 0 22px}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}.meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-top:13px}.day{margin-top:20px}.day h2{font-size:21px;margin:0 0 9px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff}table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}tr:last-child td{border-bottom:0}.lesson{font-weight:700;width:72px}.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--soft);color:#3046a5;font-size:13px}.low{color:var(--warn)}.empty{padding:30px;text-align:center;color:var(--muted)}.note{font-size:13px;color:var(--muted);margin-top:2px}.change{display:grid;grid-template-columns:110px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}.change:last-child{border-bottom:0}a{color:var(--accent)}@media(max-width:700px){.filters{grid-template-columns:1fr}.panel{padding:13px}main{padding:20px 12px 45px}.change{grid-template-columns:1fr}}
 </style>
 </head>
 <body><main>
 <h1>Расписание 2026–2027</h1>
-<p class="sub">Интерактивная версия расписания, распознанного с фотографии.</p>
-<section class="panel"><div class="filters">
-<div><label for="teacher">Учитель</label><select id="teacher"></select></div>
-<div><label for="class">Класс</label><select id="class"></select></div>
-<div><label for="day">День</label><select id="day"></select></div>
-</div><div class="meta" style="margin-top:13px"><span id="count"></span><span>«7» = 7А/7Б не удалось уверенно различить</span></div></section>
+<p class="sub">Исправленная версия. База заново распознана по фотографии от 08.09.2026.</p>
+<section class="panel"><div class="filters"><div><label for="teacher">Учитель</label><select id="teacher"></select></div><div><label for="class">Класс</label><select id="class"></select></div><div><label for="day">День</label><select id="day"></select></div></div><div class="meta"><span id="count"></span><span>«7» = 7А/7Б, буква на части записей неразборчива</span></div></section>
 <div id="out"></div>
-<section class="panel note"><strong>О точности:</strong> это рабочая версия базы. Нумерация и предметы первых 14 учителей исправлены по уточнённому списку. Строки 13–14 дополнительно распознаны с фотографии.
-<details><summary>Неоднозначности</summary><ul>
-<li>7А и 7Б в части ячеек пока записаны как «7».</li>
-<li>Для химии/физики и русского/литературы конкретный предмет отдельной ячейки пока не разделён.</li>
-<li>Для учителя №13: 6 класс отображается как «Математика / Труды», 7 класс — «Математика», остальные классы — «Информатика».</li>
-</ul></details>
-<p><a href="./schedule-v2.json">Открыть исправления JSON v2</a> · <a href="./schedule.json">Исходная распознанная сетка</a></p></section>
+<section class="panel"><h2 style="margin-top:0">Изменения в исправленном фото</h2><div id="changes"></div></section>
+<section class="panel note"><strong>О точности:</strong> это рабочая база, вручную распознанная с фотографии. Для пар «химия/физика» и «русский/литература» конкретный предмет в отдельной ячейке исходной таблицы не указан.<p><a href="./schedule.json">Открыть JSON-базу</a></p></section>
 </main>
 <script>
-(async()=>{
- const [raw,v2]=await Promise.all([fetch('./schedule.json').then(r=>r.json()),fetch('./schedule-v2.json').then(r=>r.json())]);
- const db={days:raw.days,teachers:v2.teachers,entries:[...raw.entries,...v2.additionalEntries]};
- const $=id=>document.getElementById(id),teacher=$('teacher'),cls=$('class'),day=$('day'),out=$('out'),count=$('count');
- const option=(value,text)=>{const o=document.createElement('option');o.value=value;o.textContent=text;return o};
- teacher.append(option('','Все учителя'));db.teachers.forEach(t=>teacher.append(option(String(t.id),`${t.name} — ${t.subjects.join(', ')}`)));
- const classes=[...new Set(db.entries.map(x=>x.class))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b,'ru'));
- cls.append(option('','Все классы'));classes.forEach(c=>cls.append(option(c,c==='7'?'7 класс (А/Б не различено)':`${c} класс`)));
- day.append(option('','Вся неделя'));db.days.forEach(d=>day.append(option(d,d)));
- const tm=new Map(db.teachers.map(t=>[t.id,t]));
- const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function subject(x){
-   if(x.teacherId===13){if(x.class==='6')return 'Математика / Труды';if(x.class==='7')return 'Математика';return 'Информатика'}
-   return v2.subjectRules[String(x.teacherId)]||x.subject||'';
- }
- function render(){
-   const tid=teacher.value,c=cls.value,d=day.value;
-   let rows=db.entries.filter(x=>(!tid||String(x.teacherId)===tid)&&(!c||x.class===c)&&(!d||x.day===d));
-   rows.sort((a,b)=>db.days.indexOf(a.day)-db.days.indexOf(b.day)||a.lesson-b.lesson||a.teacherId-b.teacherId);
-   count.textContent=`Найдено занятий: ${rows.length}`;out.innerHTML='';
-   for(const dd of (d?[d]:db.days)){
-     const rr=rows.filter(x=>x.day===dd);if(!rr.length)continue;
-     const sec=document.createElement('section');sec.className='day';sec.innerHTML=`<h2>${esc(dd)}</h2><div class="table-wrap"><table><thead><tr><th>Урок</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>`;
-     const tb=sec.querySelector('tbody');rr.forEach(x=>{const t=tm.get(x.teacherId),tr=document.createElement('tr');tr.innerHTML=`<td class="lesson">${x.lesson}</td><td><span class="badge${x.confidence==='low'?' low':''}">${esc(x.class)}</span></td><td>${esc(subject(x))}${x.note?`<div class="note">${esc(x.note)}</div>`:''}</td><td>${esc(t?.name||'')}</td>`;tb.append(tr)});out.append(sec);
-   }
-   if(!out.children.length)out.innerHTML='<div class="panel empty">По выбранным фильтрам занятий не найдено.</div>';
-   const q=new URLSearchParams();if(tid)q.set('teacher',tid);if(c)q.set('class',c);if(d)q.set('day',d);history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:''));
- }
- const q=new URLSearchParams(location.search);if(q.get('teacher'))teacher.value=q.get('teacher');if(q.get('class'))cls.value=q.get('class');if(q.get('day'))day.value=q.get('day');[teacher,cls,day].forEach(x=>x.addEventListener('change',render));render();
-})().catch(e=>{document.getElementById('out').innerHTML='<div class="panel empty">Не удалось загрузить базу расписания.</div>';console.error(e)});
-</script></body></html>
+(async()=>{const db=await fetch('./schedule.json').then(r=>r.json());const $=id=>document.getElementById(id),teacher=$('teacher'),cls=$('class'),day=$('day'),out=$('out'),count=$('count');const tm=new Map(db.teachers.map(t=>[t.id,t]));const option=(value,text)=>{const o=document.createElement('option');o.value=value;o.textContent=text;return o};const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function subject(tid,c){if(tid===1)return'Английский';if(tid===2)return'Химия / Физика';if(tid===3)return'Биология';if(tid===4)return'История';if(tid===5)return'География';if(tid===6)return'Музыка';if(tid===7)return'ОБЗР';if(tid===8)return'Труды';if(tid===9||tid===10)return'Русский / Литература';if(tid===11||tid===12)return'Математика';if(tid===13){if(c==='6')return'Математика / Труды';if(c==='7')return'Математика';return'Информатика'}if(tid===14)return'Физкультура';return''}const entries=[];for(const d of db.days){for(const t of db.teachers){const row=db.schedule[d]?.[String(t.id)]||[];row.forEach((c,i)=>{if(c===null||c===undefined||c==='')return;entries.push({teacherId:t.id,day:d,lesson:i+1,class:String(c),subject:subject(t.id,String(c))})})}}teacher.append(option('','Все учителя'));db.teachers.forEach(t=>teacher.append(option(String(t.id),`${t.name} — ${t.subjects.join(', ')}`)));const classes=[...new Set(entries.map(x=>x.class))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b,'ru'));cls.append(option('','Все классы'));classes.forEach(c=>cls.append(option(c,c==='7'?'7 класс (А/Б не различено)':`${c} класс`)));day.append(option('','Вся неделя'));db.days.forEach(d=>day.append(option(d,d)));function render(){const tid=teacher.value,c=cls.value,d=day.value;let rows=entries.filter(x=>(!tid||String(x.teacherId)===tid)&&(!c||x.class===c)&&(!d||x.day===d));rows.sort((a,b)=>db.days.indexOf(a.day)-db.days.indexOf(b.day)||a.lesson-b.lesson||a.teacherId-b.teacherId);count.textContent=`Найдено занятий: ${rows.length}`;out.innerHTML='';for(const dd of(d?[d]:db.days)){const rr=rows.filter(x=>x.day===dd);if(!rr.length)continue;const sec=document.createElement('section');sec.className='day';sec.innerHTML=`<h2>${esc(dd)}</h2><div class="table-wrap"><table><thead><tr><th>Урок</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>`;const tb=sec.querySelector('tbody');rr.forEach(x=>{const t=tm.get(x.teacherId),tr=document.createElement('tr');const note=x.class==='7'?'<div class="note">7А/7Б на фото различается неуверенно</div>':'';tr.innerHTML=`<td class="lesson">${x.lesson}</td><td><span class="badge${x.class==='7'?' low':''}">${esc(x.class)}</span></td><td>${esc(x.subject)}${note}</td><td>${esc(t?.name||'')}</td>`;tb.append(tr)});out.append(sec)}if(!out.children.length)out.innerHTML='<div class="panel empty">По выбранным фильтрам занятий не найдено.</div>';const q=new URLSearchParams();if(tid)q.set('teacher',tid);if(c)q.set('class',c);if(d)q.set('day',d);history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:''))}const ch=$('changes');(db.changesFromPreviousPhoto||[]).forEach(x=>{const div=document.createElement('div');div.className='change';const before=x.beforeClass?`${x.beforeClass} класс`:'—',after=x.afterClass?`${x.afterClass} класс`:'—';div.innerHTML=`<strong>${esc(x.day)}, ${x.lesson} урок</strong><span>${esc(x.teacher)}: ${esc(before)} → ${esc(after)}</span>`;ch.append(div)});if(!ch.children.length)ch.textContent='Явных изменений относительно предыдущего фото не найдено.';const q=new URLSearchParams(location.search);if(q.get('teacher'))teacher.value=q.get('teacher');if(q.get('class'))cls.value=q.get('class');if(q.get('day'))day.value=q.get('day');[teacher,cls,day].forEach(x=>x.addEventListener('change',render));render()})().catch(e=>{document.getElementById('out').innerHTML='<div class="panel empty">Не удалось загрузить schedule.json</div>';console.error(e)});
+</script>
+</body></html>
