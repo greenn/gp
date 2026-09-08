@@ -15,7 +15,7 @@
 <section class="panel"><div class="filters"><div><label for="teacher">Учитель</label><select id="teacher"></select></div><div><label for="class">Класс</label><select id="class"></select></div><div><label for="day">День</label><select id="day"></select></div></div><div class="meta"><span id="count"></span><span>«7» = 7А/7Б, буква на части записей неразборчива</span></div></section>
 <div id="out"></div>
 <section class="panel"><h2 style="margin-top:0">Изменения в исправленном фото</h2><div id="changes"></div></section>
-<section class="panel note"><strong>Правила предметов:</strong> у учителей русского/литературы для одного класса в один день первый урок считается русским, следующий — литературой. У Рожкова С. два подряд урока 6 класса считаются трудом, остальные уроки 6 класса — математикой. В 7 классе: понедельник–среда — алгебра, четверг–пятница — геометрия. Остальные классы — информатика.<p><a href="./schedule.json">Открыть JSON-базу</a> · <a href="./subject-rules.json">Открыть правила предметов</a></p></section>
+<section class="panel note"><strong>Правила предметов:</strong> первый урок в понедельник — «Разговоры о важном», первый урок в четверг — «Билет в будущее». У учителей русского/литературы для одного класса в один день первый урок считается русским, следующий — литературой. У Рожкова С. два подряд урока 6 класса считаются трудом, остальные уроки 6 класса — математикой. В 7 классе: понедельник–среда — алгебра, четверг–пятница — геометрия. Отдельное уточнение: понедельник, 8-й урок у Рожкова — информатика, 7А.<p><a href="./schedule.json">Открыть JSON-базу</a> · <a href="./subject-rules.json">Открыть правила предметов</a></p></section>
 </main>
 <script>
 (async()=>{
@@ -44,6 +44,13 @@
      else if(x.class===split7.class)x.subject=split7.algebraDays.includes(d)?'Алгебра':'Геометрия';
      else x.subject='Информатика';
    });
+ }
+ for(const o of (rules.rules.schoolwideLessonOverrides||[])){
+   entries.filter(x=>x.day===o.day&&x.lesson===o.lesson).forEach(x=>x.subject=o.subject);
+ }
+ for(const o of (rules.rules.entryOverrides||[])){
+   const x=entries.find(x=>x.teacherId===o.teacherId&&x.day===o.day&&x.lesson===o.lesson);
+   if(x){if(o.class)x.class=o.class;if(o.subject)x.subject=o.subject;}
  }
  teacher.append(option('','Все учителя'));db.teachers.forEach(t=>{const subjects=t.id===13?'Информатика, Труды, Математика, Алгебра, Геометрия':t.subjects.join(', ');teacher.append(option(String(t.id),`${t.name} — ${subjects}`))});
  const classes=[...new Set(entries.map(x=>x.class))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b,'ru'));
