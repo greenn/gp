@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "updatedAt": "2026-09-08",
   "rules": {
     "russianLiterature": {
@@ -22,6 +22,13 @@
     "otherRozhkovSubjects": {
       "teacherId": 13,
       "description": "У Рожкова С. остальные классы, кроме 6 и 7, считаются информатикой."
-    }
+    },
+    "schoolwideLessonOverrides": [
+      {"day":"Понедельник","lesson":1,"subject":"Разговоры о важном","description":"Первый урок в понедельник у всех — «Разговоры о важном»."},
+      {"day":"Четверг","lesson":1,"subject":"Билет в будущее","description":"Первый урок в четверг у всех — «Билет в будущее»."}
+    ],
+    "entryOverrides": [
+      {"teacherId":13,"day":"Понедельник","lesson":8,"class":"7А","subject":"Информатика","description":"У Рожкова С. в понедельник 8-й урок — информатика, 7А."}
+    ]
   }
 }
