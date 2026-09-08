@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "base": "./schedule.json",
+  "status": "best-effort-correction",
+  "notes": [
+    "Исправлена нумерация и предметы первых 14 учителей по уточнению пользователя.",
+    "Основная сетка занятий учителей 1–12 берётся из schedule.json и переосмысливается по правильному номеру строки.",
+    "Строки 13–14 дополнительно распознаны с исходной фотографии.",
+    "Для части рукописных обозначений 7А/7Б оставлено значение 7.",
+    "У учителя 13: класс 6 показывается как «Математика / Труды», класс 7 — «Математика», остальные классы — «Информатика»."
+  ],
+  "teachers": [
+    {"id":1,"name":"Иванова Т.И.","subjects":["Английский"]},
+    {"id":2,"name":"Артемьева Г.М.","subjects":["Химия","Физика"]},
+    {"id":3,"name":"Шишкова Е.В.","subjects":["Биология"]},
+    {"id":4,"name":"Спиридонова Е.Ю.","subjects":["История"]},
+    {"id":5,"name":"Фетисова Н.Е.","subjects":["География"]},
+    {"id":6,"name":"Кириллова О.Н.","subjects":["Музыка"]},
+    {"id":7,"name":"Иванова Г.В.","subjects":["ОБЗР"]},
+    {"id":8,"name":"Писарева Е.В.","subjects":["Труды (5 класс)"]},
+    {"id":9,"name":"Краснова Е.П.","subjects":["Русский","Литература"]},
+    {"id":10,"name":"Иванова С.А.","subjects":["Русский","Литература"]},
+    {"id":11,"name":"Коляго Т.И.","subjects":["Математика"]},
+    {"id":12,"name":"Васильева Т.В.","subjects":["Математика"]},
+    {"id":13,"name":"Рожков С.","subjects":["Информатика","Труды","Математика"]},
+    {"id":14,"name":"Вальцева К.Д.","subjects":["Физкультура"]}
+  ],
+  "subjectRules": {
+    "1":"Английский",
+    "2":"Химия / Физика",
+    "3":"Биология",
+    "4":"История",
+    "5":"География",
+    "6":"Музыка",
+    "7":"ОБЗР",
+    "8":"Труды (5 класс)",
+    "9":"Русский / Литература",
+    "10":"Русский / Литература",
+    "11":"Математика",
+    "12":"Математика",
+    "14":"Физкультура"
+  },
+  "additionalEntries": [
+    {"teacherId":13,"day":"Понедельник","lesson":1,"class":"6","confidence":"medium"},
+    {"teacherId":13,"day":"Понедельник","lesson":2,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Понедельник","lesson":4,"class":"6","confidence":"medium"},
+    {"teacherId":13,"day":"Понедельник","lesson":5,"class":"8","confidence":"medium"},
+    {"teacherId":13,"day":"Понедельник","lesson":6,"class":"11","confidence":"medium"},
+    {"teacherId":13,"day":"Понедельник","lesson":7,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Понедельник","lesson":8,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+
+    {"teacherId":13,"day":"Вторник","lesson":1,"class":"6","confidence":"medium"},
+    {"teacherId":13,"day":"Вторник","lesson":2,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Вторник","lesson":5,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Вторник","lesson":6,"class":"9","confidence":"medium"},
+
+    {"teacherId":13,"day":"Среда","lesson":1,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Среда","lesson":2,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Среда","lesson":5,"class":"6","confidence":"medium"},
+
+    {"teacherId":13,"day":"Четверг","lesson":1,"class":"6","confidence":"medium"},
+    {"teacherId":13,"day":"Четверг","lesson":2,"class":"10","confidence":"medium"},
+    {"teacherId":13,"day":"Четверг","lesson":3,"class":"6","confidence":"medium"},
+    {"teacherId":13,"day":"Четверг","lesson":5,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Четверг","lesson":6,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Четверг","lesson":7,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+
+    {"teacherId":13,"day":"Пятница","lesson":1,"class":"6","confidence":"medium"},
+    {"teacherId":13,"day":"Пятница","lesson":2,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Пятница","lesson":4,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":13,"day":"Пятница","lesson":5,"class":"6","confidence":"medium"},
+    {"teacherId":13,"day":"Пятница","lesson":6,"class":"6","confidence":"medium"},
+
+    {"teacherId":14,"day":"Понедельник","lesson":2,"class":"4","confidence":"low","note":"Цифра распознана неуверенно."},
+    {"teacherId":14,"day":"Понедельник","lesson":3,"class":"3","confidence":"medium"},
+    {"teacherId":14,"day":"Понедельник","lesson":4,"class":"1","confidence":"medium"},
+    {"teacherId":14,"day":"Понедельник","lesson":5,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":14,"day":"Понедельник","lesson":6,"class":"8","confidence":"medium"},
+    {"teacherId":14,"day":"Понедельник","lesson":7,"class":"5","confidence":"medium"},
+    {"teacherId":14,"day":"Понедельник","lesson":8,"class":"9","confidence":"medium"},
+
+    {"teacherId":14,"day":"Вторник","lesson":2,"class":"6","confidence":"medium"},
+    {"teacherId":14,"day":"Вторник","lesson":3,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":14,"day":"Вторник","lesson":4,"class":"2","confidence":"medium"},
+
+    {"teacherId":14,"day":"Среда","lesson":3,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":14,"day":"Среда","lesson":4,"class":"1","confidence":"medium"},
+    {"teacherId":14,"day":"Среда","lesson":5,"class":"3","confidence":"medium"},
+    {"teacherId":14,"day":"Среда","lesson":6,"class":"5","confidence":"medium"},
+    {"teacherId":14,"day":"Среда","lesson":7,"class":"4","confidence":"low","note":"Цифра распознана неуверенно."},
+
+    {"teacherId":14,"day":"Четверг","lesson":3,"class":"2","confidence":"medium"},
+    {"teacherId":14,"day":"Четверг","lesson":4,"class":"1","confidence":"medium"},
+    {"teacherId":14,"day":"Четверг","lesson":5,"class":"9","confidence":"medium"},
+    {"teacherId":14,"day":"Четверг","lesson":7,"class":"6","confidence":"medium"},
+    {"teacherId":14,"day":"Четверг","lesson":8,"class":"4","confidence":"low","note":"Цифра распознана неуверенно."},
+
+    {"teacherId":14,"day":"Пятница","lesson":1,"class":"7","confidence":"low","note":"7А/7Б на фото не различено."},
+    {"teacherId":14,"day":"Пятница","lesson":2,"class":"8","confidence":"medium"}
+  ]
+}
