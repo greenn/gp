@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "updatedAt": "2026-09-14",
-  "policy": "Указанные ниже занятия относятся к 7А. Все остальные записи 7 класса относятся к 7Б.",
+  "policy": "Указанные занятия grade7A относятся к 7А. Все остальные записи 7 класса относятся к 7Б. grade7BOverrides имеют приоритет и заменяют занятие 7Б в указанном слоте.",
   "fridayMaxLesson": 6,
   "grade7A": [
     {"day":"Понедельник","lesson":1,"teacherId":10},
@@ -43,5 +43,13 @@
     {"day":"Пятница","lesson":4,"teacherId":10},
     {"day":"Пятница","lesson":5,"teacherId":1},
     {"day":"Пятница","lesson":6,"teacherId":6,"subject":"Музыка"}
+  ],
+  "grade7BOverrides": [
+    {"day":"Понедельник","lesson":4,"teacherId":14,"subject":"Физкультура"},
+    {"day":"Вторник","lesson":6,"teacherId":null,"subject":"Литература"},
+    {"day":"Среда","lesson":8,"teacherId":6,"subject":"Финансовая грамотность"},
+    {"day":"Четверг","lesson":1,"teacherId":4,"subject":"Билет в будущее"},
+    {"day":"Четверг","lesson":6,"teacherId":18,"teacherName":"Меркулова Г. А.","subject":"Ритмика"},
+    {"day":"Четверг","lesson":8,"teacherId":4,"subject":"История"}
   ]
 }
