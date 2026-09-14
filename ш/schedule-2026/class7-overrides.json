@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-14",
+  "policy": "Указанные ниже занятия относятся к 7А. Все остальные записи 7 класса относятся к 7Б.",
+  "fridayMaxLesson": 6,
+  "grade7A": [
+    {"day":"Понедельник","lesson":1,"teacherId":10},
+    {"day":"Понедельник","lesson":2,"teacherId":4},
+    {"day":"Понедельник","lesson":3,"teacherId":10},
+    {"day":"Понедельник","lesson":4,"teacherId":3},
+    {"day":"Понедельник","lesson":5,"teacherId":14},
+    {"day":"Понедельник","lesson":6,"teacherId":1},
+    {"day":"Понедельник","lesson":7,"teacherId":13},
+    {"day":"Понедельник","lesson":8,"teacherId":13},
+
+    {"day":"Вторник","lesson":1,"teacherId":4},
+    {"day":"Вторник","lesson":2,"teacherId":13},
+    {"day":"Вторник","lesson":3,"teacherId":2},
+    {"day":"Вторник","lesson":4,"teacherId":10},
+    {"day":"Вторник","lesson":5,"teacherId":5},
+    {"day":"Вторник","lesson":6,"teacherId":10,"subject":"Литература"},
+
+    {"day":"Среда","lesson":1,"teacherId":3},
+    {"day":"Среда","lesson":2,"teacherId":13},
+    {"day":"Среда","lesson":3,"teacherId":2},
+    {"day":"Среда","lesson":4,"teacherId":10},
+    {"day":"Среда","lesson":5,"teacherId":1},
+    {"day":"Среда","lesson":6,"teacherId":8,"subject":"Труды"},
+    {"day":"Среда","lesson":7,"teacherId":8,"subject":"Труды"},
+    {"day":"Среда","lesson":8,"teacherId":7},
+
+    {"day":"Четверг","lesson":1,"teacherId":null,"subject":"Билет в будущее"},
+    {"day":"Четверг","lesson":2,"teacherId":4},
+    {"day":"Четверг","lesson":3,"teacherId":10},
+    {"day":"Четверг","lesson":4,"teacherId":2},
+    {"day":"Четверг","lesson":5,"teacherId":3},
+    {"day":"Четверг","lesson":6,"teacherId":13},
+    {"day":"Четверг","lesson":7,"teacherId":5},
+
+    {"day":"Пятница","lesson":1,"teacherId":14,"subject":"Физкультура"},
+    {"day":"Пятница","lesson":2,"teacherId":13},
+    {"day":"Пятница","lesson":3,"teacherId":5,"subject":"ИЗО"},
+    {"day":"Пятница","lesson":4,"teacherId":10},
+    {"day":"Пятница","lesson":5,"teacherId":1},
+    {"day":"Пятница","lesson":6,"teacherId":6,"subject":"Музыка"}
+  ]
+}
