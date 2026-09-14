@@ -6,23 +6,7 @@
 <title>Расписание 2026–2027</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#dfe4ec;--accent:#315efb;--soft:#eef2ff}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:1080px;margin:auto;padding:28px 18px 60px}
-h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}
-.sub{color:var(--muted);margin:0 0 22px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
-.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
-select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}
-.meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-top:13px}
-.day{margin-top:20px}.day-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}.day h2{font-size:21px;margin:0}
-.copy-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:7px 11px;font:inherit;font-size:14px;cursor:pointer}.copy-btn:hover{background:#f8fafc}.copy-btn:disabled{opacity:.45;cursor:default}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff}table{width:100%;border-collapse:collapse;min-width:650px}
-th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}
-tr:last-child td{border-bottom:0}.lesson{font-weight:700;width:72px}.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--soft);color:#3046a5;font-size:13px}.empty{color:var(--muted)}
-.note{font-size:13px;color:var(--muted);margin-top:2px}.change{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)}.change:last-child{border-bottom:0}a{color:var(--accent)}details summary{cursor:pointer}
-@media(max-width:700px){.filters{grid-template-columns:1fr}.panel{padding:13px}main{padding:20px 12px 45px}.change{grid-template-columns:1fr}.copy-btn{padding:6px 9px}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}main{max-width:1080px;margin:auto;padding:28px 18px 60px}h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}.sub{color:var(--muted);margin:0 0 22px}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}.meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-top:13px}.day{margin-top:20px}.day-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}.day h2{font-size:21px;margin:0}.copy-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:7px 11px;font:inherit;font-size:14px;cursor:pointer}.copy-btn:hover{background:#f8fafc}.copy-btn:disabled{opacity:.45;cursor:default}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff}table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}tr:last-child td{border-bottom:0}.lesson{font-weight:700;width:72px}.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--soft);color:#3046a5;font-size:13px}.empty{color:var(--muted)}.note{font-size:13px;color:var(--muted);margin-top:2px}.change{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)}.change:last-child{border-bottom:0}a{color:var(--accent)}details summary{cursor:pointer}@media(max-width:700px){.filters{grid-template-columns:1fr}.panel{padding:13px}main{padding:20px 12px 45px}.change{grid-template-columns:1fr}.copy-btn{padding:6px 9px}}
 </style>
 </head>
 <body><main>
@@ -35,127 +19,71 @@ tr:last-child td{border-bottom:0}.lesson{font-weight:700;width:72px}.badge{displ
 </div><div class="meta"><span id="count"></span><span><b>7А</b> задан по уточнённому расписанию</span><span>остальные записи 7 класса считаются <b>7Б</b></span><span><b>8В</b> хранится отдельно</span></div></section>
 <div id="out"></div>
 <section class="panel"><details><summary><strong>Изменения последнего фото</strong></summary><div id="changes" style="margin-top:10px"></div></details></section>
-<section class="panel note"><strong>Правила:</strong> 7А задан отдельным расписанием; все остальные записи 7 класса относятся к 7Б. В пятницу у всех не более 6 уроков, поэтому 7-й и 8-й строки не выводятся. У Фетисовой Н.Е. в 6 классе — ИЗО, а также ИЗО у 7А в пятницу на 3-м уроке; в остальных случаях — география. У Рожкова С. для 7 класса первый урок одного и того же класса в день — математический предмет, второй — информатика. Пн и ср — алгебра; вт — «Алгебра (геометрия)»; чт — «Геометрия (алгебра)»; пт — геометрия. У 6 класса в четверг два урока русского отображаются как русский язык. Кнопка рядом с названием дня копирует сокращённое расписание с учётом фильтров.<p><a href="./schedule.json">JSON-база</a> · <a href="./class7-overrides.json">Расписание 7А</a></p></section>
+<section class="panel note"><strong>Правила:</strong> явные предметы, заданные вручную для 7А/7Б, имеют приоритет и не заменяются автоматикой. В пятницу у всех не более 6 уроков. У Фетисовой Н.Е. в 6 классе — ИЗО, у 7А в пятницу на 3-м уроке — ИЗО; в остальных случаях — география. У Рожкова С. для 7 класса первый урок одного класса в день — математический предмет, второй — информатика. Пн и ср — алгебра; вт — «Алгебра (геометрия)»; чт — «Геометрия (алгебра)»; пт — геометрия. У 6 класса в четверг два урока русского отображаются как русский язык. Кнопка рядом с названием дня копирует сокращённое расписание с учётом фильтров.<p><a href="./schedule.json">JSON-база</a> · <a href="./class7-overrides.json">Правки 7 классов</a></p></section>
 </main>
 <script>
 (async()=>{
- const [db,c7]=await Promise.all([
-   fetch('./schedule.json').then(r=>r.json()),
-   fetch('./class7-overrides.json').then(r=>r.json())
- ]);
+ const [db,c7]=await Promise.all([fetch('./schedule.json').then(r=>r.json()),fetch('./class7-overrides.json').then(r=>r.json())]);
  const $=id=>document.getElementById(id),teacher=$('teacher'),cls=$('class'),day=$('day'),out=$('out'),count=$('count');
- const tm=new Map(db.teachers.map(t=>[t.id,t]));
+ const teacherMeta=new Map(db.teachers.map(t=>[t.id,{...t}]));
+ for(const o of (c7.grade7BOverrides||[]))if(o.teacherId!=null&&o.teacherName&&!teacherMeta.has(o.teacherId))teacherMeta.set(o.teacherId,{id:o.teacherId,name:o.teacherName,subjects:[o.subject]});
  const option=(value,text)=>{const o=document.createElement('option');o.value=value;o.textContent=text;return o};
- const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const entries=[];
- for(const d of db.days){for(const t of db.teachers){const row=db.schedule[d]?.[String(t.id)]||[];row.forEach((c,i)=>{if(c!==null&&c!==undefined&&c!=='')entries.push({teacherId:t.id,day:d,lesson:i+1,class:String(c),subject:'',manualSubject:''})})}}
+ for(const d of db.days){for(const t of db.teachers){const row=db.schedule[d]?.[String(t.id)]||[];row.forEach((c,i)=>{if(c!==null&&c!==undefined&&c!=='')entries.push({teacherId:t.id,teacherName:t.name,day:d,lesson:i+1,class:String(c),subject:'',manualSubject:''})})}}
 
- // Всё, что раньше было записано как 7 / 7А / 7Б, сначала считаем 7Б.
+ // Старые 7 / 7А / 7Б сначала считаем 7Б.
  entries.forEach(x=>{if(/^7(?:А|Б)?$/.test(x.class))x.class='7Б'});
 
- // Точное расписание 7А имеет приоритет над распознанной таблицей.
+ // Точное расписание 7А.
  for(const o of c7.grade7A){
-   if(o.teacherId===null){
-     entries.push({teacherId:null,day:o.day,lesson:o.lesson,class:'7А',subject:o.subject||'',manualSubject:o.subject||''});
-     continue;
-   }
+   if(o.teacherId===null){entries.push({teacherId:null,teacherName:'',day:o.day,lesson:o.lesson,class:'7А',subject:o.subject||'',manualSubject:o.subject||''});continue}
    let x=entries.find(e=>e.teacherId===o.teacherId&&e.day===o.day&&e.lesson===o.lesson);
-   if(!x){x={teacherId:o.teacherId,day:o.day,lesson:o.lesson,class:'7А',subject:'',manualSubject:''};entries.push(x)}
-   x.class='7А';
-   if(o.subject)x.manualSubject=o.subject;
+   if(!x){const m=teacherMeta.get(o.teacherId);x={teacherId:o.teacherId,teacherName:m?.name||'',day:o.day,lesson:o.lesson,class:'7А',subject:'',manualSubject:''};entries.push(x)}
+   x.class='7А';if(o.subject)x.manualSubject=o.subject;
+ }
+
+ // Явные правки 7Б: слот 7Б целиком заменяется.
+ for(const o of (c7.grade7BOverrides||[])){
+   for(let i=entries.length-1;i>=0;i--)if(entries[i].class==='7Б'&&entries[i].day===o.day&&entries[i].lesson===o.lesson)entries.splice(i,1);
+   const m=o.teacherId==null?null:teacherMeta.get(o.teacherId);
+   entries.push({teacherId:o.teacherId,teacherName:o.teacherName||m?.name||'',day:o.day,lesson:o.lesson,class:'7Б',subject:o.subject||'',manualSubject:o.subject||''});
  }
 
  // В пятницу у всех максимум 6 уроков.
  for(let i=entries.length-1;i>=0;i--)if(entries[i].day==='Пятница'&&entries[i].lesson>c7.fridayMaxLesson)entries.splice(i,1);
 
- function fixedSubject(tid,c){
-   if(tid===1)return'Английский';
-   if(tid===2)return'Химия / Физика';
-   if(tid===3)return'Биология';
-   if(tid===4)return'История';
-   if(tid===5)return c==='6'?'ИЗО':'География';
-   if(tid===6)return'Музыка';
-   if(tid===7)return'ОБЗР';
-   if(tid===8)return'Труды';
-   if(tid===11||tid===12)return'Математика';
-   if(tid===14)return'Физкультура';
-   return'';
- }
+ function fixedSubject(tid,c){if(tid===1)return'Английский';if(tid===2)return'Химия / Физика';if(tid===3)return'Биология';if(tid===4)return'История';if(tid===5)return c==='6'?'ИЗО':'География';if(tid===6)return'Музыка';if(tid===7)return'ОБЗР';if(tid===8)return'Труды';if(tid===11||tid===12)return'Математика';if(tid===14)return'Физкультура';return''}
  entries.forEach(x=>x.subject=x.manualSubject||fixedSubject(x.teacherId,x.class));
 
- // РОВ и БВБ не считаются первым уроком русского при определении пары русский/литература.
  const isSchoolwide=x=>(x.day==='Понедельник'&&x.lesson===1)||(x.day==='Четверг'&&x.lesson===1);
- for(const tid of [9,10]){
-   for(const d of db.days){
-     const byClass=new Map();
-     entries.filter(x=>x.teacherId===tid&&x.day===d&&!isSchoolwide(x)).sort((a,b)=>a.lesson-b.lesson).forEach(x=>{if(!byClass.has(x.class))byClass.set(x.class,[]);byClass.get(x.class).push(x)});
-     byClass.forEach(list=>list.forEach((x,i)=>x.subject=i===0?'Русский язык':'Литература'));
-   }
- }
- entries.filter(x=>(x.teacherId===9||x.teacherId===10)&&x.day==='Четверг'&&x.class==='6').forEach(x=>x.subject='Русский язык');
+ for(const tid of [9,10])for(const d of db.days){const byClass=new Map();entries.filter(x=>x.teacherId===tid&&x.day===d&&!isSchoolwide(x)&&!x.manualSubject).sort((a,b)=>a.lesson-b.lesson).forEach(x=>{if(!byClass.has(x.class))byClass.set(x.class,[]);byClass.get(x.class).push(x)});byClass.forEach(list=>list.forEach((x,i)=>x.subject=i===0?'Русский язык':'Литература'))}
+ entries.filter(x=>(x.teacherId===9||x.teacherId===10)&&x.day==='Четверг'&&x.class==='6'&&!x.manualSubject).forEach(x=>x.subject='Русский язык');
 
  const mathName=d=>d==='Вторник'?'Алгебра (геометрия)':d==='Четверг'?'Геометрия (алгебра)':(d==='Пятница'?'Геометрия':'Алгебра');
  for(const d of db.days){
    const row=entries.filter(x=>x.teacherId===13&&x.day===d).sort((a,b)=>a.lesson-b.lesson);
-   row.forEach(x=>{
-     if(x.class==='6'){
-       const pair=row.some(y=>y!==x&&y.class==='6'&&Math.abs(y.lesson-x.lesson)===1);
-       x.subject=pair?'Труды':'Математика';
-     }else if(x.class==='7А'||x.class==='7Б')x.subject=mathName(d);
-     else x.subject='Информатика';
-   });
-   for(const klass of ['7А','7Б']){
-     const list=row.filter(x=>x.class===klass).sort((a,b)=>a.lesson-b.lesson);
-     list.forEach((x,i)=>x.subject=i===0?mathName(d):'Информатика');
-   }
+   row.forEach(x=>{if(x.manualSubject)return;if(x.class==='6'){const pair=row.some(y=>y!==x&&y.class==='6'&&Math.abs(y.lesson-x.lesson)===1);x.subject=pair?'Труды':'Математика'}else if(x.class==='7А'||x.class==='7Б')x.subject=mathName(d);else x.subject='Информатика'});
+   for(const klass of ['7А','7Б']){const list=row.filter(x=>x.class===klass&&!x.manualSubject).sort((a,b)=>a.lesson-b.lesson);list.forEach((x,i)=>x.subject=i===0?mathName(d):'Информатика')}
  }
 
- // Явные предметы из уточнённого расписания 7А.
- for(const o of c7.grade7A){
-   if(!o.subject)continue;
-   const x=entries.find(e=>e.day===o.day&&e.lesson===o.lesson&&e.class==='7А'&&(o.teacherId===null?e.teacherId===null:e.teacherId===o.teacherId));
-   if(x)x.subject=o.subject;
- }
+ // Общешкольные предметы, если слот не задан вручную.
+ entries.filter(x=>x.day==='Понедельник'&&x.lesson===1&&!x.manualSubject).forEach(x=>x.subject='Разговоры о важном');
+ entries.filter(x=>x.day==='Четверг'&&x.lesson===1&&!x.manualSubject).forEach(x=>x.subject='Билет в будущее');
 
- entries.filter(x=>x.day==='Понедельник'&&x.lesson===1).forEach(x=>x.subject='Разговоры о важном');
- entries.filter(x=>x.day==='Четверг'&&x.lesson===1).forEach(x=>x.subject='Билет в будущее');
+ // Ручные названия всегда имеют последний приоритет.
+ entries.filter(x=>x.manualSubject).forEach(x=>x.subject=x.manualSubject);
 
  teacher.append(option('','Все учителя'));
- db.teachers.forEach(t=>{const subjects=t.id===5?'География, ИЗО':t.subjects.join(', ');teacher.append(option(String(t.id),`${t.name} — ${subjects}`))});
- const classes=[...new Set(entries.map(x=>x.class))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b,'ru'));
- cls.append(option('','Все классы'));classes.forEach(c=>cls.append(option(c,`${c} класс`)));
- day.append(option('','Вся неделя'));db.days.forEach(d=>day.append(option(d,d)));
+ [...teacherMeta.values()].sort((a,b)=>a.id-b.id).forEach(t=>{let subjects=t.id===5?'География, ИЗО':(t.subjects||[]).join(', ');teacher.append(option(String(t.id),`${t.name} — ${subjects}`))});
+ const classes=[...new Set(entries.map(x=>x.class))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b,'ru'));cls.append(option('','Все классы'));classes.forEach(c=>cls.append(option(c,`${c} класс`)));day.append(option('','Вся неделя'));db.days.forEach(d=>day.append(option(d,d)));
 
- async function copyText(text,btn){
-   if(!text)return;
-   try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}
-   const old=btn.textContent;btn.textContent='Скопировано';setTimeout(()=>btn.textContent=old,1200);
- }
-
+ async function copyText(text,btn){if(!text)return;try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}const old=btn.textContent;btn.textContent='Скопировано';setTimeout(()=>btn.textContent=old,1200)}
  function render(){
-   const tid=teacher.value,c=cls.value,d=day.value;
-   let rows=entries.filter(x=>(!tid||String(x.teacherId)===tid)&&(!c||x.class===c)&&(!d||x.day===d));
-   rows.sort((a,b)=>db.days.indexOf(a.day)-db.days.indexOf(b.day)||a.lesson-b.lesson||(a.teacherId??999)-(b.teacherId??999));
-   count.textContent=`Найдено занятий: ${rows.length}`;out.innerHTML='';
-   for(const dd of(d?[d]:db.days)){
-     const rr=rows.filter(x=>x.day===dd);
-     const sec=document.createElement('section');sec.className='day';
-     sec.innerHTML=`<div class="day-head"><h2>${esc(dd)}</h2><button class="copy-btn" type="button">Копировать</button></div><div class="table-wrap"><table><thead><tr><th>Урок</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>`;
-     const tb=sec.querySelector('tbody');
-     const maxLesson=dd==='Пятница'?c7.fridayMaxLesson:8;
-     for(let lesson=1;lesson<=maxLesson;lesson++){
-       const lr=rr.filter(x=>x.lesson===lesson);
-       if(!lr.length){const tr=document.createElement('tr');tr.innerHTML=`<td class="lesson">${lesson}</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td>`;tb.append(tr);continue}
-       lr.forEach((x,i)=>{const t=x.teacherId===null?null:tm.get(x.teacherId),tr=document.createElement('tr');tr.innerHTML=`<td class="lesson">${i===0?lesson:''}</td><td><span class="badge">${esc(x.class)}</span></td><td>${esc(x.subject)}</td><td>${esc(t?.name||'—')}</td>`;tb.append(tr)});
-     }
-     const btn=sec.querySelector('.copy-btn');
-     if(!rr.length)btn.disabled=true;
-     else btn.addEventListener('click',()=>{const text=rr.map(x=>`${x.lesson}. ${x.subject}`).join('\n');copyText(text,btn)});
-     out.append(sec);
-   }
+   const tid=teacher.value,c=cls.value,d=day.value;let rows=entries.filter(x=>(!tid||String(x.teacherId)===tid)&&(!c||x.class===c)&&(!d||x.day===d));rows.sort((a,b)=>db.days.indexOf(a.day)-db.days.indexOf(b.day)||a.lesson-b.lesson||(a.teacherId??999)-(b.teacherId??999));count.textContent=`Найдено занятий: ${rows.length}`;out.innerHTML='';
+   for(const dd of(d?[d]:db.days)){const rr=rows.filter(x=>x.day===dd);const sec=document.createElement('section');sec.className='day';sec.innerHTML=`<div class="day-head"><h2>${esc(dd)}</h2><button class="copy-btn" type="button">Копировать</button></div><div class="table-wrap"><table><thead><tr><th>Урок</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>`;const tb=sec.querySelector('tbody');const maxLesson=dd==='Пятница'?c7.fridayMaxLesson:8;for(let lesson=1;lesson<=maxLesson;lesson++){const lr=rr.filter(x=>x.lesson===lesson);if(!lr.length){const tr=document.createElement('tr');tr.innerHTML=`<td class="lesson">${lesson}</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td>`;tb.append(tr);continue}lr.forEach((x,i)=>{const tr=document.createElement('tr');const t=x.teacherId==null?null:teacherMeta.get(x.teacherId);tr.innerHTML=`<td class="lesson">${i===0?lesson:''}</td><td><span class="badge">${esc(x.class)}</span></td><td>${esc(x.subject)}</td><td>${esc(x.teacherName||t?.name||'—')}</td>`;tb.append(tr)})}const btn=sec.querySelector('.copy-btn');if(!rr.length)btn.disabled=true;else btn.addEventListener('click',()=>copyText(rr.map(x=>`${x.lesson}. ${x.subject}`).join('\n'),btn));out.append(sec)}
    const q=new URLSearchParams();if(tid)q.set('teacher',tid);if(c)q.set('class',c);if(d)q.set('day',d);history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:''));
  }
-
  const ch=$('changes');(db.changesFromPreviousPhoto||[]).forEach(x=>{const div=document.createElement('div');div.className='change';const before=x.beforeClass?`${x.beforeClass}`:'—',after=x.afterClass?`${x.afterClass}`:'—';div.innerHTML=`<strong>${esc(x.day)}, ${x.lesson} урок</strong><span>${esc(x.teacher)}: ${esc(before)} → ${esc(after)}</span>`;ch.append(div)});if(!ch.children.length)ch.textContent='Изменений нет.';
  const q=new URLSearchParams(location.search);if(q.get('teacher'))teacher.value=q.get('teacher');if(q.get('class'))cls.value=q.get('class');if(q.get('day'))day.value=q.get('day');[teacher,cls,day].forEach(x=>x.addEventListener('change',render));render();
 })().catch(e=>{document.getElementById('out').innerHTML='<div class="panel">Не удалось загрузить базу расписания.</div>';console.error(e)});
