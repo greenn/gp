@@ -5,29 +5,44 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Расписание 2026–2027</title>
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#dfe4ec;--accent:#315efb;--soft:#eef2ff;--warn:#9a6700}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:1080px;margin:auto;padding:28px 18px 60px}h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}
-.sub{color:var(--muted);margin:0 0 22px}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
-.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#dfe4ec;--accent:#315efb;--soft:#eef2ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:1080px;margin:auto;padding:28px 18px 60px}
+h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}
+.sub{color:var(--muted);margin:0 0 22px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
 select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}
 .meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-top:13px}
-.day{margin-top:20px}.day h2{font-size:21px;margin:0 0 9px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff}
-table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}tr:last-child td{border-bottom:0}.lesson{font-weight:700;width:72px}
+.day{margin-top:20px}
+.day-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
+.day h2{font-size:21px;margin:0}
+.copy-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:7px 11px;font:inherit;font-size:14px;cursor:pointer}
+.copy-btn:hover{background:#f8fafc}.copy-btn:disabled{opacity:.45;cursor:default}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}
+tr:last-child td{border-bottom:0}.lesson{font-weight:700;width:72px}
 .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--soft);color:#3046a5;font-size:13px}.empty{color:var(--muted)}
 .note{font-size:13px;color:var(--muted);margin-top:2px}.change{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)}
 .change:last-child{border-bottom:0}a{color:var(--accent)}details summary{cursor:pointer}
-@media(max-width:700px){.filters{grid-template-columns:1fr}.panel{padding:13px}main{padding:20px 12px 45px}.change{grid-template-columns:1fr}}
+@media(max-width:700px){.filters{grid-template-columns:1fr}.panel{padding:13px}main{padding:20px 12px 45px}.change{grid-template-columns:1fr}.copy-btn{padding:6px 9px}}
 </style>
 </head>
 <body><main>
 <h1>Расписание 2026–2027</h1>
 <p class="sub">Рабочая версия по исправленной фотографии от 10.09.2026.</p>
-<section class="panel"><div class="filters"><div><label for="teacher">Учитель</label><select id="teacher"></select></div><div><label for="class">Класс</label><select id="class"></select></div><div><label for="day">День</label><select id="day"></select></div></div><div class="meta"><span id="count"></span><span><b>8В</b> хранится как отдельный класс</span><span>неуверенные 7А/7Б пока могут быть «7»</span></div></section>
+<section class="panel"><div class="filters">
+<div><label for="teacher">Учитель</label><select id="teacher"></select></div>
+<div><label for="class">Класс</label><select id="class"></select></div>
+<div><label for="day">День</label><select id="day"></select></div>
+</div><div class="meta"><span id="count"></span><span><b>8В</b> хранится как отдельный класс</span><span>неуверенные 7А/7Б пока могут быть «7»</span></div></section>
 <div id="out"></div>
 <section class="panel"><details><summary><strong>Изменения последнего фото</strong></summary><div id="changes" style="margin-top:10px"></div></details></section>
-<section class="panel note"><strong>Правила:</strong> у Рожкова С. два подряд урока 6 класса — труды, остальные уроки 6 класса — математика. Для 7 класса первый урок Рожкова в этот день — математический, следующий урок того же класса — информатика. Пн и ср — алгебра; вт — «Алгебра (геометрия)»; чт — «Геометрия (алгебра)»; пт — геометрия. В понедельник 8-й урок у Рожкова — информатика, 7А. У 6 класса в четверг два урока русского отображаются как русский язык. Если урока нет, его номер всё равно выводится, а остальные поля — «—».<p><a href="./schedule.json">Открыть JSON-базу</a></p></section>
+<section class="panel note"><strong>Правила:</strong> у Фетисовой Н.Е. в 6 классе — ИЗО, в остальных классах — география. У Рожкова С. два подряд урока 6 класса — труды, остальные уроки 6 класса — математика. Для 7 класса первый урок Рожкова в этот день — математический, следующий урок того же класса — информатика. Пн и ср — алгебра; вт — «Алгебра (геометрия)»; чт — «Геометрия (алгебра)»; пт — геометрия. В понедельник 8-й урок у Рожкова — информатика, 7А. У 6 класса в четверг два урока русского отображаются как русский язык. Если урока нет, его номер всё равно выводится, а остальные поля — «—». Кнопка рядом с названием дня копирует сокращённое расписание с учётом текущих фильтров.<p><a href="./schedule.json">Открыть JSON-базу</a> · <a href="./subject-rules.json">Правила предметов</a></p></section>
 </main>
 <script>
 (async()=>{
@@ -38,18 +53,65 @@ th{font-size:13px;color:var(--muted);background:#fafbfc;position:sticky;top:0}tr
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const entries=[];
  for(const d of db.days){for(const t of db.teachers){const row=db.schedule[d]?.[String(t.id)]||[];row.forEach((c,i)=>{if(c!==null&&c!==undefined&&c!=='')entries.push({teacherId:t.id,day:d,lesson:i+1,class:String(c),subject:''})})}}
- function fixedSubject(tid){if(tid===1)return'Английский';if(tid===2)return'Химия / Физика';if(tid===3)return'Биология';if(tid===4)return'История';if(tid===5)return'География';if(tid===6)return'Музыка';if(tid===7)return'ОБЗР';if(tid===8)return'Труды';if(tid===11||tid===12)return'Математика';if(tid===14)return'Физкультура';return''}
- entries.forEach(x=>x.subject=fixedSubject(x.teacherId));
+ function fixedSubject(tid,c){
+   if(tid===1)return'Английский';
+   if(tid===2)return'Химия / Физика';
+   if(tid===3)return'Биология';
+   if(tid===4)return'История';
+   if(tid===5)return c==='6'?'ИЗО':'География';
+   if(tid===6)return'Музыка';
+   if(tid===7)return'ОБЗР';
+   if(tid===8)return'Труды';
+   if(tid===11||tid===12)return'Математика';
+   if(tid===14)return'Физкультура';
+   return'';
+ }
+ entries.forEach(x=>x.subject=fixedSubject(x.teacherId,x.class));
  for(const tid of [9,10]){for(const d of db.days){const byClass=new Map();entries.filter(x=>x.teacherId===tid&&x.day===d).sort((a,b)=>a.lesson-b.lesson).forEach(x=>{if(!byClass.has(x.class))byClass.set(x.class,[]);byClass.get(x.class).push(x)});byClass.forEach(list=>list.forEach((x,i)=>x.subject=i===0?'Русский язык':'Литература'))}}
  entries.filter(x=>(x.teacherId===9||x.teacherId===10)&&x.day==='Четверг'&&x.class==='6').forEach(x=>x.subject='Русский язык');
  const mathName=d=>d==='Вторник'?'Алгебра (геометрия)':d==='Четверг'?'Геометрия (алгебра)':(d==='Пятница'?'Геометрия':'Алгебра');
- for(const d of db.days){const row=entries.filter(x=>x.teacherId===13&&x.day===d).sort((a,b)=>a.lesson-b.lesson);row.forEach(x=>{if(x.class==='6'){const pair=row.some(y=>y!==x&&y.class==='6'&&Math.abs(y.lesson-x.lesson)===1);x.subject=pair?'Труды':'Математика'}else if(x.class.startsWith('7'))x.subject=mathName(d);else x.subject='Информатика'});const by7=new Map();row.filter(x=>x.class.startsWith('7')).forEach(x=>{if(!by7.has(x.class))by7.set(x.class,[]);by7.get(x.class).push(x)});by7.forEach(list=>list.sort((a,b)=>a.lesson-b.lesson).forEach((x,i)=>x.subject=i===0?mathName(d):'Информатика'))}
+ for(const d of db.days){
+   const row=entries.filter(x=>x.teacherId===13&&x.day===d).sort((a,b)=>a.lesson-b.lesson);
+   row.forEach(x=>{if(x.class==='6'){const pair=row.some(y=>y!==x&&y.class==='6'&&Math.abs(y.lesson-x.lesson)===1);x.subject=pair?'Труды':'Математика'}else if(x.class.startsWith('7'))x.subject=mathName(d);else x.subject='Информатика'});
+   const by7=new Map();
+   row.filter(x=>x.class.startsWith('7')).forEach(x=>{if(!by7.has(x.class))by7.set(x.class,[]);by7.get(x.class).push(x)});
+   by7.forEach(list=>list.sort((a,b)=>a.lesson-b.lesson).forEach((x,i)=>x.subject=i===0?mathName(d):'Информатика'));
+ }
  const rMon8=entries.find(x=>x.teacherId===13&&x.day==='Понедельник'&&x.lesson===8);if(rMon8){rMon8.class='7А';rMon8.subject='Информатика'}
  entries.filter(x=>x.day==='Понедельник'&&x.lesson===1).forEach(x=>x.subject='Разговоры о важном');
  entries.filter(x=>x.day==='Четверг'&&x.lesson===1).forEach(x=>x.subject='Билет в будущее');
- teacher.append(option('','Все учителя'));db.teachers.forEach(t=>teacher.append(option(String(t.id),`${t.name} — ${t.subjects.join(', ')}`)));
- const classes=[...new Set(entries.map(x=>x.class))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b,'ru'));cls.append(option('','Все классы'));classes.forEach(c=>cls.append(option(c,c==='7'?'7 класс (А/Б не распознано)':`${c} класс`)));day.append(option('','Вся неделя'));db.days.forEach(d=>day.append(option(d,d)));
- function render(){const tid=teacher.value,c=cls.value,d=day.value;let rows=entries.filter(x=>(!tid||String(x.teacherId)===tid)&&(!c||x.class===c)&&(!d||x.day===d));rows.sort((a,b)=>db.days.indexOf(a.day)-db.days.indexOf(b.day)||a.lesson-b.lesson||a.teacherId-b.teacherId);count.textContent=`Найдено занятий: ${rows.length}`;out.innerHTML='';for(const dd of(d?[d]:db.days)){const rr=rows.filter(x=>x.day===dd);const sec=document.createElement('section');sec.className='day';sec.innerHTML=`<h2>${esc(dd)}</h2><div class="table-wrap"><table><thead><tr><th>Урок</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>`;const tb=sec.querySelector('tbody');for(let lesson=1;lesson<=8;lesson++){const lr=rr.filter(x=>x.lesson===lesson);if(!lr.length){const tr=document.createElement('tr');tr.innerHTML=`<td class="lesson">${lesson}</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td>`;tb.append(tr);continue}lr.forEach((x,i)=>{const t=tm.get(x.teacherId),tr=document.createElement('tr');const note=x.class==='7'?'<div class="note">7А/7Б не удалось различить уверенно</div>':'';tr.innerHTML=`<td class="lesson">${i===0?lesson:''}</td><td><span class="badge">${esc(x.class)}</span></td><td>${esc(x.subject)}${note}</td><td>${esc(t?.name||'')}</td>`;tb.append(tr)})}out.append(sec)}const q=new URLSearchParams();if(tid)q.set('teacher',tid);if(c)q.set('class',c);if(d)q.set('day',d);history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:''))}
+ teacher.append(option('','Все учителя'));
+ db.teachers.forEach(t=>{const subjects=t.id===5?'География, ИЗО':t.subjects.join(', ');teacher.append(option(String(t.id),`${t.name} — ${subjects}`))});
+ const classes=[...new Set(entries.map(x=>x.class))].sort((a,b)=>parseInt(a)-parseInt(b)||a.localeCompare(b,'ru'));
+ cls.append(option('','Все классы'));classes.forEach(c=>cls.append(option(c,c==='7'?'7 класс (А/Б не распознано)':`${c} класс`)));
+ day.append(option('','Вся неделя'));db.days.forEach(d=>day.append(option(d,d)));
+ async function copyText(text,btn){
+   if(!text)return;
+   try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}
+   const old=btn.textContent;btn.textContent='Скопировано';setTimeout(()=>btn.textContent=old,1200);
+ }
+ function render(){
+   const tid=teacher.value,c=cls.value,d=day.value;
+   let rows=entries.filter(x=>(!tid||String(x.teacherId)===tid)&&(!c||x.class===c)&&(!d||x.day===d));
+   rows.sort((a,b)=>db.days.indexOf(a.day)-db.days.indexOf(b.day)||a.lesson-b.lesson||a.teacherId-b.teacherId);
+   count.textContent=`Найдено занятий: ${rows.length}`;out.innerHTML='';
+   for(const dd of(d?[d]:db.days)){
+     const rr=rows.filter(x=>x.day===dd);
+     const sec=document.createElement('section');sec.className='day';
+     sec.innerHTML=`<div class="day-head"><h2>${esc(dd)}</h2><button class="copy-btn" type="button">Копировать</button></div><div class="table-wrap"><table><thead><tr><th>Урок</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>`;
+     const tb=sec.querySelector('tbody');
+     for(let lesson=1;lesson<=8;lesson++){
+       const lr=rr.filter(x=>x.lesson===lesson);
+       if(!lr.length){const tr=document.createElement('tr');tr.innerHTML=`<td class="lesson">${lesson}</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td>`;tb.append(tr);continue}
+       lr.forEach((x,i)=>{const t=tm.get(x.teacherId),tr=document.createElement('tr');const note=x.class==='7'?'<div class="note">7А/7Б не удалось различить уверенно</div>':'';tr.innerHTML=`<td class="lesson">${i===0?lesson:''}</td><td><span class="badge">${esc(x.class)}</span></td><td>${esc(x.subject)}${note}</td><td>${esc(t?.name||'')}</td>`;tb.append(tr)});
+     }
+     const btn=sec.querySelector('.copy-btn');
+     if(!rr.length)btn.disabled=true;
+     else btn.addEventListener('click',()=>{const text=rr.map(x=>`${x.lesson}. ${x.subject}`).join('\n');copyText(text,btn)});
+     out.append(sec);
+   }
+   const q=new URLSearchParams();if(tid)q.set('teacher',tid);if(c)q.set('class',c);if(d)q.set('day',d);history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:''));
+ }
  const ch=$('changes');(db.changesFromPreviousPhoto||[]).forEach(x=>{const div=document.createElement('div');div.className='change';const before=x.beforeClass?`${x.beforeClass}`:'—',after=x.afterClass?`${x.afterClass}`:'—';div.innerHTML=`<strong>${esc(x.day)}, ${x.lesson} урок</strong><span>${esc(x.teacher)}: ${esc(before)} → ${esc(after)}</span>`;ch.append(div)});if(!ch.children.length)ch.textContent='Изменений нет.';
  const q=new URLSearchParams(location.search);if(q.get('teacher'))teacher.value=q.get('teacher');if(q.get('class'))cls.value=q.get('class');if(q.get('day'))day.value=q.get('day');[teacher,cls,day].forEach(x=>x.addEventListener('change',render));render();
 })().catch(e=>{document.getElementById('out').innerHTML='<div class="panel">Не удалось загрузить базу расписания.</div>';console.error(e)});
