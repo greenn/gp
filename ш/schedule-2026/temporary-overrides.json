@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "active": true,
+  "updatedAt": "2026-09-15",
+  "description": "Временные правки расписания. Действуют до явной отмены пользователем.",
+  "overrides": [
+    {"day":"Среда","lesson":3,"class":"7А","teacherId":13,"subject":"Вероятность и статистика"},
+    {"day":"Среда","lesson":4,"class":"7Б","teacherId":13,"subject":"Вероятность и статистика"},
+    {"day":"Среда","lesson":6,"class":"10","teacherId":13,"subject":"Вероятность и статистика"},
+    {"day":"Четверг","lesson":4,"class":"7А","teacherId":13,"subject":"Физика","sharedLesson":"7А+7Б"},
+    {"day":"Четверг","lesson":4,"class":"7Б","teacherId":13,"subject":"Физика","sharedLesson":"7А+7Б"},
+    {"day":"Четверг","lesson":1,"class":"9","teacherId":13,"subject":"Физика"},
+    {"day":"Четверг","lesson":1,"class":"6","teacherId":14,"subject":"Физкультура","replaces":"Билет в будущее"}
+  ]
+}
