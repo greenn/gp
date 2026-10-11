@@ -126,7 +126,7 @@ section.lesson { scroll-margin-top: 18px; background: var(--surface); border: 1p
 <div class="takeaway"><strong>Запомните:</strong><p>Если сначала открыли <code>&lt;b&gt;</code>, а внутри него <code>&lt;font&gt;</code>, сначала закрываем <code>&lt;/font&gt;</code>, затем <code>&lt;/b&gt;</code>.</p></div>
 </section>
 <section class="lesson" id="one-b"><div class="lesson-head"><div class="lesson-num">1б</div><h2>В конце таблицы нужен &lt;/table&gt;</h2></div>
-<p>В исходном коде отсутствовал закрывающий тег <code>&lt;/table&gt;</code> перед концом документа. Это видно на приложенном фрагменте.</p>
+<p>В исходном коде отсутствовал закрывающий тег <code>&lt;/table&gt;</code> перед концом документа. Перед завершением документа таблицу необходимо закрыть.</p>
 <div class="goodbad"><div class="code-card bad"><div class="code-top">✕ Было <button class="copy">Копировать</button></div><pre><code class="language-html">    &lt;/tr&gt;
 &lt;/html&gt;</code></pre></div><div class="code-card good"><div class="code-top">✓ Нужно <button class="copy">Копировать</button></div><pre><code class="language-html">    &lt;/tr&gt;
   &lt;/table&gt;
