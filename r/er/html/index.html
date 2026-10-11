@@ -3,15 +3,94 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1321">
+<meta name="theme-color" content="#f5f7fb">
 <meta name="description" content="Наглядный разбор HTML: правильная вложенность тегов, структура документа, таблицы, отступы, ссылки, изображения и бегущая строка.">
 <title>HTML без путаницы — разбор кода</title>
 <style>
-:root{color-scheme:dark;--bg:#09111d;--panel:#111d2c;--panel2:#152437;--line:#253b50;--txt:#e9f1f8;--muted:#9caebf;--accent:#6df1c7;--green:#56ddaf;--yellow:#ffe29d;--red:#ff8c9b;--blue:#94beff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse 950px 550px at 75% -100px,#15384580,transparent 72%),var(--bg);color:var(--txt);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}::selection{background:#287b6d}a{color:var(--accent)}a:hover{color:#d2fff1}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}code:not(pre code){font-size:.92em;background:#243348;padding:.1em .34em;border-radius:5px;color:#c8fce9}
-header.top{border-bottom:1px solid #244052;background:#071220cc;backdrop-filter:blur(12px)}.top-in{max-width:1300px;margin:auto;padding:15px 28px;display:flex;align-items:center;justify-content:space-between;gap:15px}.mark{display:flex;gap:11px;align-items:center;font-weight:750;letter-spacing:.04em}.mark .logo{background:#214d47;color:#8dffe0;font-weight:900;display:grid;place-items:center;border:1px solid #376a60;width:38px;height:38px;border-radius:12px}.top .src{font-size:.86rem;color:var(--muted);white-space:nowrap}.layout{max-width:1300px;padding:0 28px 90px;margin:auto;display:grid;grid-template-columns:228px minmax(0,1fr);gap:38px}.side{padding-top:42px}.side-inner{position:sticky;top:24px}.side small{text-transform:uppercase;letter-spacing:.14em;color:#7d98a8;font-size:.69rem;font-weight:800}.side a{display:flex;gap:12px;padding:8px 10px;margin:3px 0;border-radius:9px;color:#afc2d0;text-decoration:none;font-size:.88rem;line-height:1.4}.side a:hover,.side a:focus-visible{background:#142a36;color:#d7fff3}.side a span{color:var(--green);font-size:.77rem;min-width:22px}.side .tip{padding:14px;margin-top:24px;border:1px solid #285149;border-radius:12px;font-size:.8rem;color:#a1cabf;background:#10352b66}.content{min-width:0}.hero{padding:63px 0 26px}.eyebrow{display:inline-flex;gap:9px;align-items:center;background:#15352e;border:1px solid #2b6856;color:#93ffe0;border-radius:99px;padding:5px 12px;font-weight:750;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-size:clamp(2.4rem,5.3vw,4.35rem);line-height:1.07;letter-spacing:-.056em;max-width:740px;margin:22px 0 16px}.hero h1 em{font-style:normal;color:var(--accent)}.lede{color:#b8c9d5;max-width:700px;font-size:1.1rem;margin:0 0 24px}.hero-meta{display:flex;flex-wrap:wrap;gap:8px}.pill{border:1px solid #345163;border-radius:99px;padding:6px 12px;color:#9fb3c5;font-size:.78rem}.quote{padding:22px 26px;margin:24px 0 34px;border:1px solid #37776a;background:linear-gradient(120deg,#15352d,#132534);border-radius:17px}.quote strong{font-size:1.17rem;color:#c5ffe9}.quote p{margin:3px 0 0;color:#aacbc4}
-section.lesson{scroll-margin-top:18px;background:#101e2d;border:1px solid #273d50;border-radius:17px;margin-bottom:18px;padding:29px 30px;box-shadow:0 10px 30px #030a130d}.lesson-head{display:flex;align-items:flex-start;gap:15px;margin-bottom:12px}.lesson-num{display:grid;place-items:center;min-width:39px;height:39px;padding:0 8px;background:#193c38;color:#90f9d3;border-radius:12px;border:1px solid #31685b;font-weight:800;font-size:.9rem}.lesson h2{font-size:1.35rem;line-height:1.35;letter-spacing:-.02em;margin:3px 0 0}.lesson p{color:#c0d0db;margin:10px 0 15px}.lesson p:last-child{margin-bottom:0}.lesson ul{color:#c0d0db;padding-left:22px}.lesson li{margin:8px 0}.note{border-left:3px solid #d9ba7a;background:#342c203b;padding:13px 16px;border-radius:0 9px 9px 0;color:#f3e6c7;margin:15px 0;font-size:.9rem}.note strong{color:#ffe1a0}.goodbad{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.code-card{border:1px solid #31475a;border-radius:12px;overflow:hidden;min-width:0;background:#081320}.code-card.good{border-color:#2e705d}.code-card.bad{border-color:#7b4554}.code-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 13px;background:#132334;border-bottom:1px solid #294054;font-size:.77rem;letter-spacing:.02em;color:#a6bfce;font-weight:700}.good .code-top{color:#8ef1c0}.bad .code-top{color:#ffadbd}.code-card pre{margin:0;padding:17px 18px;overflow:auto;color:#cad8e7;line-height:1.65;font-size:13px;tab-size:2;white-space:pre}.copy{border:1px solid #3a5265;border-radius:7px;background:#1b3042;color:#bdcfdc;font:inherit;font-size:.72rem;padding:3px 9px;cursor:pointer;white-space:nowrap}.copy:hover{border-color:#82e1c7;color:white}.tag{color:#6bdcb8}.attr{color:#b2c9ff}.value{color:#f9d68b}.punct{color:#8fabc0}.comment{color:#8299ab}.textcode{color:#e2e9f1}.shot-gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}.shot{border:1px solid #3d5060;border-radius:12px;overflow:hidden;background:#191e20;margin:0}.shot-top{display:flex;gap:6px;align-items:center;background:#273034;padding:9px 14px;color:#a6b5bd;font-size:.73rem}.dot{width:8px;height:8px;border-radius:50%;background:#e18175}.dot:nth-child(2){background:#f0cb70}.dot:nth-child(3){background:#70b58b}.shot pre{padding:14px 13px;margin:0;overflow:auto;font-size:12px;color:#d7e6ef;line-height:1.7}.shot figcaption{padding:10px 14px;background:#142334;color:#bdcbd6;font-size:.79rem}.shot.wide{grid-column:1/-1}.shot.wide pre{font-size:12.7px}.key{display:inline-block;font-weight:750;font-size:.68rem;line-height:1;border-radius:4px;background:#274a42;color:#9ff5cf;padding:5px 7px;letter-spacing:.08em;text-transform:uppercase;margin-right:6px}.tbl{width:100%;border-collapse:collapse;min-width:510px;font-size:.87rem}.tbl th,.tbl td{text-align:left;padding:11px 13px;border-bottom:1px solid #304459}.tbl th{color:#a0bcce;font-weight:750}.tbl tr:last-child td{border-bottom:none}.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid #304459;border-radius:11px}.takeaway{border:1px solid #356b60;background:#12342c;border-radius:13px;padding:18px 20px;margin:18px 0}.takeaway strong{color:#abfada}.takeaway p{margin:4px 0 0}.footer{padding:33px 0 60px;color:#8da5b3;font-size:.9rem}.footer a{color:#b5f5dd}.caption{font-size:.78rem;color:#92a9b8}.tools{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.button-link{border:1px solid #437663;background:#163d35;color:#c5ffed;padding:9px 14px;border-radius:9px;text-decoration:none;font-size:.87rem}.button-link:hover{background:#21594b}.button-link.secondary{background:#192b3a;border-color:#3a5265;color:#bbd2dc}
-#progress{position:fixed;top:0;left:0;height:3px;width:0;background:#73efca;z-index:20;box-shadow:0 0 10px #6bffc2}@media(max-width:980px){.layout{grid-template-columns:1fr}.side{display:none}.content{max-width:850px;margin:auto}.hero{padding-top:43px}}@media(max-width:620px){.top-in,.layout{padding-left:16px;padding-right:16px}.hero h1{letter-spacing:-.035em}section.lesson{padding:21px 17px}.goodbad,.shot-gallery{grid-template-columns:1fr}.shot.wide{grid-column:auto}.code-card pre{font-size:12px}.quote{padding:19px}.top .src{display:none}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+:root {
+  color-scheme: light;
+  --bg: #f5f7fb; --surface: #fff; --ink: #25364a;
+  --muted: #5d6e81; --line: #dde5ed; --accent: #167e7b;
+  --green: #177c64; --good: #0f7254; --bad: #b64053;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; color: var(--ink);
+  background: radial-gradient(ellipse 900px 520px at 85% -140px, #d9eee9 0%, transparent 72%), var(--bg);
+  font: 18px/1.72 system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+::selection { background: #bcece2; }
+a { color: var(--accent); }
+a:hover { color: #07595b; }
+code,pre { font-family: ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace; }
+code:not(pre code) { background: #edf4f8; color: #135b69; border-radius: 5px; padding: .13em .35em; font-size: .89em; }
+header.top { border-bottom: 1px solid var(--line); background: #ffffffed; backdrop-filter: blur(12px); }
+.top-in { max-width: 1300px; margin: auto; padding: 15px 28px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.mark { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .03em; color: #23495c; font-size: 15px; }
+.mark .logo { width: 38px; height: 38px; display: grid; place-items: center; color: #096c64; background: #e1f5ed; border: 1px solid #b5dfd1; border-radius: 12px; font-size: 16px; }
+.top .src { color: var(--muted); font-size: .8rem; }
+.layout { max-width: 1300px; margin: auto; padding: 0 28px 90px; display: grid; grid-template-columns: 228px minmax(0,1fr); gap: 38px; }
+.side { padding-top: 42px; }
+.side-inner { position: sticky; top: 24px; }
+.side small { text-transform: uppercase; letter-spacing: .14em; color: #68818d; font-size: .72rem; font-weight: 800; }
+.side a { display: flex; align-items: start; gap: 12px; padding: 9px 11px; margin: 3px 0; color: #42566b; border-radius: 9px; font-size: .9rem; line-height: 1.45; text-decoration: none; }
+.side a:hover,.side a:focus-visible { background: #e7f4ef; color: #085d60; }
+.side a span { color: var(--green); font-size: .8rem; min-width: 22px; font-weight: 800; }
+.side .tip { background: #edf7f1; border: 1px solid #cce9d8; color: #346957; border-radius: 12px; padding: 15px; margin-top: 24px; font-size: .87rem; }
+.content { min-width: 0; }
+.hero { padding: 60px 0 28px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 9px; padding: 5px 13px; border: 1px solid #bfe4d5; background: #e7f6ef; color: #08675d; border-radius: 99px; font-size: .73rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.hero h1 { font-size: clamp(2.4rem,5.3vw,4.2rem); line-height: 1.1; letter-spacing: -.052em; max-width: 740px; margin: 22px 0 18px; color: #1e3446; }
+.hero h1 em { font-style: normal; color: #147b79; }
+.lede { color: #50677a; max-width: 730px; font-size: 1.23rem; line-height: 1.6; margin: 0 0 24px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { border: 1px solid #d6e0e7; background: #fff; color: #52667c; border-radius: 99px; padding: 6px 12px; font-size: .79rem; }
+.quote { padding: 23px 28px; margin: 25px 0 35px; border: 1px solid #c1e6d4; background: linear-gradient(110deg,#e8f8ef,#f6fffb); border-radius: 17px; }
+.quote strong { display: block; font-size: 1.35rem; line-height: 1.5; color: #145c4b; }
+.quote p { color: #386459; font-size: 1.17rem; margin: 5px 0 0; }
+section.lesson { scroll-margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; margin-bottom: 20px; padding: 32px 34px; box-shadow: 0 8px 30px #1e3c5b0a; }
+.lesson-head { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 14px; }
+.lesson-num { display: grid; place-items: center; min-width: 43px; height: 43px; padding: 0 8px; color: #136f60; background: #e3f5ee; border: 1px solid #bce6d5; border-radius: 12px; font-size: .92rem; font-weight: 800; }
+.lesson h2 { color: #243e53; font-size: clamp(1.38rem,2.4vw,1.7rem); letter-spacing: -.027em; line-height: 1.34; margin: 2px 0 0; }
+.lesson p { color: #364d61; font-size: 1.11rem; line-height: 1.77; margin: 12px 0 18px; max-width: 76ch; }
+.lesson p:last-child { margin-bottom: 0; }
+.lesson ul { color: #364d61; padding-left: 22px; font-size: 1.1rem; }
+.lesson li { margin: 9px 0; }
+.goodbad { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
+.code-card { border: 1px solid #d1dde8; border-radius: 12px; overflow: hidden; min-width: 0; background: #f8fafc; }
+.code-card.good { border-color: #a6d9c5; }
+.code-card.bad { border-color: #ecc2c8; }
+.code-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; background: #f0f4f8; border-bottom: 1px solid #dce4ec; color: #51677b; font-weight: 750; font-size: .79rem; }
+.good .code-top { color: #176c54; background: #f1fbf6; border-bottom-color: #d3ebdd; }
+.bad .code-top { color: #a0364d; background: #fff3f5; border-bottom-color: #f0d7da; }
+.code-card pre { margin: 0; padding: 19px 18px; overflow: auto; color: #253c4f; font-size: 14px; line-height: 1.68; tab-size: 2; white-space: pre; }
+.copy { border: 1px solid #ccd8e4; border-radius: 7px; padding: 5px 10px; background: #fff; color: #36576f; font: inherit; font-size: .74rem; cursor: pointer; white-space: nowrap; }
+.copy:hover { border-color: #83bdb5; background: #e9f7f3; color: #085b52; }
+.tag { color: #007968; }
+.attr { color: #2459ab; }
+.value { color: #9b5216; }
+.punct { color: #647789; }
+.comment { color: #6b8195; }
+.textcode { color: #273c51; }
+.tbl { width: 100%; border-collapse: collapse; min-width: 510px; font-size: .95rem; }
+.tbl th,.tbl td { text-align: left; padding: 12px 15px; border-bottom: 1px solid #e0e8f0; }
+.tbl th { color: #415d70; font-weight: 750; background: #f6f9fb; }
+.tbl tr:last-child td { border-bottom: none; }
+.table-wrap { overflow-x: auto; margin: 18px 0; border: 1px solid #dae3ea; border-radius: 12px; }
+.takeaway { border: 1px solid #c1e4d1; background: #effaf3; border-radius: 13px; padding: 19px 22px; margin: 20px 0; font-size: 1.1rem; }
+.takeaway strong { color: #17654d; }
+.takeaway p { color: #365d52; font-size: 1.07rem; margin: 6px 0 0; }
+.footer { padding: 28px 0 55px; color: #657789; font-size: .89rem; }
+.footer a { color: #147b79; }
+.tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+.button-link { display: inline-block; border: 1px solid #a1d0c0; background: #e2f5ec; color: #12634e; padding: 10px 16px; border-radius: 10px; text-decoration: none; font-size: .93rem; font-weight: 650; }
+.button-link:hover { background: #d1eee3; }
+.button-link.secondary { background: #fff; border-color: #d4dfe7; color: #42576a; }
+#progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: #168c7b; z-index: 20; }
+@media(max-width:980px) { .layout { grid-template-columns: 1fr; } .side { display: none; } .content { max-width: 850px; margin: auto; } .hero { padding-top: 43px; } }
+@media(max-width:620px) { .top-in,.layout { padding-left: 16px; padding-right: 16px; } .hero h1 { letter-spacing: -.035em; } section.lesson { padding: 23px 19px; } .goodbad { grid-template-columns: 1fr; } .code-card pre { font-size: 12.5px; } .quote { padding: 20px; } .top .src { display: none; } .lesson p { font-size: 1.04rem; } }
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
@@ -30,7 +109,6 @@ section.lesson{scroll-margin-top:18px;background:#101e2d;border:1px solid #273d5
 <a href="#seven"><span>07</span> Бегущая строка</a>
 <a href="#eight"><span>08</span> Изображения</a>
 <a href="#nine"><span>09</span> Выравнивание</a>
-<a href="#attachments"><span>★</span> Фрагменты скриншотов</a>
 <div class="tip">Главное правило: закрываем теги в обратном порядке относительно открытия.</div>
 </div></aside>
 <main class="content">
@@ -54,7 +132,7 @@ section.lesson{scroll-margin-top:18px;background:#101e2d;border:1px solid #273d5
   &lt;/table&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
-<p class="caption">См. визуальный фрагмент приложенного скриншота в разделе «Фрагменты скриншотов» ниже.</p>
+
 </section>
 <section class="lesson" id="two"><div class="lesson-head"><div class="lesson-num">02</div><h2>Разделяем &lt;head&gt; и &lt;body&gt;</h2></div><p>По правилам внутри <code>&lt;html&gt;</code> после <code>&lt;head&gt;...&lt;/head&gt;</code> должен располагаться <code>&lt;body&gt;</code>. Именно в нём размещается основное содержимое страницы.</p>
 <div class="code-card good"><div class="code-top">✓ Пример структуры HTML <button class="copy">Копировать</button></div><pre><code class="language-html">&lt;!doctype html&gt;
@@ -86,7 +164,6 @@ section.lesson{scroll-margin-top:18px;background:#101e2d;border:1px solid #273d5
   &lt;td align="center"&gt;&lt;font size="6"&gt;
     &lt;i&gt;Козерог&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
 &lt;/tr&gt;</code></pre></div></div>
-<div class="note"><strong>Важное уточнение по скриншоту:</strong> в разреженном варианте на снимке вместо <code>&lt;/font&gt;</code> написано <code>&lt;font&gt;</code>. Это отдельная ошибка закрытия тега; ширина отступов здесь ни при чём.</div>
 </section>
 <section class="lesson" id="five"><div class="lesson-head"><div class="lesson-num">05</div><h2>Переход на другую страницу через &lt;a&gt;</h2></div><p>Ссылка задаётся тегом <code>&lt;a&gt;</code>, а её адрес — атрибутом <code>href</code>. Адрес может вести на соседний HTML-файл или на сайт в интернете.</p>
 <div class="goodbad"><div class="code-card good"><div class="code-top">✓ Локальная страница <button class="copy">Копировать</button></div><pre><code class="language-html">&lt;a href="Овен.html"&gt;Овен&lt;/a&gt;</code></pre></div><div class="code-card good"><div class="code-top">✓ Внешний сайт <button class="copy">Копировать</button></div><pre><code class="language-html">&lt;a href="https://ya.ru/"&gt;yandex&lt;/a&gt;</code></pre></div></div>
@@ -104,60 +181,16 @@ section.lesson{scroll-margin-top:18px;background:#101e2d;border:1px solid #273d5
 <div class="table-wrap"><table class="tbl"><thead><tr><th>Атрибут</th><th>Значение</th></tr></thead><tbody><tr><td><code>behavior="alternate"</code></td><td>Текст отскакивает от краёв.</td></tr><tr><td><code>scrollamount="20"</code></td><td>Скорость движения: чем больше значение, тем быстрее.</td></tr></tbody></table></div>
 </section>
 <section class="lesson" id="eight"><div class="lesson-head"><div class="lesson-num">08</div><h2>Добавляем картинку через &lt;img&gt;</h2></div><p>В <code>src</code> указывается название файла изображения или адрес изображения в интернете.</p>
-<div class="code-card"><div class="code-top">Пример из исходного текста <button class="copy">Копировать</button></div><pre><code class="language-html">&lt;img src="Овен.jpg" /&gt;</code></pre></div><div class="note"><strong>Для HTML5:</strong> можно писать и <code>&lt;img src="Овен.jpg"&gt;</code>. Полезно дополнительно задать <code>alt</code> — текстовое описание картинки.</div>
-</section>
+<div class="code-card"><div class="code-top">Пример с изображением <button class="copy">Копировать</button></div><pre><code class="language-html">&lt;img src="Овен.jpg" /&gt;</code></pre></div></section>
 <section class="lesson" id="nine"><div class="lesson-head"><div class="lesson-num">09</div><h2>Центрирование через &lt;center&gt;</h2></div><p>Тег <code>&lt;center&gt;...&lt;/center&gt;</code> позволяет поместить содержимое по центру страницы. В учебном HTML без CSS такой вариант встречается.</p>
 <div class="code-card"><div class="code-top">Пример центрирования <button class="copy">Копировать</button></div><pre><code class="language-html">&lt;center&gt;
   &lt;h1&gt;ОВЕН ♈&lt;/h1&gt;
   &lt;img src="Овен.jpg" alt="Знак зодиака Овен"&gt;
 &lt;/center&gt;</code></pre></div>
-<div class="note"><strong>Современный HTML:</strong> элементы <code>&lt;font&gt;</code>, <code>&lt;center&gt;</code> и <code>&lt;marquee&gt;</code> устарели. Здесь они оставлены сознательно, чтобы сохранить логику исходного учебного разбора. В реальных проектах их оформление и анимацию обычно делают с помощью CSS.</div></section>
-<section class="lesson" id="attachments"><div class="lesson-head"><div class="lesson-num">★</div><h2>Фрагменты из приложенных скриншотов</h2></div>
-<p>Два приложенных снимка показывают разные варианты форматирования таблицы и отсутствие закрывающего <code>&lt;/table&gt;</code>. Ниже — уменьшенные версии снимков и текстовые воспроизведения видимых фрагментов с подсветкой. В них сохранены детали ошибок из скриншотов.</p>
-<div class="shot-gallery"><figure class="shot"><a href="./assets/indentation-screenshot.svg" target="_blank" rel="noopener"><img src="./assets/indentation-screenshot.svg" alt="Исходный скриншот: разреженная и компактная запись ячеек HTML-таблицы" loading="lazy" style="display:block;width:100%;height:auto;background:white"></a><figcaption>Приложение 1. Сравнение отступов, уменьшенный просмотр.</figcaption></figure><figure class="shot"><a href="./assets/table-end-screenshot.svg" target="_blank" rel="noopener"><img src="./assets/table-end-screenshot.svg" alt="Исходный скриншот: забытый закрывающий тег таблицы" loading="lazy" style="display:block;width:100%;height:auto;background:white"></a><figcaption>Приложение 2. Пропущенный закрывающий тег таблицы, уменьшенный просмотр.</figcaption></figure></div>
-<div class="shot-gallery">
-<figure class="shot"><div class="shot-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Разреженный вариант</div><pre><code class="language-html">&lt;tr&gt;
-    &lt;td align="center"&gt;
-        &lt;font size="6"&gt;
-            &lt;b&gt;Знак&lt;/b&gt;
-        &lt;font&gt;
-    &lt;/td&gt;
-    &lt;td align="center"&gt;
-        &lt;b&gt;
-          &lt;font size="6"&gt;Начало&lt;/font&gt;
-        &lt;/b&gt;
-    &lt;/td&gt;
-    &lt;td align="center"&gt;
-        &lt;b&gt;
-          &lt;font size="6"&gt;Конец&lt;/font&gt;
-        &lt;/b&gt;
-    &lt;/td&gt;
-&lt;/tr&gt;</code></pre><figcaption>Виден разреженный формат и ошибка <code>&lt;font&gt;</code> вместо <code>&lt;/font&gt;</code>.</figcaption></figure>
-<figure class="shot"><div class="shot-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Компактный вариант</div><pre><code class="language-html">&lt;tr&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;Козерог&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;22 декабря&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;19 января&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-&lt;/tr&gt;</code></pre><figcaption>Те же ячейки можно записывать компактнее. Это не ошибка.</figcaption></figure>
-<figure class="shot wide"><div class="shot-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Конец таблицы на втором скриншоте</div><pre><code class="language-html">&lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;21 марта&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-&lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;20 апреля&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;Рак&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;22 июня&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;22 июля&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;Весы&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;23 сентября&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-  &lt;td align="center"&gt;&lt;font size="6"&gt;&lt;i&gt;22 октября&lt;/i&gt;&lt;/font&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/html&gt;</code></pre><figcaption>Перед <code>&lt;/html&gt;</code> необходимо закрыть <code>&lt;/table&gt;</code> и <code>&lt;/body&gt;</code>.</figcaption></figure>
-</div>
-<div class="takeaway"><strong>Итог:</strong><p>Отступы — дело оформления. Правильная вложенность, закрывающие теги и структура HTML — требования к корректному коду.</p></div>
-<div class="tools"><a class="button-link" href="./source.txt">Открыть исходный текст</a><a class="button-link secondary" href="#intro">Вернуться к началу ↑</a></div>
-<p class="caption">Для публикации скриншоты уменьшены и встроены в SVG. Ниже показаны те же фрагменты в виде доступного для копирования кода. Полноразмерные оригиналы сохранены отдельно.</p>
 </section>
-<footer class="footer">Материал построен по присланному тексту и двум скриншотам. Учебные примеры дополнены пояснениями о современном HTML5.</footer>
+<div class="takeaway"><strong>Итог</strong><p>Отступы помогают читать код. Правильная вложенность и закрытие тегов необходимы для корректной HTML-страницы.</p></div>
+<div class="tools"><a class="button-link" href="./source.txt">Исходный текст</a><a class="button-link secondary" href="#intro">Наверх ↑</a></div>
+<footer class="footer">Учебный разбор основных элементов HTML.</footer>
 </main></div>
 <script>
 (function(){
