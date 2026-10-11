@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f5f7fb">
 <meta name="description" content="Наглядный разбор HTML: правильная вложенность тегов, структура документа, таблицы, отступы, ссылки, изображения и бегущая строка.">
-<title>HTML без путаницы — разбор кода</title>
+<title>HTML / Курс</title>
 <style>
 :root {
   color-scheme: light;
@@ -38,7 +38,7 @@ header.top { border-bottom: 1px solid var(--line); background: #ffffffed; backdr
 .side a:hover,.side a:focus-visible { background: #e7f4ef; color: #085d60; }
 .side a span { color: var(--green); font-size: .8rem; min-width: 22px; font-weight: 800; }
 .side .tip { background: #edf7f1; border: 1px solid #cce9d8; color: #346957; border-radius: 12px; padding: 15px; margin-top: 24px; font-size: .87rem; }
-.content { min-width: 0; }
+.content { min-width: 0; padding-top: 36px; }
 .hero { padding: 60px 0 28px; }
 .eyebrow { display: inline-flex; align-items: center; gap: 9px; padding: 5px 13px; border: 1px solid #bfe4d5; background: #e7f6ef; color: #08675d; border-radius: 99px; font-size: .73rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .hero h1 { font-size: clamp(2.4rem,5.3vw,4.2rem); line-height: 1.1; letter-spacing: -.052em; max-width: 740px; margin: 22px 0 18px; color: #1e3446; }
@@ -88,17 +88,16 @@ section.lesson { scroll-margin-top: 18px; background: var(--surface); border: 1p
 .button-link:hover { background: #d1eee3; }
 .button-link.secondary { background: #fff; border-color: #d4dfe7; color: #42576a; }
 #progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: #168c7b; z-index: 20; }
-@media(max-width:980px) { .layout { grid-template-columns: 1fr; } .side { display: none; } .content { max-width: 850px; margin: auto; } .hero { padding-top: 43px; } }
+@media(max-width:980px) { .layout { grid-template-columns: 1fr; } .side { display: none; } .content { max-width: 850px; margin: auto; padding-top: 24px; } }
 @media(max-width:620px) { .top-in,.layout { padding-left: 16px; padding-right: 16px; } .hero h1 { letter-spacing: -.035em; } section.lesson { padding: 23px 19px; } .goodbad { grid-template-columns: 1fr; } .code-card pre { font-size: 12.5px; } .quote { padding: 20px; } .top .src { display: none; } .lesson p { font-size: 1.04rem; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
 <div id="progress"></div>
-<header class="top"><div class="top-in"><div class="mark"><div class="logo">&lt;/&gt;</div><span>HTML / РАЗБОР КОДА</span></div><span class="src">Учебный конспект • 9 тем</span></div></header>
+<header class="top"><div class="top-in"><div class="mark"><div class="logo">&lt;/&gt;</div><span>HTML / Курс</span></div><span class="src">Учебный конспект • 9 тем</span></div></header>
 <div class="layout">
 <aside class="side"><div class="side-inner"><small>Содержание</small>
-<a href="#intro"><span>00</span> Введение</a>
 <a href="#one"><span>01</span> Вложенность тегов</a>
 <a href="#one-b"><span>1б</span> Закрытие таблицы</a>
 <a href="#two"><span>02</span> Структура страницы</a>
@@ -109,11 +108,8 @@ section.lesson { scroll-margin-top: 18px; background: var(--surface); border: 1p
 <a href="#seven"><span>07</span> Бегущая строка</a>
 <a href="#eight"><span>08</span> Изображения</a>
 <a href="#nine"><span>09</span> Выравнивание</a>
-<div class="tip">Главное правило: закрываем теги в обратном порядке относительно открытия.</div>
 </div></aside>
 <main class="content">
-<div class="hero" id="intro"><div class="eyebrow">HTML · практический разбор</div><h1>Пишем HTML <em>без путаницы.</em></h1><p class="lede">Ошибки в тегах, таблицы, структура документа, отступы, ссылки, картинки и бегущая строка. Примеры с подсветкой синтаксиса — в одном месте.</p><div class="hero-meta"><span class="pill">9 пунктов разбора</span><span class="pill">Можно копировать код</span><span class="pill">Примеры без CSS</span></div></div>
-<div class="quote"><strong>Вы молодец! Безапелляционно! И не обсуждается!))</strong><p>А теперь сухо по коду.</p></div>
 <section class="lesson" id="one"><div class="lesson-head"><div class="lesson-num">01</div><h2>Соблюдаем вложенность и закрываем теги</h2></div>
 <p>Были ошибки с закрывающим тегом <code>&lt;/b&gt;</code>: он располагался не на своём месте, а где-то отсутствовал. Теги должны закрываться в порядке, обратном их открытию.</p>
 <div class="goodbad">
@@ -188,8 +184,6 @@ section.lesson { scroll-margin-top: 18px; background: var(--surface); border: 1p
   &lt;img src="Овен.jpg" alt="Знак зодиака Овен"&gt;
 &lt;/center&gt;</code></pre></div>
 </section>
-<div class="takeaway"><strong>Итог</strong><p>Отступы помогают читать код. Правильная вложенность и закрытие тегов необходимы для корректной HTML-страницы.</p></div>
-<div class="tools"><a class="button-link" href="./source.txt">Исходный текст</a><a class="button-link secondary" href="#intro">Наверх ↑</a></div>
 <footer class="footer">Учебный разбор основных элементов HTML.</footer>
 </main></div>
 <script>
