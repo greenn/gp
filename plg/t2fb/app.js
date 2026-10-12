@@ -330,7 +330,7 @@
     $('#clearParams').addEventListener('click',()=>{S.selected=[];save();renderParams();refresh();notify('Поля команды 32 очищены');});
     $('#collapseAll').addEventListener('click',()=>{
       openParamHelp.clear();
-      $('.param-extra').forEach(x=>x.hidden=true);
+      document.querySelectorAll('.param-extra').forEach(x=>x.hidden=true);
       $$('.param-card .explain').forEach(x=>{x.textContent='ⓘ Пояснить';x.setAttribute('aria-expanded','false');});
     });
     $('#resetAll').addEventListener('click',()=>{
