@@ -6,11 +6,13 @@
   <meta name="theme-color" content="#f4f5f0">
   <meta name="description" content="Интерактивный каталог команд T2F: ракурсы, позы, камеры, свет, фотореализм и 32 параметра фотореалистичной фотографии.">
   <title>T2F · Лаборатория фотопромптов</title>
-  <link rel="stylesheet" href="./styles.css?v=1.2.2">
+  <link rel="stylesheet" href="./styles.css?v=1.3.0">
   <script src="./catalog.js" defer></script>
   <script src="./option-guides.js" defer></script>
   <script src="./randomizer.js" defer></script>
-  <script src="./app.js?v=1.2.1" defer></script>
+  <script src="./app.js?v=1.3.0" defer></script>
+  <script src="./commands12.js?v=1.3.0" defer></script>
+  <script src="./builder12.js?v=1.3.0" defer></script>
   <script src="./commands22.js?v=1.2.1" defer></script>
   <script src="./builder22.js?v=1.2.1" defer></script>
 </head>
@@ -20,7 +22,7 @@
     <header class="topbar">
       <a class="brand" href="./" aria-label="T2F — главная">
         <span class="brand-mark">T<span>2</span>F<span>b</span></span>
-        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.2.2</small></span>
+        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.3.0</small></span>
       </a>
       <div class="topbar-right">
         <span class="top-status"><i></i> Локальная работа, без загрузки фото</span>
@@ -33,19 +35,20 @@
         <div class="section-kicker">РАБОЧЕЕ ПРОСТРАНСТВО</div>
         <nav class="side-nav" id="mainNav" aria-label="Разделы каталога">
           <button data-page="builder" class="nav-link active" aria-current="page"><span class="nav-ico">◈</span>Конструктор 32<span class="nav-count">32</span></button>
+          <button data-page="commands12" class="nav-link"><span class="nav-ico">▣</span>Конструктор 12<span class="nav-count">12</span></button>
           <button data-page="commands22" class="nav-link"><span class="nav-ico">✳</span>Конструктор 22<span class="nav-count">22</span></button>
           <button data-page="quick" class="nav-link"><span class="nav-ico">⌘</span>Короткие команды<span class="nav-count" id="quickCount">—</span></button>
           <button data-page="guide" class="nav-link"><span class="nav-ico">☷</span>Справочник и примеры</button>
         </nav>
         <div class="divider"></div>
-        <div class="section-kicker">НАСТРОЙКИ КОМПОЗИЦИИ</div>
+        <div class="section-kicker" data-only-photo="true">НАСТРОЙКИ КОМПОЗИЦИИ</div>
         <div class="sidebar-box" data-only32="true">
           <label for="preset">Сценарий съёмки</label>
           <select id="preset"></select>
           <button class="subtle-btn" id="explainPreset" type="button">ⓘ Пояснить пресет</button>
           <p class="preset-summary" id="presetSummary"></p>
         </div>
-        <div class="sidebar-box">
+        <div class="sidebar-box" data-only-photo="true">
           <label for="subjectType">Тип исходной модели</label>
           <select id="subjectType">
             <option value="student">Учащийся / подросток</option>
@@ -60,7 +63,7 @@
           <label for="viewMode" class="label-spaced">Различия между кадрами</label>
           <select id="viewMode"><option value="angles">Разные ракурсы</option><option value="cameras">Разные камеры</option><option value="mixed">Ракурсы и камеры</option></select>
         </div>
-        <div class="sidebar-actions">
+        <div class="sidebar-actions" data-only-photo="true">
           <button class="subtle-btn" id="resetAll" type="button">↺ Сбросить всё</button>
           <button class="subtle-btn" id="exportConfig" type="button">⇩ Сохранить настройки</button>
           <label class="subtle-btn file-label" for="importConfig">⇧ Загрузить настройки</label>
@@ -98,6 +101,58 @@
           <div id="emptyParams" class="empty-state" hidden>Параметров по запросу не найдено. Попробуйте другое слово.</div>
         </div>
 
+
+
+        <div id="page-commands12" class="page" aria-label="Конструктор команд 12">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> T2F 0.6 · ФОТО → 3D-ИЗОБРАЖЕНИЕ</div>
+          <h1>Из фотографии <span class="headline-accent">в 3D.</span></h1>
+          <p class="lead">Соберите команду <code>12 {PS1, ...}</code> по мастер-промпту PHOTO → 3D v3.0: от ретро-консолей до современного CGI. Конструктор создаёт <strong>текст команды</strong> для @T2F; сама страница не загружает фотографии и не создаёт редактируемые 3D-файлы.</p>
+          <div class="metrics">
+            <div class="metric"><b id="total12">—</b><span>стиля и пресета</span></div>
+            <div class="metric"><b id="active12">0</b><span>выбрано условий</span></div>
+            <div class="metric"><b id="mode12Badge">AAAAA</b><span>основной стиль</span></div>
+          </div>
+          <div class="panel-head">
+            <div><div class="section-kicker">ОСНОВНОЙ ПРЕСЕТ</div><h2>Эпоха и характер 3D</h2></div>
+            <div class="head-actions">
+              <button class="lucky-btn" id="lucky12" type="button">✦ Мне повезёт 12</button>
+              <button class="quiet-btn" id="reset12" type="button">↺ Сбросить 12</button>
+              <button class="quiet-btn" id="export12" type="button">⇩ JSON</button>
+              <label class="quiet-btn" for="import12" style="cursor:pointer">⇧ Загрузить</label>
+              <input id="import12" class="visually-hidden" type="file" accept=".json,application/json">
+            </div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <p class="tt-subtle">Выберите <strong>один</strong> основной стиль. AAAA и AAAAA — условные пользовательские уровни детализации, не технические стандарты. Названия консолей и движков обозначают художественный ориентир.</p>
+            <div class="tt-pose-tabs" id="presetTabs12" role="group" aria-label="Группы 3D-пресетов"></div>
+            <label class="search large-search"><span>⌕</span><input id="presetSearch12" type="search" placeholder="Найти стиль: PS1, PS2, PS5, Unreal, voxel, CGI…" autocomplete="off"></label>
+            <div id="presetList12" class="t12-preset-grid"></div>
+            <div id="emptyPresets12" class="empty-state" hidden>Подходящих пресетов не найдено.</div>
+            <p class="tt-explanation" id="presetDescription12"></p>
+          </div>
+          <div class="panel-head"><div><div class="section-kicker">16 ГРУПП НАСТРОЕК</div><h2>Геометрия, свет, камера и материалы</h2></div><button class="quiet-btn" id="clearFields12" type="button">Очистить параметры</button></div>
+          <div id="fields12" class="t12-field-grid"></div>
+          <div class="tt-panel tt-wide">
+            <div class="section-kicker">СВОИ УСЛОВИЯ</div><h2>Дополнительные инструкции</h2>
+            <label for="custom12" class="tt-label">Свободный текст — одна или несколько настроек через запятую</label>
+            <textarea id="custom12" rows="3" maxlength="1800" placeholder="Например: 1997, сохранить лицо, 4K output, лёгкий туман, пропорции оригинального фото"></textarea>
+            <p class="field-hint">Явные настройки дополняют выбранный пресет. Если вы запросили гибрид PS1 + современные тени, основной стиль остаётся PS1.</p>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="section-kicker">ПРИМЕРЫ КОМБИНАЦИЙ</div><h2>Быстрые сценарии</h2>
+            <div id="examples12" class="t12-example-grid"></div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="section-kicker">ГОТОВАЯ КОМАНДА</div><h2>Формат результата</h2>
+            <div class="twentytwo-grid">
+              <div><label class="tt-label" for="format12">Вывод справа</label>
+              <select id="format12"><option value="command">Одна команда 12</option><option value="explained">Команда + русские пояснения</option><option value="series">Серия разных эпох</option></select></div>
+              <div><label class="tt-label" for="series12">Количество команд серии</label>
+              <select id="series12"><option value="2">2 варианта</option><option value="3" selected>3 варианта</option><option value="4">4 варианта</option></select></div>
+            </div>
+            <p class="tt-explanation" id="warnings12" role="status" aria-live="polite">Выберите стиль и настройки — итог появится в правой панели.</p>
+          </div>
+        </div>
 
         <div id="page-commands22" class="page" aria-label="Конструктор команд 22">
           <div class="eyebrow"><span class="eyebrow-dot"></span> T2F 0.4 · ИНТЕРАКТИВНЫЙ КОНСТРУКТОР</div>
@@ -183,6 +238,7 @@
           <div class="eyebrow"><span class="eyebrow-dot"></span> КАК ПОЛЬЗОВАТЬСЯ</div>
           <h1>Принцип работы <span class="headline-accent">T2F.</span></h1>
           <p class="lead">В одном месте — правила сохранения модели, синтаксис 32 параметров, готовые сценарии и диагностика признаков CGI.</p>
+          <section class="guide-block"><span class="step-num">00</span><h2>Новый режим 12: фото → 3D</h2><p>На вкладке «Конструктор 12» задайте один основной стиль PS1, PS2, PS5, AAA–AAAAA или другой, настройте геометрию, свет, текстуры, разрешение вывода, сохранение объектов и эффекты. Результат справа — команда вида <code>12 {PS1, low-poly, 4K output}</code>. Прикрепите настоящую фотографию уже в чате @T2F. Режим 12 создаёт 3D-изображение, а не экспортируемую модель.</p></section>
           <section class="guide-block">
             <span class="step-num">01</span><h2>Выберите исходное изображение</h2>
             <p>Приложите в чат <strong>@T2F</strong> свой 3D-рендер. Эта страница не загружает изображения — она помогает составить текст команды.</p>
