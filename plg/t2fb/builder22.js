@@ -97,7 +97,7 @@ function output(){
     for(let i=0;i<n;i++){
       const next=S.customPose.trim() ? S.customPose.trim() : list[(idx+i)%list.length].code;
       const camera=S.camera ? S.camera : ['35','50','85','35'][i];
-      series.push((i+1)+'. '+command(next,camera));
+      series.push(command(next,camera));
     }
     return series.join('\n');
   }
@@ -110,7 +110,7 @@ function why(field){
   const active=$(id).dataset.open==='true';
   $(id).hidden=!active;
 }
-function renderSelect(id,list,value){$(id).replaceChildren(...list.map(item=>{const option=document.createElement('option');option.value=item.value||item.code;option.textContent=item.name;option.selected=(option.value===value);return option;}));}
+function renderSelect(id,list,value){$(id).replaceChildren(...list.map(item=>{const option=document.createElement('option');option.value=typeof item.value==='string'?item.value:item.code;option.textContent=item.name;option.selected=(option.value===value);return option;}));}
 function createLabel(group,code,name,description,value){
   const card=document.createElement('article');card.className='tt-option-card';
   const head=document.createElement('div');head.className='tt-row';
