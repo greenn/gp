@@ -1,4 +1,4 @@
-/* T2Fb 0.4 — интерактивный конструктор команды 22. Без внешних зависимостей. */
+/* T2F 0.4 — интерактивный конструктор команды 22. Без внешних зависимостей. */
 (function(){
 'use strict';
 const C=window.T2FB22_CATALOG;
@@ -239,7 +239,7 @@ $('export22').addEventListener('click',()=>{
   const json=JSON.stringify({format:'t2fb-commands22-v1',config:S},null,2);
   const blob=new Blob([json],{type:'application/json;charset=utf-8'});
   const link=document.createElement('a'),url=URL.createObjectURL(blob);
-  link.href=url;link.download='T2Fb-commands22.json';document.body.appendChild(link);
+  link.href=url;link.download='T2F-commands22.json';document.body.appendChild(link);
   link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 $('import22').addEventListener('change',async event=>{
