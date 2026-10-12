@@ -9,7 +9,7 @@
 .custom-note{display:block;font-weight:700;color:#536e5d;font-size:11px;margin:-4px 0 -11px}.custom-note textarea{display:block;width:100%;resize:vertical;min-height:58px;max-height:150px;margin-top:6px;border-radius:8px;border:1px solid #d8e5db;padding:9px;font-weight:400;font-size:11px;color:#294b34;background:#fff}
 
 
-/* T2Fb v1.1: button for coherent full 32-parameter randomization */
+/* T2F v1.1: button for coherent full 32-parameter randomization */
 .lucky-btn{
   border:1px solid #158050;border-radius:9px;
   background:linear-gradient(125deg,#167f50,#0b623d);color:#fff;
@@ -24,7 +24,7 @@
 @media(max-width:720px){.lucky-btn{width:100%;text-align:center}.head-actions{display:flex;gap:8px}.head-actions .lucky-btn{flex:1 0 100%}}
 @media(prefers-reduced-motion:reduce){.lucky-btn{transition:none;transform:none!important}}
 
-/* T2Fb · Command 22 builder v1.2 */
+/* T2F · Command 22 builder v1.2 */
 #page-commands22 .lead{max-width:740px}
 .twentytwo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:17px}
 .tt-panel{min-width:0;background:#fff;border:1px solid #dfe6df;border-radius:12px;padding:17px;box-shadow:var(--shadow)}
