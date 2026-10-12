@@ -6,7 +6,7 @@ if(!C||!document.getElementById('page-commands12'))return;
 const $=id=>document.getElementById(id);
 const STORE='t2f-photo-to-3d-command12-v1';
 const COPY=o=>JSON.parse(JSON.stringify(o));
-const DEFAULT={preset:'AAAAA',tab:'all',values:{preserve:['сохранить лицо и возраст','сохранить одежду и позу','сохранить композицию и объекты','no added objects','no HUD']},custom:'',format:'command',series:'3'};
+const DEFAULT={preset:'AAAAA',tab:'all',values:{preserve:['сохранить лицо и возраст','сохранить одежду и позу','сохранить композицию и объекты','no added objects','no HUD']},custom:'',format:'command',series:'3',seriesTech:false};
 const pvals=new Set(C.presets.map(p=>p.value));
 const groups=Object.fromEntries(C.groups.map(g=>[g.key,g]));
 const isObj=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
@@ -22,6 +22,7 @@ function normalize(input){
  if(typeof input.custom==='string')s.custom=input.custom.slice(0,1800);
  if(['command','explained','series'].includes(input.format))s.format=input.format;
  if(['2','3','4'].includes(String(input.series)))s.series=String(input.series);
+ if(typeof input.seriesTech==='boolean')s.seriesTech=input.seriesTech;
  return s;
 }
 let S;try{S=normalize(JSON.parse(localStorage.getItem(STORE)||'null'));}catch(_){S=normalize(null);}
@@ -30,14 +31,20 @@ const preset=()=>C.presets.find(p=>p.value===S.preset)||C.presets.find(p=>p.valu
 const selected=g=>g.multi?(Array.isArray(S.values[g.key])?S.values[g.key]:[]):S.values[g.key]||'';
 const valueInfo=(g,v)=>g.options.find(o=>o.value===v);
 const strip=s=>String(s).replace(/[{}]/g,' ').replace(/\s+/g,' ').trim().slice(0,1800);
-function terms(otherPreset){
+function terms(otherPreset,forSeries=false){
  const v=[otherPreset||S.preset];
- for(const g of C.groups){const x=selected(g);if(g.multi){for(const a of x){if(!v.includes(a))v.push(a);}}else if(x&&!v.includes(x))v.push(x);}
+ for(const g of C.groups){
+  if(forSeries&&!S.seriesTech){
+   const shared=['camera','ratio','output','effects','preserve'];
+   if(g.key==='light'&&!['sunny','overcast','golden hour','night','studio softbox'].includes(selected(g)))continue;
+   if(g.key!=='light'&&!shared.includes(g.key))continue;
+  }
+  const x=selected(g);if(g.multi){for(const a of x){if(!v.includes(a))v.push(a);}}else if(x&&!v.includes(x))v.push(x);}
  const extra=strip(S.custom);if(extra)v.push(extra);
  return v;
 }
-function command(otherPreset){
- const args=terms(otherPreset);
+function command(otherPreset,forSeries=false){
+ const args=terms(otherPreset,forSeries);
  return '12 {'+args.join(', ')+'}';
 }
 function notesFor(){
@@ -58,7 +65,7 @@ function seriesOutput(){
  const chain=art.includes(S.preset)?art:path;
  const ix=chain.indexOf(S.preset);
  const res=[];
- for(let i=0;i<n;i++)res.push(command(chain[(ix+i)%chain.length]));
+ for(let i=0;i<n;i++)res.push(command(chain[(ix+i)%chain.length],true));
  return res.join('\n');
 }
 function output(){return S.format==='series'?seriesOutput():S.format==='explained'?command()+'\n\nПОЯСНЕНИЯ\n'+notesFor():command();}
@@ -172,12 +179,13 @@ function changed(){
  $('active12').textContent=C.groups.reduce((sum,g)=>sum+(g.multi?selected(g).length:Number(!!selected(g))),0)+Number(!!S.custom.trim());
  $('presetDescription12').textContent=preset().help;
  $('series12').disabled=S.format!=='series';
+ $('seriesTech12').disabled=S.format!=='series';
  $('warnings12').textContent=warnings();
  if(typeof window.T2FB_REFRESH_OUTPUT==='function')window.T2FB_REFRESH_OUTPUT();
 }
 function sync(){
  $('presetSearch12').value='';$('custom12').value=S.custom;
- $('format12').value=S.format;$('series12').value=S.series;
+ $('format12').value=S.format;$('series12').value=S.series;$('seriesTech12').checked=S.seriesTech;
  drawPresets();drawFields();changed();
 }
 function lucky(){
@@ -228,6 +236,7 @@ $('presetSearch12').addEventListener('input',drawPresets);
 $('custom12').addEventListener('input',e=>{S.custom=e.target.value.slice(0,1800);changed();});
 $('format12').addEventListener('change',e=>{S.format=e.target.value;changed();});
 $('series12').addEventListener('change',e=>{S.series=e.target.value;changed();});
+$('seriesTech12').addEventListener('change',e=>{S.seriesTech=e.target.checked;changed();});
 $('clearFields12').addEventListener('click',()=>{S.values={};S.custom='';$('custom12').value='';drawFields();changed();});
 $('reset12').addEventListener('click',()=>{if(!confirm('Сбросить все настройки системы 12?'))return;S=normalize(null);sync();});
 $('lucky12').addEventListener('click',lucky);
