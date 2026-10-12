@@ -107,3 +107,8 @@ body.mode-12 [data-only32],body.mode-12 [data-only-photo]{display:none}
 #page-commands12 .t12-field .tt-small-desc{margin-top:9px}
 @media(max-width:1100px){.t12-preset-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.t12-preset-grid,.t12-field-grid,.t12-example-grid{grid-template-columns:1fr}.t12-preset-grid{max-height:430px}}
+
+/* Explicit hybrid setting for multi-era series in command 12. */
+.t12-series-checkbox{display:flex;align-items:flex-start;gap:9px;color:#567060;font-size:11px;line-height:1.65;margin:14px 0 6px;cursor:pointer}
+.t12-series-checkbox input{accent-color:#15814e;margin-top:3px;flex:none}
+.t12-series-checkbox:has(input:disabled){opacity:.55}
