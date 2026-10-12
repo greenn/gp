@@ -39,7 +39,7 @@
         </nav>
         <div class="divider"></div>
         <div class="section-kicker">НАСТРОЙКИ КОМПОЗИЦИИ</div>
-        <div class="sidebar-box">
+        <div class="sidebar-box" data-only32="true">
           <label for="preset">Сценарий съёмки</label>
           <select id="preset"></select>
           <button class="subtle-btn" id="explainPreset" type="button">ⓘ Пояснить пресет</button>
@@ -54,7 +54,7 @@
           </select>
           <p class="field-hint">По умолчанию сохраняются визуальный возраст, лицо, одежда и пропорции.</p>
         </div>
-        <div class="sidebar-box">
+        <div class="sidebar-box" data-only32="true">
           <label for="views">Количество кадров</label>
           <select id="views"><option value="1">1 фотография</option><option value="2">2 ракурса</option><option value="3" selected>3 ракурса</option><option value="4">4 ракурса</option></select>
           <label for="viewMode" class="label-spaced">Различия между кадрами</label>
@@ -110,7 +110,7 @@
           </div>
           <div class="panel-head">
             <div><div class="section-kicker">СБОРКА КОМАНДЫ</div><h2>Режим и безопасность</h2></div>
-            <div class="head-actions"><button class="lucky-btn" type="button" id="lucky22">✦ Мне повезёт 22</button><button class="quiet-btn" type="button" id="reset22">↺ Сбросить 22</button></div>
+            <div class="head-actions"><button class="lucky-btn" type="button" id="lucky22">✦ Мне повезёт 22</button><button class="quiet-btn" type="button" id="reset22">↺ Сбросить 22</button><button class="quiet-btn" type="button" id="export22">⇩ JSON</button><label class="quiet-btn" for="import22" style="cursor:pointer">⇧ Загрузить</label><input type="file" id="import22" class="visually-hidden" accept=".json,application/json"></div>
           </div>
           <div class="twentytwo-grid">
             <div class="tt-panel">
