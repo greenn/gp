@@ -8,6 +8,7 @@
   <title>T2Fb · Лаборатория фотопромптов</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="./catalog.js" defer></script>
+  <script src="./option-guides.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -16,7 +17,7 @@
     <header class="topbar">
       <a class="brand" href="./" aria-label="T2Fb — главная">
         <span class="brand-mark">T<span>2</span>F<span>b</span></span>
-        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.0</small></span>
+        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.1</small></span>
       </a>
       <div class="topbar-right">
         <span class="top-status"><i></i> Локальная работа, без загрузки фото</span>
@@ -68,7 +69,7 @@
         <div id="page-builder" class="page visible">
           <div class="eyebrow"><span class="eyebrow-dot"></span> ИНТЕРАКТИВНЫЙ КОНСТРУКТОР</div>
           <h1>От 3D-модели <span class="headline-accent">к фотографии.</span></h1>
-          <p class="lead">Настройте камеру, свет, материалы и обработку. Система соберёт команду <code>32 {...}</code> для <strong>@T2Fb</strong>. Каждый параметр можно объяснить и изменить.</p>
+          <p class="lead">Настройте камеру, свет, материалы и обработку. Система соберёт команду <code>32 {...}</code> для <strong>@T2Fb</strong>. Нажмите «Пояснить», чтобы узнать значение выбранного варианта, или «Мне повезёт», чтобы случайно заполнить все 32 поля.</p>
           <div class="metrics">
             <div class="metric"><b>32</b><span>параметра</span></div>
             <div class="metric"><b id="metricActive">0</b><span>выбрано вами</span></div>
@@ -80,6 +81,7 @@
               <h2>Настройте детали <span id="parameterCount" class="soft-count">32</span></h2>
             </div>
             <div class="head-actions">
+              <button class="lucky-btn" id="luckyAll" type="button" title="Заполнить 32 параметра согласованными случайными значениями">✦ Мне повезёт</button>
               <button class="quiet-btn" id="collapseAll" type="button">Свернуть пояснения</button>
               <button class="quiet-btn" id="clearParams" type="button">Очистить параметры</button>
             </div>
@@ -123,7 +125,7 @@
           </section>
           <section class="guide-block">
             <span class="step-num">03</span><h2>Соберите и скопируйте</h2>
-            <p>Панель справа обновляется при каждом выборе. «Команда 32» копирует техническую спецификацию. «Полный запрос» добавляет правила сохранения возраста, внешности и указанное число ракурсов.</p>
+            <p>Панель справа обновляется при каждом выборе. «Команда 32» копирует техническую спецификацию. «Полный запрос» добавляет правила сохранения возраста, внешности и указанное число ракурсов. Кнопка «Мне повезёт» заполняет все 32 поля случайными согласованными значениями, не заменяя исходную личность или тип персонажа. Повторное нажатие создаёт новый набор.</p>
           </section>
           <section class="guide-block">
             <span class="step-num">04</span><h2>Правила приоритета</h2>
@@ -159,7 +161,7 @@
           <button id="copyPrompt" class="primary-btn" type="button">⧉ Скопировать</button>
           <button id="downloadPrompt" class="outline-btn" type="button">↓ TXT</button>
         </div>
-        <div class="output-note">Изменения появляются сразу. Нажмите «Пояснить» у любого параметра, чтобы узнать, за что он отвечает и когда нужен.</div>
+        <div class="output-note">Изменения появляются сразу. «Пояснить» объясняет конкретное выбранное значение. «Мне повезёт» подбирает новую комбинацию 32 параметров.</div>
       </aside>
     </div>
 
