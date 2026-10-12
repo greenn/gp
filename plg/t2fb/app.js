@@ -47,7 +47,7 @@
     result.subjectType=['student','adult','object'].includes(data.subjectType)?data.subjectType:defaults.subjectType;
     result.views=['1','2','3','4'].includes(String(data.views))?String(data.views):defaults.views;
     result.viewMode=['angles','cameras','mixed'].includes(data.viewMode)?data.viewMode:defaults.viewMode;
-    result.page=['builder','commands22','quick','guide'].includes(data.page)?data.page:'builder';
+    result.page=['builder','commands12','commands22','quick','guide'].includes(data.page)?data.page:'builder';
     result.group=D.groups.some(x=>x.id===data.group)?data.group:'all';
     result.quickGroup=qgroup.includes(data.quickGroup)?data.quickGroup:'Все';
     result.output=['full','code','quick'].includes(data.output)?data.output:'full';
@@ -251,11 +251,12 @@
   function refresh(){
     $('#metricActive').textContent=S.selected.length;
     $('#metricPreset').textContent=S.preset.replace('PORTRAIT_EDITORIAL','PORTRAIT').replace('BASE_NEUTRAL','BASE').replace('SMARTPHONE_CASUAL','PHONE').replace('STREET_DOCUMENTARY','STREET').replace('PRODUCT_STUDIO','PRODUCT').replace('ARCH_INTERIOR_DAY','ARCH').replace('NIGHT_URBAN','NIGHT').replace('AUTOMOTIVE_NATURAL','AUTO');
+    const page12=S.page==='commands12' && !!window.T2FB12;
     const page22=S.page==='commands22' && !!window.T2FB22;
-    $('#promptOutput').textContent=page22?window.T2FB22.output():(S.output==='code'?compileCode():(S.output==='quick'?quickPrompt():fullPrompt()));
-    $('.output-switch').style.display=S.page==='commands22'?'none':'';
-    const warnings=page22?[]:analyze();
-    $('#validation').innerHTML=page22?'<div class="success">✓ Режим 22. Используйте выбор формата слева, затем «Скопировать».</div>':(warnings.length?warnings.map(w=>'<div class="notice">⚠ '+htmlEsc(w)+'</div>').join(''):'<div class="success">✓ Автоматическая проверка не нашла очевидных конфликтов.</div>');
+    $('#promptOutput').textContent=page12?window.T2FB12.output():(page22?window.T2FB22.output():(S.output==='code'?compileCode():(S.output==='quick'?quickPrompt():fullPrompt())));
+    $('.output-switch').style.display=(S.page==='commands12'||S.page==='commands22')?'none':'';
+    const warnings=page12||page22?[]:analyze();
+    $('#validation').innerHTML=page12?'<div class="success">✓ Команда 12: фото → 3D-изображение. Проверьте подсказки слева, затем скопируйте результат.</div>':(page22?'<div class="success">✓ Режим 22. Используйте выбор формата слева, затем «Скопировать».</div>':(warnings.length?warnings.map(w=>'<div class="notice">⚠ '+htmlEsc(w)+'</div>').join(''):'<div class="success">✓ Автоматическая проверка не нашла очевидных конфликтов.</div>'));
     $$('.output-switch button').forEach(b=>{const v=b.dataset.output===S.output;b.classList.toggle('active',v);b.setAttribute('aria-pressed',String(v));});
   }
   async function copyText(text){
@@ -272,7 +273,7 @@
     const url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),400);
   }
   function showPage(id){
-    S.page=id;save();document.body.classList.toggle('mode-22',id==='commands22');document.querySelectorAll('.page').forEach(p=>p.classList.toggle('visible',p.id==='page-'+id));
+    S.page=id;save();document.body.classList.toggle('mode-22',id==='commands22');document.body.classList.toggle('mode-12',id==='commands12');document.querySelectorAll('.page').forEach(p=>p.classList.toggle('visible',p.id==='page-'+id));
     document.querySelectorAll('.nav-link').forEach(b=>{const active=b.dataset.page===id;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
     refresh();
   }
@@ -312,7 +313,7 @@
     $('#viewMode').value=S.viewMode;$('#viewMode').addEventListener('change',e=>{S.viewMode=e.target.value;save();refresh();});
     $$('.output-switch button').forEach(b=>b.addEventListener('click',()=>{S.output=b.dataset.output;save();refresh();}));
     $('#copyPrompt').addEventListener('click',()=>copyText($('#promptOutput').textContent));
-    $('#downloadPrompt').addEventListener('click',()=>downloadText('t2fb-prompt.txt',$('#promptOutput').textContent));
+    $('#downloadPrompt').addEventListener('click',()=>downloadText('t2f-prompt.txt',$('#promptOutput').textContent));
     $('#luckyAll').addEventListener('click',()=>{
       const random=T2FB_RANDOMIZER.randomize(S.subjectType,D);
       S.preset=random.preset;
