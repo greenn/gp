@@ -60,12 +60,13 @@ function notesFor(){
 function seriesOutput(){
  const n=Number(S.series);
  // Художественные ступени, с исходного стиля начиная. Все настройки кадра сохраняются.
- const path=['EARLY_3D','PS1','PS2','PS3','PS5','AAA','AAAA','AAAAA'];
+ const path=['EARLY_3D','PS1','N64','DREAMCAST','PS2','DX9','PS3','PS4','PS5','AAA','AAAA','AAAAA'];
  const art=['LOW_POLY','STYLIZED_3D','TOON_3D','VOXEL','CLAY_RENDER','WIREFRAME','ISOMETRIC','PRODUCT_CGI','ARCHVIZ','CHARACTER_3D'];
  const chain=art.includes(S.preset)?art:path;
  const ix=chain.indexOf(S.preset);
+ const direction=ix+n>chain.length?-1:1;
  const res=[];
- for(let i=0;i<n;i++)res.push(command(chain[(ix+i)%chain.length],true));
+ for(let i=0;i<n;i++)res.push(command(chain[Math.max(0,Math.min(chain.length-1,ix+i*direction))],true));
  return res.join('\n');
 }
 function output(){return S.format==='series'?seriesOutput():S.format==='explained'?command()+'\n\nПОЯСНЕНИЯ\n'+notesFor():command();}
