@@ -171,7 +171,7 @@
   function compileCode(){
     const preset='@'+S.preset;
     const used=D.params.filter(p=>selected(p.key)&&qval(p.key).trim()!=='');
-    if(!used.length)return '32 '+preset+' {\n  // Добавьте нужные параметры слева\n}';
+    if(!used.length)return '32 '+preset+' {\n}';
     const lines=used.map(p=>'  '+p.key+'="'+qval(p.key).trim().replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,' ')+'"');
     return '32 '+preset+' {\n'+lines.join(',\n')+'\n}';
   }
@@ -186,7 +186,7 @@
     }
     const count=Number(S.views);
     if(count>1){
-      const prefix='Сделай '+count+' согласованных кадра(ов) одной и той же модели.';
+      const prefix='Сделай '+count+' согласованных '+(count===2?'кадра':'кадра')+' одной и той же модели.';
       const mode=S.viewMode==='angles'?'Различия: фронтальный, три четверти, профиль; остальные ракурсы по смыслу.':S.viewMode==='cameras'?
         'Различия: нейтральная фотокамера, смартфон, студийная съёмка, при необходимости четвёртая естественная камера. Если в параметрах указана камера, применяй её к основному кадру.':
         'Различия: сначала ракурсы, затем характер камер; сохраняй внешность и одежду.';
@@ -228,7 +228,7 @@
     $('#metricPreset').textContent=S.preset.replace('PORTRAIT_EDITORIAL','PORTRAIT').replace('BASE_NEUTRAL','BASE').replace('SMARTPHONE_CASUAL','PHONE').replace('STREET_DOCUMENTARY','STREET').replace('PRODUCT_STUDIO','PRODUCT').replace('ARCH_INTERIOR_DAY','ARCH').replace('NIGHT_URBAN','NIGHT').replace('AUTOMOTIVE_NATURAL','AUTO');
     $('#promptOutput').textContent=S.output==='code'?compileCode():(S.output==='quick'?quickPrompt():fullPrompt());
     const warnings=analyze();
-    $('#validation').innerHTML=warnings.length?warnings.map(w=>'<div class="notice">⚠ '+htmlEsc(w)+'</div>').join(''):'<div class="success">✓ Значимых конфликтов в выбранных параметрах не обнаружено.</div>';
+    $('#validation').innerHTML=warnings.length?warnings.map(w=>'<div class="notice">⚠ '+htmlEsc(w)+'</div>').join(''):'<div class="success">✓ Автоматическая проверка не нашла очевидных конфликтов.</div>';
     $$('.output-switch button').forEach(b=>{const v=b.dataset.output===S.output;b.classList.toggle('active',v);b.setAttribute('aria-pressed',String(v));});
   }
   async function copyText(text){
