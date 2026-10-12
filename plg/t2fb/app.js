@@ -19,13 +19,13 @@
     },
     quick:[], note:''
   };
+  const qgroup = ['Все'].concat(Array.from(new Set(D.quick.map(q=>q.group))));
+  const byKey = Object.fromEntries(D.params.map(p => [p.key,p]));
   let S = load();
   let showingPresetExplanation = false;
   let toastTimer = 0;
   let searchParam = '';
   let searchQuick = '';
-  const byKey = Object.fromEntries(D.params.map(p => [p.key,p]));
-  const qgroup = ['Все'].concat(Array.from(new Set(D.quick.map(q=>q.group))));
 
   function load(){
     let data=null;
@@ -294,7 +294,7 @@
       if(!confirm('Сбросить все настройки и выбранные команды?'))return;
       S=JSON.parse(JSON.stringify(defaults));save();$('#preset').value=S.preset;$('#subjectType').value=S.subjectType;
       $('#views').value=S.views;$('#viewMode').value=S.viewMode;$('#paramSearch').value='';$('#quickSearch').value='';
-      searchParam='';searchQuick='';showingPresetExplanation=false;updatePresetText();renderParams();renderQuick();showPage('builder');refresh();notify('Восстановлены исходные настройки');
+      searchParam='';searchQuick='';$('#customNote').value='';showingPresetExplanation=false;updatePresetText();renderParams();renderQuick();showPage('builder');refresh();notify('Восстановлены исходные настройки');
     });
     $('#exportConfig').addEventListener('click',()=>downloadText('t2fb-settings.json',JSON.stringify({version:1,config:S},null,2),'application/json;charset=utf-8'));
     $('#importConfig').addEventListener('change',async e=>{
@@ -304,7 +304,7 @@
         const text=await file.text();const payload=JSON.parse(text);
         if(!payload||typeof payload!=='object'||!payload.config||typeof payload.config!=='object')throw Error('Некорректный формат настроек.');
         S=sanitize(payload.config);save();$('#preset').value=S.preset;$('#subjectType').value=S.subjectType;
-        $('#views').value=S.views;$('#viewMode').value=S.viewMode;updatePresetText();renderParams();renderQuick();showPage(S.page);refresh();notify('Настройки загружены');
+        $('#views').value=S.views;$('#viewMode').value=S.viewMode;$('#customNote').value=S.note;updatePresetText();renderParams();renderQuick();showPage(S.page);refresh();notify('Настройки загружены');
       } catch(err) {notify('Ошибка: '+err.message);} finally{e.target.value='';}
     });
     document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();copyText($('#promptOutput').textContent);}});
@@ -314,6 +314,8 @@
       document.body.appendChild(btn);
     }
     $('#quickCount').textContent=D.quick.length;
+    $('#customNote').value=S.note;
+    $('#customNote').addEventListener('input',e=>{S.note=e.target.value.slice(0,3000);save();refresh();});
   }
   buildPresetOptions();
   buildChips();
