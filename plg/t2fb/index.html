@@ -10,7 +10,9 @@
   <script src="./catalog.js" defer></script>
   <script src="./option-guides.js" defer></script>
   <script src="./randomizer.js" defer></script>
-  <script src="./app.js?v=1.1.1" defer></script>
+  <script src="./app.js?v=1.2.0" defer></script>
+  <script src="./commands22.js?v=1.2.0" defer></script>
+  <script src="./builder22.js?v=1.2.0" defer></script>
 </head>
 <body>
   <a class="skip" href="#content">К содержимому</a>
@@ -18,7 +20,7 @@
     <header class="topbar">
       <a class="brand" href="./" aria-label="T2Fb — главная">
         <span class="brand-mark">T<span>2</span>F<span>b</span></span>
-        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.1.1</small></span>
+        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.2.0</small></span>
       </a>
       <div class="topbar-right">
         <span class="top-status"><i></i> Локальная работа, без загрузки фото</span>
@@ -31,6 +33,7 @@
         <div class="section-kicker">РАБОЧЕЕ ПРОСТРАНСТВО</div>
         <nav class="side-nav" id="mainNav" aria-label="Разделы каталога">
           <button data-page="builder" class="nav-link active" aria-current="page"><span class="nav-ico">◈</span>Конструктор 32<span class="nav-count">32</span></button>
+          <button data-page="commands22" class="nav-link"><span class="nav-ico">✳</span>Конструктор 22<span class="nav-count">22</span></button>
           <button data-page="quick" class="nav-link"><span class="nav-ico">⌘</span>Короткие команды<span class="nav-count" id="quickCount">—</span></button>
           <button data-page="guide" class="nav-link"><span class="nav-ico">☷</span>Справочник и примеры</button>
         </nav>
@@ -95,6 +98,77 @@
           <div id="emptyParams" class="empty-state" hidden>Параметров по запросу не найдено. Попробуйте другое слово.</div>
         </div>
 
+
+        <div id="page-commands22" class="page" aria-label="Конструктор команд 22">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> T2Fb 0.4 · ИНТЕРАКТИВНЫЙ КОНСТРУКТОР</div>
+          <h1>Режим <span class="headline-accent">22.</span></h1>
+          <p class="lead">Полный каталог команд для ракурсов, поз, одежды, сохранения лица, камеры и качества фотографии. Все значения можно комбинировать и получить готовую команду для <strong>@T2Fb</strong>.</p>
+          <div class="metrics">
+            <div class="metric"><b id="total22">—</b><span>поз в каталоге</span></div>
+            <div class="metric"><b id="active22">0</b><span>настроек выбрано</span></div>
+            <div class="metric"><b id="mode22Badge">фото</b><span>режим 22</span></div>
+          </div>
+          <div class="panel-head">
+            <div><div class="section-kicker">СБОРКА КОМАНДЫ</div><h2>Режим и безопасность</h2></div>
+            <div class="head-actions"><button class="lucky-btn" type="button" id="lucky22">✦ Мне повезёт 22</button><button class="quiet-btn" type="button" id="reset22">↺ Сбросить 22</button></div>
+          </div>
+          <div class="twentytwo-grid">
+            <div class="tt-panel">
+              <label for="mode22" class="tt-label">Режим команды <button type="button" class="tt-info" data-why22="mode">ⓘ Пояснить</button></label>
+              <select id="mode22"></select><p class="tt-explanation" id="explainMode22"></p>
+            </div>
+            <div class="tt-panel">
+              <label for="safety22" class="tt-label">Уровень безопасности S <button type="button" class="tt-info" data-why22="safety">ⓘ Пояснить</button></label>
+              <select id="safety22"></select><p class="tt-explanation" id="explainSafety22"></p>
+            </div>
+            <div class="tt-panel">
+              <label for="realism22" class="tt-label">Сдвиг реализма r <button type="button" class="tt-info" data-why22="realism">ⓘ Пояснить</button></label>
+              <select id="realism22"></select><p class="tt-explanation" id="explainRealism22"></p>
+            </div>
+            <div class="tt-panel">
+              <label for="camera22" class="tt-label">Камера <button type="button" class="tt-info" data-why22="camera">ⓘ Пояснить</button></label>
+              <select id="camera22"></select><p class="tt-explanation" id="explainCamera22"></p>
+            </div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="tt-row"><div><div class="section-kicker">ДЕЙСТВИЯ И ВОССТАНОВЛЕНИЕ</div><h2>Полный рост, руки, ноги и позы</h2></div></div>
+            <div class="twentytwo-grid">
+              <div><label for="action22" class="tt-label">Действие <button type="button" class="tt-info" data-why22="action">ⓘ Пояснить</button></label><select id="action22"></select><p class="tt-explanation" id="explainAction22"></p></div>
+              <div><label for="strength22" class="tt-label">Сила изменения N (1–5)</label><select id="strength22"><option value="1">1 — слабо</option><option value="2">2 — умеренно</option><option value="3">3 — заметно</option><option value="4">4 — сильно</option><option value="5">5 — максимально</option></select><p class="field-hint">Используется для pose N, body N, outpaint N, pose safe N.</p></div>
+            </div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="tt-row"><div><div class="section-kicker">СОХРАНЯТЬ / МЕНЯТЬ</div><h2>Контроль исходного персонажа</h2></div></div>
+            <p class="tt-subtle">Для каждого свойства выберите один режим: оставить без указаний, <strong>keep</strong> или <strong>change</strong>. Взаимоисключающие команды не формируются.</p>
+            <div id="keep22" class="tt-keep-grid"></div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="tt-row"><div><div class="section-kicker">МОДИФИКАТОРЫ СИЛЫ</div><h2>Лицо, свет, одежда, стиль и чистота</h2></div><button class="quiet-btn" type="button" id="clearModifiers22">Очистить</button></div>
+            <p class="tt-subtle">Значение 0 — не добавлять модификатор, 1–5 — степень влияния. Нажмите «Пояснить», чтобы увидеть смысл каждого параметра.</p>
+            <div id="modifiers22" class="tt-modifier-grid"></div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="tt-row"><div><div class="section-kicker">БИБЛИОТЕКА ПОЗ</div><h2>Fashion & Visual Novel</h2></div><span class="soft-count" id="poseCount22"></span></div>
+            <div class="tt-pose-tabs" id="poseTabs22"></div>
+            <label class="search large-search"><span>⌕</span><input id="poseSearch22" type="search" placeholder="Поиск позы: через плечо, колено, thinking, руку…" autocomplete="off"></label>
+            <div id="poseList22" class="tt-pose-grid"></div>
+            <div class="empty-state" id="poseEmpty22" hidden>Подходящих поз не найдено.</div>
+            <div class="tt-custom">
+              <label for="customPose22" class="tt-label">Своя поза или действие</label>
+              <textarea id="customPose22" rows="2" maxlength="600" placeholder="Например: поднимает одно колено, смотрит через плечо, одну руку в сторону, другую к камере"></textarea>
+              <p class="field-hint">Свободное описание заменяет выбранный готовый вариант позы; используется только как команда <code>pose ...</code>.</p>
+            </div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="tt-row"><div><div class="section-kicker">ФОРМАТ РЕЗУЛЬТАТА</div><h2>Одна команда или серия</h2></div></div>
+            <div class="twentytwo-grid">
+              <div><label for="format22" class="tt-label">Формат</label><select id="format22"><option value="command">Только команда 22</option><option value="explained">Команда + русское пояснение</option><option value="series">Серия разных кадров</option></select></div>
+              <div><label for="seriesCount22" class="tt-label">Количество вариантов в серии</label><select id="seriesCount22"><option value="2">2 кадра</option><option value="3" selected>3 кадра</option><option value="4">4 кадра</option></select></div>
+            </div>
+            <p class="tt-explanation" id="status22">Выбранная команда появится справа. Используйте общие кнопки «Скопировать» и «TXT».</p>
+          </div>
+        </div>
+
         <div id="page-quick" class="page">
           <div class="eyebrow"><span class="eyebrow-dot"></span> КАТАЛОГ БЫСТРЫХ КОМАНД</div>
           <h1>Коротко. <span class="headline-accent">Точно.</span></h1>
@@ -142,6 +216,7 @@
             <p>Не меняйте лицо, возраст, телосложение, одежду и число людей без запроса. Для школьников сохраняйте возрастосоответствующие черты и нейтральную подачу. Если нужна новая сторона персонажа, учитывайте, что скрытые детали достраиваются приблизительно.</p>
             <p class="reference-note">Составлено по исследованию 32 параметров фотореализма, включённому в T2Fb v0.3.0, и по пользовательским коротким командам. «22» — условный синтаксис для чата; «32» — внутренняя договорённость с инструкциями плагина, а не общепринятый формат генераторов изображений.</p>
           </section>
+          <section class="guide-block"><span class="step-num">07</span><h2>Система команд 22</h2><p>Откройте вкладку «Конструктор 22»: режим фото или промпт, уровни S и r, 14 модификаторов, сохранение/изменение 9 свойств, полный набор Fashion и Visual Novel поз. Можно собрать один кадр или серию и сразу скопировать результат.</p></section>
         </div>
       </main>
 
