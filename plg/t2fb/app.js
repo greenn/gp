@@ -272,8 +272,8 @@
     const url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),400);
   }
   function showPage(id){
-    S.page=id;save();document.body.classList.toggle('mode-22',id==='commands22');$('.page').forEach(p=>p.classList.toggle('visible',p.id==='page-'+id));
-    $('.nav-link').forEach(b=>{const active=b.dataset.page===id;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+    S.page=id;save();document.body.classList.toggle('mode-22',id==='commands22');document.querySelectorAll('.page').forEach(p=>p.classList.toggle('visible',p.id==='page-'+id));
+    document.querySelectorAll('.nav-link').forEach(b=>{const active=b.dataset.page===id;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
     refresh();
   }
   function diagnostics(){
