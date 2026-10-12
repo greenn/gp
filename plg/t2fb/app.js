@@ -158,7 +158,7 @@
     list.replaceChildren(fragment);
     $('#emptyParams').hidden=items.length>0;
     $('#parameterCount').textContent=items.length;
-    $$('.chip','#categoryChips').forEach(btn=>btn.classList.toggle('active',btn.dataset.group===S.group));
+    $('#categoryChips .chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.group===S.group));
     $('#metricActive').textContent=S.selected.length;
   }
   function renderQuickTabs(){
