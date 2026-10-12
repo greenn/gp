@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f5f0">
+  <meta name="description" content="Интерактивный каталог команд T2Fb: ракурсы, позы, камеры, свет, фотореализм и 32 параметра фотореалистичной фотографии.">
+  <title>T2Fb · Лаборатория фотопромптов</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./catalog.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#content">К содержимому</a>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="T2Fb — главная">
+        <span class="brand-mark">T<span>2</span>F<span>b</span></span>
+        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.0</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="top-status"><i></i> Локальная работа, без загрузки фото</span>
+        <a class="top-link" href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин T2Fb <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" aria-label="Навигация">
+        <div class="section-kicker">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+        <nav class="side-nav" id="mainNav" aria-label="Разделы каталога">
+          <button data-page="builder" class="nav-link active" aria-current="page"><span class="nav-ico">◈</span>Конструктор 32<span class="nav-count">32</span></button>
+          <button data-page="quick" class="nav-link"><span class="nav-ico">⌘</span>Короткие команды<span class="nav-count" id="quickCount">—</span></button>
+          <button data-page="guide" class="nav-link"><span class="nav-ico">☷</span>Справочник и примеры</button>
+        </nav>
+        <div class="divider"></div>
+        <div class="section-kicker">НАСТРОЙКИ КОМПОЗИЦИИ</div>
+        <div class="sidebar-box">
+          <label for="preset">Сценарий съёмки</label>
+          <select id="preset"></select>
+          <button class="subtle-btn" id="explainPreset" type="button">ⓘ Пояснить пресет</button>
+          <p class="preset-summary" id="presetSummary"></p>
+        </div>
+        <div class="sidebar-box">
+          <label for="subjectType">Тип исходной модели</label>
+          <select id="subjectType">
+            <option value="student">Учащийся / подросток</option>
+            <option value="adult">Взрослый персонаж</option>
+            <option value="object">Предмет / сцена без человека</option>
+          </select>
+          <p class="field-hint">По умолчанию сохраняются визуальный возраст, лицо, одежда и пропорции.</p>
+        </div>
+        <div class="sidebar-box">
+          <label for="views">Количество кадров</label>
+          <select id="views"><option value="1">1 фотография</option><option value="2">2 ракурса</option><option value="3" selected>3 ракурса</option><option value="4">4 ракурса</option></select>
+          <label for="viewMode" class="label-spaced">Различия между кадрами</label>
+          <select id="viewMode"><option value="angles">Разные ракурсы</option><option value="cameras">Разные камеры</option><option value="mixed">Ракурсы и камеры</option></select>
+        </div>
+        <div class="sidebar-actions">
+          <button class="subtle-btn" id="resetAll" type="button">↺ Сбросить всё</button>
+          <button class="subtle-btn" id="exportConfig" type="button">⇩ Сохранить настройки</button>
+          <label class="subtle-btn file-label" for="importConfig">⇧ Загрузить настройки</label>
+          <input class="visually-hidden" id="importConfig" type="file" accept=".json,application/json">
+        </div>
+        <div class="side-foot">T2Fb · учебный фотокружок<br>Содержимое команды остаётся в браузере до копирования.</div>
+      </aside>
+
+      <main id="content" class="main-content">
+        <div id="page-builder" class="page visible">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> ИНТЕРАКТИВНЫЙ КОНСТРУКТОР</div>
+          <h1>От 3D-модели <span class="headline-accent">к фотографии.</span></h1>
+          <p class="lead">Настройте камеру, свет, материалы и обработку. Система соберёт команду <code>32 {...}</code> для <strong>@T2Fb</strong>. Каждый параметр можно объяснить и изменить.</p>
+          <div class="metrics">
+            <div class="metric"><b>32</b><span>параметра</span></div>
+            <div class="metric"><b id="metricActive">0</b><span>выбрано вами</span></div>
+            <div class="metric"><b id="metricPreset">—</b><span>текущий пресет</span></div>
+          </div>
+          <div class="panel-head">
+            <div>
+              <div class="section-kicker">ПАРАМЕТРЫ ФОТОГРАФИИ</div>
+              <h2>Настройте детали <span id="parameterCount" class="soft-count">32</span></h2>
+            </div>
+            <div class="head-actions">
+              <button class="quiet-btn" id="collapseAll" type="button">Свернуть пояснения</button>
+              <button class="quiet-btn" id="clearParams" type="button">Очистить параметры</button>
+            </div>
+          </div>
+          <div class="filterbar">
+            <label class="search"><span>⌕</span><input id="paramSearch" type="search" placeholder="Найти параметр: свет, ISO, roughness…" autocomplete="off"></label>
+            <div class="chips" id="categoryChips" role="group" aria-label="Категории параметров"></div>
+          </div>
+          <div id="params" class="param-list"></div>
+          <div id="emptyParams" class="empty-state" hidden>Параметров по запросу не найдено. Попробуйте другое слово.</div>
+        </div>
+
+        <div id="page-quick" class="page">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> КАТАЛОГ БЫСТРЫХ КОМАНД</div>
+          <h1>Коротко. <span class="headline-accent">Точно.</span></h1>
+          <p class="lead">Быстрые команды вида <code>22 pose three-quarter</code>. Выбирайте действия, нажимайте «Пояснить» или собирайте серию указаний. Это пользовательские сокращения, а не отдельный API.</p>
+          <div class="quick-tabs" id="quickTabs"></div>
+          <label class="search large-search"><span>⌕</span><input id="quickSearch" type="search" placeholder="Поиск: pose, cam, ноги, фон, фотореализм…" autocomplete="off"></label>
+          <div id="quickItems" class="quick-grid"></div>
+          <div id="quickEmpty" class="empty-state" hidden>Команды не найдены.</div>
+        </div>
+
+        <div id="page-guide" class="page">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> КАК ПОЛЬЗОВАТЬСЯ</div>
+          <h1>Принцип работы <span class="headline-accent">T2Fb.</span></h1>
+          <p class="lead">В одном месте — правила сохранения модели, синтаксис 32 параметров, готовые сценарии и диагностика признаков CGI.</p>
+          <section class="guide-block">
+            <span class="step-num">01</span><h2>Выберите исходное изображение</h2>
+            <p>Приложите в чат <strong>@T2Fb</strong> свой 3D-рендер. Эта страница не загружает изображения — она помогает составить текст команды.</p>
+          </section>
+          <section class="guide-block">
+            <span class="step-num">02</span><h2>Выберите способ управления</h2>
+            <p><strong>Команда 32:</strong> подробная декларация камеры, освещения, материалов и цвета. Незаданные поля сохраняют исходные свойства или остаются неопределёнными.</p>
+            <pre class="guide-code">32 @PORTRAIT_EDITORIAL {
+  focal_mm=85,
+  aperture="f/2.2",
+  key_light="большое окно слева",
+  focus_distance="eyes"
+}</pre>
+            <p><strong>Короткие команды:</strong> например, <code>22 cam 50</code>, <code>22 legs</code> или <code>22 pose three-quarter</code>. Они сформулированы как естественные пожелания к T2Fb и могут отправляться отдельно.</p>
+          </section>
+          <section class="guide-block">
+            <span class="step-num">03</span><h2>Соберите и скопируйте</h2>
+            <p>Панель справа обновляется при каждом выборе. «Команда 32» копирует техническую спецификацию. «Полный запрос» добавляет правила сохранения возраста, внешности и указанное число ракурсов.</p>
+          </section>
+          <section class="guide-block">
+            <span class="step-num">04</span><h2>Правила приоритета</h2>
+            <div class="priority">Явное указание пользователя <span>→</span> сохранение исходника <span>→</span> пресет <span>→</span> вывод из сцены <span>→</span> нейтральный вариант</div>
+            <p>Пресет не должен перезаписывать указанные вами параметры. Неизвестные точные настройки не выдумываются. Разрешение и движок не задаются автоматически.</p>
+          </section>
+          <section class="guide-block">
+            <span class="step-num">05</span><h2>На что смотреть при фотореализме</h2>
+            <div id="diagnostics" class="diagnostics"></div>
+          </section>
+          <section class="guide-block">
+            <span class="step-num">06</span><h2>Принцип сохранения персонажа</h2>
+            <p>Не меняйте лицо, возраст, телосложение, одежду и число людей без запроса. Для школьников сохраняйте возрастосоответствующие черты и нейтральную подачу. Если нужна новая сторона персонажа, учитывайте, что скрытые детали достраиваются приблизительно.</p>
+            <p class="reference-note">Составлено по исследованию 32 параметров фотореализма, включённому в T2Fb v0.3.0, и по пользовательским коротким командам. «22» — условный синтаксис для чата; «32» — внутренняя договорённость с инструкциями плагина, а не общепринятый формат генераторов изображений.</p>
+          </section>
+        </div>
+      </main>
+
+      <aside class="output-panel" aria-label="Готовая команда">
+        <div class="output-top">
+          <div><div class="section-kicker">РЕЗУЛЬТАТ</div><h2>Ваш промпт</h2></div>
+          <span class="live-pill"><i></i> LIVE</span>
+        </div>
+        <div class="output-switch" role="group" aria-label="Вид результата">
+          <button type="button" data-output="full" class="active" aria-pressed="true">Полный запрос</button>
+          <button type="button" data-output="code" aria-pressed="false">Только 32</button>
+          <button type="button" data-output="quick" aria-pressed="false">Короткие</button>
+        </div>
+        <div class="code-wrap"><pre id="promptOutput" tabindex="0"></pre></div>
+        <div id="validation" class="validation" aria-live="polite"></div>
+        <div class="output-actions">
+          <button id="copyPrompt" class="primary-btn" type="button">⧉ Скопировать</button>
+          <button id="downloadPrompt" class="outline-btn" type="button">↓ TXT</button>
+        </div>
+        <div class="output-note">Изменения появляются сразу. Нажмите «Пояснить» у любого параметра, чтобы узнать, за что он отвечает и когда нужен.</div>
+      </aside>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
