@@ -234,6 +234,27 @@ document.querySelectorAll('[data-why22]').forEach(b=>{b.addEventListener('click'
 $('clearModifiers22').addEventListener('click',()=>{S.modifiers={};renderModifiers();changed();});
 $('reset22').addEventListener('click',()=>{if(!confirm('Сбросить настройки команды 22?'))return;S=sanitize(null);$('poseSearch22').value='';sync();});
 $('lucky22').addEventListener('click',random22);
+
+$('export22').addEventListener('click',()=>{
+  const json=JSON.stringify({format:'t2fb-commands22-v1',config:S},null,2);
+  const blob=new Blob([json],{type:'application/json;charset=utf-8'});
+  const link=document.createElement('a'),url=URL.createObjectURL(blob);
+  link.href=url;link.download='T2Fb-commands22.json';document.body.appendChild(link);
+  link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+$('import22').addEventListener('change',async event=>{
+  const file=event.target.files&&event.target.files[0];if(!file)return;
+  try{
+    if(file.size>200000)throw Error('Файл слишком большой');
+    const data=JSON.parse(await file.text());
+    if(data.format!=='t2fb-commands22-v1'||!data.config)throw Error('Неверный формат JSON');
+    S=sanitize(data.config);
+    $('poseSearch22').value='';
+    sync();
+  }catch(e){$('status22').textContent='Ошибка импорта: '+e.message;}
+  event.target.value='';
+});
+
 window.T2FB22={output,command,explainCommand,refresh,snapshot:()=>clone(S)};
 $('total22').textContent=C.fashion.length+C.vn.length;
 sync();
