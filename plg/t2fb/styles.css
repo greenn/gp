@@ -7,3 +7,19 @@
 
 .mobile-output-btn{position:fixed;bottom:17px;right:18px;z-index:40;background:#0c6d44;color:white;border:0;border-radius:999px;box-shadow:0 12px 28px #073f2880;padding:13px 18px;font:700 12px Manrope,sans-serif}@media(min-width:1041px){.mobile-output-btn{display:none}}
 .custom-note{display:block;font-weight:700;color:#536e5d;font-size:11px;margin:-4px 0 -11px}.custom-note textarea{display:block;width:100%;resize:vertical;min-height:58px;max-height:150px;margin-top:6px;border-radius:8px;border:1px solid #d8e5db;padding:9px;font-weight:400;font-size:11px;color:#294b34;background:#fff}
+
+
+/* T2Fb v1.1: button for coherent full 32-parameter randomization */
+.lucky-btn{
+  border:1px solid #158050;border-radius:9px;
+  background:linear-gradient(125deg,#167f50,#0b623d);color:#fff;
+  font-weight:800;font-size:12px;letter-spacing:.012em;
+  padding:10px 15px;box-shadow:0 3px 8px rgba(13,86,52,.12);
+  white-space:nowrap;transition:background .15s ease,transform .15s ease;
+}
+.lucky-btn:hover{background:linear-gradient(125deg,#1d9460,#0c7047);transform:translateY(-1px)}
+.lucky-btn:active{transform:translateY(0)}
+.selected-interpretation{font-weight:600;color:#205c3c}
+.selected-syntax{display:inline-block;margin-top:3px;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:720px){.lucky-btn{width:100%;text-align:center}.head-actions{display:flex;gap:8px}.head-actions .lucky-btn{flex:1 0 100%}}
+@media(prefers-reduced-motion:reduce){.lucky-btn{transition:none;transform:none!important}}
