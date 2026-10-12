@@ -47,7 +47,7 @@
     result.subjectType=['student','adult','object'].includes(data.subjectType)?data.subjectType:defaults.subjectType;
     result.views=['1','2','3','4'].includes(String(data.views))?String(data.views):defaults.views;
     result.viewMode=['angles','cameras','mixed'].includes(data.viewMode)?data.viewMode:defaults.viewMode;
-    result.page=['builder','quick','guide'].includes(data.page)?data.page:'builder';
+    result.page=['builder','commands22','quick','guide'].includes(data.page)?data.page:'builder';
     result.group=D.groups.some(x=>x.id===data.group)?data.group:'all';
     result.quickGroup=qgroup.includes(data.quickGroup)?data.quickGroup:'Все';
     result.output=['full','code','quick'].includes(data.output)?data.output:'full';
@@ -251,9 +251,11 @@
   function refresh(){
     $('#metricActive').textContent=S.selected.length;
     $('#metricPreset').textContent=S.preset.replace('PORTRAIT_EDITORIAL','PORTRAIT').replace('BASE_NEUTRAL','BASE').replace('SMARTPHONE_CASUAL','PHONE').replace('STREET_DOCUMENTARY','STREET').replace('PRODUCT_STUDIO','PRODUCT').replace('ARCH_INTERIOR_DAY','ARCH').replace('NIGHT_URBAN','NIGHT').replace('AUTOMOTIVE_NATURAL','AUTO');
-    $('#promptOutput').textContent=S.output==='code'?compileCode():(S.output==='quick'?quickPrompt():fullPrompt());
-    const warnings=analyze();
-    $('#validation').innerHTML=warnings.length?warnings.map(w=>'<div class="notice">⚠ '+htmlEsc(w)+'</div>').join(''):'<div class="success">✓ Автоматическая проверка не нашла очевидных конфликтов.</div>';
+    const page22=S.page==='commands22' && !!window.T2FB22;
+    $('#promptOutput').textContent=page22?window.T2FB22.output():(S.output==='code'?compileCode():(S.output==='quick'?quickPrompt():fullPrompt()));
+    $('.output-switch').style.display=S.page==='commands22'?'none':'';
+    const warnings=page22?[]:analyze();
+    $('#validation').innerHTML=page22?'<div class="success">✓ Режим 22. Используйте выбор формата слева, затем «Скопировать».</div>':(warnings.length?warnings.map(w=>'<div class="notice">⚠ '+htmlEsc(w)+'</div>').join(''):'<div class="success">✓ Автоматическая проверка не нашла очевидных конфликтов.</div>');
     $$('.output-switch button').forEach(b=>{const v=b.dataset.output===S.output;b.classList.toggle('active',v);b.setAttribute('aria-pressed',String(v));});
   }
   async function copyText(text){
@@ -271,7 +273,8 @@
   }
   function showPage(id){
     S.page=id;save();$$('.page').forEach(p=>p.classList.toggle('visible',p.id==='page-'+id));
-    $$('.nav-link').forEach(b=>{const active=b.dataset.page===id;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+    $('.nav-link').forEach(b=>{const active=b.dataset.page===id;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+    refresh();
   }
   function diagnostics(){
     const items=[
@@ -297,7 +300,7 @@
       S.values.scene_subject=type==='student'?common[0]:type==='adult'?common[1]:common[2];
       const input=$('.param-card[data-key="scene_subject"] .value-field');if(input)input.value=S.values.scene_subject;
     }
-    S.subjectType=type;save();refresh();
+    S.subjectType=type;save();if(window.T2FB22)window.T2FB22.refresh();refresh();
   }
   function attach(){
     $$('.nav-link').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
@@ -360,6 +363,8 @@
     $('#customNote').value=S.note;
     $('#customNote').addEventListener('input',e=>{S.note=e.target.value.slice(0,3000);save();refresh();});
   }
+  window.T2FB_SUBJECT_TYPE=()=>S.subjectType;
+  window.T2FB_REFRESH_OUTPUT=refresh;
   buildPresetOptions();
   buildChips();
   renderParams();
