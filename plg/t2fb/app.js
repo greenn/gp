@@ -1,4 +1,4 @@
-/* T2Fb Photo Prompt Lab — no external runtime dependencies. */
+/* T2F Photo Prompt Lab — no external runtime dependencies. */
 (function () {
   'use strict';
   const D = window.T2FB_CATALOG || (typeof T2FB_CATALOG !== 'undefined' ? T2FB_CATALOG : null);
@@ -221,7 +221,7 @@
     return base;
   }
   function fullPrompt(){
-    let s='@T2Fb\n\n'+composeInstruction()+'\n\n'+compileCode();
+    let s='@T2F\n\n'+composeInstruction()+'\n\n'+compileCode();
     if(S.quick.length) s+='\n\nДополнительные короткие команды (как естественные указания):\n'+S.quick.map(i=>D.quick[i].cmd).join('\n');
     if(S.note.trim())s+='\n\nДополнительные условия:\n'+S.note.trim();
     return s;
