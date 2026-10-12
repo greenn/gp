@@ -6,6 +6,8 @@
   const $ = (sel, host=document) => host.querySelector(sel);
   const $$ = (sel, host=document) => Array.from(host.querySelectorAll(sel));
   const STORE = 't2fb-photo-prompt-lab-v1';
+  const optionDetails = typeof T2FB_OPTION_DETAILS !== 'undefined' ? T2FB_OPTION_DETAILS : {};
+  const openParamHelp = new Set();
   const defaults = {
     preset:'PORTRAIT_EDITORIAL', subjectType:'student', views:'3', viewMode:'angles',
     page:'builder', group:'all', quickGroup:'Все', output:'full',
@@ -84,6 +86,23 @@
       const btn=ev.target.closest('[data-group]');if(!btn)return;S.group=btn.dataset.group;save();renderParams();
     });
   }
+  function explainCurrentSelection(param, current){
+    if(!current.trim()) return 'Значение не задано. Выберите готовый вариант или введите свой.';
+    const idx=param.options.findIndex(option=>option.value===current);
+    if(idx<0) {
+      return 'Собственное значение: «'+current+'». '+param.help+' '+param.tip;
+    }
+    const option=param.options[idx];
+    const description=(optionDetails[param.key] || [])[idx];
+    return 'Выбрано: '+option.label+' ('+option.value+'). '+(description || param.help);
+  }
+  function refreshSelectedExplanation(param, card){
+    const current=qval(param.key);
+    const description=$('.selected-interpretation',card);
+    if(description) description.textContent=explainCurrentSelection(param,current);
+    const syntax=$('.selected-syntax',card);
+    if(syntax) syntax.textContent=param.key+'='+JSON.stringify(current);
+  }
   function renderParams(){
     const list=$('#params');
     const items=D.params.filter(p=>(S.group==='all'||S.group===p.group)&&
@@ -97,18 +116,20 @@
         '<input class="check" type="checkbox" aria-label="Включить '+htmlEsc(p.title)+'"'+(selected(p.key)?' checked':'')+'>'+
         '<span class="param-num">'+p.id+'</span>'+
         '<div class="param-name">'+htmlEsc(p.title)+'<small>'+htmlEsc(p.key)+'</small></div>'+
-        '<div class="param-actions"><button type="button" class="explain" aria-expanded="false">ⓘ Пояснить</button></div>'+
+        '<div class="param-actions"><button type="button" class="explain" aria-expanded="'+openParamHelp.has(p.key)+'">'+(openParamHelp.has(p.key)?'↑ Скрыть':'ⓘ Пояснить')+'</button></div>'+
         '</div><div class="param-controls">'+
         '<select aria-label="Быстрый выбор: '+htmlEsc(p.title)+'"><option value="">Выбрать вариант…</option>'+
         p.options.map(o=>'<option value="'+htmlEsc(o.value)+'">'+htmlEsc(o.label)+'</option>').join('')+'</select>'+
         '<input class="value-field" type="text" maxlength="1500" aria-label="Значение: '+htmlEsc(p.title)+'" placeholder="Своё значение…">'+
-        '</div><div class="param-extra" hidden><b>Что делает:</b> '+htmlEsc(p.help)+
-        '<br><b>Зачем и когда:</b> '+htmlEsc(p.tip)+
-        '<br><b>Пример:</b> <span class="example-tag">'+htmlEsc(p.example)+'</span></div>';
+        '</div><div class="param-extra"'+(openParamHelp.has(p.key)?'':' hidden')+'><b>Что делает:</b> '+htmlEsc(p.help)+
+        '<br><b>Именно ваш выбор:</b> <span class="selected-interpretation"></span>'+
+        '<br><b>Совет:</b> '+htmlEsc(p.tip)+
+        '<br><b>В запрос пойдёт:</b> <span class="example-tag selected-syntax"></span></div>';
       const checkbox=$('.check',el), select=$('select',el), input=$('.value-field',el), info=$('.param-extra',el), explain=$('.explain',el);
       input.value=qval(p.key);
       select.value=p.options.some(o=>o.value===input.value)?input.value:'';
       select.disabled=!selected(p.key);input.disabled=!selected(p.key);
+      refreshSelectedExplanation(p,el);
       checkbox.addEventListener('change',()=>{
         chooseParam(p.key,checkbox.checked);el.classList.toggle('enabled',checkbox.checked);
         select.disabled=!checkbox.checked;input.disabled=!checkbox.checked;
@@ -116,16 +137,20 @@
       select.addEventListener('change',()=>{
         if(!select.value)return;
         input.value=select.value;S.values[p.key]=select.value;
+        refreshSelectedExplanation(p,el);
         if(!selected(p.key)){checkbox.checked=true;chooseParam(p.key,true);}
         save();refresh();
       });
       input.addEventListener('input',()=>{
         S.values[p.key]=input.value;
+        refreshSelectedExplanation(p,el);
         if(!selected(p.key)){checkbox.checked=true;chooseParam(p.key,true);}
         save();refresh();
       });
       explain.addEventListener('click',()=>{
         const open=info.hidden;info.hidden=!open;explain.setAttribute('aria-expanded',String(open));
+        if(open) openParamHelp.add(p.key); else openParamHelp.delete(p.key);
+        refreshSelectedExplanation(p,el);
         explain.textContent=open?'↑ Скрыть':'ⓘ Пояснить';
       });
       fragment.appendChild(el);
@@ -285,9 +310,27 @@
     $$('.output-switch button').forEach(b=>b.addEventListener('click',()=>{S.output=b.dataset.output;save();refresh();}));
     $('#copyPrompt').addEventListener('click',()=>copyText($('#promptOutput').textContent));
     $('#downloadPrompt').addEventListener('click',()=>downloadText('t2fb-prompt.txt',$('#promptOutput').textContent));
+    $('#luckyAll').addEventListener('click',()=>{
+      const random=T2FB_RANDOMIZER.randomize(S.subjectType,D);
+      S.preset=random.preset;
+      S.values={...S.values,...random.values};
+      S.selected=D.params.map(p=>p.key);
+      S.group='all';
+      searchParam='';
+      $('#paramSearch').value='';
+      $('#preset').value=S.preset;
+      showingPresetExplanation=false;
+      updatePresetText();
+      save();
+      renderParams();
+      showPage('builder');
+      refresh();
+      notify('Мне повезёт: все 32 параметра заполнены. Ещё раз — новый вариант.');
+    });
     $('#clearParams').addEventListener('click',()=>{S.selected=[];save();renderParams();refresh();notify('Поля команды 32 очищены');});
     $('#collapseAll').addEventListener('click',()=>{
-      $$('.param-extra').forEach(x=>x.hidden=true);
+      openParamHelp.clear();
+      $('.param-extra').forEach(x=>x.hidden=true);
       $$('.param-card .explain').forEach(x=>{x.textContent='ⓘ Пояснить';x.setAttribute('aria-expanded','false');});
     });
     $('#resetAll').addEventListener('click',()=>{
