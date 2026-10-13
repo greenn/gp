@@ -1,0 +1,342 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><meta name="description" content="Исследование резких скачков качества GPT Image: Flare и Sunburst, вариативность генерации, маршрутизация и воспроизводимые проверки."><title>Почему качество GPT Image иногда резко меняется — исследование</title><style>
+:root{color-scheme:light;--bg:#f6f8fc;--paper:#fff;--ink:#17263c;--muted:#617187;--line:#dbe2ec;--accent:#325de0;--accent-soft:#ebf0ff;--shadow:0 12px 45px #162f5010}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:26px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.72 system-ui,-apple-system,Segoe UI,Arial,sans-serif}a{color:#2253c3;text-underline-offset:3px}a:hover{color:#122e82}button,input{font:inherit}button{cursor:pointer}header{background:linear-gradient(115deg,#132850,#264bb0);color:#fff;padding:30px 18px 55px}header .inner{max-width:1260px;margin:auto}.crumb{font-size:13px;color:#cbd8fa}.crumb a{color:inherit}header h1{font-size:clamp(29px,3.5vw,52px);line-height:1.17;letter-spacing:-.025em;max-width:970px;margin:20px 0}header p{color:#dee7ff;max-width:860px}.eyebrow{font-size:12px;font-weight:760;text-transform:uppercase;letter-spacing:.13em;color:#bdceff}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.tags span{border:1px solid #ffffff45;border-radius:100px;padding:5px 12px;color:#ecf1ff;font-size:12px}.wrap{max-width:1260px;margin:-22px auto 50px;padding:0 18px;display:grid;grid-template-columns:275px minmax(0,1fr);gap:22px;align-items:start}.sidebar{position:sticky;top:18px;display:grid;gap:16px}.panel,.sheet{background:var(--paper);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.panel{padding:22px}.panel h2{margin:0 0 14px;font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}.toc-link{display:flex;align-items:baseline;gap:10px;padding:9px 0;text-decoration:none;color:#334562;font-size:13px;border-top:1px solid #eef1f7;line-height:1.35}.toc-link:hover{color:var(--accent)}.toc-n{font-size:11px;color:#8695ae;font-variant-numeric:tabular-nums}.source-download{display:block;margin-top:11px;text-decoration:none;font-weight:650}.sheet{padding:clamp(22px,3.8vw,48px);min-width:0}.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}.fact{border:1px solid var(--line);border-radius:12px;padding:15px;background:#fafbfe}.fact strong{display:block;font-size:14px}.fact small{display:block;font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 17px}.toolbar input[type=search]{border:1px solid #c6d2e4;background:#fff;border-radius:9px;min-height:45px;flex:1;min-width:140px;padding:8px 13px;outline-offset:3px}.btn{border:1px solid #c5d0e4;background:#fff;color:#244070;border-radius:9px;padding:9px 14px}.btn:hover{border-color:var(--accent)}.count{font-size:12px;color:var(--muted)}.report-section{border-top:1px solid var(--line);padding-top:15px;margin-top:29px;scroll-margin-top:30px}.report-section:first-child{border:0;margin-top:0}.report-section[hidden]{display:none}.report-section h2{font-size:clamp(24px,2.6vw,33px);line-height:1.24;letter-spacing:-.02em;margin:18px 0}.report-section h3{font-size:21px;line-height:1.3;margin:18px 0}.report-section h4{font-size:17px;margin-top:12px}.report-section p{margin:12px 0 15px}.report-section ul,.report-section ol{padding-left:26px}.report-section li{margin:7px 0}.report-section code,code{font: .88em/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;background:#eff2f7;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}.code{background:#16253e;color:#eef4ff;overflow-x:auto;padding:17px 18px;border-radius:9px;line-height:1.55;font-size:13px}.code code{background:transparent;color:inherit;padding:0;white-space:pre}.formula{background:var(--accent-soft);padding:16px;border-left:3px solid var(--accent);border-radius:7px;font-size:20px;text-align:center;font-family:Georgia,serif;overflow:auto}.table-scroll{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px}.research-table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.45}.research-table th,.research-table td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid #e7ebf2;min-width:90px}.research-table th{background:#eef3fb;font-weight:750;white-space:nowrap}.research-table tr:last-child td{border-bottom:0}.research-table tbody tr:nth-child(even){background:#fafbfe}.research-table th button{background:transparent;border:0;padding:0;color:inherit;text-align:left;font-weight:inherit}.research-table th button::after{content:" ⇅";color:#8291a9;font-weight:400}.report-section blockquote{border-left:3px solid #9eb8ef;margin:16px 0;padding:5px 16px;background:#f5f8ff;color:#405675}.interactive{margin:24px 0;border-radius:13px;border:1px solid #c8d5ff;background:#f4f7ff;padding:22px}.interactive h2{margin:0 0 10px;font-size:21px}.interactive p{font-size:13px;color:#526782}.calcrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:15px 0}.calcrow label{min-width:120px;font-weight:650;font-size:14px}.calcrow input[type=range]{flex:1;min-width:140px;accent-color:var(--accent)}output{min-width:60px;font-variant-numeric:tabular-nums;text-align:right;font-weight:750}.big-result{font-size:clamp(26px,3.7vw,44px);font-weight:800;letter-spacing:-.02em;color:#2558c6}.small-print{font-size:12px;color:#67788e}.references{margin-top:42px;padding-top:22px;border-top:2px solid var(--line)}.references h2{font-size:23px}.references details{margin-top:16px}.references summary{cursor:pointer;font-weight:750;padding:11px;border:1px solid var(--line);border-radius:9px}.references ol{padding-left:24px}.source{padding:12px 0;border-bottom:1px solid var(--line)}.source a{font-weight:650;overflow-wrap:anywhere}.source p{font-size:13px;color:var(--muted);margin:5px 0}.source-type{font-size:11px;letter-spacing:.09em;color:#526785;text-transform:uppercase;font-weight:800}.footnote{margin-top:25px;font-size:12px;color:#66778e}footer{max-width:1260px;margin:0 auto 30px;padding:0 18px;color:#697991;font-size:12px}@media(max-width:840px){.wrap{grid-template-columns:1fr}.sidebar{position:static;grid-row:2}.sheet{grid-row:1}.summary{grid-template-columns:1fr 1fr}.panel .toc-link{display:inline-flex;margin-right:14px}.panel h2{margin-bottom:7px}}@media(max-width:520px){body{font-size:15px}header{padding:23px 16px 45px}.wrap{padding:0 10px}.sheet{padding:21px 17px}.summary{grid-template-columns:1fr}header h1{font-size:29px}.report-section h3{font-size:19px}}@media print{header{background:none;color:#000;padding:0}header .crumb,header .tags,.sidebar,.toolbar,.interactive,footer{display:none!important}.wrap{display:block;margin:0;max-width:none}.sheet{border:0;box-shadow:none;padding:0}.report-section{break-inside:avoid}.table-scroll{overflow:visible}.research-table{font-size:10px}body{background:#fff;color:#000}a{color:#000}}
+</style></head><body><header><div class="inner"><div class="crumb"><a href="../../">GP</a> / <a href="../../">Исследования</a> / GPT Image</div><div class="eyebrow" style="margin-top:28px">Deep Research · Анализ доказательств</div><h1>Почему ChatGPT иногда создаёт изображение в разы лучше обычного?</h1><p>Вариативность генерации, Flare и Sunburst, гипотезы скрытой маршрутизации и проверяемые способы повысить вероятность сильного результата.</p><div class="tags"><span>Актуальность исследования: 13.10.2026</span><span>GPT Image 2.5</span><span>Факты vs гипотезы</span><span>Эксперименты</span></div></div></header><div class="wrap"><aside class="sidebar" aria-label="Навигация"><nav class="panel"><h2>Оглавление</h2><a class="toc-link" href="#part-1"><span class="toc-n">01</span>Резюме</a>
+<a class="toc-link" href="#part-2"><span class="toc-n">02</span>Что официально известно о механизме генерации</a>
+<a class="toc-link" href="#part-7"><span class="toc-n">03</span>Что об этом сообщают пользователи</a>
+<a class="toc-link" href="#part-11"><span class="toc-n">04</span>Как это проверить экспериментально</a>
+<a class="toc-link" href="#part-18"><span class="toc-n">05</span>Какие метаданные собирать и как анализировать результаты</a>
+<a class="toc-link" href="#part-23"><span class="toc-n">06</span>Как практически повысить вероятность очень хорошей генерации</a></nav><div class="panel"><h2>Исходники</h2><p style="font-size:13px;color:#52627c">Полный исходный отчёт сохранён без сокращений.</p><a class="source-download" href="./source.md" download>↓ Скачать Markdown</a></div></aside><main class="sheet"><div class="summary"><div class="fact"><strong>Установлено</strong><small>В API доступны Flare и Sunburst — генераторы с разными приоритетами.</small></div><div class="fact"><strong>Не доказано</strong><small>Скрытое случайное переключение на Sunburst внутри ChatGPT.</small></div></div><div class="toolbar" role="search"><input type="search" id="search" placeholder="Поиск по отчёту: Flare, seed, API, качество…" aria-label="Поиск по разделам исследования"><button type="button" id="reset" class="btn">Сбросить</button><span class="count" id="match-count"></span></div><div class="interactive" id="calculator"><h2>Калькулятор: шанс найти выдающуюся генерацию</h2><p>Математическая иллюстрация для независимых попыток. Не является эмпирической оценкой качества GPT Image.</p><div class="calcrow"><label for="prob">Шанс за попытку</label><input type="range" min="1" max="50" value="10" id="prob"><output id="prob-value" for="prob">10%</output></div><div class="calcrow"><label for="tries">Число попыток</label><input type="range" min="1" max="30" value="8" id="tries"><output id="tries-value" for="tries">8</output></div><div class="big-result" id="calc-result" aria-live="polite">57.0%</div><div class="small-print">Формула: 1 − (1 − p)<sup>k</sup>. Попытки предполагаются независимыми.</div></div><article aria-label="Полный текст исследования"><section class="report-section" id="part-1"><h2>Резюме</h2>
+<p>Наблюдение правдоподобно: один и тот же или почти тот же запрос действительно может иногда дать изображение, которое субъективно выглядит так, будто его сделал более сильный генератор. Похожие сообщения регулярно появляются у пользователей ChatGPT и API. Люди описывают как внезапные «удачные» генерации, так и обратный эффект: резкое падение качества при прежних промптах и настройках. Однако из доступных публичных данных <strong>не следует, что OpenAI случайным образом тайно переключает конкретный запрос на «премиальную» модель</strong>. На 13 октября 2026 года OpenAI действительно имеет два разных актуальных генератора GPT Image 2.5: <code>Flare</code>, ориентированный на скорость, и более сильный <code>Sunburst</code>, ориентированный на максимальное качество и точность. В API модель выбирается явно. OpenAI рекомендует Sunburst для сложных задач, где качество приоритетнее задержки. Это делает гипотезу о маршрутизации технически возможной для закрытого интерфейса ChatGPT, но <strong>официального подтверждения автоматического переключения Flare → Sunburst в зависимости от сложности промпта, нагрузки, повторных попыток или специальных слов в запросе я не нашёл</strong>. Форумные утверждения о подобных режимах существуют, но это наблюдения пользователей, а не документация OpenAI. Наиболее вероятное объяснение одиночной исключительно хорошей генерации проще: <strong>стохастическая вариативность самой генерации плюс вариативность промежуточной интерпретации промпта</strong>. Даже очень подробный запрос не задаёт единственного изображения. В апреле 2026 года сооснователь OpenAI Грег Брокман отдельно демонстрировал, что GPT Image 2 выдаёт существенно разные результаты на одном подробном промпте, и рекомендовал делать несколько попыток для важных задач. В Responses API добавляется ещё один источник вариативности: основной GPT-модельный слой <strong>автоматически переписывает запрос для image-generation tool</strong>. Причём этот <code>revised_prompt</code> API теперь позволяет получить. Кроме того, параметры <code>quality</code>, <code>size</code>, <code>background</code> и <code>action</code> могут иметь значение <code>auto</code>, то есть часть решений оставляется модели. Для текущего GPT Image API нет документированных параметров <code>seed</code> или <code>temperature</code>. Поэтому популярный совет «найдите удачный seed и повторяйте его» к современному GPT Image API неприменим. В текущем методе <code>images.generate</code> перечислены <code>model</code>, <code>quality</code>, <code>size</code>, <code>n</code>, формат, compression и другие параметры, но не seed/temperature. Практически наиболее надёжный способ получить «тот самый сильный режим» сейчас такой:</p>
+<p><strong>API → явно выбрать <code>gpt-image-2.5-sunburst</code> → зафиксировать dated snapshot → поставить <code>quality=&quot;max&quot;</code> → явно задать разрешение → PNG → создать несколько независимых кандидатов → выбрать лучший → дальнейшие изменения делать редактированием удачного изображения, а не новой генерацией с нуля.</strong> Это опирается на документированные возможности, а не на попытку вызвать неизвестный скрытый переключатель. При этом исходные детали вашего конкретного случая <strong>не указаны</strong>: неизвестны точный интерфейс — ChatGPT или API, точное название модели, дата наблюдения, исходный промпт, использовались ли референсные изображения, был ли это новый чат или продолжение старого, какое было разрешение и сколько было повторов. Без них нельзя установить причину конкретного эпизода.</p>
+</section>
+<section class="report-section" id="part-2"><h2>Что официально известно о механизме генерации</h2>
+</section>
+<section class="report-section" id="part-3"><h3>Сейчас действительно существуют генераторы разной силы</h3>
+<p>GPT Image 2.5 представлен двумя моделями. OpenAI называет Flare малой моделью, оптимизированной на скорость, а Sunburst — базовой моделью, оптимизированной на качество. В руководстве прямо рекомендуется начинать с Sunburst, когда GPT Image 2 не удовлетворяет требованиям сложного workflow, и только потом проверять, достаточно ли качества Flare. В официальном анонсе OpenAI описывает Flare как вариант для большинства приложений с более низкой задержкой, а Sunburst — как модель для premium visual workflows, требующих более точного контроля. API позволяет указать как плавающие имена:</p>
+<p><code>gpt-image-2.5-sunburst</code> <code>gpt-image-2.5-flare</code></p>
+<p>так и датированные snapshots:</p>
+<p><code>gpt-image-2.5-sunburst-2026-09-08</code> <code>gpt-image-2.5-flare-2026-09-08</code>. Это важный факт. Часть впечатления «будто иногда подключается другая модель» имеет реальную технологическую основу: <strong>в продуктовой линейке действительно есть два современных генератора с разным quality/latency trade-off</strong>. Но существование двух моделей само по себе ещё не доказывает скрытое случайное переключение между ними в ChatGPT.</p>
+<p>OpenAI Images также неоднократно менялся в течение последнего года. В декабре 2025 года ChatGPT получил новое поколение Images, доступное в API как GPT Image 1.5. 21 апреля 2026 года был представлен Images 2.0. Нынешний Images 2.5 снова изменил качество, редактирование и скорость. Поэтому сравнение генераций, сделанных в разные месяцы, нельзя считать контролируемым экспериментом. Более того, OpenAI прямо предупреждает разработчиков, что поведение моделей может меняться между snapshots, а сами outputs являются вариативными. Для стабильности компания рекомендует фиксированные версии модели и собственные evals. ### Не только генератор определяет результат</p>
+<p>Особенно важен Responses API. Его image-generation tool не просто передаёт пользовательскую строку в генератор. OpenAI пишет, что текст автоматически оптимизируется, а основной GPT-модуль автоматически делает revision запроса перед вызовом image model. В ответе можно получить поле <code>revised_prompt</code>. Получается, что видимый пользователю запрос</p>
+<blockquote>«Сделай реалистичный портрет человека возле окна»</blockquote><p>может фактически превращаться в существенно более подробную внутреннюю спецификацию композиции, освещения, материалов и прочего. Если этот промежуточный этап отличается от попытки к попытке, он потенциально способен давать результат, воспринимаемый как смена генератора. <strong>OpenAI, однако, не утверждает в документации, что переписывание само по себе обязательно стохастично</strong>, поэтому это объяснение следует считать вероятной гипотезой, а не установленной причиной.</p>
+<p>Есть и другие автоматические решения. В Responses image tool <code>quality</code>, <code>size</code> и <code>background</code> поддерживают <code>auto</code>; <code>action=auto</code> позволяет системе самой решить, создавать новую картинку или редактировать существующую. Текущий default для quality — <code>auto</code>. В прямом Images API <code>quality=&quot;auto&quot;</code> также означает автоматический выбор подходящего качества. Sunburst и Flare поддерживают уровни <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code> и <code>max</code>. Поэтому для исследования феномена <code>auto</code> желательно отключать.</p>
+</section>
+<section class="report-section" id="part-4"><h3>Seed и temperature — важное отличие от привычных diffusion-систем</h3>
+<p>Для нынешнего <code>images.generate</code> OpenAI не документирует ни <code>seed</code>, ни <code>temperature</code>. Поэтому нельзя сделать стандартный эксперимент вида «одинаковый seed, разные backend conditions» или воспроизвести особенно удачный output только номером seed. На Stack Overflow ещё во времена DALL·E 3 пользователи пытались найти способ перенести seed-подобную воспроизводимость из интерфейса в API. Это показывает, что проблема давняя, но не является свидетельством наличия такого параметра в современном GPT Image API. Это также означает, что советы из Stable Diffusion, Flux и других систем вида:</p>
+<p><code>seed=123456</code> <code>CFG=7</code> <code>steps=40</code> <code>temperature=0.7</code></p>
+<p>нельзя автоматически переносить на GPT Image.</p>
+</section>
+<section class="report-section" id="part-5"><h3>«Перегенерация латентов» тоже не универсальное объяснение</h3>
+<p>В старой терминологии генераторов изображений принято говорить о diffusion process, latent noise и новом latent seed. Для DALL·E такая модель мышления была уместна. Но OpenAI официально описывал native image generation GPT-4o иначе: в отличие от diffusion-based DALL·E, GPT-4o image generation являлся <strong>autoregressive</strong> image generator, встроенным в мультимодальную модель. OpenAI не публикует достаточно деталей внутренней архитектуры нынешних GPT Image 2/2.5, чтобы достоверно утверждать, что Sunburst и Flare устроены точно так же. Поэтому выражение «случайно попался хороший latent» для текущего GPT Image скорее является удобной аналогией, чем установленным описанием механизма.</p>
+</section>
+<section class="report-section" id="part-6"><h3>Сравнение технических гипотез</h3>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Гипотеза</th><th scope="col">Что должно происходить</th><th scope="col">Что известно</th><th scope="col">Оценка</th></tr></thead><tbody><tr><td><strong>Обычная вариативность sampling</strong></td><td>Разные траектории генерации дают сильно различающиеся композицию, анатомию, свет и детализацию</td><td>GPT Image действительно даёт разнообразные outputs даже на одном подробном prompt; это публично демонстрировал Brockman</td><td><strong>Высокая вероятность</strong> для одиночного «вау»-кадра.</td></tr><tr><td><strong>Разная внутренняя интерпретация / prompt rewrite</strong></td><td>Один и тот же пользовательский текст превращается в различающиеся эффективные инструкции</td><td>Responses API автоматически оптимизирует и переписывает prompt</td><td><strong>Высокая/средняя</strong>; особенно для ChatGPT/Responses.</td></tr><tr><td><strong><code>quality=auto</code>, <code>size=auto</code>, <code>action=auto</code></strong></td><td>Система принимает скрытое для пользователя решение о режиме</td><td>Все эти автоматические режимы документированы</td><td><strong>Средняя/высокая</strong>, если параметры не зафиксированы.</td></tr><tr><td><strong>Смена версии модели / rollout</strong></td><td>Поведение меняется после server-side rollout</td><td>OpenAI постоянно обновляет Images и предупреждает о различиях snapshots</td><td><strong>Высокая</strong> для изменений между днями/неделями; хуже объясняет соседние секунды.</td></tr><tr><td><strong>Flare ↔ Sunburst routing внутри ChatGPT</strong></td><td>Некоторые запросы направляются на более сильный backend</td><td>Обе модели существуют; API позволяет явно выбрать их</td><td><strong>Технически правдоподобно, но не подтверждено для ChatGPT</strong>.</td></tr><tr><td><strong>Model ensemble</strong></td><td>Несколько генераторов оценивают/генерируют кандидат и система выбирает лучший</td><td>Публичного описания такого ensemble для GPT Image 2.5 нет</td><td><strong>Нет достаточных свидетельств</strong></td></tr><tr><td><strong>Постобработка / hidden upscaler</strong></td><td>Иногда включается дополнительный restoration/upscale pass</td><td>Формат, compression, safety/provenance задокументированы; случайный «beautifier» — нет</td><td><strong>Низкая/неустановленная</strong>.</td></tr><tr><td><strong>Кэш</strong></td><td>Cache hit каким-то образом даёт другой уровень генератора</td><td>Prompt caching предназначен для повторного использования вычислений prefix, уменьшения стоимости и latency</td><td><strong>Низкая</strong>; свидетельств quality routing через cache нет.</td></tr><tr><td><strong>Rate limits / перегрузка</strong></td><td>При высокой нагрузке backend заменяет сильную модель дешёвой</td><td>Документация описывает RPM/TPM/IPM и ограничения, но не quality fallback</td><td><strong>Не подтверждено</strong>.</td></tr><tr><td><strong>Разные GPU / kernel nondeterminism</strong></td><td>Небольшие численные различия меняют траекторию sampling</td><td>Нетерминизм GPU-вычислений является известным явлением, но image-specific evidence от OpenAI отсутствует</td><td><strong>Возможен как небольшой источник вариации</strong>, слабое объяснение огромного скачка</td></tr><tr><td><strong>Модерация / safety path</strong></td><td>Prompt проходит через разные safety decisions</td><td>OpenAI использует chat-model checks, prompt classifiers и image checks</td><td><strong>Может менять допустимый результат</strong>, но не выглядит общим объяснением случайного повышения эстетического качества.</td></tr></tbody></table></div><p>Главный вывод из таблицы: <strong>не требуется гипотеза о скрытой более сильной модели, чтобы получить редкий выдающийся результат</strong>. Достаточно распределения качества с широким «правым хвостом»: большинство генераций средние, несколько плохие, а иногда случайно совпадают удачная композиция, лицо, свет, детализация, фон и prompt adherence.</p>
+</section>
+<section class="report-section" id="part-7"><h2>Что об этом сообщают пользователи</h2>
+<p>Пользовательских сообщений много. Но они являются важным индикатором феномена, а не доказательством его механизма.</p>
+</section>
+<section class="report-section" id="part-8"><h3>Reddit и OpenAI Community</h3>
+<p>Очень близкое к исходному наблюдение опубликовано в r/ChatGPT: пользователь пишет, что иногда изображение получается очень реалистичным и детальным, а через несколько генераций качество резко переходит к типичному «AI slop». В другом обсуждении пользователь сообщает, что ещё накануне получал хорошие изображения, а затем за один-два часа результаты стали выглядеть как output старой модели: хуже фон и анатомия. Другие участники подтвердили похожее наблюдение, хотя это не контролируемый тест. После появления GPT Image 2 появились и сообщения, что первоначально модель выглядела заметно лучше, а позже стала хуже следовать сложным промптам. В комментариях буквально появляется предположение «looks like they swapped the model», но никакого backend metadata в обсуждении не приводится. OpenAI Developer Community даёт несколько особенно показательных случаев. 8 июня 2026 года пользователь, генерировавший сотни тестовых изображений для storyboard workflow, сообщил о резком ухудшении prompt adherence, лиц и анатомии в течение предыдущих суток. Другой участник сообщил, что ему пришлось перейти с <code>quality=low</code> на <code>medium</code>, чтобы восстановить приемлемый уровень. В июле другой пользователь утверждал, что тот же workflow использовался для тысяч изображений и изменился после outage. В той же ветке участник предположил наличие простого и более сложного режима генерации, основываясь на различающихся задержках и UI-поведении. Это интересная гипотеза, но её источник — пользователь форума, а не сотрудник OpenAI. Есть также сообщения о систематической разнице ChatGPT UI и Responses API. В одном случае одинаковый prompt и reference image давали в ChatGPT более реалистичный свет и текстуры, чем через API; другие участники сообщали аналогичное для своих задач. Это совместимо с гипотезой, что продуктовые pipeline отличаются prompt preprocessing, system context или настройками, но само обсуждение не устанавливает точную причину. ### Twitter/X</p>
+<p>Наиболее значимое свидетельство здесь — не слух о routing, а демонстрация вариативности. Грег Брокман проверил GPT Image 2 несколькими генерациями одного подробного prompt и отметил большую разницу между результатами; практический совет в публикации — при важном изображении генерировать его несколько раз. Это хорошо согласуется с гипотезой <strong>tail sampling</strong>: лучший из четырёх outputs может казаться созданным принципиально лучшей моделью, хотя backend был тем же.</p>
+</section>
+<section class="report-section" id="part-9"><h3>Stack Overflow</h3>
+<p>Stack Overflow содержит меньше наблюдений именно о «внезапно включившейся сверхмодели». Там преобладают вопросы о воспроизводимости и различиях интерфейсов.</p>
+<p>В 2024 году пользователь DALL·E 3, например, пытался воспроизводить персонажей через seed, который, по его впечатлению, помогал в веб-интерфейсе, но не понимал, как получить тот же контроль в Python API. Это старый стек и не следует переносить этот опыт на GPT Image 2.5. Есть также сообщение об Azure OpenAI, где DALL·E 3 Playground выдавал хороший результат, а тот же текст через Python — заметно хуже. Это косвенно показывает, что «одинаковый видимый prompt» не гарантирует эквивалентность всего execution pipeline, однако речь идёт о старом Azure/DALL·E окружении. ### Русскоязычные Telegram-источники</p>
+<p>Русскоязычные Telegram-каналы активно фиксировали rollout новых image-моделей. Например, Data Secrets сообщал о начале развёртывания GPT Image 2 и необычно сильных первых генерациях; другие русскоязычные каналы сейчас отдельно обсуждают Flare и Sunburst как варианты с различным соотношением скорости и качества. Но при поиске русскоязычных источников <strong>не удалось обнаружить убедительный воспроизводимый эксперимент</strong>, показывающий, что определённая русская фраза, последовательность retry или режим общения стабильно принуждает ChatGPT переключиться на Sunburst/«старшую» модель.</p>
+<p>Показателен другой распространённый тип контента: Telegram-подборки советуют писать <code>/4k</code>, <code>/8k</code>, <code>/ultrarealistic</code> и подобные модификаторы. При этом даже автор такой подборки отдельно уточняет, что это <strong>не настоящие команды ChatGPT</strong>, а просто короткие текстовые описания желаемого визуального результата. Поэтому <code>/8k</code>, <code>ultra quality</code>, <code>masterpiece</code>, «используй самый сильный генератор» и подобные конструкции не следует путать с реальным backend switch.</p>
+</section>
+<section class="report-section" id="part-10"><h3>Сводка сообщений</h3>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Источник</th><th scope="col">Наблюдение</th><th scope="col">Что оно поддерживает</th><th scope="col">Что оно не доказывает</th></tr></thead><tbody><tr><td>Reddit</td><td>«Иногда реалистично и детально, потом резко хуже»</td><td>Большая intra-session variance</td><td>Смену модели.</td></tr><tr><td>Reddit</td><td>Резкое ухудшение в течение часа</td><td>Возможный rollout/backend incident</td><td>Причину и конкретную модель.</td></tr><tr><td>Reddit, GPT Image 2</td><td>После сильного старта некоторые видят regression</td><td>Возможное изменение backend или параметров</td><td>Что OpenAI тайно заменил модель.</td></tr><tr><td>OpenAI Community</td><td>Сотни стабильных outputs, затем ухудшение</td><td>Версионный или operational shift заслуживает проверки</td><td>Это пользовательское наблюдение, не официальный incident report.</td></tr><tr><td>OpenAI Community</td><td>ChatGPT UI лучше API на том же видимом prompt</td><td>Pipeline/context/preprocessing имеют значение</td><td>Конкретный механизм.</td></tr><tr><td>X, Greg Brockman</td><td>Один detailed prompt → заметно разные outputs</td><td>Сильную обычную вариативность</td><td>Routing между моделями.</td></tr><tr><td>Stack Overflow</td><td>Пользователи ищут seed и сталкиваются с UI/API differences</td><td>Проблему воспроизводимости</td><td>Современный GPT Image seed.</td></tr><tr><td>Russian Telegram</td><td>Отмечаются rollout новых GPT Image и Flare/Sunburst</td><td>Реальные модельные изменения воспринимаются сообществом</td><td>Существование «секретной команды» переключения.</td></tr></tbody></table></div><p>Таким образом, <strong>сам феномен подтверждается большим количеством независимых анекдотических наблюдений</strong>. А вот механизм «иногда нас тайно переводят на более сильную модель» остаётся неподтверждённым.</p>
+</section>
+<section class="report-section" id="part-11"><h2>Как это проверить экспериментально</h2>
+<p>Правильный эксперимент должен разделить четыре возможных явления:</p>
+<ol><li>обычный sampling variance;</li><li>эффект <code>auto</code>-параметров;</li><li>различия моделей Flare/Sunburst;</li><li>server-side изменение версии или ChatGPT pipeline.</li></ol>
+<p>Ниже — набор тестов, который позволяет сделать это сравнительно строго.</p>
+</section>
+<section class="report-section" id="part-12"><h3>Базовый тест случайности на фиксированном snapshot</h3>
+<p>Цель — узнать, может ли <strong>одна неизменная модель сама по себе</strong> производить редкие «аномально хорошие» outputs.</p>
+<p>Использовать:</p>
+<pre class="code"><code>endpoint: Images API
+model: gpt-image-2.5-sunburst-2026-09-08
+quality: max
+size: 1536x1024
+background: opaque
+output_format: png
+n: 1
+seed: недоступен
+temperature: недоступна</code></pre>
+<p>Эти параметры поддерживаются текущим API; <code>seed</code> и <code>temperature</code> в image-generation schema не представлены. Пример фиксированного stress-test prompt:</p>
+<pre class="code"><code>Фотореалистичная редакционная фотография мастера-часовщика
+за деревянным верстаком в Праге вечером.
+
+Камера на уровне глаз, объектив 35 мм.
+Естественный мягкий свет из окна слева.
+Тёплые лампы на заднем плане.
+
+В правой руке человек держит ровно одну часовую лупу.
+В левой руке — одну латунную шестерёнку.
+Обе кисти полностью видны, по пять пальцев.
+
+На стене одна чистая вывеска с точным текстом:
+«МАСТЕРСКАЯ 1926»
+
+Реалистичная текстура кожи и дерева.
+Естественные несовершенства.
+Без пластиковой кожи.
+Без дополнительных пальцев.
+Без дублированных объектов.
+Без лишнего текста.
+Без иллюстративного или CGI-стиля.</code></pre>
+<p>Сделать <strong>100 отдельных запросов</strong>, а не одну генерацию и 100 edits. Сохранять исходный PNG каждого результата.</p>
+<p>Почему 100: здесь интересует не только среднее качество, но и редкий верхний хвост распределения. При 10 запусках «одна на двадцать» аномалия легко останется незамеченной.</p>
+<p>Затем полностью повторить тест с:</p>
+<pre class="code"><code>model: gpt-image-2.5-flare-2026-09-08</code></pre>
+<p>Все остальные поля оставить неизменными. Именно такой принцип — менять модель, сохраняя prompt, references, dimensions и format — рекомендует OpenAI для сравнительного тестирования Flare и Sunburst. Если внутри фиксированного Sunburst snapshot уже обнаружатся outputs уровня «другая модель», гипотеза о необходимости backend switch существенно ослабляется.</p>
+</section>
+<section class="report-section" id="part-13"><h3>Проверка <code>auto</code> против фиксированного compute/quality</h3>
+<p>Для одного snapshot:</p>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Условие</th><th scope="col">Повторов</th></tr></thead><tbody><tr><td><code>quality=auto</code></td><td>50</td></tr><tr><td><code>quality=high</code></td><td>50</td></tr><tr><td><code>quality=xhigh</code></td><td>50</td></tr><tr><td><code>quality=max</code></td><td>50</td></tr></tbody></table></div><p>Размер, prompt и формат фиксируются.</p>
+<p>Если <code>auto</code> имеет намного более широкое распределение и особенно выраженные верхний и нижний хвосты, автоматический выбор параметров становится кандидатом на объяснение. Если <code>max</code> просто сдвигает всю выборку вверх, это означает, что гораздо надёжнее покупать качество напрямую, чем искать загадочный trigger.</p>
+<p>OpenAI подтверждает существование всех этих quality levels и автоматического режима. ### Проверка alias против snapshot</p>
+<p>Это ключевой тест server-side drift.</p>
+<p>Сравнивать одновременно:</p>
+<pre class="code"><code>gpt-image-2.5-sunburst</code></pre>
+<p>и</p>
+<pre class="code"><code>gpt-image-2.5-sunburst-2026-09-08</code></pre>
+<p>Например, семь дней:</p>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Каждый день</th><th scope="col">Alias</th><th scope="col">Snapshot</th></tr></thead><tbody><tr><td>Один и тот же prompt</td><td>20</td><td>20</td></tr></tbody></table></div><p>Запросы необходимо чередовать случайным образом:</p>
+<pre class="code"><code>snapshot
+alias
+alias
+snapshot
+snapshot
+...</code></pre>
+<p>а не сначала сделать все alias, затем все snapshot.</p>
+<p>OpenAI прямо рекомендует pinned model versions, если нужна стабильность между snapshots. Сильный сдвиг только у alias при стабильном snapshot был бы гораздо более убедительным свидетельством изменения версии, чем впечатления от нескольких картинок.</p>
+</section>
+<section class="report-section" id="part-14"><h3>ChatGPT против прямого API</h3>
+<p>Это наиболее интересный эксперимент именно для гипотезы скрытого переключения.</p>
+<p>Для одного prompt сделать четыре условия:</p>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Условие</th><th scope="col">Повторов</th></tr></thead><tbody><tr><td>ChatGPT, каждый раз новый чат</td><td>30</td></tr><tr><td>ChatGPT, все повторы в одном диалоге</td><td>30</td></tr><tr><td>API Flare snapshot</td><td>30</td></tr><tr><td>API Sunburst snapshot</td><td>30</td></tr></tbody></table></div><p>В ChatGPT не нужно писать судьям, какое условие использовалось.</p>
+<p>Если «аномально прекрасные» ChatGPT-outputs образуют кластер, статистически похожий на Sunburst и заметно отличающийся от Flare, это будет интересным косвенным свидетельством. Но <strong>визуальное сходство всё равно не сможет доказать routing</strong>. Для доказательства нужен backend identifier, provenance metadata или официальное подтверждение.</p>
+</section>
+<section class="report-section" id="part-15"><h3>Проверка автоматического prompt rewrite</h3>
+<p>Responses API делает этот эксперимент особенно полезным, поскольку <code>revised_prompt</code> возвращается в image-generation call. Сделать 50 независимых Responses requests с абсолютно одинаковым visible prompt:</p>
+<pre class="code"><code>top-level model: фиксированный
+image_generation model: gpt-image-2.5-sunburst-2026-09-08
+quality: max
+size: 1536x1024</code></pre>
+<p>Для каждого запроса сохранить:</p>
+<pre class="code"><code>visible_prompt
+revised_prompt
+generated_image
+latency
+response id
+created time</code></pre>
+<p>Затем посмотреть, идентичны ли <code>revised_prompt</code>.</p>
+<p>Если особенно хорошие изображения коррелируют с определёнными дополнительными инструкциями в rewritten prompt — например, модель чаще добавляет конкретный свет, объектив, skin texture или композиционные ограничения — часть «магического переключения» будет объяснена <strong>не сменой генератора, а удачным prompt expansion</strong>.</p>
+<p>Это один из самых сильных доступных сегодня экспериментов.</p>
+</section>
+<section class="report-section" id="part-16"><h3>Проверка нагрузки и rate limits</h3>
+<p>Официально rate limits ограничивают RPM, TPM, RPD и IPM и используются в том числе для управления нагрузкой. Документация не говорит, что OpenAI при высокой нагрузке переводит изображение на более слабый генератор. Тем не менее гипотезу можно проверить эмпирически.</p>
+<p>На протяжении семи дней по времени Праги:</p>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Время</th><th scope="col">Генераций</th></tr></thead><tbody><tr><td>02:00</td><td>8</td></tr><tr><td>08:00</td><td>8</td></tr><tr><td>14:00</td><td>8</td></tr><tr><td>20:00</td><td>8</td></tr></tbody></table></div><p>Это 224 изображения на условие за неделю.</p>
+<p>Использовать только pinned snapshot. Фиксировать latency, ошибки и rate-limit информацию.</p>
+<p>Затем оценить модель:</p>
+<pre class="code"><code>quality_score ~ time_of_day + latency + day + error/retry history</code></pre>
+<p>Если high-quality outliers не коррелируют ни со временем, ни latency, гипотеза «в тихие часы запускают сильную модель» заметно ослабнет.</p>
+</section>
+<section class="report-section" id="part-17"><h3>Матрица рекомендуемых экспериментов</h3>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Тест</th><th scope="col">Главный вопрос</th><th scope="col">Минимум</th><th scope="col">Предпочтительно</th><th scope="col">Что считалось бы интересным результатом</th></tr></thead><tbody><tr><td>Snapshot repeated sampling</td><td>Может ли одна модель сама давать «магические» результаты?</td><td>50</td><td>100</td><td>Широкий верхний хвост</td></tr><tr><td>Flare vs Sunburst</td><td>Похож ли «магический» output на сильную модель?</td><td>30+30</td><td>100+100</td><td>Явный разрыв distributions</td></tr><tr><td>Auto vs Max</td><td>Виноваты ли auto settings?</td><td>30 на режим</td><td>50</td><td>У <code>auto</code> больше variance</td></tr><tr><td>Alias vs pinned snapshot</td><td>Идёт ли server-side drift?</td><td>10/день</td><td>20/день</td><td>Alias меняется, snapshot нет</td></tr><tr><td>Responses prompt rewrite</td><td>Влияет ли скрытая формулировка?</td><td>30</td><td>50–100</td><td>Quality связана с revised prompt</td></tr><tr><td>ChatGPT new-chat vs same-chat</td><td>Влияет ли контекст?</td><td>30+30</td><td>50+50</td><td>Сильная разница variance/mean</td></tr><tr><td>Time/load</td><td>Есть ли эффект нагрузки?</td><td>100</td><td>200+</td><td>Quality коррелирует с time/latency</td></tr></tbody></table></div></section>
+<section class="report-section" id="part-18"><h2>Какие метаданные собирать и как анализировать результаты</h2>
+<p>Без metadata практически невозможно различить «другую модель» и случайно удачную генерацию.</p>
+</section>
+<section class="report-section" id="part-19"><h3>Минимальный журнал каждого запуска</h3>
+<p>Стоит сохранять одну строку данных на каждый output:</p>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Поле</th><th scope="col">Зачем</th></tr></thead><tbody><tr><td><code>timestamp_utc</code>, <code>timestamp_local</code></td><td>Поиск rollout/time-of-day effects</td></tr><tr><td>Endpoint</td><td>Images API / Responses / ChatGPT UI</td></tr><tr><td>Exact model string</td><td>Flare/Sunburst, alias или snapshot</td></tr><tr><td>Mainline Responses model</td><td>Может влиять на prompt revision</td></tr><tr><td>Exact visible prompt</td><td>Контроль идентичности</td></tr><tr><td>SHA-256 prompt</td><td>Быстрая проверка случайных изменений</td></tr><tr><td><code>revised_prompt</code></td><td>Критически важно для Responses</td></tr><tr><td>Полная conversation history</td><td>Проверка context effect</td></tr><tr><td>Reference image hashes</td><td>Проверка идентичности input</td></tr><tr><td>Порядок reference images</td><td>Порядок тоже должен быть фиксирован</td></tr><tr><td><code>quality</code></td><td>Не смешивать auto/high/max</td></tr><tr><td><code>size</code></td><td>Sharpness может зависеть от размера</td></tr><tr><td><code>background</code></td><td>Фиксация параметра</td></tr><tr><td><code>output_format</code></td><td>PNG/JPEG/WebP</td></tr><tr><td><code>output_compression</code></td><td>Исключение encoding artifact</td></tr><tr><td><code>action</code></td><td>generate/edit/auto</td></tr><tr><td><code>n</code></td><td>Число кандидатов</td></tr><tr><td>Seed</td><td><code>unavailable</code> для текущего GPT Image</td></tr><tr><td>Temperature</td><td><code>unavailable</code></td></tr><tr><td>Latency</td><td>Проверка предполагаемого «дорогого режима»</td></tr><tr><td>Retry count</td><td>Не смешивать retry behavior</td></tr><tr><td>Response/operation identifier</td><td>Связывание с логами</td></tr><tr><td>Width × height фактического файла</td><td>Выявление изменения resolution</td></tr><tr><td>Размер файла</td><td>Грубый индикатор encoding complexity</td></tr><tr><td>SHA-256 output</td><td>Выявление exact duplicates</td></tr><tr><td>Human scores</td><td>Основная метрика качества</td></tr></tbody></table></div><p>API официально позволяет контролировать model, n, compression, output format, quality и size; <code>n</code> может составлять от 1 до 10. Для JPEG/WebP следует отдельно учитывать <code>output_compression</code>; для экспериментальной оценки визуального качества проще использовать PNG, чтобы не смешивать ошибки генерации с compression artifacts. OpenAI также использует C2PA metadata и SynthID для provenance текущих изображений. C2PA может исчезать после редактирования, конвертации или пересылки, поэтому сохранять желательно оригинальный downloaded file. ### Человеческая оценка важнее одной автоматической метрики</p>
+<p>До просмотра результатов следует заранее определить критерии. Например, каждый output получает от 1 до 5:</p>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Критерий</th><th scope="col">Что оценивать</th></tr></thead><tbody><tr><td>Prompt adherence</td><td>Все ли заданные объекты и отношения присутствуют</td></tr><tr><td>Anatomy</td><td>Руки, пальцы, лица, позы</td></tr><tr><td>Photorealism</td><td>Нет ли пластикового/CGI-вида</td></tr><tr><td>Fine detail</td><td>Текстуры, волосы, ткани, мелкие элементы</td></tr><tr><td>Lighting</td><td>Физическая правдоподобность</td></tr><tr><td>Typography</td><td>Точный текст и читаемость</td></tr><tr><td>Composition</td><td>Баланс, перспективу, кадрирование</td></tr><tr><td>Overall preference</td><td>Общая профессиональная пригодность</td></tr></tbody></table></div><p>Желательно скрыть имя модели, порядок рандомизировать и использовать минимум несколько независимых оценщиков.</p>
+<p>Для парных сравнений Flare/Sunburst удобнее не спрашивать «поставьте 1–10», а показывать два изображения вслепую:</p>
+<pre class="code"><code>A лучше
+B лучше
+ничья</code></pre>
+<p>После сотен сравнений можно оценить Bradley–Terry preference score.</p>
+</section>
+<section class="report-section" id="part-20"><h3>Особое внимание — не среднему, а хвосту</h3>
+<p>Пользовательское наблюдение относится не к среднему quality, а к редкому событию:</p>
+<blockquote>«Иногда появляется картинка совсем другого уровня».</blockquote><p>Поэтому одной средней оценки недостаточно.</p>
+<p>Полезно заранее определить:</p>
+<pre class="code"><code>exceptional = composite_score &gt;= заранее заданного порога</code></pre>
+<p>или, для предварительного исследования:</p>
+<pre class="code"><code>exceptional = верхние 10% по blind human score</code></pre>
+<p>И считать:</p>
+<div class="formula" aria-label="Математическая формула">P(\text{exceptional}\mid\text{condition})</div><p>с доверительным интервалом.</p>
+<p>Это непосредственно отвечает на практический вопрос: например, не «Sunburst в среднем на 0,4 балла лучше», а:</p>
+<pre class="code"><code>Flare:     7% exceptional
+Sunburst: 24% exceptional
+ChatGPT:  15% exceptional</code></pre>
+<p>Такая картина уже позволяет говорить предметно.</p>
+</section>
+<section class="report-section" id="part-21"><h3>Как искать признаки двух скрытых режимов</h3>
+<p>Если система действительно переключается между условными A и B, распределение может выглядеть не как один плавный bell-shaped cloud, а как два режима.</p>
+<p>Стоит сравнить:</p>
+<ul><li>однокомпонентную модель распределения quality scores;</li><li>двухкомпонентную mixture model;</li><li>распределения latency;</li><li>output dimensions;</li><li>revised prompts;</li><li>provenance/model metadata.</li></ul>
+<p>Но <strong>бимодальность сама по себе не доказывает две модели</strong>. Одна генеративная модель может иметь несколько естественных визуальных modes.</p>
+<p>Гораздо сильнее было бы наблюдение вида:</p>
+<pre class="code"><code>кластер высокого качества:
+latency ≈ 55 s
+resolution = X
+metadata characteristic = A
+
+обычный кластер:
+latency ≈ 12 s
+resolution = Y
+metadata characteristic = B</code></pre>
+<p>и повторение этого эффекта на нескольких независимых prompts.</p>
+</section>
+<section class="report-section" id="part-22"><h3>Предлагаемые визуализации</h3>
+<p>Наиболее информативны:</p>
+<p><strong>Violin plot / boxplot</strong></p>
+<pre class="code"><code>             Quality score
+Flare       ▂▃▇████▅▂
+Sunburst       ▂▄██████▆▃
+ChatGPT       ▂▃▅████▇▅▂</code></pre>
+<p>Показывает не только среднее, но и variance и хвосты.</p>
+<p><strong>ECDF</strong> — особенно полезна для вопроса «какой процент outputs выше quality threshold».</p>
+<p><strong>Scatter plot</strong></p>
+<pre class="code"><code>x = latency
+y = blind quality score
+marker = model/condition</code></pre>
+<p>Если предполагаемый «второй сильный режим» действительно требует существенно больше compute, может появиться кластер справа-сверху. Отсутствие такого кластера ослабит гипотезу.</p>
+<p><strong>Time-series</strong></p>
+<pre class="code"><code>x = дата/время
+y = quality score</code></pre>
+<p>С вертикальными линиями на официальных releases/outages. Для 2026 года это особенно существенно, поскольку OpenAI несколько раз менял image stack. <strong>Upper-tail chart</strong></p>
+<pre class="code"><code>% outputs with score ≥ threshold</code></pre>
+<p>Это лучшая практическая диаграмма для оценки «шанса поймать очень хороший вариант».</p>
+<p>Концептуальный workflow исследования:</p>
+<pre class="code"><code>flowchart TD
+    A[Фиксированный пользовательский prompt] --&gt; B{Интерфейс}
+    B --&gt;|Images API| C[Явно заданная image model]
+    B --&gt;|Responses API| D[Mainline model]
+    B --&gt;|ChatGPT| E[Внутренний product pipeline&lt;br/&gt;детали не опубликованы]
+
+    D --&gt; F[Automatic prompt revision]
+    F --&gt; G[Записать revised_prompt]
+    G --&gt; C
+
+    C --&gt; H{Параметры}
+    H --&gt; I[quality / size фиксированы]
+    H --&gt; J[auto-параметры]
+
+    I --&gt; K[Стохастическая генерация]
+    J --&gt; K
+    E --&gt; K
+
+    K --&gt; L[Safety / provenance / encoding]
+    L --&gt; M[Оригинальный output]
+
+    M --&gt; N[Blind human scoring]
+    N --&gt; O[Распределение качества]
+    O --&gt; P{Есть отдельный high-quality cluster?}
+
+    P --&gt;|Нет| Q[Вероятнее sampling variance]
+    P --&gt;|Да| R[Искать связь с model, latency,&lt;br/&gt;revised prompt, version и metadata]</code></pre>
+<p>Пункт <code>ChatGPT → internal product pipeline</code> намеренно оставлен неопределённым: публичных данных недостаточно, чтобы подставить туда Flare, Sunburst или конкретную routing policy.</p>
+</section>
+<section class="report-section" id="part-23"><h2>Как практически повысить вероятность очень хорошей генерации</h2>
+</section>
+<section class="report-section" id="part-24"><h3>Не пытаться вызвать switch, если модель можно выбрать напрямую</h3>
+<p>Для API это главный ответ.</p>
+<p>Вместо:</p>
+<pre class="code"><code>«Пожалуйста, используй самую сильную модель»</code></pre>
+<p>лучше непосредственно задать:</p>
+<pre class="code"><code>model=&quot;gpt-image-2.5-sunburst-2026-09-08&quot;
+quality=&quot;max&quot;
+size=&quot;2048x1152&quot;
+output_format=&quot;png&quot;</code></pre>
+<p>Sunburst официально предназначен для более требовательных по качеству workflows, а <code>max</code> является документированным quality level. Плавающий alias полезен для доступа к обновлениям. Для воспроизводимости лучше dated snapshot. OpenAI прямо рекомендует pinned versions и evals для стабильного поведения. ### Генерировать несколько независимых кандидатов</p>
+<p>Это, вероятно, самый недооценённый способ получить ощущение «старшей модели».</p>
+<p>Если вероятность exceptional result в одном запуске равна \(p\), то вероятность хотя бы одного такого результата среди \(k\) примерно равна:</p>
+<div class="formula" aria-label="Математическая формула">1-(1-p)^k</div><p>Например, при условном \(p=10\%\):</p>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Независимых попыток</th><th scope="col">Шанс получить ≥1 exceptional</th></tr></thead><tbody><tr><td>1</td><td>10.0%</td></tr><tr><td>4</td><td>34.4%</td></tr><tr><td>8</td><td>57.0%</td></tr><tr><td>10</td><td>65.1%</td></tr></tbody></table></div><p>Реальные outputs не обязательно полностью независимы, поэтому это иллюстрация, а не гарантия.</p>
+<p>Но принцип подтверждается практическим наблюдением Брокмана: GPT Image 2 заметно варьирует output при одинаковом подробном prompt. API поддерживает <code>n</code> до 10, хотя для научного эксперимента предпочтительнее отдельные запросы с <code>n=1</code>, чтобы проще отслеживать latency и metadata каждой попытки. ### Отключать <code>auto</code>, когда требуется контроль</p>
+<p>Для production-процесса, где нужен максимум качества:</p>
+<pre class="code"><code>quality=max
+size=&lt;явное значение&gt;
+background=&lt;явное значение&gt;
+action=generate или edit</code></pre>
+<p>обычно является лучшей контрольной стратегией, чем оставление нескольких параметров в <code>auto</code>.</p>
+<p>Это не означает, что <code>auto</code> плох. Он удобен. Но он вводит ещё одну переменную в эксперимент. <code>quality</code>, <code>size</code> и <code>background</code> действительно имеют автоматические режимы, а Responses API может автоматически выбирать generate/edit. ### Сделать prompt менее магическим и более операционным</p>
+<p>Официальное руководство OpenAI строит prompts вокруг конкретных визуальных свойств и отдельно подчёркивает необходимость сохранять prompt, reference inputs, dimensions и format неизменными при сравнении моделей. Полезнее:</p>
+<pre class="code"><code>eye-level camera
+35 mm lens
+soft window light from camera-left
+natural skin texture
+visible pores
+realistic contact shadows
+five fingers on each visible hand
+text EXACTLY: &quot;...&quot;
+no extra text</code></pre>
+<p>чем:</p>
+<pre class="code"><code>masterpiece
+8K
+insane quality
+award winning
+ultra ultra realistic
+activate best model</code></pre>
+<p>Последние слова могут влиять на эстетическую интерпретацию как обычный prompt, но не являются задокументированными переключателями backend. Даже русскоязычные подборки <code>/4k</code> и <code>/8k</code> прямо указывают, что это не настоящие slash-команды. ### Не уничтожать удачный результат новой генерацией с нуля</p>
+<p>Когда получена действительно сильная картинка, лучше превратить её в новый reference и делать небольшие edits.</p>
+<p>OpenAI специально подчёркивает способность современных GPT Image сохранять subject и детали при editing, а prompting guide рекомендует локально формулировать изменения — например, поменять один объект, сохранив композицию, свет и окружение. Практический workflow:</p>
+<pre class="code"><code>20 кандидатов
+      ↓
+выбрать лучший
+      ↓
+сохранить оригинальный PNG + prompt + metadata
+      ↓
+использовать этот output как reference
+      ↓
+одна правка за шаг
+      ↓
+не менять одновременно свет + позу + одежду + фон + камеру</code></pre>
+<p>Это гораздо надёжнее попытки снова случайно попасть в тот же удачный region распределения.</p>
+</section>
+<section class="report-section" id="part-25"><h3>Для Responses анализировать <code>revised_prompt</code></h3>
+<p>Это один из немногих доступных способов посмотреть, что происходило между вашей фразой и image generator.</p>
+<p>Responses API официально возвращает автоматически переработанный <code>revised_prompt</code>. Поэтому при особенно хорошем output следует сохранять не только пользовательский prompt, но и rewritten version. Возможно, именно там окажется повторяемый рецепт хорошего результата.</p>
+</section>
+<section class="report-section" id="part-26"><h3>Не рассчитывать на кэш, rate-limit cycling или время суток</h3>
+<p>Prompt caching официально предназначен для повторного использования prefix computation, сокращения latency и стоимости. Документация не описывает cache hit как механизм выбора более сильного image model. А rate limits определяются через ограничения RPM/TPM/IPM и служат управлению доступом и нагрузкой. В официальной документации нет режима «при свободных GPU дать Sunburst, при нагрузке дать слабую модель». Поэтому советы:</p>
+<pre class="code"><code>подождать до ночи
+сделать 5 быстрых retry
+упереться в лимит и повторить
+очистить cache
+использовать VPN</code></pre>
+<p>сейчас не имеют достаточного подтверждения как способ получить более сильный генератор.</p>
+</section>
+<section class="report-section" id="part-27"><h3>С аппаратной вариативностью ситуация похожая</h3>
+<p>Низкоуровневые GPU-вычисления в ML могут быть недетерминированными, а порядок floating-point операций способен давать небольшие различия. Это известное свойство современных ускоренных ML-систем. Но публичных данных, показывающих, что GPT Image иногда выглядит «на целое поколение лучше» именно из-за другого GPU или kernel, нет.</p>
+<p>Для стохастического autoregressive процесса небольшое численное отличие теоретически может быть усилено последующими sampling decisions. Но практически такую причину следует ставить значительно ниже обычного sampling variance, prompt rewrite или model/version differences.</p>
+</section>
+<section class="report-section" id="part-28"><h3>Что считать рабочей стратегией, а что — неподтверждённым фольклором</h3>
+<div class="table-scroll"><table class="research-table"><thead><tr><th scope="col">Приём</th><th scope="col">Статус</th></tr></thead><tbody><tr><td>Явно выбрать Sunburst</td><td><strong>Подтверждено и рекомендуется OpenAI</strong>.</td></tr><tr><td><code>quality=max</code> / <code>xhigh</code></td><td><strong>Официальный API-параметр</strong>.</td></tr><tr><td>Зафиксировать dated snapshot</td><td><strong>Лучший способ уменьшить version drift</strong>.</td></tr><tr><td>Явно задать размер</td><td><strong>Официально поддерживается</strong>.</td></tr><tr><td>PNG вместо lossy output для тестов</td><td><strong>Убирает compression как confounder</strong>; API поддерживает PNG/JPEG/WebP.</td></tr><tr><td>Сделать несколько независимых генераций</td><td><strong>Рационально при высокой stochastic variance</strong>; такую вариативность демонстрировал Brockman.</td></tr><tr><td>Использовать удачный output как reference</td><td><strong>Поддерживается image-editing workflow OpenAI</strong>.</td></tr><tr><td>Анализировать <code>revised_prompt</code></td><td><strong>Доступно в Responses API</strong>.</td></tr><tr><td>«Сделай на самой мощной скрытой модели»</td><td><strong>Нет документированной гарантии</strong></td></tr><tr><td>«Think harder, чтобы включился Sunburst»</td><td><strong>Форумная гипотеза, официально не подтверждена</strong>.</td></tr><tr><td><code>/8k</code>, <code>/ultrarealistic</code> как системная команда</td><td><strong>Не является реальной slash-командой</strong>.</td></tr><tr><td>Найти хороший GPT Image seed</td><td><strong>Современный image API seed не предоставляет</strong>.</td></tr><tr><td>Менять temperature</td><td><strong>Такого image parameter в текущем API нет</strong>.</td></tr><tr><td>Генерировать только ночью</td><td><strong>Нет подтверждения</strong></td></tr><tr><td>Провоцировать rate limit</td><td><strong>Нет подтверждения; скорее ухудшает эксплуатационную надёжность</strong>.</td></tr><tr><td>Cache hit = более качественная модель</td><td><strong>Документация этого не поддерживает</strong>.</td></tr></tbody></table></div><p>Итоговый диагноз на основании доступных данных: <strong>случайный необычно высокий quality output реален, но наиболее экономное объяснение — широкий stochastic quality distribution, усиленный prompt rewriting, контекстом и автоматическими параметрами. Изменение model version способно объяснить скачки между периодами. Скрытая маршрутизация между Flare и Sunburst в ChatGPT остаётся технически возможной, однако публичных доказательств её существования или пользовательского способа намеренно вызвать такой switch сейчас нет.</strong></p>
+<p>Поэтому для практической работы лучше не искать «секретную фразу». В API эквивалент желаемого переключения уже доступен напрямую: <strong>Sunburst + pinned snapshot + <code>quality=max</code> + фиксированный размер + несколько кандидатов + сохранение лучшего результата как reference</strong>. Для ChatGPT наиболее полезная стратегия — несколько независимых генераций, строгий prompt, сохранение удачного изображения и дальнейшее итеративное редактирование, одновременно логируя время, контекст и исходные файлы.</p>
+</section></article><section class="references" id="references"><h2>Источники и проверка</h2><p>Ниже — дополнительно проверенные прямые ссылки на документы OpenAI и характерные сообщения сообщества. Сообщения пользователей не доказывают внутреннюю маршрутизацию моделей.</p><details open><summary>Показать источники (6)</summary><ol><li class="source" data-type="Официальный"><div class="source-type">Официальный</div><a href="https://openai.com/index/introducing-chatgpt-images-2-5/" target="_blank" rel="noopener noreferrer">OpenAI: Introducing ChatGPT Images 2.5</a><p>Анонс Flare и Sunburst, различия назначения и компромисс по скорости</p></li>
+<li class="source" data-type="Официальный"><div class="source-type">Официальный</div><a href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank" rel="noopener noreferrer">OpenAI API: Image generation guide</a><p>Выбор модели, изображения, редактирование, форматы и параметры</p></li>
+<li class="source" data-type="Официальный"><div class="source-type">Официальный</div><a href="https://developers.openai.com/api/reference/resources/images/methods/generate" target="_blank" rel="noopener noreferrer">OpenAI API: Images generate reference</a><p>Поддерживаемые модели, quality, size и другие поля API</p></li>
+<li class="source" data-type="Официальный"><div class="source-type">Официальный</div><a href="https://developers.openai.com/api/docs/guides/tools-image-generation" target="_blank" rel="noopener noreferrer">OpenAI API: Responses image generation</a><p>Tool routing и автоматическая оптимизация входного промпта</p></li>
+<li class="source" data-type="Наблюдение"><div class="source-type">Наблюдение</div><a href="https://www.reddit.com/r/ChatGPT/comments/1vf4xg8/why_is_the_image_generation_so_inconsistent/" target="_blank" rel="noopener noreferrer">Reddit: Why is image generation so inconsistent?</a><p>Пользовательский опыт: реалистичные изображения сменяются более слабыми генерациями</p></li>
+<li class="source" data-type="Гипотеза"><div class="source-type">Гипотеза</div><a href="https://community.openai.com/t/introducing-gpt-images-2-5-in-the-api-and-chatgpt/1395897/19" target="_blank" rel="noopener noreferrer">OpenAI Developer Community: предположение о routing</a><p>Заявление участника форума о возможном переключении; не является подтверждением OpenAI</p></li></ol></details></section><p class="footnote">Текст исследования сохранён в <a href="./source.md">source.md</a>. Официальная документация подтверждает существование моделей и API-параметров, но не гипотезу о скрытом переключении конкретных запросов в ChatGPT.</p></main></div><footer>GP · Публичная исследовательская публикация. Страница работает без авторизации и сборки.</footer><script>
+(()=>{"use strict";
+const search=document.getElementById("search"),reset=document.getElementById("reset"),sections=[...document.querySelectorAll(".report-section")],count=document.getElementById("match-count");
+function filter(){const q=search.value.trim().toLocaleLowerCase("ru");let n=0;sections.forEach(s=>{const show=!q||s.textContent.toLocaleLowerCase("ru").includes(q);s.hidden=!show;if(show)n++;});count.textContent=q?("Разделов найдено: "+n):("Разделов: "+sections.length);}
+search.addEventListener("input",filter);reset.addEventListener("click",()=>{search.value="";filter();search.focus();});
+document.querySelectorAll(".toc-link").forEach(a=>a.addEventListener("click",()=>{if(search.value){search.value="";filter();}}));filter();
+const p=document.getElementById("prob"),k=document.getElementById("tries"),po=document.getElementById("prob-value"),ko=document.getElementById("tries-value"),pr=document.getElementById("calc-result");
+function calculate(){const x=Number(p.value)/100,n=Number(k.value);po.textContent=p.value+"%";ko.textContent=n;pr.textContent=((1-Math.pow(1-x,n))*100).toFixed(1)+"%";}
+p.addEventListener("input",calculate);k.addEventListener("input",calculate);calculate();
+const collator=new Intl.Collator("ru",{numeric:true,sensitivity:"base"});
+document.querySelectorAll(".research-table").forEach(table=>{let dir=1,last=-1;[...table.tHead.rows[0].cells].forEach((th,idx)=>{const label=th.innerHTML;const button=document.createElement("button");button.type="button";button.innerHTML=label;button.setAttribute("aria-label","Сортировать по столбцу "+th.textContent.trim());th.replaceChildren(button);button.addEventListener("click",()=>{dir=last===idx?-dir:1;last=idx;const body=table.tBodies[0],rows=[...body.rows];rows.sort((a,b)=>collator.compare(a.cells[idx]?.textContent.trim()||"",b.cells[idx]?.textContent.trim()||"")*dir);rows.forEach(row=>body.appendChild(row));});});});
+})();
+</script></body></html>
