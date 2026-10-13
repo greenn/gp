@@ -1,0 +1,5 @@
+Net;Pins / Terminals
+GB1+;GB1(+),S1.1
+SW_OUT;S1.2,PCB.IN+
+VM+;PCB.F1.OUT,C1.1,C2.1,VD1.K,M1(+)
+GND;GB1(-),PCB.IN-,C1.2,C2.2,VD1.A,M1(-)

@@ -1,0 +1,68 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Капучинатор 3 В — схемы, расчёты, монтаж</title><meta name="description" content="Электротехнический проект ручного капучинатора: схема Э3, расчёт мощности, список компонентов и соединения для пайки.">
+<style>
+:root{--ink:#152b41;--line:#b8cbdc;--accent:#1b507c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f2f5f9;color:var(--ink);font:16px/1.52 system-ui,Arial}
+header{padding:34px max(20px,calc((100vw - 1060px)/2));background:#17304b;color:#fff}header h1{font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.2;margin:8px 0}header p{max-width:850px;color:#dce9f6}
+main{max-width:1100px;margin:auto;padding:22px 16px 70px}nav{display:flex;flex-wrap:wrap;gap:8px}nav a,.btn{display:inline-block;text-decoration:none;color:var(--accent);border:1px solid var(--line);background:#fff;border-radius:7px;padding:8px 12px;font-size:.9rem;font-weight:600}
+section{background:white;border:1px solid var(--line);border-radius:9px;margin:19px 0;padding:23px}h2{font-size:1.36rem;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 13px}h3{font-size:1.1rem}
+small,.muted{color:#586b7d}.alert{border-left:4px solid #aa7318;padding:12px 15px;background:#fff8eb}.tw,.schematic{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:590px;font-size:.92rem}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#e8f2f9}
+.schematic{border:1px solid var(--line);border-radius:6px;padding:8px}svg{min-width:780px;width:100%;height:auto;display:block}svg path,svg circle,svg rect{stroke:#173b59;stroke-width:3;fill:none}svg text{font:16px Arial;fill:#173b59}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pane{background:#f4f8fc;border:1px solid var(--line);padding:13px;border-radius:7px}.eq{background:#eff4f9;padding:8px 10px;margin:7px 0;border-radius:4px;font:1.12rem "Cambria Math","Times New Roman",serif}.buttons{display:flex;flex-wrap:wrap;gap:8px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}section{padding:15px}header{padding:30px 18px}}
+@media print{body{background:#fff}header{background:#fff;color:#111;padding:0}header p{color:#111}nav,.btn{display:none}section{break-inside:avoid}.schematic{overflow:visible}svg{min-width:0}}
+</style></head><body>
+<header><div>МКF‑3V · Редакция A · Проектная конструкторская документация</div><h1>Ручной капучинатор: электрическая схема и расчёты</h1><p>Принципиальная схема (Э3), источник 2×AA, фильтрация помех, схема соединений и первичные расчёты двигателя. Предназначено для изучения и разработки прототипа.</p></header>
+<main><nav><a href="#e3">Схема Э3</a><a href="#math">Расчёты</a><a href="#bom">BOM</a><a href="#mount">Монтаж</a><a href="#test">Испытания</a><a href="#download">Данные</a></nav>
+<section><h2>Статус</h2><p class="alert"><strong>Инженерный концепт, не утверждённая заводская КД.</strong> Параметры двигателя, сопротивления батареек, габариты и ток нагрузки заданы для примера. Для производства нужны реальные даташиты, CAD/PCB и испытания.</p></section>
+<section id="e3"><h2>1. Электрическая принципиальная схема Э3</h2>
+<div class="schematic"><svg viewBox="0 0 950 395" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Две батарейки AA GB1, кнопка S1, предохранитель F1, двигатель M1. Конденсаторы C1, C2 и диод VD1 подключены параллельно двигателю.">
+<path d="M105 145 V65 H245 M301 65 H400 M480 65 H838 V176 M105 222 V335 H838 V260 M538 65 V199 M538 227 V335 M647 65 V199 M647 227 V335 M745 65 V204 M745 244 V335"/>
+<path d="M72 145 H138 M85 160 H125 M72 208 H138 M85 222 H125 M105 160 V208"/>
+<circle cx="245" cy="65" r="5"/><circle cx="301" cy="65" r="5"/><path d="M249 60 L297 35"/>
+<rect x="400" y="48" width="80" height="34" rx="2"/><path d="M508 199 H568 M508 227 H568 M617 199 H677 M617 227 H677 M724 204 H766 M745 204 L724 244 H766 Z"/>
+<circle cx="838" cy="218" r="42"/>
+<text x="30" y="278" font-weight="bold">GB1</text><text x="30" y="301">2×AA 3,0 В</text><text x="55" y="144">+</text><text x="55" y="245">−</text>
+<text x="267" y="19" font-weight="bold">S1</text><text x="237" y="109">Кнопка NO</text>
+<text x="420" y="33" font-weight="bold">F1</text><text x="417" y="71">PPTC</text><text x="409" y="109">0,50 А*</text>
+<text x="520" y="174" font-weight="bold">C1</text><text x="505" y="260">100 нФ</text>
+<text x="631" y="174" font-weight="bold">C2</text><text x="624" y="260">22 мкФ</text>
+<text x="730" y="175" font-weight="bold">VD1</text><text x="722" y="266">SS14</text><text x="703" y="287">K к +VM</text>
+<text x="829" y="225" font-weight="bold" font-size="24">M</text><text x="892" y="216" font-weight="bold">M1</text><text x="891" y="240">3 В DC</text>
+<text x="518" y="43">+VM</text><text x="514" y="370">GND</text></svg></div>
+<p><b>Цепь:</b> GB1(+) → S1 → F1 → +VM → M1(+) → M1(−) → GB1(−). C1, C2 и VD1 соединены параллельно выводам двигателя. Катод VD1 — на +VM, анод — на GND. С1 и С2 подавляют высокочастотные помехи.</p>
+<p class="muted">* Номинал PPTC F1 подлежит проверке по току запуска, блокировке и температуре. Схема отображает соединения, а не готовую печатную плату.</p></section>
+<section id="math"><h2>2. Электрические расчёты</h2>
+<div class="grid"><div class="pane"><h3>Питание</h3><div class="eq">U₀(нов.) = 2×1,50 = 3,00 В</div><div class="eq">U₀(исп.) = 2×1,31 = 2,62 В</div>
+<p>Принято внутреннее сопротивление одной AA: 0,18 Ом (новая), 0,40 Ом (использованная). Прочие сопротивления = 0,20 Ом.</p>
+<div class="eq">RΣ(нов.) = 2×0,18 + 0,20 = 0,56 Ом</div><div class="eq">RΣ(исп.) = 2×0,40 + 0,20 = 1,00 Ом</div></div>
+<div class="pane"><h3>Падение напряжения и мощность</h3><p>Для сравнения принят I = 0,35 А (не измерен).</p>
+<div class="eq">Uм(нов.) = 3 − 0,35×0,56 = 2,804 В</div><div class="eq">Uм(исп.) = 2,62 − 0,35×1,00 = 2,270 В</div>
+<div class="eq">Pнов = 2,804×0,35 ≈ 0,981 Вт</div><div class="eq">Pисп = 2,270×0,35 ≈ 0,795 Вт</div></div></div>
+<h3>Модель двигателя и скорость</h3><p>Допущения для M1: 3 В; n₀=12 000 об/мин; I₀=0,08 А; ток стопорения от идеального источника Iстоп≈1,2 А; Rм≈3/1,2=2,5 Ом. Оценка по противоЭДС: n ≈ n₀×(Uм−I×Rм)/(3,0−I₀×Rм).</p>
+<div class="grid"><div class="pane"><b>Новые батарейки: ≈ 8 267 об/мин</b><div class="eq">12000×(2,804−0,35×2,5)/2,8</div></div>
+<div class="pane"><b>Использованные: ≈ 5 979 об/мин</b><div class="eq">12000×(2,270−0,35×2,5)/2,8</div></div></div>
+<h3>Стопорение ротора</h3><div class="eq">Iстоп ≈ 3/(2,5+0,56) ≈ 0,98 А</div><div class="eq">Pобмотки ≈ 0,98²×2,5 ≈ 2,40 Вт</div><p>Реальные значения могут отличаться. Блокировка способна вызвать перегрев; защиту проверить испытанием.</p></section>
+<section id="bom"><h2>3. Перечень элементов</h2><div class="tw"><table><thead><tr><th>Ref</th><th>Компонент</th><th>Проектный номинал</th><th>Шт.</th><th>Монтаж</th></tr></thead><tbody>
+<tr><td>GB1</td><td>Держатель батареек</td><td>2×AA последовательно</td><td>1</td><td>корпус</td></tr>
+<tr><td>S1</td><td>Кнопка NO</td><td>≥2 А при 6 В DC (проверить)</td><td>1</td><td>корпус</td></tr>
+<tr><td>F1</td><td>PPTC</td><td>Ihold=0,50 А, Itrip≈1 А</td><td>1</td><td>1206*</td></tr>
+<tr><td>M1</td><td>Двигатель DC</td><td>3 В; n₀=12 000 об/мин (условно)</td><td>1</td><td>провода</td></tr>
+<tr><td>C1</td><td>Конденсатор X7R</td><td>100 нФ ±10 %, 25 В</td><td>1</td><td>0805</td></tr>
+<tr><td>C2</td><td>Конденсатор X5R</td><td>22 мкФ ±20 %, 10 В</td><td>1</td><td>1206*</td></tr>
+<tr><td>VD1</td><td>Диод Шоттки</td><td>SS14, 1 А / 40 В</td><td>1</td><td>SMA</td></tr>
+<tr><td>PCB1</td><td>Плата FR-4</td><td>28×12 мм, медь 35 мкм (эскиз)</td><td>1</td><td>PCB*</td></tr>
+<tr><td>W1–W5</td><td>Монтажные провода</td><td>0,2–0,35 мм²</td><td>5</td><td>пайка</td></tr></tbody></table></div><p class="muted">* Нужны реальные артикулы, footprint, контроль нагрева и DFM.</p></section>
+<section id="mount"><h2>4. Соединения для пайки</h2>
+<div class="tw"><table><thead><tr><th>Провод</th><th>Откуда</th><th>Куда</th><th>Цвет</th></tr></thead><tbody>
+<tr><td>W1</td><td>GB1(+)</td><td>S1/1</td><td>красный</td></tr><tr><td>W2</td><td>S1/2</td><td>PCB IN+</td><td>красный</td></tr><tr><td>W3</td><td>GB1(−)</td><td>PCB GND</td><td>чёрный</td></tr><tr><td>W4</td><td>PCB +VM</td><td>M1(+)</td><td>красный</td></tr><tr><td>W5</td><td>PCB GND</td><td>M1(−)</td><td>чёрный</td></tr></tbody></table></div>
+<p>Разместить C1, C2 и VD1 близко к мотору. Проверить полярность VD1 и надежность фиксации проводов. Не допускать соприкосновения жгута с валом. Плату отмыть и проверить на короткие замыкания.</p></section>
+<section id="test"><h2>5. Заводская верификация: что ещё необходимо</h2>
+<div class="tw"><table><thead><tr><th>Тест</th><th>Действие</th><th>Статус</th></tr></thead><tbody>
+<tr><td>Полярность, КЗ</td><td>Прозвонить без питания</td><td>не выполнено</td></tr>
+<tr><td>Напряжение M1</td><td>Измерить под нагрузкой в молоке</td><td>не выполнено</td></tr>
+<tr><td>Токи</td><td>Iпуск, Iх.х., Iмолоко, Iблокировки</td><td>не выполнено</td></tr>
+<tr><td>Нагрев и ресурсы</td><td>Температура M1; износ, безопасность</td><td>не выполнено</td></tr>
+<tr><td>Печатная плата</td><td>CAD, DRC, Gerber, Excellon, DFM</td><td>отсутствует</td></tr>
+<tr><td>Влагозащита, материалы</td><td>Проверить корпус и пищевой контакт</td><td>не выполнено</td></tr></tbody></table></div></section>
+<section id="download"><h2>6. Исходные материалы</h2><p>Веб-версия содержит схему, расчёты, перечень деталей и таблицу соединений. Исходный PDF A3 и полный ZIP остаются в предыдущем ответе ChatGPT, в GitHub загружены доступные текстовые данные.</p>
+<div class="buttons"><a class="btn" href="./source.md">Описание · MD</a><a class="btn" href="./data/bom.csv">BOM · CSV</a><a class="btn" href="./data/connections.csv">Сети · CSV</a><button class="btn" onclick="window.print()">Печать</button></div></section>
+<footer>MKF-3V · Концепт для прототипирования. Не использовать как утверждённый выпускной комплект.</footer></main></body></html>

@@ -1,0 +1,10 @@
+Ref;Description;Qty;Footprint/Assembly;Specification;Comments
+GB1;Battery holder 2xAA series;1;2 x AA mechanical;Battery manufacturer TBD;Unit U_oc 3.0 V
+S1;Momentary switch, normally open;1;Through wire / chassis;>=2A @6VDC;Actual switch footprint TBD
+F1;PPTC resettable fuse;1;1206;Ihold 0.50A, Itrip ~1A, Vmax >=6V;Illustrative, validate stall/ambient
+M1;Brushed DC motor;1;Wired motor;"3V, no-load 12000rpm; I0 0.08A; Istall 1.2A assumptions";Actual model and dimensions TBD
+C1;Ceramic capacitor;1;0805;100nF +/-10%, X7R 25V;Across motor, near motor
+C2;Ceramic capacitor;1;1206;22uF +/-20%, X5R 10V;Across motor, effective C DC-bias to check
+VD1;Schottky rectifier;1;SMA;SS14, 1A 40V;Cathode VM+, anode GND
+PCB1;Printed circuit board;1;28x12mm placeholder;FR4 1.0mm 1oz Cu;Dimensions illustrative, no Gerber
+W1-W5;Hookup wire;5;Solder joints;0.2-0.35mm2 insulated;Define actual lengths after case design
