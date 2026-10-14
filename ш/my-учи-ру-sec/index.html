@@ -10,23 +10,58 @@
 </style></head>
 <body><main>
 <header><div><h1>Учи.ру — учётные данные</h1><p class="muted">Локальная таблица для поиска и копирования · <a href="https://uchi.ru/" rel="noopener noreferrer" target="_blank">Открыть Учи.ру</a></p></div><p id="stat" class="muted">Данные не загружены</p></header>
-<section class="panel"><h2>Загрузить личный список</h2><p>Выберите файл <strong>uchi_students_PRIVATE.json</strong>, полученный отдельно. Все данные читаются только в браузере и не передаются на GitHub, Учи.ру или сторонний сервер.</p><label class="picker" for="file">Выбрать файл JSON</label> <input id="file" type="file" accept=".json,application/json"> <span id="message" class="muted">Файл ещё не выбран</span><p class="small">Эта публичная страница не содержит имён, логинов и паролей. Не публикуйте личный JSON-файл.</p></section>
+<section class="panel"><h2>Загрузить личный список</h2><p>Выберите файл <strong>uchi_students_PRIVATE.json</strong>, полученный отдельно. Все данные читаются только в браузере и не передаются на GitHub, Учи.ру или сторонний сервер.</p><label class="picker" for="file">Выбрать файл JSON</label> <input id="file" type="file" accept=".json,application/json"> <span id="message" class="muted">Файл ещё не выбран</span><p class="small">Эта публичная страница не содержит имён, логинов и паролей. Не публикуйте личный JSON-файл.</p>
+<p class="small"><strong>Важно:</strong> кнопка «Сохранить» записывает имена, логины и пароли в LocalStorage этого браузера <strong>без шифрования</strong>. Они доступны другим страницам этого же домена. Используйте только личное устройство, не общий школьный компьютер.</p></section>
 <section id="viewer" hidden><div class="tools">
 <input type="search" id="search" placeholder="Поиск по фамилии, имени, логину или паролю" autocomplete="off" aria-label="Поиск учеников">
-<button id="show">Показать пароли</button><button id="all">Копировать всю таблицу</button><button id="close">Закрыть список</button><span class="count" id="count"></span></div>
+<button id="show">Показать пароли</button><button id="all">Копировать всю таблицу</button><button id="save">Сохранить на устройстве</button><button id="delete">Удалить сохранённое</button><button id="close">Закрыть просмотр</button><span class="count" id="count"></span></div>
 <div class="wrap"><table><thead><tr><th>№</th><th>Ученик</th><th>Логин</th><th>Пароль</th><th>Копировать</th></tr></thead><tbody id="rows"></tbody></table></div>
-<p class="small">В колонке «Копировать» доступны отдельный логин, пароль и оба значения. Повторяющиеся логины воспроизведены по исходному PDF. Данные не сохраняются при закрытии страницы.</p>
+<p class="small">В колонке «Копировать» доступны отдельный логин, пароль и оба значения. Повторяющиеся логины воспроизведены по исходному PDF. После нажатия «Сохранить» список автоматически восстановится при повторном открытии сайта в этом браузере. «Закрыть просмотр» скрывает таблицу, но не удаляет сохранённое.</p>
 </section><div id="toast" hidden role="status" aria-live="polite"></div>
 </main><script>
 "use strict";
 const $=id=>document.getElementById(id);let users=[],reveal=false;
+const STORAGE_KEY='uchi-ru-student-credentials-v1';
+function validatedStudents(data){
+ if(!data||!Array.isArray(data.students)||!data.students.length||data.students.some(v=>!v||typeof v.name!=='string'||typeof v.login!=='string'||typeof v.password!=='string'))throw Error('Неверная структура JSON');
+ return data.students.map(v=>({name:v.name,login:v.login,password:v.password}));
+}
+function hasSaved(){try{return localStorage.getItem(STORAGE_KEY)!==null}catch(e){return false}}
+function setStudents(data,source){
+ users=validatedStudents(data);reveal=false;
+ $('viewer').hidden=false;$('stat').textContent=users.length+' учеников';
+ $('message').textContent=source+': '+users.length+' учеников';$('search').value='';$('show').textContent='Показать пароли';
+ $('delete').disabled=!hasSaved();
+ render();
+}
 function cell(v,cls){const e=document.createElement('td');e.textContent=v;if(cls)e.className=cls;return e}
 function action(label,content){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>copy(content,label));return b}
 async function copy(value,label){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value)}else{const ta=document.createElement('textarea');ta.value=value;document.body.appendChild(ta);ta.select();if(!document.execCommand('copy'))throw Error('Copy');ta.remove()}$('toast').textContent='Скопировано: '+label;$('toast').hidden=false;setTimeout(()=>$('toast').hidden=true,1300)}catch(e){alert('Не удалось скопировать. Выделите значение вручную.')}}
 function render(){const q=$('search').value.trim().toLocaleLowerCase('ru');const result=users.filter(x=>(x.name+' '+x.login+' '+x.password).toLocaleLowerCase('ru').includes(q));const body=$('rows');body.replaceChildren();for(const [i,v] of result.entries()){const tr=document.createElement('tr');const actions=cell('','actions');actions.append(action('Логин',v.login),action('Пароль',v.password),action('Оба',v.login+'\t'+v.password));tr.append(cell(String(i+1)),cell(v.name,'name'),cell(v.login,'mono'),cell(reveal?v.password:'••••••••','mono'),actions);body.append(tr)}$('count').textContent='Показано '+result.length+' из '+users.length}
-$('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.students)||d.students.some(v=>!v||typeof v.name!=='string'||typeof v.login!=='string'||typeof v.password!=='string'))throw Error('Неверная структура JSON');users=d.students.map(v=>({name:v.name,login:v.login,password:v.password}));$('viewer').hidden=false;$('message').textContent='Загружено '+users.length;$('stat').textContent=users.length+' учеников';$('search').value='';reveal=false;$('show').textContent='Показать пароли';render()}catch(err){$('message').textContent='Ошибка: '+err.message}});
+$('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{setStudents(JSON.parse(await f.text()),'Импортировано');$('message').textContent+=' — нажмите «Сохранить на устройстве», чтобы запомнить изменения.'}catch(err){$('message').textContent='Ошибка: '+err.message}});
 $('search').addEventListener('input',render);
 $('show').addEventListener('click',()=>{reveal=!reveal;$('show').textContent=reveal?'Скрыть пароли':'Показать пароли';render()});
 $('all').addEventListener('click',()=>copy(['Ученик\tЛогин\tПароль',...users.map(v=>v.name+'\t'+v.login+'\t'+v.password)].join('\n'),'вся таблица'));
-$('close').addEventListener('click',()=>{users=[];$('viewer').hidden=true;$('file').value='';$('stat').textContent='Данные не загружены';$('message').textContent='Файл ещё не выбран'});
+$('save').addEventListener('click',()=>{
+ if(!users.length)return;
+ try{
+  localStorage.setItem(STORAGE_KEY,JSON.stringify({students:users,savedAt:new Date().toISOString()}));
+  $('message').textContent='Сохранено в этом браузере: '+users.length+' учеников';
+  $('delete').disabled=false;
+ }catch(err){$('message').textContent='Не удалось сохранить: браузер блокирует LocalStorage или нет свободного места.'}
+});
+$('delete').addEventListener('click',()=>{
+ try{
+  localStorage.removeItem(STORAGE_KEY);
+  users=[];reveal=false;$('viewer').hidden=true;$('file').value='';
+  $('stat').textContent='Данные не загружены';
+  $('message').textContent='Сохранённый список удалён из этого браузера.';
+ }catch(err){$('message').textContent='Не удалось удалить данные из LocalStorage.'}
+});
+$('close').addEventListener('click',()=>{users=[];reveal=false;$('viewer').hidden=true;$('file').value='';$('stat').textContent='Просмотр закрыт';$('message').textContent=hasSaved()?'Список сохранён. Обновите страницу для восстановления.':'Просмотр закрыт. Вы можете импортировать JSON снова.'});
+try{
+ const stored=localStorage.getItem(STORAGE_KEY);
+ if(stored){setStudents(JSON.parse(stored),'Восстановлено из браузера')}
+}catch(err){$('message').textContent='Не удалось восстановить сохранённый список. Импортируйте JSON заново или очистите данные сайта в настройках браузера.'}
+
 </script></body></html>
