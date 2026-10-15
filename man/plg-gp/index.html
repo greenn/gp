@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#fff4e4">
+<meta name="theme-color" content="#e5e7e6">
 <meta name="description" content="Интерактивная справка GP: VNS, Google Drive, ZIP истории чата и публикации GitHub Pages. Примеры команд, поиск и конструктор.">
 <title>GP — руководство по командам</title>
 <link rel="stylesheet" href="./style.css">
@@ -36,6 +36,18 @@
 </aside>
 <div class="main">
 <div class="mobile-top"><button id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>gp<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.2.3</span></div>
+<div class="guide-search" role="search" aria-label="Поиск по всей справке">
+ <div class="guide-search-inner">
+  <label for="guide-search-input" class="guide-search-label">Поиск по справке</label>
+  <div class="guide-search-control">
+   <span aria-hidden="true" class="guide-search-icon">⌕</span>
+   <input id="guide-search-input" type="search" autocomplete="off" aria-controls="content" aria-describedby="guide-search-status" placeholder="Например: io, vns, drive-log...">
+   <button type="button" id="guide-search-clear" class="guide-search-clear" hidden>Сбросить ×</button>
+  </div>
+  <span id="guide-search-status" class="guide-search-status" role="status" aria-live="polite">Показаны все разделы</span>
+ </div>
+</div>
+<div id="guide-search-empty" class="guide-search-empty" hidden><strong>Ничего не найдено.</strong><p>Попробуйте io, vns, drive или другой запрос.</p><button id="guide-search-reset" type="button">Показать всё</button></div>
 <main class="doc" id="content">
 <section id="overview" class="section">
  <p class="overline">YOUR HOME FOR RESULTS · СПРАВКА GP</p>

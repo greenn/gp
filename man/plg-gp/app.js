@@ -9,6 +9,65 @@ const closeNav=()=>{sidebar.classList.remove("open");scrim.classList.remove("sho
 toggle?.addEventListener("click",()=>{const open=sidebar.classList.toggle("open");scrim.classList.toggle("show",open);toggle.setAttribute("aria-expanded",String(open))});
 scrim?.addEventListener("click",closeNav);
 doc.querySelectorAll(".nav-item").forEach(link=>link.addEventListener("click",closeNav));
+
+const guideInput=doc.getElementById("guide-search-input");
+const guideStatus=doc.getElementById("guide-search-status");
+const guideClear=doc.getElementById("guide-search-clear");
+const guideReset=doc.getElementById("guide-search-reset");
+const guideEmpty=doc.getElementById("guide-search-empty");
+const guideSections=[...doc.querySelectorAll("main.doc > section[id]")];
+const guideLinks=[...doc.querySelectorAll('.sidebar a[href^="#"]')];
+const guideGroups=[...doc.querySelectorAll(".sidebar .side-group")];
+const guideAliases={
+ overview:"начало home overview главная обзор",
+ vns:"vns collect фото изображения картинки генерации промпты",
+ drive:"drive google облако папки cur cur+ сохранение",
+ archive:"drive-log drive-all drive-txt log журнал история архив zip экспорт переписка вложения",
+ io:"io github github-pages публикация сайт страница web",
+ commands:"commands команды справочник каталог",
+ builder:"builder конструктор генератор",
+ faq:"faq вопросы ответы ограничения помощь"
+};
+function normalQuery(value){return String(value).toLocaleLowerCase("ru").replace(/ё/g,"е").trim().replace(/\s+/g," ")}
+function exactGuideTopic(value){
+ const q=normalQuery(value).replace(/^@gp\s+/,"");
+ if(/^(drive-(log|txt|all))([\s-]|$)/.test(q) || /^(лог|архив|журнал|история|zip)(\s|$)/.test(q))return "archive";
+ if(/^(io|github|публикац|сайт)(\s|$)/.test(q))return "io";
+ if(/^(vns|collect|фото|изображения|картинки)(\s|$)/.test(q))return "vns";
+ if(/^(drive|google|облако)(\s|$)/.test(q))return "drive";
+ if(/^(commands|команды|справочник)(\s|$)/.test(q))return "commands";
+ if(/^(builder|конструктор)(\s|$)/.test(q))return "builder";
+ if(/^(faq|вопросы)(\s|$)/.test(q))return "faq";
+ if(/^(overview|начало|главная)(\s|$)/.test(q))return "overview";
+ return null;
+}
+function applyGuideSearch(shouldScroll){
+ if(!guideInput)return;
+ const q=normalQuery(guideInput.value),topic=q?exactGuideTopic(q):null;
+ const matched=guideSections.filter(section=>!q||(topic?section.id===topic:normalQuery((guideAliases[section.id]||"")+" "+section.textContent).includes(q)));
+ const visible=new Set(matched.map(section=>section.id));
+ for(const section of guideSections)section.hidden=!visible.has(section.id);
+ for(const link of guideLinks){
+  const id=decodeURIComponent(link.getAttribute("href").slice(1));
+  link.hidden=Boolean(q)&&!visible.has(id);
+  if(q)link.classList.toggle("active",id===(matched[0]?.id||""));
+ }
+ for(const group of guideGroups)group.hidden=Boolean(q)&&![...group.querySelectorAll('a[href^="#"]')].some(link=>!link.hidden);
+ doc.body.classList.toggle("guide-filtered",Boolean(q));
+ guideClear.hidden=!q;
+ guideEmpty.hidden=matched.length>0;
+ if(guideStatus)guideStatus.textContent=!q?"Показаны все разделы":matched.length===0?"Ничего не найдено":matched.length===1?"Показан 1 раздел":"Разделов: "+matched.length;
+ if(shouldScroll){
+  const target=matched[0]||guideEmpty;
+  window.requestAnimationFrame(()=>target?.scrollIntoView({block:"start",behavior:"instant"}));
+ }
+}
+guideInput?.addEventListener("input",()=>applyGuideSearch(true));
+function clearGuide(){if(!guideInput)return;guideInput.value="";applyGuideSearch(true);guideInput.focus()}
+guideClear?.addEventListener("click",clearGuide);
+guideReset?.addEventListener("click",clearGuide);
+applyGuideSearch(false);
+
 const navLinks=[...doc.querySelectorAll('.nav-item[href^="#"]')];
 if("IntersectionObserver" in window){
 const io=new IntersectionObserver(entries=>{
@@ -62,9 +121,9 @@ for(const f of filters)f.addEventListener("click",()=>{activeFilter=f.dataset.fi
 render();
 doc.addEventListener("keydown",e=>{
  const k=e.key.toLowerCase();
- if((e.ctrlKey||e.metaKey)&&k==="k"){e.preventDefault();search?.focus();search?.scrollIntoView({behavior:"smooth",block:"center"})}
- if(e.key==="/" && !/INPUT|TEXTAREA|SELECT/.test(doc.activeElement?.tagName||"")){e.preventDefault();search?.focus();search?.scrollIntoView({behavior:"smooth",block:"center"})}
- if(e.key==="Escape"){if(sidebar.classList.contains("open"))closeNav();else if(doc.activeElement===search){search.value="";render();search.blur()}}
+ if((e.ctrlKey||e.metaKey)&&k==="k"){e.preventDefault();guideInput?.focus();guideInput?.scrollIntoView({behavior:"smooth",block:"center"})}
+ if(e.key==="/" && !/INPUT|TEXTAREA|SELECT/.test(doc.activeElement?.tagName||"")){e.preventDefault();guideInput?.focus();guideInput?.scrollIntoView({behavior:"smooth",block:"center"})}
+ if(e.key==="Escape"){if(sidebar.classList.contains("open"))closeNav();else if(doc.activeElement===guideInput){clearGuide();guideInput.blur()}else if(doc.activeElement===search){search.value="";render();search.blur()}}
 });
 const select=doc.getElementById("build-command");
 const path=doc.getElementById("build-path");
