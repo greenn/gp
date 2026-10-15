@@ -27,17 +27,19 @@ const guideAliases={
  vns:"vns collect фото изображения картинки генерации промпты",
  drive:"drive google облако папки cur cur+ сохранение",
  archive:"drive-log drive-all drive-txt log журнал история архив zip экспорт переписка вложения",
+ doc:"doc docs google документы вкладки pdf docx deep research file all",
  io:"io github github-pages публикация сайт страница web",
  commands:"commands команды справочник каталог",
  builder:"builder конструктор генератор",
  faq:"faq вопросы ответы ограничения помощь"
 };
-const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",io:"IO",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
+const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",doc:"Google Docs",io:"IO",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
 let pageMode="landing";
 function normalQuery(value){return String(value).toLocaleLowerCase("ru").replace(/ё/g,"е").trim().replace(/\s+/g," ")}
 function exactGuideTopic(value){
  const q=normalQuery(value).replace(/^@gp\s+/,"");
  if(/^(drive-(log|txt|all))([\s-]|$)/.test(q) || /^(лог|архив|журнал|история|zip)(\s|$)/.test(q))return "archive";
+ if(/^(doc|docs|вкладк|документ)(\s|$)/.test(q))return "doc";
  if(/^(io|github|публикац|сайт)(\s|$)/.test(q))return "io";
  if(/^(vns|collect|фото|изображения|картинки)(\s|$)/.test(q))return "vns";
  if(/^(drive|google|облако)(\s|$)/.test(q))return "drive";
@@ -181,6 +183,11 @@ const date=doc.getElementById("build-date");
 const output=doc.getElementById("built-command");
 const copyBuild=doc.getElementById("copy-built");
 const builderHint=doc.getElementById("builder-hint");
+const docTitle=doc.getElementById("build-tab-title");
+const docMode=doc.getElementById("build-doc-mode");
+const docTitleWrap=doc.getElementById("doc-builder-title-wrap");
+const docModeWrap=doc.getElementById("doc-builder-mode-wrap");
+const dateWrap=doc.getElementById("build-date-wrap");
 const labels={
  "drive":"Сохранение результатов задачи в Drive",
  "drive-all":"Все доступные файлы",
@@ -193,6 +200,7 @@ const labels={
  "drive-txt-my":"Только тексты пользователя",
  "vns-drive":"Фото, MD, JSON, ZIP и Google Drive",
  "vns-next-drive":"Только новые генерации + Drive",
+ "doc-tab":"Добавить новую вкладку в существующий Google Документ",
  "io":"Публикация страницы на GitHub Pages",
  "io-ds":"Интерактивная страница исследования"
 };
@@ -201,22 +209,30 @@ function build(){
  const kind=select.value;
  const isVns=kind.startsWith("vns-");
  const isIo=kind.startsWith("io");
- const supportDate=!isVns&&!isIo;
+ const isDoc=kind==="doc-tab";
+ const supportDate=!isVns&&!isIo&&!isDoc;
+ if(docTitleWrap)docTitleWrap.hidden=!isDoc;
+ if(docModeWrap)docModeWrap.hidden=!isDoc;
+ if(dateWrap)dateWrap.hidden=isDoc;
  date.disabled=!supportDate;
  date.closest(".last")?.classList.toggle("disabled",!supportDate);
- path.placeholder=isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
+ path.placeholder=isDoc?"@nws или ссылка Google Docs":isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
  path.disabled=isIo;
  const sub=path.value.trim().replace(/^\/+|\/+$/g,"");
  let command="";
- if(isIo)command=kind==="io-ds"?"@gp io ds":"@gp io";
+ if(isDoc){
+  const target=sub||"@nws";
+  const title=(docTitle?.value||"").trim().replace(/"/g,"");
+  command="@gp doc tab "+target+(title?' "'+title+'"':"")+(docMode?.value&&docMode.value!=="current"?" "+docMode.value:"");
+ }else if(isIo)command=kind==="io-ds"?"@gp io ds":"@gp io";
  else if(isVns)command=kind==="vns-next-drive"?"@gp vns next drive":"@gp vns drive";
  else command="@gp "+kind;
- if(!isIo&&sub)command+=" "+sub;
+ if(!isIo&&!isDoc&&sub)command+=" "+sub;
  if(supportDate&&date.value!=="none")command+=" "+date.value;
  output.textContent=command;
  copyBuild.setAttribute("data-copy",command);
  builderHint.textContent=labels[kind]||"";
 }
-for(const el of [select,path,date])el?.addEventListener(el===path?"input":"change",build);
+for(const el of [select,path,date,docTitle,docMode])el?.addEventListener(el===path||el===docTitle?"input":"change",build);
 build();
 })();

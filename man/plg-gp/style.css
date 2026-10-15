@@ -189,3 +189,11 @@ body.guide-filtered .guide-search-empty{scroll-margin-top:145px}
   .landing-menu-item:last-child{border-bottom:0}
   .landing-menu-item strong{font-size:23px}
 }
+
+/* GP 0.2.4 — fourth landing tile + Google Docs command builder. */
+.landing-menu{grid-template-columns:repeat(4,minmax(0,1fr))}
+.landing-menu-item strong{font-size:23px}
+.doc-builder-extra[hidden],#build-date-wrap[hidden]{display:none!important}
+.builder-grid:has(.doc-builder-extra:not([hidden])){grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:800px){.landing-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.landing-menu-item{border-bottom:1px solid var(--line)}.landing-menu-item:nth-child(2){border-right:0}}
+@media(max-width:540px){.landing-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.landing-menu-item{border-bottom:1px solid var(--line)}.landing-menu-item:nth-child(2){border-right:0}.builder-grid:has(.doc-builder-extra:not([hidden])){grid-template-columns:1fr}}
