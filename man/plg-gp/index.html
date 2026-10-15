@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff4e4">
+<meta name="description" content="Интерактивная справка GP: VNS, Google Drive, ZIP истории чата и публикации GitHub Pages. Примеры команд, поиск и конструктор.">
+<title>GP — руководство по командам</title>
+<link rel="stylesheet" href="./style.css">
+<script src="./app.js" defer></script>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<div class="mobile-scrim" id="scrim"></div>
+<div class="app">
+<aside class="sidebar" id="sidebar" aria-label="Навигация по руководству">
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="GP — начало">gp<span class="brand-dot">.</span></a><span class="brand-mark" title="Версия 0.2.3">↗</span></div>
+ <a class="install" href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть GP в ChatGPT <span aria-hidden="true">↗</span></a>
+ <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки"><a class="nav-item active" href="#overview"><span class="ico" aria-hidden="true">⌂</span>Начало<span class="num">01</span></a>
+<a class="nav-item" href="#vns"><span class="ico" aria-hidden="true">▧</span>Изображения · VNS<span class="num">02</span></a>
+<a class="nav-item" href="#drive"><span class="ico" aria-hidden="true">↥</span>Google Drive<span class="num">03</span></a>
+<a class="nav-item" href="#archive"><span class="ico" aria-hidden="true">≡</span>История и архив<span class="num">04</span></a>
+<a class="nav-item" href="#io"><span class="ico" aria-hidden="true">↗</span>GitHub Pages · IO<span class="num">05</span></a>
+<a class="nav-item" href="#commands"><span class="ico" aria-hidden="true">⌘</span>Все команды<span class="num">06</span></a>
+<a class="nav-item" href="#builder"><span class="ico" aria-hidden="true">⚙</span>Конструктор<span class="num">07</span></a>
+<a class="nav-item" href="#faq"><span class="ico" aria-hidden="true">?</span>Вопросы и ответы<span class="num">08</span></a></nav></div>
+ <div class="side-divider"></div>
+ <div class="side-group"><h3>Модули</h3>
+   <a class="folder selected" href="#vns"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Сбор изображений</a>
+   <a class="folder" href="#drive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Файлы и облако</a>
+   <a class="folder" href="#archive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Архив переписки</a>
+   <a class="folder" href="#io"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Публикации</a>
+ </div>
+ <div class="side-divider"></div>
+ <div class="side-foot"><strong>GP / Справочник</strong><div>Документация возможностей версии 0.2.3<br>Обновлено 15 октября 2026</div></div>
+</aside>
+<div class="main">
+<div class="mobile-top"><button id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>gp<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.2.3</span></div>
+<main class="doc" id="content">
+<section id="overview" class="section">
+ <p class="overline">YOUR HOME FOR RESULTS · СПРАВКА GP</p>
+ <h1 class="hero-title">Все результаты —<br>в одном движении.</h1>
+ <p class="hero-lead">GP помогает <em>собирать изображения</em>, сохранять материалы в Google Drive, архивировать переписку и публиковать интерактивные страницы на GitHub Pages.</p>
+ <p class="hero-note">Это набор команд внутри ChatGPT. Вы даёте короткую инструкцию через <span class="inline-code">@gp</span>, а GP выбирает нужный рабочий процесс и доступные инструменты. Никаких серверов, сложных настроек или отдельной панели управления.</p>
+ <div class="hero-actions"><a href="#commands" class="action-dark">Смотреть все команды ↓</a><a href="#builder" class="action-light">Собрать команду →</a></div>
+ <div class="statline"><div class="stat"><strong>VNS</strong><span>Изображения и промпты</span></div><div class="stat"><strong>Drive</strong><span>Файлы и журнал чата</span></div><div class="stat"><strong>IO</strong><span>Публичные веб-страницы</span></div></div>
+ <div class="note"><span aria-hidden="true">✳</span><div><strong>Как начать.</strong> Выберите команду ниже, нажмите «Копировать» и вставьте её в беседу с подключённым GP. Примеры не запускают действия на этой справочной странице.</div></div>
+</section>
+<section class="section" id="vns">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">01 / визуальные результаты</p>
+ <h2 class="section-title">VNS. Галерея с памятью о сборках.</h2>
+ <p class="section-intro">Из результатов генерации — в упорядоченный архив: каждая доступная картинка сопровождается подробным промптом и структурированным описанием.</p>
+ <div class="cmd-grid">
+ <div class="cmd-card"><div class="top"><code>@gp vns</code><button class="copy" data-copy="@gp vns" aria-label="Скопировать @gp vns">Копировать</button></div><p>Полная сборка всех доступных изображений, созданных GPT в текущем чате.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp vns next</code><button class="copy" data-copy="@gp vns next" aria-label="Скопировать @gp vns next">Копировать</button></div><p>Только изображения, которых не было в предыдущих подтверждённых сборках.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp vns drive</code><button class="copy" data-copy="@gp vns drive" aria-label="Скопировать @gp vns drive">Копировать</button></div><p>ZIP в чате и загрузка набора в Google Drive: gp/vns/MMDD-N.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp vns next drive</code><button class="copy" data-copy="@gp vns next drive" aria-label="Скопировать @gp vns next drive">Копировать</button></div><p>Загрузить только новые изображения; не повторять успешно собранные.</p></div>
+ </div>
+ <h3>Что попадает в комплект</h3>
+ <div class="file-tree"><strong>photo_prompt_pack/</strong><br>├── photo_01.png<br>├── photo_01.md <span>← промпт для новой модели</span><br>├── photo_01.json <span>← сцена, теги, камера</span><br>├── _index.json<br>├── _collection_state.json<br>└── README.md</div>
+ <p class="text">MD-промпт описывает позу, одежду, освещение, камеру и окружение так, чтобы сцену можно было повторить с внешностью человека из нового референса. JSON отражает видимый результат изображения, а не предположения по исходному запросу.</p>
+ <div class="note"><span aria-hidden="true">✓</span><div>При <strong>next</strong> учёт идёт по подтверждённым исходным ID и контрольным суммам. Если старый архив недоступен, GP не должен объявлять повторы исключёнными без проверки.</div></div>
+</section>
+<section class="section" id="drive">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">02 / сохранение</p>
+ <h2 class="section-title">Drive. Нужное — в нужную папку.</h2>
+ <p class="section-intro">Сохранение результата текущей задачи на подключённый Google Drive. Не путать с командой VNS: обычный <span class="inline-code">drive</span> не собирает историю чата или все изображения автоматически.</p>
+ <div class="cmd-grid">
+ <div class="cmd-card"><div class="top"><code>@gp drive</code><button class="copy" data-copy="@gp drive" aria-label="Скопировать @gp drive">Копировать</button></div><p>Папка с текущей датой: gp/MMDD.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive s/2025</code><button class="copy" data-copy="@gp drive s/2025" aria-label="Скопировать @gp drive s/2025">Копировать</button></div><p>Точный путь: gp/s/2025.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive vns cur</code><button class="copy" data-copy="@gp drive vns cur" aria-label="Скопировать @gp drive vns cur">Копировать</button></div><p>Подпапка с датой: gp/vns/MMDD.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive vns cur+</code><button class="copy" data-copy="@gp drive vns cur+" aria-label="Скопировать @gp drive vns cur+">Копировать</button></div><p>Первый свободный номер: gp/vns/MMDD-1, -2…</p></div>
+ </div>
+ <h3>Как выбрать папку</h3>
+ <div class="diagram"><span>gp/</span><span class="arrow">→</span><span>ваш подпуть</span><span class="arrow">→</span><span>cur или cur+</span></div>
+ <p class="text"><strong>cur</strong> использует папку с датой формата <span class="inline-code">MMDD</span> повторно. <strong>cur+</strong> создаёт новую папку <span class="inline-code">MMDD-N</span>, где N — первый незанятый номер. Существующие файлы не должны перезаписываться без явной команды.</p>
+ <div class="terminal"><pre><code>@gp drive vns cur+</code></pre><button class="copy" data-copy="@gp drive vns cur+">Копировать</button></div>
+</section>
+<section class="section" id="archive">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">03 / история и вложения</p>
+ <h2 class="section-title">Журнал чата. Не терять контекст.</h2>
+ <p class="section-intro">Три семейства команд на разную глубину экспорта: файлы, переписка с событиями или только текст. Для журнала формируется скачиваемый ZIP.</p>
+ <h3>Все доступные файлы</h3>
+ <div class="cmd-grid">
+ <div class="cmd-card"><div class="top"><code>@gp drive-all</code><button class="copy" data-copy="@gp drive-all" aria-label="Скопировать @gp drive-all">Копировать</button></div><p>Доступные файлы пользователя и GPT.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive-all-gpt</code><button class="copy" data-copy="@gp drive-all-gpt" aria-label="Скопировать @gp drive-all-gpt">Копировать</button></div><p>Только файлы, созданные или прикреплённые GPT.</p></div>
+ </div>
+ <h3>Журнал с ZIP</h3>
+ <div class="cmd-grid">
+ <div class="cmd-card"><div class="top"><code>@gp drive-log</code><button class="copy" data-copy="@gp drive-log" aria-label="Скопировать @gp drive-log">Копировать</button></div><p>Тексты, файлы, видимые логи, ошибки и предупреждения обеих сторон.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive-log-gpt</code><button class="copy" data-copy="@gp drive-log-gpt" aria-label="Скопировать @gp drive-log-gpt">Копировать</button></div><p>Доступные сообщения и результаты GPT.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive-log-my</code><button class="copy" data-copy="@gp drive-log-my" aria-label="Скопировать @gp drive-log-my">Копировать</button></div><p>Ваши сообщения и доступные вложения.</p></div>
+ </div>
+ <div class="file-tree"><strong>drive-log.zip</strong><br>├── conversation.md<br>├── messages/<br>├── events/<br>├── files/<br>├── _index.json · MANIFEST.json<br>├── checksums.sha256<br>├── MISSING.md<br>└── README.md</div>
+ <p class="text">Текстовые сообщения и файлы имеют последовательные имена <span class="inline-code">N-DDMM-краткая-тема</span>. Внутри текстовых файлов — доступный полный текст, не краткое резюме. После создания ZIP команда дополнительно пытается сохранить его в Drive.</p>
+ <h3>Только текст</h3>
+ <div class="cmd-grid">
+ <div class="cmd-card"><div class="top"><code>@gp drive-txt</code><button class="copy" data-copy="@gp drive-txt" aria-label="Скопировать @gp drive-txt">Копировать</button></div><p>Тексты ответов GPT, без файлов.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive-txt-all</code><button class="copy" data-copy="@gp drive-txt-all" aria-label="Скопировать @gp drive-txt-all">Копировать</button></div><p>Тексты обеих сторон, без файлов.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp drive-txt-my</code><button class="copy" data-copy="@gp drive-txt-my" aria-label="Скопировать @gp drive-txt-my">Копировать</button></div><p>Только ваши текстовые сообщения.</p></div>
+ </div>
+ <div class="note warn"><span aria-hidden="true">!</span><div><strong>Граница возможностей.</strong> У GP нет скрытого API всей переписки. Экспортируется только то, к чему действительно есть доступ: сообщения, видимые записи работы и байты файлов. Скрытые рассуждения модели, внутренние системные журналы и недоступные изображения в архив не попадут. Пропуски перечисляются в <span class="inline-code">MISSING.md</span>.</div></div>
+</section>
+<section class="section" id="io">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">04 / публикация</p>
+ <h2 class="section-title">IO. Из ответа — в работающую страницу.</h2>
+ <p class="section-intro">GP создаёт статическую HTML-страницу из текущего результата, публикует её в публичном репозитории <span class="inline-code">greenn/gp</span> и возвращает адрес GitHub Pages.</p>
+ <div class="cmd-grid">
+ <div class="cmd-card"><div class="top"><code>@gp io</code><button class="copy" data-copy="@gp io" aria-label="Скопировать @gp io">Копировать</button></div><p>Публикация текущего материала в s/&lt;english-kebab-slug&gt;/.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp io ds</code><button class="copy" data-copy="@gp io ds" aria-label="Скопировать @gp io ds">Копировать</button></div><p>Интерактивная HTML-версия исследования в ds/&lt;slug&gt;/.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp io ds ?url</code><button class="copy" data-copy="@gp io ds ?url" aria-label="Скопировать @gp io ds ?url">Копировать</button></div><p>То же: ?url необязателен, ссылка выдаётся всегда.</p></div>
+ </div>
+ <h3>Как выглядит путь</h3>
+ <div class="terminal"><pre><code>https://greenn.github.io/gp/ds/ai-tools-for-teachers/</code></pre><button class="copy" data-copy="https://greenn.github.io/gp/ds/ai-tools-for-teachers/">Копировать</button></div>
+ <p class="text">Папка получает короткое понятное английское название. Внутри — <span class="inline-code">index.html</span> и доступные исходные материалы. Запись также появляется в главном каталоге сайта. Для исследований могут быть добавлены поиск, оглавление и фильтры, если они полезны по содержанию.</p>
+ <div class="note warn"><span aria-hidden="true">↗</span><div>Публикация через <strong>io</strong> общедоступна. Не переносите туда пароли, личные данные или закрытые файлы. <strong>Drive</strong> и <strong>IO</strong> — разные места сохранения.</div></div>
+</section>
+<section class="section" id="commands">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">05 / справочник</p>
+ <h2 class="section-title">Команды без поиска по чату.</h2>
+ <p class="section-intro">Фильтруйте по сценарию или начните печатать. Кнопка справа копирует выбранную команду целиком.</p>
+ <div class="search-bar"><span class="glass" aria-hidden="true">⌕</span><input type="search" id="command-search" aria-label="Поиск по командам" placeholder="Найти команду или действие…"><span class="keycap">Ctrl K</span></div>
+ <div class="filterbar" aria-label="Фильтр команд">
+  <button class="filter active" data-filter="all" aria-pressed="true">Все</button>
+  <button class="filter" data-filter="vns" aria-pressed="false">VNS</button>
+  <button class="filter" data-filter="drive" aria-pressed="false">Drive</button>
+  <button class="filter" data-filter="archive" aria-pressed="false">Журнал</button>
+  <button class="filter" data-filter="io" aria-pressed="false">IO</button>
+  <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
+ </div>
+ <p class="search-status" id="search-count" aria-live="polite">Найдено команд: 22 из 22</p>
+ <div class="command-list" id="command-list"><div class="command-row" data-group="vns" data-keywords="фотографии рисунки нейросеть"><code class="syntax">@gp vns</code><span class="desc">Все изображения ассистента + MD, JSON и ZIP</span><button class="copy" data-copy="@gp vns" aria-label="Скопировать @gp vns">Копировать</button></div>
+<div class="command-row" data-group="vns" data-keywords="инкрементальный"><code class="syntax">@gp vns next</code><span class="desc">Только новые, ещё не собранные изображения</span><button class="copy" data-copy="@gp vns next" aria-label="Скопировать @gp vns next">Копировать</button></div>
+<div class="command-row" data-group="vns" data-keywords="google drive архив"><code class="syntax">@gp vns drive</code><span class="desc">Сборка и загрузка в gp/vns/MMDD-N</span><button class="copy" data-copy="@gp vns drive" aria-label="Скопировать @gp vns drive">Копировать</button></div>
+<div class="command-row" data-group="vns" data-keywords="google"><code class="syntax">@gp vns next drive</code><span class="desc">Новые изображения + загрузка на Drive</span><button class="copy" data-copy="@gp vns next drive" aria-label="Скопировать @gp vns next drive">Копировать</button></div>
+<div class="command-row" data-group="vns" data-keywords="путь каталог"><code class="syntax">@gp vns drive 1014-2</code><span class="desc">Явный каталог gp/vns/1014-2</span><button class="copy" data-copy="@gp vns drive 1014-2" aria-label="Скопировать @gp vns drive 1014-2">Копировать</button></div>
+<div class="command-row" data-group="drive" data-keywords="google файлы"><code class="syntax">@gp drive</code><span class="desc">Текущий результат в gp/MMDD</span><button class="copy" data-copy="@gp drive" aria-label="Скопировать @gp drive">Копировать</button></div>
+<div class="command-row" data-group="drive" data-keywords="папка подкаталог"><code class="syntax">@gp drive s/2025</code><span class="desc">Текущий результат в указанном подпути</span><button class="copy" data-copy="@gp drive s/2025" aria-label="Скопировать @gp drive s/2025">Копировать</button></div>
+<div class="command-row" data-group="drive" data-keywords="дата"><code class="syntax">@gp drive vns cur</code><span class="desc">Добавить дату MMDD к подпути</span><button class="copy" data-copy="@gp drive vns cur" aria-label="Скопировать @gp drive vns cur">Копировать</button></div>
+<div class="command-row" data-group="drive" data-keywords="дата нумерация"><code class="syntax">@gp drive vns cur+</code><span class="desc">Создать каталог MMDD-N с первым свободным номером</span><button class="copy" data-copy="@gp drive vns cur+" aria-label="Скопировать @gp drive vns cur+">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="файлы вложения"><code class="syntax">@gp drive-all</code><span class="desc">Все доступные файлы текущего чата</span><button class="copy" data-copy="@gp drive-all" aria-label="Скопировать @gp drive-all">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="генерация"><code class="syntax">@gp drive-all-gpt</code><span class="desc">Только файлы, созданные GPT</span><button class="copy" data-copy="@gp drive-all-gpt" aria-label="Скопировать @gp drive-all-gpt">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="лог история предупреждения"><code class="syntax">@gp drive-log</code><span class="desc">ZIP переписки, файлов и видимых событий + Drive</span><button class="copy" data-copy="@gp drive-log" aria-label="Скопировать @gp drive-log">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="лог ответы"><code class="syntax">@gp drive-log-gpt</code><span class="desc">ZIP видимых сообщений и файлов GPT</span><button class="copy" data-copy="@gp drive-log-gpt" aria-label="Скопировать @gp drive-log-gpt">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="мои сообщения"><code class="syntax">@gp drive-log-my</code><span class="desc">ZIP сообщений и вложений пользователя</span><button class="copy" data-copy="@gp drive-log-my" aria-label="Скопировать @gp drive-log-my">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="ответы"><code class="syntax">@gp drive-txt</code><span class="desc">Тексты только GPT без вложений</span><button class="copy" data-copy="@gp drive-txt" aria-label="Скопировать @gp drive-txt">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="текст"><code class="syntax">@gp drive-txt-all</code><span class="desc">Тексты пользователя и GPT без вложений</span><button class="copy" data-copy="@gp drive-txt-all" aria-label="Скопировать @gp drive-txt-all">Копировать</button></div>
+<div class="command-row" data-group="archive" data-keywords="вопросы"><code class="syntax">@gp drive-txt-my</code><span class="desc">Тексты только пользователя без вложений</span><button class="copy" data-copy="@gp drive-txt-my" aria-label="Скопировать @gp drive-txt-my">Копировать</button></div>
+<div class="command-row" data-group="io" data-keywords="github сайт"><code class="syntax">@gp io</code><span class="desc">Публикация текущего результата в GitHub Pages /s/</span><button class="copy" data-copy="@gp io" aria-label="Скопировать @gp io">Копировать</button></div>
+<div class="command-row" data-group="io" data-keywords="deep research github"><code class="syntax">@gp io ds</code><span class="desc">Интерактивная веб-версия исследования в /ds/</span><button class="copy" data-copy="@gp io ds" aria-label="Скопировать @gp io ds">Копировать</button></div>
+<div class="command-row" data-group="io" data-keywords="ссылка github"><code class="syntax">@gp io ds ?url</code><span class="desc">То же с явным запросом URL (необязательный флаг)</span><button class="copy" data-copy="@gp io ds ?url" aria-label="Скопировать @gp io ds ?url">Копировать</button></div>
+<div class="command-row" data-group="general" data-keywords="помощь"><code class="syntax">@gp help</code><span class="desc">Показать подсказку по доступным командам</span><button class="copy" data-copy="@gp help" aria-label="Скопировать @gp help">Копировать</button></div>
+<div class="command-row" data-group="general" data-keywords="помощь список"><code class="syntax">@gp list</code><span class="desc">Показать список зарегистрированных команд</span><button class="copy" data-copy="@gp list" aria-label="Скопировать @gp list">Копировать</button></div></div><div id="empty-state" class="empty-state">Ничего не найдено. Попробуйте другой запрос или выберите «Все».</div>
+</section>
+<section class="section" id="builder">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">06 / попробовать</p>
+ <h2 class="section-title">Соберите свою команду.</h2>
+ <p class="section-intro">Выберите действие, добавьте подпапку и вариант даты. Конструктор создаст текст команды, готовый к вставке в ChatGPT.</p>
+ <div class="builder">
+  <h3>Конструктор GP</h3><p id="builder-hint">Сохранение результатов задачи в Drive</p>
+  <div class="builder-grid">
+   <div><label for="build-command">Сценарий</label><select id="build-command">
+    <option value="drive">drive</option><option value="drive-all">drive-all</option><option value="drive-all-gpt">drive-all-gpt</option>
+    <option value="drive-log">drive-log</option><option value="drive-log-gpt">drive-log-gpt</option><option value="drive-log-my">drive-log-my</option>
+    <option value="drive-txt">drive-txt</option><option value="drive-txt-all">drive-txt-all</option><option value="drive-txt-my">drive-txt-my</option>
+    <option value="vns-drive">vns drive</option><option value="vns-next-drive">vns next drive</option><option value="io">io</option><option value="io-ds">io ds</option>
+   </select></div>
+   <div><label for="build-path">Подпапка (необязательно)</label><input type="text" id="build-path" autocomplete="off" placeholder="например, vns или s/2025"></div>
+   <div class="last"><label for="build-date">Каталог по дате</label><select id="build-date"><option value="none">Без</option><option value="cur">cur</option><option value="cur+">cur+</option></select></div>
+  </div>
+  <div class="builder-output"><code id="built-command">@gp drive</code><button class="copy" id="copy-built" data-copy="@gp drive">Копировать</button></div>
+  <p style="font-size:11px;margin:12px 0 0">Это конструктор текста, а не загрузчик файлов. Для VNS имена каталогов задаются напрямую; IO выбирает раздел автоматически.</p>
+ </div>
+</section>
+<section class="section" id="faq">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">07 / полезно знать</p>
+ <h2 class="section-title">Частые вопросы.</h2>
+ <p class="section-intro">Коротко об ограничениях и ситуациях, которые легко перепутать.</p>
+ <details class="details"><summary>Где хранятся результаты GP?</summary><p><strong>vns</strong> без drive создаёт ZIP для скачивания. <strong>drive*</strong> отправляет результаты в Google Drive и в режиме <strong>drive-log*</strong> также даёт ZIP в чате. <strong>io</strong> публикует страницу в открытом GitHub-репозитории.</p></details>
+ <details class="details"><summary>Может ли vns next гарантировать отсутствие повторов?</summary><p>Только если есть доступные прошлые архивы или проверяемые идентификаторы/хеши результатов. Недоступные генерации не следует считать обработанными.</p></details>
+ <details class="details"><summary>Почему в drive-log могут отсутствовать сообщения?</summary><p>GP не получает полный системный экспорт чата и не может прочитать скрытые служебные данные. Файлы, для которых нет исходных байтов, и обрезанная история фиксируются как пропуски.</p></details>
+ <details class="details"><summary>Зачем cur+ вместо cur?</summary><p><strong>cur</strong> повторно использует календарную папку, например <span class="inline-code">gp/vns/1015</span>. <strong>cur+</strong> ищет первую свободную номерную папку, например <span class="inline-code">gp/vns/1015-2</span>. Это снижает риск смешать отдельные выгрузки.</p></details>
+ <details class="details"><summary>Что означает ?url у io?</summary><p>Это необязательный сигнал «покажи ссылку». URL формируется автоматически после записи публикации в репозиторий даже без этого параметра. Работу GitHub Pages после коммита нужно отдельно проверять.</p></details>
+ <details class="details"><summary>GP работает автоматически между сообщениями?</summary><p>Нет. Он выполняет команды при вызове в чате и зависит от подключённых инструментов. Фоновое копирование или доступ ко всем сообщениям из других чатов не подразумевается.</p></details>
+ <footer class="footer"><span>GP · Справочник версии 0.2.3</span><a href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть плагин ↗</a><a href="../../" target="_blank" rel="noopener noreferrer">Каталог публикаций ↗</a><span>Создано для GitHub Pages</span></footer>
+</section>
+</main>
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
