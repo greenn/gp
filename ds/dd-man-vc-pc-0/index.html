@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Полное исследование и интерактивные инструменты для игры «Человек против компьютера»: 16 учеников, одна интерактивная доска, 5 режимов, 20 заданий и сценарий урока.">
+<meta name="color-scheme" content="dark light">
+<title>Человек против компьютера — интерактивное исследование</title>
+<style>
+:root{--bg:#101414;--panel:#181f1f;--panel2:#202a29;--ink:#f0f3ed;--muted:#b3beb6;--line:#40504b;--accent:#bffb73;--glow:#6b9e48;--orange:#ffb274;--paper:#f3f1e9;--paperink:#19231f;--paperline:#ced1c7;--shadow:0 15px 50px #0003}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.58 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}button,input,select{font:inherit}button,select,input{border-radius:0}a{color:inherit}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button{cursor:pointer}.shell{max-width:1380px;margin:0 auto;padding:0 28px}
+header{height:66px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-weight:900;letter-spacing:.14em;font-size:14px}.brand span{background:var(--accent);color:#0b130a;padding:6px 8px;margin-right:12px}.headerlink{color:var(--muted);font-size:13px;text-decoration:none}.headerlink:hover{color:var(--ink)}
+.hero{padding:70px 0 50px;display:grid;grid-template-columns:1.6fr 1fr;gap:44px;border-bottom:1px solid var(--line)}.eyebrow{text-transform:uppercase;letter-spacing:.15em;color:var(--accent);font-size:12px;font-weight:800}.hero h1{font-size:clamp(40px,5.6vw,83px);letter-spacing:-.058em;line-height:1.02;margin:16px 0 22px;max-width:820px}.hero p{max-width:740px;color:var(--muted);font-size:18px}.em{color:var(--accent)}.principle{padding:22px;border-left:3px solid var(--accent);background:var(--panel);align-self:end}.principle small{display:block;color:var(--accent);letter-spacing:.12em;font-weight:800}.principle p{font-size:18px;color:var(--ink);margin:12px 0 6px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}.kpi{padding:24px 12px 28px 0}.kpi:not(:last-child){border-right:1px solid var(--line);margin-right:22px}.kpi strong{font-size:44px;line-height:1.1;letter-spacing:-.06em;display:block}.kpi span{font-size:13px;color:var(--muted)}
+.quicknav{display:flex;gap:8px;flex-wrap:wrap;padding:21px 0}.quicknav a{font-size:13px;text-decoration:none;border:1px solid var(--line);padding:7px 12px;background:var(--panel)}.quicknav a:hover{border-color:var(--accent)}
+.area{padding:62px 0;border-top:1px solid var(--line);scroll-margin-top:18px}.area h2{font-size:clamp(27px,3vw,43px);line-height:1.14;letter-spacing:-.04em;margin:0 0 12px}.area>p,.sectiondesc{color:var(--muted);max-width:850px}.sectiontop{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;margin-bottom:25px}.sectiontop h2{margin:0}
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);margin-top:26px}.step{padding:20px;border-right:1px solid var(--line);min-height:128px}.step:last-child{border-right:0}.step b{font-size:12px;color:var(--accent);display:block;margin-bottom:13px}.step span{font-weight:750;font-size:17px}
+.pills{display:flex;gap:0}.pills button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:10px 18px}.pills button+button{border-left:0}.pills button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#12200c;font-weight:800}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.planitem{background:var(--panel);padding:18px 20px;border:1px solid var(--line);min-height:118px}.planitem b{display:block;color:var(--accent);font-size:20px}.planitem span{display:block;margin-top:5px;font-size:14px}.planitem small{display:block;color:var(--muted);margin-top:4px}.note{padding:14px 18px;border-left:2px solid var(--orange);background:#26241f;color:#ecd9ca;font-size:14px;margin:22px 0}
+.modes{display:grid;grid-template-columns:230px 1fr;border:1px solid var(--line)}.modebuttons{border-right:1px solid var(--line)}.modebuttons button{display:block;width:100%;text-align:left;padding:19px 16px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--muted)}.modebuttons button:last-child{border-bottom:0}.modebuttons button[aria-pressed="true"]{background:var(--accent);color:#162111;font-weight:850}.modepanel{padding:32px;min-height:255px}.modepanel h3{font-size:29px;margin:0 0 13px;letter-spacing:-.03em}.modepanel p{color:var(--muted)}.modepanel dl{display:grid;grid-template-columns:130px 1fr;gap:13px;margin:20px 0}.modepanel dt{color:var(--accent)}.modepanel dd{margin:0}
+.toolbar{display:grid;grid-template-columns:minmax(190px,2fr) minmax(150px,1fr) minmax(150px,1fr) minmax(110px,.5fr);gap:9px;margin:22px 0 10px}.toolbar input,.toolbar select,.simcontrols select{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:12px 13px;min-width:0}.counter{color:var(--muted);font-size:13px;margin-bottom:17px}.tasks{display:grid;grid-template-columns:1fr 1fr;gap:13px}.task{border:1px solid var(--line);background:var(--panel);padding:20px;scroll-margin-top:90px}.task[hidden]{display:none}.taskhead{display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:12px}.taskno{background:var(--accent);color:#15250b;padding:2px 6px;font-weight:900}.tasksub{font-weight:700}.tasklvl{margin-left:auto;color:var(--muted)}.taskquestion{font-size:17px;line-height:1.5;margin:22px 0}.task details{border-top:1px solid var(--line);padding-top:12px}.task summary{cursor:pointer;color:var(--accent);font-size:13px}.answer{margin-top:12px;font-size:14px;color:#d5e0d5}.task code{font-size:90%}
+.simgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.simscreen{background:#090d0c;border:1px solid var(--line);padding:27px;text-align:center}.simlabel{font-size:12px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.scores{display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0 20px}.scores strong{font-size:clamp(45px,6vw,86px);font-variant-numeric:tabular-nums;letter-spacing:-.055em}.scores i{font-style:normal;font-size:38px;color:var(--muted)}.simscreen small{color:var(--muted)}.simcontrols{padding:18px;background:var(--panel);border:1px solid var(--line)}.simcontrols label{display:block;font-size:13px;margin-bottom:12px}.simcontrols select{width:100%;margin:6px 0 7px}.simcontrols .choice{display:flex;gap:15px;margin:10px 0 17px;align-items:center}.simcontrols .choice label{margin:0}.action{width:100%;background:var(--accent);color:#162212;border:0;padding:13px;font-weight:800}.action:hover{filter:brightness(.9)}.secondary{background:transparent;color:var(--ink);border:1px solid var(--line);padding:10px;width:100%;margin-top:8px}.log{padding:13px 0;border-top:1px solid var(--line);margin-top:16px;color:var(--muted);font-size:13px;min-height:55px}
+.paperouter{background:var(--paper);color:var(--paperink);padding:0 0 55px}.paperouter .shell{padding-top:65px}.paperhead{border-bottom:2px solid #334239;padding-bottom:22px}.paperhead .eyebrow{color:#365c2c}.paperhead h2{font-size:clamp(28px,3.8vw,48px);margin:9px 0}.paperhead p{max-width:750px;color:#4b5c52}.download{display:inline-block;padding:9px 13px;border:1px solid #8a9c8b;font-size:13px;text-decoration:none;font-weight:700;margin-top:8px}
+.paperlayout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:52px;align-items:start;margin-top:35px}.toc{position:sticky;top:18px;max-height:calc(100vh - 35px);overflow:auto;padding-right:10px;border-right:1px solid var(--paperline)}.toc b{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#566559}.toc a{display:block;text-decoration:none;padding:8px 6px 8px 0;color:#425346;font-size:12px;line-height:1.35;border-bottom:1px solid #dedfd4}.toc a:hover{color:#000}.report{min-width:0;max-width:940px}.report h1{font-size:31px;line-height:1.2}.report h2{font-size:27px;letter-spacing:-.03em;margin:50px 0 14px;border-bottom:1px solid #d7d9cf;padding-bottom:12px}.report h3{font-size:20px;margin:28px 0 9px}.report h4{font-size:17px;margin:22px 0 8px}.report h1,.report h2,.report h3,.report h4{scroll-margin-top:20px}.report p,.report li{font-size:15px;line-height:1.76}.report p{margin:12px 0}.report li{margin:4px 0}.report blockquote{margin:25px 0;padding:12px 18px;background:#e8eadf;border-left:3px solid #557453}.report pre{overflow:auto;font-size:13px;line-height:1.55;padding:18px;background:#182221;color:#e9f1e8;margin:0;white-space:pre;max-height:440px}.codeblock{margin:16px 0}.codeheader{background:#293632;color:#c7d4cb;padding:7px 13px;font-size:11px;text-transform:uppercase;letter-spacing:.11em}.report .tablewrap{overflow-x:auto;margin:17px 0 26px;border:1px solid var(--paperline)}.report table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}.report th,.report td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--paperline)}.report th{background:#e2e7dd;color:#253b2e;white-space:nowrap}.report tr:nth-child(even) td{background:#eeefe7}.report code{background:#e4e7dd;padding:1px 4px;font-size:.93em;overflow-wrap:anywhere}.report pre code{background:none;padding:0;color:inherit}.report a{color:#225a35}.cite-token{font-size:10px;color:#526c59;border-bottom:1px dotted #526c59;cursor:help;white-space:nowrap}.report hr{border:0;border-top:1px solid var(--paperline);margin:28px 0}footer{padding:32px 0;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+@media(max-width:960px){.hero{grid-template-columns:1fr}.principle{max-width:760px}.paperlayout{grid-template-columns:1fr;gap:14px}.toc{position:static;max-height:170px;border-right:0;border-bottom:1px solid var(--paperline);padding-bottom:12px}.simgrid{grid-template-columns:1fr}}
+@media(max-width:660px){.shell{padding:0 15px}header{height:auto;padding:15px 0}.hero{padding:44px 0}.hero h1{font-size:42px}.hero p{font-size:16px}.kpis{grid-template-columns:1fr 1fr}.kpi{padding:18px 7px 18px 0}.kpi:not(:last-child){margin-right:0}.kpi:nth-child(even){padding-left:16px;border-right:0}.kpi strong{font-size:35px}.pipeline{grid-template-columns:1fr}.step{min-height:0;padding:14px;border-right:0;border-bottom:1px solid var(--line)}.step b{display:inline;margin-right:15px}.step:last-child{border:0}.plan,.tasks,.toolbar{grid-template-columns:1fr}.modes{grid-template-columns:1fr}.modebuttons{border:0;border-bottom:1px solid var(--line);display:flex;overflow-x:auto}.modebuttons button{flex:0 0 170px;border-right:1px solid var(--line);border-bottom:0}.modepanel{padding:20px}.modepanel dl{grid-template-columns:1fr;gap:2px}.modepanel dd{margin-bottom:14px}.area{padding:42px 0}.paperouter .shell{padding-top:45px}}
+@media print{body{background:white;color:black}.hero,.quicknav,.kpis,.area,header,footer,.toc,.download,.paperhead p{display:none!important}.paperouter{background:white}.paperlayout{display:block}.report{max-width:100%}.report h2{break-after:avoid}.report tr{break-inside:avoid}.report pre{max-height:none;white-space:pre-wrap}body{font-size:11pt}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header><div class="brand"><span>HVC</span> HUMAN × COMPUTER / RESEARCH</div><a class="headerlink" href="../../">← Каталог GP</a></header>
+<section class="hero">
+<div><div class="eyebrow">Методическое исследование · интерактивная версия</div><h1>Человек <span class="em">против</span> компьютера</h1><p>Как устроить настоящее соревнование для <b>16 учеников</b> с одной интерактивной доской: независимый компьютерный ход, командная игра, алгоритмы соперника и проверка ответов.</p></div>
+<div class="principle"><small>КЛЮЧЕВОЙ ПРИНЦИП</small><p>Компьютер не ведущий викторины. Он <b>отдельный игрок</b>, который отвечает, ошибается, получает очки и может победить.</p><small>СНАЧАЛА — ОТВЕТ ЛЮДЕЙ. ЗАТЕМ — ХОД КОМПЬЮТЕРА.</small></div>
+</section>
+<div class="kpis"><div class="kpi"><strong>16</strong><span>учеников в классе</span></div><div class="kpi"><strong>4×4</strong><span>команды и сменные роли</span></div><div class="kpi"><strong>12</strong><span>раундов: рекомендуемый максимум</span></div><div class="kpi"><strong>45′</strong><span>сценарий обычного урока</span></div></div>
+<nav class="quicknav" aria-label="Быстрые переходы"><a href="#mechanism">Механика</a><a href="#schedule">План урока</a><a href="#modes">Режимы</a><a href="#tasks">20 заданий</a><a href="#demo">Соперник: демо</a><a href="#full-report">Полный отчёт ↓</a></nav>
+<section class="area" id="mechanism"><h2>Один раунд. Два независимых ответа.</h2><p>Успех формата зависит от честного порядка действий — компьютер не должен видеть ответ класса, пока не сделает свой собственный ход.</p><div class="pipeline"><div class="step"><b>01 / ЗАДАНИЕ</b><span>Все думают одновременно</span></div><div class="step"><b>02 / КОМАНДА</b><span>Обсуждают и фиксируют ответ</span></div><div class="step"><b>03 / КОМПЬЮТЕР</b><span>Независимый ответ соперника</span></div><div class="step"><b>04 / АРБИТР</b><span>Оба ответа сверяются с ключом</span></div><div class="step"><b>05 / РЕЗУЛЬТАТ</b><span>Очки, объяснение, следующий раунд</span></div></div><div class="note">Педагогический принцип: все 16 решают, а не смотрят на одного ученика у доски. Представитель выбирается после размышления; роли внутри четвёрок меняются каждый раунд.</div></section>
+<section class="area" id="schedule"><div class="sectiontop"><h2>Конструктор времени урока</h2><div class="pills"><button id="plan45" aria-pressed="true" type="button">45 минут</button><button id="plan55" aria-pressed="false" type="button">55 минут</button></div></div><p>Два сценария из исследования. Переключайте длительность — этапы и время пересчитаются, содержание не изменяется.</p><div class="plan" id="planItems"><div class="planitem"><b>4′</b><span>Правила</span><small>Пробный ход</small></div><div class="planitem"><b>4′</b><span>Организация</span><small>Команды и роли</small></div><div class="planitem"><b>24′</b><span>Основная игра</span><small>8–10 коротких раундов</small></div><div class="planitem"><b>7′</b><span>Финал</span><small>Босс или AI-аудит</small></div><div class="planitem"><b>6′</b><span>Индивидуальная проверка</span><small>3 вопроса, подведение итогов</small></div></div><div class="note">В исходном исследовании отдельно отмечено ограничение экранного времени: ориентир — до 30 минут использования интерактивной доски для детей старше 10 лет и до 20 минут для детей до 10 лет. Уточняйте действующие санитарные требования для конкретного класса.</div></section>
+<section class="area" id="modes"><h2>Пять форматов соревнования</h2><p>Режимы можно использовать по отдельности или комбинировать в одном уроке.</p><div class="modes"><div class="modebuttons" role="group" aria-label="Выбрать режим"><button type="button" data-mode="0" aria-pressed="true">Класс против AI</button><button type="button" data-mode="1" aria-pressed="false">Рейд на босса</button><button type="button" data-mode="2" aria-pressed="false">Трио-эстафета</button><button type="button" data-mode="3" aria-pressed="false">Случайная дуэль</button><button type="button" data-mode="4" aria-pressed="false">Поймай ошибку AI</button></div><div class="modepanel" aria-live="polite"><h3 id="modeTitle">Класс против AI</h3><p id="modeDescription">Четыре команды по очереди дают ответ класса. AI отвечает на тот же вопрос без подсказок.</p><dl><dt>Компьютер</dt><dd id="modeComputer">Независимый AI-ответ</dd><dt>Как считать</dt><dd id="modePoints">Обе стороны получают по 1 баллу за правильный ответ. Если обе ответили верно — 1:1.</dd><dt>Время</dt><dd id="modeTime">25–35 минут</dd></dl></div></div></section>
+<section class="area" id="tasks"><div class="sectiontop"><h2>Банк из 20 готовых заданий</h2><span class="eyebrow">Исходный набор · без изменений</span></div><p>Фильтрация по предмету и сложности. Ответы скрыты, чтобы можно было использовать материал при подготовке или на доске.</p><div class="toolbar"><input id="taskSearch" aria-label="Поиск задания" placeholder="Поиск по вопросу или ответу…"><select id="taskSubject" aria-label="Предмет"><option value="">Все предметы</option><option value="Алгебра">Алгебра</option><option value="Английский язык">Английский язык</option><option value="Биология">Биология</option><option value="Вероятность">Вероятность</option><option value="География">География</option><option value="Закономерность">Закономерность</option><option value="Информатика">Информатика</option><option value="История">История</option><option value="Логическая задача">Логическая задача</option><option value="Математика">Математика</option><option value="Русский язык">Русский язык</option><option value="Физика">Физика</option><option value="Химия">Химия</option><option value="AI/логика">AI/логика</option></select><select id="taskLevel" aria-label="Сложность"><option value="">Любая сложность</option><option>низкая</option><option>средняя</option><option>высокая</option></select><select id="taskSort" aria-label="Порядок"><option value="asc">№ ↑</option><option value="desc">№ ↓</option></select></div><div id="taskCount" class="counter">20 заданий</div><div class="tasks" id="taskList"><article class="task" data-subject="Математика" data-level="низкая" data-n="1" data-search="математика, быстрый тест низкая **чему равны 15% от 240?** a 24; b 30; c 36; d 40 **36**"><div class="taskhead"><span class="taskno">01</span><span class="tasksub">Математика, быстрый тест</span><span class="tasklvl">низкая</span></div><div class="taskquestion"><strong>Чему равны 15% от 240?</strong> A 24; B 30; C 36; D 40</div><details><summary>Ответ и критерий</summary><div class="answer"><strong>36</strong></div></details></article>
+<article class="task" data-subject="Алгебра" data-level="средняя" data-n="2" data-search="алгебра средняя **решите:** \(3(x-2)=18\) **x = 8**"><div class="taskhead"><span class="taskno">02</span><span class="tasksub">Алгебра</span><span class="tasklvl">средняя</span></div><div class="taskquestion"><strong>Решите:</strong> \(3(x-2)=18\)</div><details><summary>Ответ и критерий</summary><div class="answer"><strong>x = 8</strong></div></details></article>
+<article class="task" data-subject="Математика" data-level="средняя" data-n="3" data-search="математика, логика средняя **какое наименьшее положительное число делится и на 4, и на 6, но не делится на 8?** **12**"><div class="taskhead"><span class="taskno">03</span><span class="tasksub">Математика, логика</span><span class="tasklvl">средняя</span></div><div class="taskquestion"><strong>Какое наименьшее положительное число делится и на 4, и на 6, но не делится на 8?</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>12</strong></div></details></article>
+<article class="task" data-subject="Закономерность" data-level="низкая" data-n="4" data-search="закономерность низкая **3, 6, 12, 24, ?** **48**"><div class="taskhead"><span class="taskno">04</span><span class="tasksub">Закономерность</span><span class="tasklvl">низкая</span></div><div class="taskquestion"><strong>3, 6, 12, 24, ?</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>48</strong></div></details></article>
+<article class="task" data-subject="Закономерность" data-level="средняя" data-n="5" data-search="закономерность средняя **2, 5, 10, 17, 26, ?** объясните правило. **37**; прибавляются 3, 5, 7, 9, 11"><div class="taskhead"><span class="taskno">05</span><span class="tasksub">Закономерность</span><span class="tasklvl">средняя</span></div><div class="taskquestion"><strong>2, 5, 10, 17, 26, ?</strong> Объясните правило.</div><details><summary>Ответ и критерий</summary><div class="answer"><strong>37</strong>; прибавляются 3, 5, 7, 9, 11</div></details></article>
+<article class="task" data-subject="Логическая задача" data-level="высокая" data-n="6" data-search="логическая задача высокая **есть 3 выключателя вне закрытой комнаты и одна лампа внутри. в комнату можно войти один раз. как определить выключатель лампы?** включить a, подождать, выключить; включить b; войти. горит=b, теплая=a, холодная=c"><div class="taskhead"><span class="taskno">06</span><span class="tasksub">Логическая задача</span><span class="tasklvl">высокая</span></div><div class="taskquestion"><strong>Есть 3 выключателя вне закрытой комнаты и одна лампа внутри. В комнату можно войти один раз. Как определить выключатель лампы?</strong></div><details><summary>Ответ и критерий</summary><div class="answer">Включить A, подождать, выключить; включить B; войти. Горит=B, теплая=A, холодная=C</div></details></article>
+<article class="task" data-subject="Вероятность" data-level="средняя" data-n="7" data-search="вероятность средняя **подбрасывают две честные монеты. какова вероятность получить ровно один орел?** **1/2**"><div class="taskhead"><span class="taskno">07</span><span class="tasksub">Вероятность</span><span class="tasklvl">средняя</span></div><div class="taskquestion"><strong>Подбрасывают две честные монеты. Какова вероятность получить ровно один орел?</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>1/2</strong></div></details></article>
+<article class="task" data-subject="Физика" data-level="средняя" data-n="8" data-search="физика средняя **если скорость тела увеличилась в 2 раза, во сколько раз выросла его кинетическая энергия при неизменной массе?** **в 4 раза**"><div class="taskhead"><span class="taskno">08</span><span class="tasksub">Физика</span><span class="tasklvl">средняя</span></div><div class="taskquestion"><strong>Если скорость тела увеличилась в 2 раза, во сколько раз выросла его кинетическая энергия при неизменной массе?</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>В 4 раза</strong></div></details></article>
+<article class="task" data-subject="Физика" data-level="средняя" data-n="9" data-search="физика, мультимедиа средняя покажите 5-секундный беззвучный клип мяча, брошенного вверх. поставьте на паузу в верхней точке. **куда направлено ускорение?** **вниз**"><div class="taskhead"><span class="taskno">09</span><span class="tasksub">Физика, мультимедиа</span><span class="tasklvl">средняя</span></div><div class="taskquestion">Покажите 5-секундный беззвучный клип мяча, брошенного вверх. Поставьте на паузу в верхней точке. <strong>Куда направлено ускорение?</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>Вниз</strong></div></details></article>
+<article class="task" data-subject="Химия" data-level="низкая" data-n="10" data-search="химия, drag-and-drop низкая перетащите **ph 2 / ph 7 / ph 11** в зоны «кислота / нейтральная / щёлочь» 2 → кислота; 7 → нейтр.; 11 → щёлочь"><div class="taskhead"><span class="taskno">10</span><span class="tasksub">Химия, drag-and-drop</span><span class="tasklvl">низкая</span></div><div class="taskquestion">Перетащите <strong>pH 2 / pH 7 / pH 11</strong> в зоны «кислота / нейтральная / щёлочь»</div><details><summary>Ответ и критерий</summary><div class="answer">2 → кислота; 7 → нейтр.; 11 → щёлочь</div></details></article>
+<article class="task" data-subject="Биология" data-level="низкая" data-n="11" data-search="биология низкая **какая органелла эукариотической клетки в школьной модели главным образом связана с синтезом atp при клеточном дыхании?** **митохондрия**"><div class="taskhead"><span class="taskno">11</span><span class="tasksub">Биология</span><span class="tasklvl">низкая</span></div><div class="taskquestion"><strong>Какая органелла эукариотической клетки в школьной модели главным образом связана с синтезом ATP при клеточном дыхании?</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>Митохондрия</strong></div></details></article>
+<article class="task" data-subject="Биология" data-level="средняя" data-n="12" data-search="биология, drag-and-drop средняя расставьте: **желудок / рот / толстая кишка / пищевод / тонкая кишка** рот → пищевод → желудок → тонкая → толстая кишка"><div class="taskhead"><span class="taskno">12</span><span class="tasksub">Биология, drag-and-drop</span><span class="tasklvl">средняя</span></div><div class="taskquestion">Расставьте: <strong>желудок / рот / толстая кишка / пищевод / тонкая кишка</strong></div><details><summary>Ответ и критерий</summary><div class="answer">рот → пищевод → желудок → тонкая → толстая кишка</div></details></article>
+<article class="task" data-subject="География" data-level="низкая" data-n="13" data-search="география низкая **столица канады:** торонто / ванкувер / оттава / монреаль **оттава**"><div class="taskhead"><span class="taskno">13</span><span class="tasksub">География</span><span class="tasklvl">низкая</span></div><div class="taskquestion"><strong>Столица Канады:</strong> Торонто / Ванкувер / Оттава / Монреаль</div><details><summary>Ответ и критерий</summary><div class="answer"><strong>Оттава</strong></div></details></article>
+<article class="task" data-subject="География" data-level="средняя" data-n="14" data-search="география, пространственная средняя расположите с севера на юг: **каир, москва, рим** **москва → рим → каир**"><div class="taskhead"><span class="taskno">14</span><span class="tasksub">География, пространственная</span><span class="tasklvl">средняя</span></div><div class="taskquestion">Расположите с севера на юг: <strong>Каир, Москва, Рим</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>Москва → Рим → Каир</strong></div></details></article>
+<article class="task" data-subject="История" data-level="средняя" data-n="15" data-search="история, drag-and-drop средняя расположите по времени: **полёт «спутника-1» / путешествие колумба 1492 / французская революция / европейское книгопечатание гутенберга** гутенберг → колумб → французская революция → «спутник-1»"><div class="taskhead"><span class="taskno">15</span><span class="tasksub">История, drag-and-drop</span><span class="tasklvl">средняя</span></div><div class="taskquestion">Расположите по времени: <strong>полёт «Спутника-1» / путешествие Колумба 1492 / Французская революция / европейское книгопечатание Гутенберга</strong></div><details><summary>Ответ и критерий</summary><div class="answer">Гутенберг → Колумб → Французская революция → «Спутник-1»</div></details></article>
+<article class="task" data-subject="Русский язык" data-level="средняя" data-n="16" data-search="русский язык средняя выберите правильное: **«в течение часа» или «в течении часа»**, если имеется в виду время **в течение часа**"><div class="taskhead"><span class="taskno">16</span><span class="tasksub">Русский язык</span><span class="tasklvl">средняя</span></div><div class="taskquestion">Выберите правильное: <strong>«в течение часа» или «в течении часа»</strong>, если имеется в виду время</div><details><summary>Ответ и критерий</summary><div class="answer"><strong>в течение часа</strong></div></details></article>
+<article class="task" data-subject="Английский язык" data-level="средняя" data-n="17" data-search="английский язык средняя **if i ___ more time, i would learn another language.** a have; b had; c will have; d would have **had**"><div class="taskhead"><span class="taskno">17</span><span class="tasksub">Английский язык</span><span class="tasklvl">средняя</span></div><div class="taskquestion"><strong>If I ___ more time, I would learn another language.</strong> A have; B had; C will have; D would have</div><details><summary>Ответ и критерий</summary><div class="answer"><strong>had</strong></div></details></article>
+<article class="task" data-subject="Информатика" data-level="средняя" data-n="18" data-search="информатика средняя **переведите \(10110_2\) в десятичную систему.** **22**"><div class="taskhead"><span class="taskno">18</span><span class="tasksub">Информатика</span><span class="tasklvl">средняя</span></div><div class="taskquestion"><strong>Переведите \(10110_2\) в десятичную систему.</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>22</strong></div></details></article>
+<article class="task" data-subject="Математика" data-level="средняя" data-n="19" data-search="математика, рисунок средняя на координатной плоскости **нарисуйте \(y=2x-1\)**. линия должна, например, проходить через **(0,−1)** и **(1,1)**"><div class="taskhead"><span class="taskno">19</span><span class="tasksub">Математика, рисунок</span><span class="tasklvl">средняя</span></div><div class="taskquestion">На координатной плоскости <strong>нарисуйте \(y=2x-1\)</strong>.</div><details><summary>Ответ и критерий</summary><div class="answer">Линия должна, например, проходить через <strong>(0,−1)</strong> и <strong>(1,1)</strong></div></details></article>
+<article class="task" data-subject="AI/логика" data-level="средняя" data-n="20" data-search="ai/логика, аудит ответа средняя компьютер утверждает: **«все простые числа нечетные, потому что каждое четное число делится на 2». найдите ошибку.** **2 — четное и простое число; утверждение “все” неверно**"><div class="taskhead"><span class="taskno">20</span><span class="tasksub">AI/логика, аудит ответа</span><span class="tasklvl">средняя</span></div><div class="taskquestion">Компьютер утверждает: <strong>«Все простые числа нечетные, потому что каждое четное число делится на 2». Найдите ошибку.</strong></div><details><summary>Ответ и критерий</summary><div class="answer"><strong>2 — четное и простое число; утверждение “все” неверно</strong></div></details></article></div></section>
+<section class="area" id="demo"><h2>Как может играть алгоритмический соперник</h2><p>Действующая демонстрация <b>вероятностного</b> компьютерного хода из исследования. В этом режиме алгоритм моделирует правильность ответа, а не решает вопрос. Это механика игры, <b>не оценка знаний детей и не генеративный AI</b>.</p><div class="simgrid"><div class="simscreen"><div class="simlabel">ЛЮДИ · КОМПЬЮТЕР</div><div class="scores"><strong id="humanScore">0</strong><i>:</i><strong id="computerScore">0</strong></div><div id="roundInfo">Сыграно раундов: 0</div><div class="log" id="turnLog" role="status">Выберите результат ответа людей и проведите раунд.</div></div><div class="simcontrols"><label for="computerLevel">Уровень компьютера</label><select id="computerLevel"><option value=".55">Лёгкий — 55%</option><option value=".7" selected>Средний — 70%</option><option value=".85">Сложный — 85%</option></select><div class="choice"><label><input type="radio" name="humanResult" value="yes" checked> Люди ответили верно</label><label><input type="radio" name="humanResult" value="no"> Ошиблись</label></div><button type="button" id="playRound" class="action">Ход компьютера →</button><button type="button" id="resetRounds" class="secondary">Сбросить матч</button><div class="log">За один раунд обе стороны могут получить по одному баллу. Ничейный результат сохраняется; он не считается победой какой-либо стороны.</div></div></div></section>
+</div>
+<div class="paperouter" id="full-report"><div class="shell"><div class="paperhead"><div class="eyebrow">Архив · полная публикация</div><h2>Полный текст исследования</h2><p>Вся исходная структура: организационная модель, пять форматов, варианты алгоритмического соперника, 20 заданий, сценарии урока, требования к доступности, программные примеры и источники.</p><a class="download" href="./source.md" download>↓ Исходный Markdown</a><div class="note">В присланном отчёте ссылки на исследования записаны техническими маркерами вида <code>turn14search2</code>, без библиографии с постоянными адресами. На странице эти маркеры показаны как «[источник]»; полные исходные записи сохранены в Markdown. Проверенными внешними URL они не являются.</div></div><div class="paperlayout"><aside class="toc" aria-label="Оглавление"><b>Содержание</b><a href="#report-h-2">Краткое резюме</a>
+<a href="#report-h-3">Базовая архитектура и принципы честной игры</a>
+<a href="#report-h-8">Форматы игры</a>
+<a href="#report-h-14">Как сделать компьютер настоящим соперником</a>
+<a href="#report-h-20">Банк из двадцати готовых заданий</a>
+<a href="#report-h-21">Урок на одной интерактивной доске: темп, управление, оценивание и доступность</a>
+<a href="#report-h-28">Инструменты и пошаговая реализация</a></aside><article class="report"><h1 id="report-h-1">«Человек против компьютера»: практическая модель интерактивной игры для класса из ~16 учеников</h1>
+<h2 id="report-h-2">Краткое резюме</h2>
+<p>Оптимальная версия <strong>Human vs Computer / «Человек против компьютера»</strong> для класса из примерно 16 учеников и одной интерактивной доски — не обычная викторина, где компьютер показывает вопросы. Компьютер должен быть <strong>отдельной игровой стороной</strong>: давать собственный ответ, иногда ошибаться, набирать очки, менять стратегию или сложность и иметь реальную возможность победить.</p>
+<p>Для большинства классов я рекомендую базовую конфигурацию <strong>4 команды × 4 ученика</strong>, но соревнование вести прежде всего как <strong>«весь класс против компьютера»</strong>, а не «четыре команды друг против друга». В каждом раунде одна команда становится активным соперником компьютера. Это сохраняет общий интерес и не превращает урок в наблюдение за четырьмя активными детьми. Для отдельных этапов полезны «активные тройки»: в каждой четверке трое решают задачу, четвертый выполняет роль проверяющего/тренера, после чего роли меняются.</p>
+<p>Главная последовательность раунда:</p>
+<div class="codeblock"><div class="codeheader">Диаграмма · схема Mermaid</div><pre><code>flowchart LR
+    A[Вопрос на доске] --&gt; B[20–60 с&lt;br/&gt;люди решают]
+    B --&gt; C[Ответ людей&lt;br/&gt;зафиксирован]
+    C --&gt; D[Ход компьютера]
+    D --&gt; E[Проверка по ключу]
+    E --&gt; F[Очки]
+    F --&gt; G[Короткое объяснение]
+    G --&gt; H{Следующий раунд?}
+    H --&gt;|Да| A
+    H --&gt;|Нет| I[Итог и рефлексия]</code></pre></div>
+<p>Критически важно сначала <strong>зафиксировать человеческий ответ</strong>, а затем показывать ответ компьютера. Иначе компьютер превращается из соперника в подсказку.</p>
+<p>Наиболее практичный вариант одного урока:</p>
+<div class="tablewrap"><table><thead><tr><th>Параметр</th><th>Рекомендация</th></tr></thead><tbody><tr><td>Класс</td><td>около 16 человек</td></tr><tr><td>Основная структура</td><td>4 команды по 4</td></tr><tr><td>Продолжительность</td><td>45–60 минут</td></tr><tr><td>Чистое игровое время</td><td>25–35 минут</td></tr><tr><td>Основная доска счёта</td><td><strong>Люди : Компьютер</strong></td></tr><tr><td>Раунд</td><td>1,5–3 минуты</td></tr><tr><td>Основных раундов</td><td>8–12</td></tr><tr><td>Активный человек у доски</td><td>один за раз</td></tr><tr><td>Остальные</td><td>решают одновременно на бумаге</td></tr><tr><td>Базовое начисление</td><td>1 балл за правильный ответ</td></tr><tr><td>Рассуждение</td><td>отдельные раунды по 2 балла</td></tr><tr><td>Компьютер</td><td>AI-бот, скрипт, алгоритм либо комбинация</td></tr><tr><td>Минимальное оборудование</td><td>доска + компьютер учителя + 4 листа/мини-доски + маркеры</td></tr><tr><td>Интернет</td><td>желателен для AI, но не обязателен</td></tr></tbody></table></div>
+<p>С педагогической точки зрения наиболее сильная часть такого формата — не сама соревновательная оболочка, а многократное <strong>активное извлечение знаний из памяти</strong>, проверка ответа и немедленная обратная связь. Систематический обзор исследований retrieval practice в реальных школах и учебных аудиториях обнаружил устойчивые преимущества такого извлечения знаний для последующего обучения в разных возрастах и предметных областях. <span class="cite-token" title="Идентификатор источника исходного исследования: turn14search2turn14search10" tabindex="0">[источник]</span></p>
+<p>Есть одно важное практическое ограничение для школ в России. Роспотребнадзор указывает, что использование интерактивной доски в течение урока ограничено: для детей до 10 лет — 20 минут, старше 10 лет — 30 минут. Поэтому 45–60-минутный сценарий ниже намеренно чередует работу с экраном и обсуждение/решение на бумаге. Не следует держать доску как постоянно активный игровой экран весь урок. <span class="cite-token" title="Идентификатор источника исходного исследования: turn16search18turn16search24" tabindex="0">[источник]</span></p>
+<p><strong>Итоговая рекомендация:</strong> начать с формата <strong>«12 раундов: класс против компьютера»</strong>, использовать 4 команды по 4, Wordwall или обычные слайды для контента, локальный счётчик для очков и либо ChatGPT на 3–4 специальных AI-раундах, либо регулируемого алгоритмического соперника для всего матча. Каждые 3–4 раунда менять тип деятельности: тест → логика → перетаскивание → рисунок/визуальная задача. Это лучше использует единственную интерактивную доску, чем попытка заставить всех 16 человек взаимодействовать с ней одновременно.</p>
+<h2 id="report-h-3">Базовая архитектура и принципы честной игры</h2>
+<h3 id="report-h-4">Исходные предположения</h3>
+<p>Поскольку возраст и предмет не заданы, план рассчитан прежде всего на диапазон примерно <strong>10–16 лет</strong>. Для младших учеников нужно уменьшить текст, увеличить время ответа и использовать больше изображений. Для старших можно повышать долю аргументации, задач с неоднозначными данными и проверки ответов AI.</p>
+<p>Предполагается:</p>
+<ul><li>один компьютер учителя подключен к сенсорной доске;</li><li>личные телефоны и ноутбуки учеников не требуются;</li><li>интернет может быть доступен, но урок должен переживать его потерю;</li><li>игровые очки используются для мотивации, а итоговая учебная оценка проверяется отдельно;</li><li>содержание урока может быть математическим, языковым, естественно-научным, гуманитарным или межпредметным.</li></ul>
+<p>В российских школах интерактивная доска относится к электронным средствам обучения, для которых действуют отдельные требования к организации работы. Роспотребнадзор также подчеркивает требования к размещению и эксплуатации таких средств. <span class="cite-token" title="Идентификатор источника исходного исследования: turn16search0turn16search6" tabindex="0">[источник]</span></p>
+<h3 id="report-h-5">Когда компьютер действительно является соперником</h3>
+<p>Чтобы слово «против» имело смысл, компьютер должен удовлетворять пяти условиям:</p>
+<div class="tablewrap"><table><thead><tr><th>Условие</th><th>Как реализовать</th></tr></thead><tbody><tr><td>Независимый ход</td><td>компьютер формирует ответ без использования человеческого ответа</td></tr><tr><td>Возможность ошибки</td><td>AI отвечает самостоятельно либо алгоритм имеет заданную вероятность успеха</td></tr><tr><td>Собственный счёт</td><td>отдельное поле «Компьютер»</td></tr><tr><td>Одинаковый критерий проверки</td><td>ответы обеих сторон сверяются с одним ключом</td></tr><tr><td>Возможность выиграть</td><td>результат матча не должен быть заранее предопределен</td></tr></tbody></table></div>
+<p>Самая важная процедура — <strong>commit before reveal</strong>:</p>
+<p><strong>вопрос → обсуждение людей → фиксация ответа → ответ компьютера → проверка</strong>.</p>
+<p>Если используется генеративный AI, ключ правильного ответа лучше не помещать в AI-промпт. Ключ остается у преподавателя. Тогда AI действительно решает задачу, а не воспроизводит заранее данный ответ.</p>
+<h3 id="report-h-6">Рекомендуемая организация шестнадцати учеников</h3>
+<p><strong>Основной режим — 4 × 4.</strong></p>
+<p>Внутри каждой четверки четыре сменяемые роли:</p>
+<ol><li>решающий;</li><li>скептик, который ищет ошибку;</li><li>секретарь;</li><li>представитель у доски.</li></ol>
+<p>После каждого раунда роли сдвигаются. Тогда ученик, который хорошо и быстро говорит, не становится постоянным представителем всей команды.</p>
+<p><strong>Режим троек — 4 активных трио + 4 тренера.</strong> Каждая команда из четырех на один раунд делится на трио решающих и одного тренера-наблюдателя. В следующем раунде тренером становится другой человек. Это значительно удобнее, чем создавать пять троек и одного постоянно «лишнего» ученика.</p>
+<p><strong>Индивидуальный режим — случайный вызов.</strong> Имя выбирается только после того, как все получили время подумать. Для полного равенства лучше использовать не независимую случайную выборку с повторениями, а перемешанный список без повторения. Wheel of Names позволяет выбирать имена случайным образом и использовать колесо в классе именно для выбора отвечающего; сервис также поддерживает веса, если они действительно нужны. <span class="cite-token" title="Идентификатор источника исходного исследования: turn11search2" tabindex="0">[источник]</span></p>
+<p>Практический принцип:</p>
+<blockquote>Случайным должен быть <strong>выбор отвечающего</strong>, но не возможность подумать.</blockquote>
+<p>Все 16 сначала решают вопрос. После этого определяется тот, кто озвучивает ответ.</p>
+<h3 id="report-h-7">Темп и счёт</h3>
+<p>Обычный раунд занимает около двух минут:</p>
+<div class="tablewrap"><table><thead><tr><th>Фаза</th><th>Время</th></tr></thead><tbody><tr><td>Показ задания</td><td>10–15 с</td></tr><tr><td>Индивидуальное обдумывание</td><td>10–20 с</td></tr><tr><td>Обсуждение команды</td><td>20–40 с</td></tr><tr><td>Фиксация ответа</td><td>5 с</td></tr><tr><td>Ход компьютера</td><td>5–15 с</td></tr><tr><td>Проверка и объяснение</td><td>20–40 с</td></tr></tbody></table></div>
+<p>Для знаний на воспроизведение подходит <strong>1 балл за правильность</strong>. Для задач, где важен ход мысли, удобнее:</p>
+<ul><li>правильный результат — 1;</li><li>корректное обоснование — еще 1.</li></ul>
+<p>Тот же критерий применяется к компьютеру, если он получает право на объяснение.</p>
+<p>Не стоит выдавать генеративному AI бонус просто за длинное объяснение. Компьютер легко производит текст. Бонус должен даваться только за заранее сформулированный содержательный критерий: например, «названа причина и приведено доказательство».</p>
+<h2 id="report-h-8">Форматы игры</h2>
+<p>Ниже пять полноценных вариантов. Их можно использовать отдельно или соединить в один урок.</p>
+<div class="tablewrap"><table><thead><tr><th>Формат</th><th>Игроки</th><th>Время</th><th>Компьютер</th><th>Подготовка</th><th>Сильные стороны</th><th>Ограничения</th></tr></thead><tbody><tr><td><strong>Класс против AI</strong></td><td>4 команды × 4</td><td>25–35 мин</td><td>AI отвечает на те же вопросы</td><td>средняя</td><td>универсален, понятный счет</td><td>AI иногда дает спорные ответы</td></tr><tr><td><strong>Рейд на босса</strong></td><td>весь класс</td><td>20–30 мин</td><td>«босс» с HP и контратаками</td><td>низкая–средняя</td><td>сильное общее чувство цели</td><td>счет чуть сложнее</td></tr><tr><td><strong>Трио-эстафета</strong></td><td>4 трио + 4 сменных тренера</td><td>20–25 мин</td><td>таймер + алгоритм</td><td>средняя</td><td>высокая активность внутри групп</td><td>нужна четкая смена ролей</td></tr><tr><td><strong>Случайная дуэль</strong></td><td>по одному ученику за ход</td><td>15–25 мин</td><td>AI или скрипт</td><td>низкая</td><td>индивидуальная ответственность</td><td>нельзя вызывать до времени на размышление</td></tr><tr><td><strong>Поймай ошибку AI</strong></td><td>4 команды × 4</td><td>15–30 мин</td><td>AI дает решение/объяснение</td><td>средняя</td><td>проверяет аргументацию и AI-грамотность</td><td>учителю нужен надежный ключ</td></tr></tbody></table></div>
+<h3 id="report-h-9">«Класс против AI»</h3>
+<p>Это наиболее универсальный вариант.</p>
+<p>На доске постоянно показывается:</p>
+<p><strong>ЛЮДИ  5 : 4  КОМПЬЮТЕР</strong></p>
+<p>Раунды распределяются A → B → C → D → A → B… Активная команда дает официальный ответ класса. Остальные команды решают тот же вопрос, но не выкрикивают. При ошибке активной команды учитель иногда разрешает «перехват» другой команде.</p>
+<p><strong>Материалы:</strong> доска, 10–12 вопросов, таблица счета, четыре листа для ответов.</p>
+<p><strong>Счет:</strong> правильный ответ — 1:0, если правильны обе стороны — 1:1, если ошиблись обе — 0:0. В трех заранее обозначенных раундах аргументации можно получить второй балл.</p>
+<p><strong>Победа:</strong> больше очков после последнего раунда.</p>
+<p>Хорошая структура из 12 раундов:</p>
+<ul><li>4 быстрых знания;</li><li>3 логических;</li><li>2 визуальных/drag-and-drop;</li><li>2 задания на объяснение;</li><li>1 финальный сложный вопрос.</li></ul>
+<h3 id="report-h-10">«Рейд на компьютерного босса»</h3>
+<p>На доске изображается условный компьютер с <strong>10 HP</strong>. У людей есть <strong>4 батареи/жизни</strong>.</p>
+<p>Каждый раунд обе стороны решают одну задачу.</p>
+<div class="tablewrap"><table><thead><tr><th>Люди</th><th>Компьютер</th><th>Последствие</th></tr></thead><tbody><tr><td>верно</td><td>неверно</td><td>босс теряет 2 HP</td></tr><tr><td>верно</td><td>верно</td><td>босс теряет 1 HP</td></tr><tr><td>неверно</td><td>верно</td><td>люди теряют 1 жизнь</td></tr><tr><td>неверно</td><td>неверно</td><td>ничего</td></tr></tbody></table></div>
+<p><strong>Победа людей:</strong> HP компьютера достигает нуля.</p>
+<p><strong>Победа компьютера:</strong> заканчиваются четыре человеческие жизни либо истекает число раундов.</p>
+<p>Такой формат удобен, если не хочется сравнивать команды между собой. Каждая команда «атакует» одного общего противника.</p>
+<p>Важный баланс: компьютер не должен иметь 90–100% точность на обычных школьных вопросах. Для алгоритмического соперника разумно задать примерно 55–65% на первом пробном раунде и затем откалибровать его так, чтобы победа оставалась реально возможной для обеих сторон. Это не статистическая норма, а предлагаемая игровая настройка.</p>
+<h3 id="report-h-11">«Трио-эстафета»</h3>
+<p>Класс остается разбитым на четыре четверки. В каждой:</p>
+<p><strong>3 ученика решают + 1 тренер проверяет процесс.</strong></p>
+<p>Через один раунд роли меняются.</p>
+<p>Используются короткие испытания:</p>
+<ul><li>найти закономерность;</li><li>распределить карточки;</li><li>собрать порядок;</li><li>дорисовать схему;</li><li>решить логическую задачу;</li><li>исправить ошибочный ответ.</li></ul>
+<p>На решение — 60–90 секунд.</p>
+<p>Одновременно компьютер выполняет собственную версию задачи. Для закрытого вопроса это может быть регулируемый алгоритм. Для открытого — AI.</p>
+<p>Счет команды не обязательно выводить публично. Можно давать каждому трио одну «звезду вклада» за успешный ход, а главный результат по-прежнему вести как <strong>Люди : Компьютер</strong>.</p>
+<p><strong>Победа:</strong> восемь испытаний; сторона, выигравшая больше испытаний, побеждает матч.</p>
+<h3 id="report-h-12">«Случайная дуэль»</h3>
+<p>Этот вариант особенно полезен, когда преподавателю важно проверить индивидуальную готовность.</p>
+<p>Порядок:</p>
+<ol><li>задание появляется для всех;</li><li>все думают 20–30 секунд;</li><li>все команды записывают ответ;</li><li>генератор выбирает ученика;</li><li>выбранный ученик отвечает;</li><li>компьютер дает свой ответ;</li><li>проверяется результат.</li></ol>
+<p>Компьютер и ученик получают по одному баллу за правильность.</p>
+<p>Не следует сначала выбирать ученика, а потом показывать вопрос: остальные 15 человек быстро понимают, что их ответ уже не нужен.</p>
+<p>Для восьми раундов можно заранее случайно сформировать восемь пар. Первый ученик пары отвечает, второй становится проверяющим. Таким способом все 16 получают формальную роль.</p>
+<h3 id="report-h-13">«Поймай ошибку AI»</h3>
+<p>В этом варианте AI не столько отвечает, сколько <strong>защищает свое решение</strong>.</p>
+<p>Пример:</p>
+<blockquote>Компьютер: «Все простые числа нечетные. Поэтому 2 не является простым».</blockquote>
+<p>Команды получают 45 секунд:</p>
+<ul><li>принять решение;</li><li>найти конкретную ошибку;</li><li>исправить ее;</li><li>при необходимости привести контрпример.</li></ul>
+<p>Счет:</p>
+<ul><li>ошибка AI действительно обнаружена — люди +1;</li><li>корректное исправление — еще +1;</li><li>обвинение AI в ошибке, когда ответ был правильным, — компьютер +1;</li><li>AI-ответ выдерживает проверку — компьютер +1.</li></ul>
+<p>Это хороший формат для обучения проверке машинных ответов. UNESCO в своей рамке компетенций по AI для учащихся рассматривает ответственное, критическое и осмысленное взаимодействие с AI как отдельную область компетентности; поэтому режим «проверить компьютер», а не «поверить компьютеру», особенно уместен. <span class="cite-token" title="Идентификатор источника исходного исследования: turn14search20" tabindex="0">[источник]</span></p>
+<h2 id="report-h-14">Как сделать компьютер настоящим соперником</h2>
+<p>Один механизм необязательно использовать весь урок. На практике эффективнее чередовать три режима: <strong>AI, регулируемый алгоритм и фиксированную компьютерную стратегию</strong>.</p>
+<h3 id="report-h-15">AI-викторина</h3>
+<p>Преподаватель открывает AI в отдельной вкладке. Люди сначала фиксируют ответ. Затем тот же вопрос передается AI.</p>
+<p>Преимущество — компьютер действительно решает задачу.</p>
+<p>Недостаток — возможны спорные формулировки, нестабильность ответа и различное время генерации. Поэтому <strong>скорость генерации AI лучше не учитывать в счете</strong>. Время важно для людей, а AI оценивается по правильности.</p>
+<p>Стартовый промпт:</p>
+<div class="codeblock"><div class="codeheader">text</div><pre><code>Ты — сторона «Компьютер» в учебной игре «Люди против компьютера».
+
+Правила:
+1. Отвечай только после сообщения, начинающегося с GO:.
+2. Не проси подсказок.
+3. Не меняй ответ после того, как он дан.
+4. На GO отвечай только в формате:
+
+ОТВЕТ: &lt;краткий окончательный ответ&gt;
+УВЕРЕННОСТЬ: &lt;0–100&gt;%
+
+5. Не добавляй объяснение.
+6. После команды EXPLAIN дай объяснение максимум в двух предложениях.
+7. Если не уверен, всё равно выбери один ответ.
+8. Не используй ответ учеников: он тебе не сообщается.
+9. Не используй веб-поиск.
+
+Жди первого GO:.</code></pre></div>
+<p>Для работы с учащимися разумно использовать AI только с аккаунта преподавателя и не передавать сервису имена, персональные сведения или ученические профили. В ChatGPT преподаватель может отключить использование новых разговоров для улучшения моделей через Data Controls; Temporary Chat не помещается в обычную историю и не используется для улучшения моделей, хотя копия может временно сохраняться в целях безопасности. Для Business, Enterprise, Edu и API действуют другие настройки использования данных. <span class="cite-token" title="Идентификатор источника исходного исследования: turn13search0turn13search1turn13search3" tabindex="0">[источник]</span></p>
+<h3 id="report-h-16">Регулируемый компьютер</h3>
+<p>Для стабильной игры генеративный AI даже не обязателен.</p>
+<p>Для вопроса с четырьмя вариантами компьютер получает вероятность правильного ответа:</p>
+<ul><li>уровень 1: 55%;</li><li>уровень 2: 70%;</li><li>уровень 3: 85%.</li></ul>
+<p>Если «бросок» успешен, компьютер выбирает правильный ответ. Иначе случайно выбирает один из неправильных.</p>
+<p>Это искусственный оппонент, но его преимущество в том, что преподаватель точно контролирует баланс.</p>
+<p>Пример функции:</p>
+<div class="codeblock"><div class="codeheader">javascript</div><pre><code>function computerAnswer(options, correctIndex, accuracy = 0.70) {
+  if (Math.random() &lt; accuracy) {
+    return options[correctIndex];
+  }
+
+  const wrong = options.filter((_, i) =&gt; i !== correctIndex);
+  return wrong[Math.floor(Math.random() * wrong.length)];
+}</code></pre></div>
+<p>Такой компьютер полезнее полностью случайного ответа. Он достаточно силен, чтобы представлять угрозу, но не выигрывает автоматически.</p>
+<h3 id="report-h-17">Адаптивная сложность</h3>
+<p>Адаптацию лучше делать <strong>прозрачной</strong>.</p>
+<p>Например:</p>
+<ul><li>если люди ведут на 3+ очка, точность компьютера повышается на 10 процентных пунктов;</li><li>если компьютер ведет на 3+, точность снижается на 10 пунктов;</li><li>границы — от 45% до 90%.</li></ul>
+<p>Не стоит тайно давать слабым учащимся «детские вопросы». Это быстро воспринимается как маркировка уровня ученика. Лучше изменять характеристики <strong>компьютерной стороны</strong> либо давать одинаковые публичные бонусы отстающей стороне.</p>
+<p>В качестве «гандикапа» подходят:</p>
+<div class="tablewrap"><table><thead><tr><th>Гандикап</th><th>Эффект</th></tr></thead><tbody><tr><td>+15 секунд людям</td><td>помогает более медленным группам</td></tr><tr><td>один бесплатный намек</td><td>снижает барьер без выдачи ответа</td></tr><tr><td>«50:50»</td><td>убирает два варианта</td></tr><tr><td>право на один повторный ответ</td><td>полезно младшим классам</td></tr><tr><td>компьютер начинает с −1</td><td>простейшая коррекция слишком сильного AI</td></tr><tr><td>точность алгоритма −10 п.п.</td><td>незаметно для содержания задания</td></tr><tr><td>компьютер обязан дать объяснение</td><td>увеличивает шанс найти ошибку</td></tr></tbody></table></div>
+<h3 id="report-h-18">Алгоритмический соперник</h3>
+<p>В отдельных заданиях компьютер может использовать настоящую стратегию, а не вероятность.</p>
+<p>Например, в игре «21»:</p>
+<ul><li>на столе виртуально 21 фишка;</li><li>за ход можно забрать 1–3;</li><li>люди и компьютер ходят по очереди;</li><li>компьютер пытается заканчивать свой ход на количестве, кратном четырем.</li></ul>
+<p>Здесь ученики постепенно могут обнаружить алгоритм. После матча вопрос меняется с «кто победил?» на «какую стратегию использовал компьютер?».</p>
+<p>Scratch подходит для создания подобных прозрачных игровых противников: официальный проект Scratch предназначен для создания интерактивных историй, игр и анимаций и доступен бесплатно. <span class="cite-token" title="Идентификатор источника исходного исследования: turn10search2" tabindex="0">[источник]</span></p>
+<h3 id="report-h-19">Автоматическая таблица результатов</h3>
+<p>Автоматизировать нужно только то, что экономит время:</p>
+<ul><li>счет Люди : Компьютер;</li><li>текущий номер раунда;</li><li>случайный выбор ученика;</li><li>уровень AI;</li><li>серия побед;</li><li>финального победителя.</li></ul>
+<p>Сложная электронная турнирная таблица для 16 учеников обычно создает больше переключений, чем пользы.</p>
+<p>Главный экран должен оставаться максимально простым:</p>
+<div class="codeblock"><div class="codeheader">text</div><pre><code>          ЛЮДИ       КОМПЬЮТЕР
+            6     :      5
+
+Раунд 9 / 12
+Активная команда: C
+Сложность компьютера: 70%
+Осталось: 00:34</code></pre></div>
+<h2 id="report-h-20">Банк из двадцати готовых заданий</h2>
+<p>Вопросы ниже намеренно смешивают предметы и типы деятельности. Их можно непосредственно перенести в слайды, Wordwall или Genially.</p>
+<div class="tablewrap"><table><thead><tr><th>№</th><th>Предмет / тип</th><th>Сложность</th><th>Готовое задание</th><th>Ответ / критерий</th></tr></thead><tbody><tr><td>1</td><td>Математика, быстрый тест</td><td>низкая</td><td><strong>Чему равны 15% от 240?</strong> A 24; B 30; C 36; D 40</td><td><strong>36</strong></td></tr><tr><td>2</td><td>Алгебра</td><td>средняя</td><td><strong>Решите:</strong> \(3(x-2)=18\)</td><td><strong>x = 8</strong></td></tr><tr><td>3</td><td>Математика, логика</td><td>средняя</td><td><strong>Какое наименьшее положительное число делится и на 4, и на 6, но не делится на 8?</strong></td><td><strong>12</strong></td></tr><tr><td>4</td><td>Закономерность</td><td>низкая</td><td><strong>3, 6, 12, 24, ?</strong></td><td><strong>48</strong></td></tr><tr><td>5</td><td>Закономерность</td><td>средняя</td><td><strong>2, 5, 10, 17, 26, ?</strong> Объясните правило.</td><td><strong>37</strong>; прибавляются 3, 5, 7, 9, 11</td></tr><tr><td>6</td><td>Логическая задача</td><td>высокая</td><td><strong>Есть 3 выключателя вне закрытой комнаты и одна лампа внутри. В комнату можно войти один раз. Как определить выключатель лампы?</strong></td><td>Включить A, подождать, выключить; включить B; войти. Горит=B, теплая=A, холодная=C</td></tr><tr><td>7</td><td>Вероятность</td><td>средняя</td><td><strong>Подбрасывают две честные монеты. Какова вероятность получить ровно один орел?</strong></td><td><strong>1/2</strong></td></tr><tr><td>8</td><td>Физика</td><td>средняя</td><td><strong>Если скорость тела увеличилась в 2 раза, во сколько раз выросла его кинетическая энергия при неизменной массе?</strong></td><td><strong>В 4 раза</strong></td></tr><tr><td>9</td><td>Физика, мультимедиа</td><td>средняя</td><td>Покажите 5-секундный беззвучный клип мяча, брошенного вверх. Поставьте на паузу в верхней точке. <strong>Куда направлено ускорение?</strong></td><td><strong>Вниз</strong></td></tr><tr><td>10</td><td>Химия, drag-and-drop</td><td>низкая</td><td>Перетащите <strong>pH 2 / pH 7 / pH 11</strong> в зоны «кислота / нейтральная / щёлочь»</td><td>2 → кислота; 7 → нейтр.; 11 → щёлочь</td></tr><tr><td>11</td><td>Биология</td><td>низкая</td><td><strong>Какая органелла эукариотической клетки в школьной модели главным образом связана с синтезом ATP при клеточном дыхании?</strong></td><td><strong>Митохондрия</strong></td></tr><tr><td>12</td><td>Биология, drag-and-drop</td><td>средняя</td><td>Расставьте: <strong>желудок / рот / толстая кишка / пищевод / тонкая кишка</strong></td><td>рот → пищевод → желудок → тонкая → толстая кишка</td></tr><tr><td>13</td><td>География</td><td>низкая</td><td><strong>Столица Канады:</strong> Торонто / Ванкувер / Оттава / Монреаль</td><td><strong>Оттава</strong></td></tr><tr><td>14</td><td>География, пространственная</td><td>средняя</td><td>Расположите с севера на юг: <strong>Каир, Москва, Рим</strong></td><td><strong>Москва → Рим → Каир</strong></td></tr><tr><td>15</td><td>История, drag-and-drop</td><td>средняя</td><td>Расположите по времени: <strong>полёт «Спутника-1» / путешествие Колумба 1492 / Французская революция / европейское книгопечатание Гутенберга</strong></td><td>Гутенберг → Колумб → Французская революция → «Спутник-1»</td></tr><tr><td>16</td><td>Русский язык</td><td>средняя</td><td>Выберите правильное: <strong>«в течение часа» или «в течении часа»</strong>, если имеется в виду время</td><td><strong>в течение часа</strong></td></tr><tr><td>17</td><td>Английский язык</td><td>средняя</td><td><strong>If I ___ more time, I would learn another language.</strong> A have; B had; C will have; D would have</td><td><strong>had</strong></td></tr><tr><td>18</td><td>Информатика</td><td>средняя</td><td><strong>Переведите \(10110_2\) в десятичную систему.</strong></td><td><strong>22</strong></td></tr><tr><td>19</td><td>Математика, рисунок</td><td>средняя</td><td>На координатной плоскости <strong>нарисуйте \(y=2x-1\)</strong>.</td><td>Линия должна, например, проходить через <strong>(0,−1)</strong> и <strong>(1,1)</strong></td></tr><tr><td>20</td><td>AI/логика, аудит ответа</td><td>средняя</td><td>Компьютер утверждает: <strong>«Все простые числа нечетные, потому что каждое четное число делится на 2». Найдите ошибку.</strong></td><td><strong>2 — четное и простое число; утверждение “все” неверно</strong></td></tr></tbody></table></div>
+<p>Для №9 не нужен специальный учебный фильм. Достаточно собственной короткой анимации или записи движения мяча. Это уменьшает зависимость от сети.</p>
+<p>Для задания №19 ученик работает непосредственно на интерактивной доске. Остальные сначала рисуют график на бумаге. Таким образом доска служит не устройством для одного человека, а финальной общей зоной проверки.</p>
+<p>Еще несколько способов быстро превращать обычный вопрос в более сильное задание:</p>
+<div class="tablewrap"><table><thead><tr><th>Вместо…</th><th>Сделать…</th></tr></thead><tbody><tr><td>«Назовите правильный ответ»</td><td>«Ответьте и укажите, какой вариант компьютер выберет ошибочно»</td></tr><tr><td>«Решите пример»</td><td>«Найдите ошибку в компьютерном решении»</td></tr><tr><td>«Соотнесите понятия»</td><td>drag-and-drop на доске</td></tr><tr><td>«Назовите порядок»</td><td>перемешанные карточки</td></tr><tr><td>«Что изображено?»</td><td>скрывать изображение частями</td></tr><tr><td>«Верно/неверно»</td><td>«Верно/неверно + одно доказательство»</td></tr><tr><td>один ответ</td><td>«Ответ + уровень уверенности 0–100%»</td></tr></tbody></table></div>
+<p>Последний вариант особенно интересен при игре против AI: после раскрытия ответа можно сравнить не только правильность, но и <strong>калибровку уверенности</strong>.</p>
+<h2 id="report-h-21">Урок на одной интерактивной доске: темп, управление, оценивание и доступность</h2>
+<h3 id="report-h-22">Расстановка и минимальные материалы</h3>
+<p>Не нужно 16 устройств.</p>
+<p>Достаточно:</p>
+<ul><li>интерактивной доски;</li><li>компьютера преподавателя;</li><li>четырех листов A4 или четырех небольших маркерных досок;</li><li>четырех маркеров;</li><li>при желании — четырех карточек A/B/C/D.</li></ul>
+<p>Доска используется для пяти функций:</p>
+<p><strong>задание → компьютерный ход → манипуляция → проверка → общий счет</strong>.</p>
+<p>Командное мышление происходит в основном <strong>не у доски</strong>. Это принципиально важно при единственном сенсорном экране.</p>
+<p>Рекомендуемая схема класса:</p>
+<div class="codeblock"><div class="codeheader">text</div><pre><code>                 ИНТЕРАКТИВНАЯ ДОСКА
+       ┌─────────────────────────────────┐
+       │  вопрос | таймер | счет | AI   │
+       └─────────────────────────────────┘
+
+          [A]                  [B]
+       4 ученика            4 ученика
+
+
+          [C]                  [D]
+       4 ученика            4 ученика
+
+                  Учитель</code></pre></div>
+<p>Не следует устраивать физические «гонки к доске». Быстрота бега никак не связана с учебной целью, усложняет доступность и создает ненужное преимущество учащимся с большей мобильностью.</p>
+<h3 id="report-h-23">Сценарий на 55 минут</h3>
+<div class="codeblock"><div class="codeheader">Диаграмма · схема Mermaid</div><pre><code>flowchart LR
+    A[&quot;0–5 мин&lt;br/&gt;правила + пробный ход&quot;] --&gt;
+    B[&quot;5–10 мин&lt;br/&gt;команды + роли&quot;] --&gt;
+    C[&quot;10–25 мин&lt;br/&gt;раунды 1–5&quot;] --&gt;
+    D[&quot;25–28 мин&lt;br/&gt;экранная пауза&quot;] --&gt;
+    E[&quot;28–43 мин&lt;br/&gt;раунды 6–10&quot;] --&gt;
+    F[&quot;43–50 мин&lt;br/&gt;босс / AI-аудит&quot;] --&gt;
+    G[&quot;50–55 мин&lt;br/&gt;exit ticket + итог&quot;]</code></pre></div>
+<div class="tablewrap"><table><thead><tr><th>Время</th><th>Что происходит</th><th>Задача преподавателя</th></tr></thead><tbody><tr><td>0–5</td><td>показать механику на одном легком вопросе</td><td>убедиться, что правило «сначала люди, потом компьютер» понятно</td></tr><tr><td>5–10</td><td>4 команды, распределение ролей</td><td>назвать очередность A–B–C–D</td></tr><tr><td>10–25</td><td>5 основных раундов</td><td>держать темп около 2–3 минут</td></tr><tr><td>25–28</td><td>работа без доски</td><td>короткая бумажная задача, смена ролей</td></tr><tr><td>28–43</td><td>еще 5 раундов</td><td>включить более сложные типы задач</td></tr><tr><td>43–50</td><td>финальный «босс» или «поймай AI»</td><td>перейти от скорости к аргументации</td></tr><tr><td>50–55</td><td>три индивидуальных exit-вопроса</td><td>отделить реальное обучение от игрового счета</td></tr></tbody></table></div>
+<p>Если требуется <strong>45 минут</strong>, сокращаются не обсуждения, а количество раундов:</p>
+<p><strong>4 мин правила → 4 мин организация → 24 мин игра → 7 мин финал → 6 мин индивидуальная проверка.</strong></p>
+<p>Если урок проводится в российской школе, такой разрыв на бумажную работу помогает соблюдать ограничения по использованию интерактивной доски. Для учащихся старше 10 лет Роспотребнадзор указывает до 30 минут использования интерактивной доски в течение урока, а для детей до 10 лет — до 20 минут. <span class="cite-token" title="Идентификатор источника исходного исследования: turn16search18turn16search24" tabindex="0">[источник]</span></p>
+<h3 id="report-h-24">Управление шумом и ожиданием</h3>
+<p>Три правила стоит вывести на первом экране:</p>
+<p><strong>«Обсуждаем внутри команды. Не выкрикиваем. Ответ фиксируем до хода компьютера.»</strong></p>
+<p>За выкрикивание не стоит отнимать учебные баллы: это смешивает знание предмета и дисциплину. Лучше использовать отдельный игровой ресурс, например команда теряет один «жетон подсказки».</p>
+<p>Команда, которая закончила первой, обязана не кричать «готово», а выполнить вторую задачу:</p>
+<blockquote>«Проверьте ответ и придумайте одну причину, почему другой вариант мог показаться правильным».</blockquote>
+<p>Это превращает лишние 20 секунд в проверку собственного рассуждения.</p>
+<h3 id="report-h-25">Честность и вовлечение</h3>
+<p><strong>Ротация.</strong> Один ученик не может дважды подряд быть представителем.</p>
+<p><strong>Выбор без повторений.</strong> Если используется случайный вызов, имя временно исключается из пула до завершения цикла.</p>
+<p><strong>Перехват.</strong> Если активная команда ошиблась, другая команда получает только половинный/бонусный балл. Иначе возникает стимул не помогать классу.</p>
+<p><strong>Намек как ресурс.</strong> Каждая команда получает один жетон Hint. Намек сужает задачу, но не дает ответ.</p>
+<p><strong>AI не получает человеческую подсказку.</strong> Ответ класса не читается AI до завершения компьютерного хода.</p>
+<p><strong>Одинаковый ключ.</strong> Решение преподавателя, а не сам AI, является арбитром.</p>
+<p><strong>Спорный вопрос аннулируется.</strong> Ни одна сторона не получает балла.</p>
+<p><strong>Ничья.</strong> Лучший tie-break — не случайность, а короткая задача с численным ответом: выигрывает сторона, чей ответ ближе. Например:</p>
+<blockquote>«Не вычисляя на калькуляторе, оцените \(49 \times 51\).»</blockquote>
+<p>Точный ответ — 2499.</p>
+<h3 id="report-h-26">Учебные цели и оценивание</h3>
+<p>Игровые очки не следует автоматически переводить в школьную отметку. Результат зависит от команды, случайного выбора отвечающего, режима AI и выбранного гандикапа.</p>
+<p>Лучше разделить <strong>game score</strong> и <strong>learning evidence</strong>.</p>
+<div class="tablewrap"><table><thead><tr><th>Учебная цель</th><th>Доказательство во время игры</th><th>Индивидуальная проверка</th></tr></thead><tbody><tr><td>воспроизвести факт/правило</td><td>доля правильных ответов</td><td>1 аналогичный вопрос</td></tr><tr><td>применить правило</td><td>решение новой задачи</td><td>новый пример</td></tr><tr><td>распознать закономерность</td><td>объяснение паттерна</td><td>новый паттерн</td></tr><tr><td>аргументировать</td><td>бонусный reasoning-раунд</td><td>одно письменное обоснование</td></tr><tr><td>выявить ошибку</td><td>AI-аудит</td><td>исправить новое ошибочное решение</td></tr><tr><td>сотрудничать</td><td>выполнение сменяемых ролей</td><td>самооценка/наблюдение преподавателя</td></tr><tr><td>AI-грамотность</td><td>проверка машинного ответа</td><td>«как проверить этот ответ?»</td></tr></tbody></table></div>
+<p>Retrieval practice особенно хорошо соответствует первым двум целям: вместо повторного чтения учащийся вынужден восстановить ответ из памяти, после чего получает обратную связь. Обзор прикладных школьных исследований показывает пользу такого подхода в разных предметах и возрастных группах. <span class="cite-token" title="Идентификатор источника исходного исследования: turn14search2" tabindex="0">[источник]</span></p>
+<p>Хороший exit ticket из трех пунктов:</p>
+<ol><li>один вопрос, очень похожий на игровой;</li><li>один вопрос с переносом в новую ситуацию;</li><li>«Какой ответ компьютера сегодня следовало проверить особенно тщательно и почему?»</li></ol>
+<p>Тогда преподаватель получает индивидуальные данные от всех 16 человек, даже если формально на доске каждый выступал только один-два раза.</p>
+<h3 id="report-h-27">Доступность и дифференциация</h3>
+<p>Логика Universal Design for Learning состоит в том, чтобы заранее проектировать среду, пригодную для учащихся с различными возможностями и исходными условиями, а не добавлять «исключения» после возникновения проблемы. CAST описывает UDL именно как рамку для создания более инклюзивного обучения. <span class="cite-token" title="Идентификатор источника исходного исследования: turn2search23" tabindex="0">[источник]</span></p>
+<p>Практически это означает:</p>
+<div class="tablewrap"><table><thead><tr><th>Потребность</th><th>Изменение игры</th></tr></thead><tbody><tr><td>трудно читать с доски</td><td>тот же вопрос на крупном листе команды</td></tr><tr><td>зрительные особенности</td><td>высокий контраст, крупные элементы, минимум текста</td></tr><tr><td>трудности чтения</td><td>учитель зачитывает вопрос вслух</td></tr><tr><td>нарушения слуха</td><td>весь аудиоконтент имеет текстовую альтернативу</td></tr><tr><td>ограниченная моторика</td><td>ответ можно диктовать представителю; не требуется быстро подходить к доске</td></tr><tr><td>медленная обработка информации</td><td>+15–30 секунд либо предварительное чтение</td></tr><tr><td>языковая поддержка</td><td>краткий словарь ключевых терминов</td></tr><tr><td>сильные учащиеся</td><td>получают задачу «объясни», а не просто более длинный пример</td></tr><tr><td>тревожность</td><td>один Pass-token или ответ через представителя</td></tr><tr><td>трудности удержания внимания</td><td>роли и задачи меняются каждые 2–4 минуты</td></tr></tbody></table></div>
+<p>Дифференцировать полезнее <strong>форму поддержки</strong>, чем объявлять вслух, кто получает «легкий уровень».</p>
+<h2 id="report-h-28">Инструменты и пошаговая реализация</h2>
+<h3 id="report-h-29">Какие инструменты подходят при одной доске</h3>
+<div class="tablewrap"><table><thead><tr><th>Инструмент</th><th>Роль</th><th>Одна доска без ученических устройств</th><th>Что особенно полезно</th><th>Ограничение</th></tr></thead><tbody><tr><td><strong>Wordwall</strong></td><td>вопросы, сортировка, drag-and-drop, колесо</td><td><strong>да</strong></td><td>быстрый контент</td><td>компьютерного соперника лучше добавить отдельно</td></tr><tr><td><strong>Genially</strong></td><td>игровое поле, квест, интерактивная презентация</td><td><strong>да</strong></td><td>визуально сложные сценарии</td><td>подготовка дольше</td></tr><tr><td><strong>Scratch</strong></td><td>собственный компьютерный соперник</td><td><strong>да</strong></td><td>счет, алгоритмы, случайность</td><td>нужно собрать проект</td></tr><tr><td><strong>Wheel of Names</strong></td><td>случайный выбор</td><td><strong>да</strong></td><td>имена, порядок, веса</td><td>это не система оценивания</td></tr><tr><td><strong>ChatGPT</strong></td><td>настоящий AI-соперник</td><td><strong>да</strong></td><td>открытые ответы и объяснения</td><td>ответы нужно проверять</td></tr><tr><td><strong>Kahoot</strong></td><td>готовые тесты</td><td>частично</td><td>знакомая quiz-механика</td><td>штатный Team Mode предполагает устройство команды</td></tr><tr><td><strong>Web Whiteboard / Miro</strong></td><td>рисунки и схемы</td><td><strong>да</strong></td><td>свободное рисование</td><td>лишний сервис, если доска уже имеет ПО</td></tr></tbody></table></div>
+<p>Wordwall особенно удобен для этого сценария: официальный сервис заявляет более 30 типов активностей, включая Quiz, Match up, Flashcards, Spin the wheel и Group sort, а шаблон существующего задания можно быстро заменить другим. Это хорошо соответствует одной общей интерактивной поверхности. <span class="cite-token" title="Идентификатор источника исходного исследования: turn10search0" tabindex="0">[источник]</span></p>
+<p>Genially ориентирован на создание интерактивных презентаций, викторин, игр и другого интерактивного контента, поэтому он удобнее Wordwall, если нужен полноценный «экран босса», карта уровней или разветвленный сюжет. <span class="cite-token" title="Идентификатор источника исходного исследования: turn1search3" tabindex="0">[источник]</span></p>
+<p>Scratch лучше выбрать, если преподавателю нужен собственный алгоритмический соперник без генеративного AI. Он предназначен именно для создания интерактивных игр и анимаций. <span class="cite-token" title="Идентификатор источника исходного исследования: turn10search2" tabindex="0">[источник]</span></p>
+<p>Wheel of Names подходит для публичного случайного вызова ученика: сервис прямо приводит выбор отвечающего ученика как один из вариантов использования и позволяет работать с весами. Для честного обычного урока веса лучше оставить одинаковыми. <span class="cite-token" title="Идентификатор источника исходного исследования: turn11search2" tabindex="0">[источник]</span></p>
+<p>Kahoot здесь не является первым выбором. Его официальный Team Mode построен вокруг маленьких команд с <strong>одним устройством на команду</strong>. Поэтому при строгом условии «только одна интерактивная доска» Kahoot удобнее использовать как источник/экран вопросов, а не как ядро игры. <span class="cite-token" title="Идентификатор источника исходного исследования: turn9search12" tabindex="0">[источник]</span></p>
+<h3 id="report-h-30">Самая простая no-code конфигурация</h3>
+<p><strong>Нужно открыть четыре вкладки:</strong></p>
+<div class="codeblock"><div class="codeheader">text</div><pre><code>[Вопросы] [Компьютер-AI] [Случайный выбор] [Счет]
+ Wordwall    ChatGPT       Wheel           слайд</code></pre></div>
+<p>Шаги перед уроком:</p>
+<p><strong>Сначала</strong> подготовить 10–12 заданий и отдельный бумажный ключ.</p>
+<p><strong>Затем</strong> перенести задания в Wordwall, Genially либо обычные слайды.</p>
+<p><strong>Далее</strong> вставить 16 имен в Wheel of Names.</p>
+<p><strong>После этого</strong> открыть AI и вставить игровой промпт.</p>
+<p><strong>Наконец</strong> сделать тестовый раунд и проверить, что переключение между вкладками занимает несколько секунд.</p>
+<p>Во время урока:</p>
+<div class="codeblock"><div class="codeheader">text</div><pre><code>Показ вопроса
+      ↓
+Команды решают
+      ↓
+Ответ людей фиксируется
+      ↓
+Переключение на AI
+      ↓
+AI отвечает
+      ↓
+Возврат к вопросу
+      ↓
+Ключ + счет</code></pre></div>
+<p>На большинстве раундов AI даже не нужно выводить на экран. Учитель может вызвать его только после фиксации человеческого ответа.</p>
+<h3 id="report-h-31">Более надежная конфигурация без интернета</h3>
+<p>Можно полностью отказаться от AI:</p>
+<p><strong>слайды/Wordwall offline-эквивалент + локальная HTML-страница соперника</strong>.</p>
+<p>Ниже небольшой автономный счетчик. Он работает прямо в браузере. Интернет и сервер не требуются.</p>
+<p>Сохраните текст как <code>human-vs-computer.html</code> и откройте файл двойным щелчком:</p>
+<div class="codeblock"><div class="codeheader">html</div><pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;ru&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Люди против компьютера&lt;/title&gt;
+&lt;style&gt;
+  body {
+    font-family: system-ui, sans-serif;
+    max-width: 900px;
+    margin: 30px auto;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  #score {
+    font-size: 64px;
+    margin: 25px;
+  }
+
+  button, select, input {
+    font-size: 22px;
+    padding: 10px 16px;
+    margin: 6px;
+  }
+
+  #result {
+    min-height: 60px;
+    margin: 20px;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;h1&gt;Люди против компьютера&lt;/h1&gt;
+
+&lt;div id=&quot;score&quot;&gt;
+  &lt;span id=&quot;human&quot;&gt;0&lt;/span&gt;
+  :
+  &lt;span id=&quot;computer&quot;&gt;0&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;label&gt;
+  Сила компьютера:
+  &lt;select id=&quot;level&quot;&gt;
+    &lt;option value=&quot;0.55&quot;&gt;Легко — 55%&lt;/option&gt;
+    &lt;option value=&quot;0.70&quot; selected&gt;Средне — 70%&lt;/option&gt;
+    &lt;option value=&quot;0.85&quot;&gt;Сложно — 85%&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/label&gt;
+
+&lt;br&gt;
+
+&lt;label&gt;
+  &lt;input id=&quot;adaptive&quot; type=&quot;checkbox&quot;&gt;
+  Адаптивный режим
+&lt;/label&gt;
+
+&lt;div&gt;
+  &lt;button onclick=&quot;humanPoint()&quot;&gt;Люди +1&lt;/button&gt;
+  &lt;button onclick=&quot;computerTurn()&quot;&gt;Ход компьютера&lt;/button&gt;
+  &lt;button onclick=&quot;resetGame()&quot;&gt;Новая игра&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;result&quot;&gt;Компьютер ждёт хода.&lt;/div&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Имена через запятую:&lt;/p&gt;
+
+&lt;input
+  id=&quot;names&quot;
+  style=&quot;width:80%&quot;
+  value=&quot;Анна, Борис, Вера, Глеб, Даша, Егор, Жанна, Иван,
+         Катя, Лев, Мария, Никита, Ольга, Павел, Рита, Сергей&quot;
+&gt;
+
+&lt;br&gt;
+
+&lt;button onclick=&quot;pickStudent()&quot;&gt;Случайный ученик&lt;/button&gt;
+
+&lt;div id=&quot;student&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+let human = 0;
+let computer = 0;
+
+function updateScore() {
+  document.getElementById(&quot;human&quot;).textContent = human;
+  document.getElementById(&quot;computer&quot;).textContent = computer;
+}
+
+function humanPoint() {
+  human++;
+  updateScore();
+}
+
+function computerAccuracy() {
+  let p = Number(document.getElementById(&quot;level&quot;).value);
+
+  if (document.getElementById(&quot;adaptive&quot;).checked) {
+    // Если люди ведут, компьютер немного усиливается.
+    // Если компьютер ведет, он немного ослабевает.
+    p += (human - computer) * 0.03;
+
+    // Ограничиваем диапазон.
+    p = Math.max(0.45, Math.min(0.90, p));
+  }
+
+  return p;
+}
+
+function computerTurn() {
+  const p = computerAccuracy();
+  const correct = Math.random() &lt; p;
+
+  if (correct) {
+    computer++;
+    document.getElementById(&quot;result&quot;).textContent =
+      `Компьютер: ВЕРНО (текущая сила ${Math.round(p * 100)}%)`;
+  } else {
+    document.getElementById(&quot;result&quot;).textContent =
+      `Компьютер: ОШИБКА (текущая сила ${Math.round(p * 100)}%)`;
+  }
+
+  updateScore();
+}
+
+function pickStudent() {
+  const names = document
+    .getElementById(&quot;names&quot;)
+    .value
+    .split(&quot;,&quot;)
+    .map(x =&gt; x.trim())
+    .filter(Boolean);
+
+  if (!names.length) {
+    document.getElementById(&quot;student&quot;).textContent =
+      &quot;Введите имена.&quot;;
+    return;
+  }
+
+  const name = names[Math.floor(Math.random() * names.length)];
+
+  document.getElementById(&quot;student&quot;).textContent =
+    `Отвечает: ${name}`;
+}
+
+function resetGame() {
+  human = 0;
+  computer = 0;
+  updateScore();
+
+  document.getElementById(&quot;result&quot;).textContent =
+    &quot;Компьютер ждёт хода.&quot;;
+
+  document.getElementById(&quot;student&quot;).textContent = &quot;&quot;;
+}
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+<p>В этой версии компьютер моделирует <strong>правильность</strong>, а учитель показывает конкретный ответ на основном слайде. Для закрытых вопросов функцию можно заменить приведенной выше <code>computerAnswer()</code>, чтобы компьютер действительно выбирал один из четырех вариантов.</p>
+<p>Для высокоставочного оценивания такой случайный алгоритм использовать нельзя: это игровая механика, а не модель знания. Для соревновательной части урока он, напротив, полезен именно тем, что уровень соперника полностью контролируется преподавателем.</p>
+<h3 id="report-h-32">Практически оптимальный стек</h3>
+<p>Для первого запуска я бы не строил сложную платформу. Достаточно трех компонентов:</p>
+<p><strong>Wordwall или слайды</strong> — учебные задания.   <strong>Локальная HTML-страница</strong> — счет, регулируемый компьютер, случайный выбор.   <strong>ChatGPT только в специальных раундах</strong> — настоящий AI, который самостоятельно отвечает и защищает свою позицию.</p>
+<p>Получается гибрид:</p>
+<div class="codeblock"><div class="codeheader">Диаграмма · схема Mermaid</div><pre><code>flowchart TB
+    Q[Учебное задание] --&gt; H[Команда людей]
+    Q --&gt; C{Тип компьютерного хода}
+
+    C --&gt; A[AI&lt;br/&gt;открытый вопрос]
+    C --&gt; R[Вероятностный алгоритм&lt;br/&gt;тест]
+    C --&gt; S[Фиксированная стратегия&lt;br/&gt;логическая игра]
+
+    H --&gt; J[Единый ключ преподавателя]
+    A --&gt; J
+    R --&gt; J
+    S --&gt; J
+
+    J --&gt; L[Таблица&lt;br/&gt;Люди : Компьютер]</code></pre></div>
+<p>Так компьютер остается непредсказуемым, но урок не становится зависимым от качества интернет-соединения или поведения одной AI-модели.</p>
+<p><strong>Wordwall</strong> дает готовые quiz-, matching-, sorting- и wheel-механики. <span class="cite-token" title="Идентификатор источника исходного исследования: turn10search0" tabindex="0">[источник]</span> <strong>Scratch</strong> позволяет перейти от вероятностного соперника к прозрачной программируемой стратегии. <span class="cite-token" title="Идентификатор источника исходного исследования: turn10search2" tabindex="0">[источник]</span> <strong>ChatGPT</strong> добавляет открытые ответы и возможность спорить с компьютером, причем преподаватель может использовать предусмотренные OpenAI настройки управления данными. <span class="cite-token" title="Идентификатор источника исходного исследования: turn13search0turn13search1" tabindex="0">[источник]</span></p>
+<p>Главный методический выбор при этом остается простым: <strong>доска показывает соревнование, но мышление происходит у всех 16 учеников одновременно</strong>. Именно поэтому формат с одной общей доской может работать не хуже многопользовательской викторины: экран не является единственной точкой учебной активности, а служит общей ареной для фиксации, проверки и обсуждения ответов. Для российского школьного контекста такая организация дополнительно позволяет чередовать экранные и безэкранные этапы в соответствии с требованиями Роспотребнадзора. <span class="cite-token" title="Идентификатор источника исходного исследования: turn16search0turn16search24" tabindex="0">[источник]</span></p></article></div></div></div>
+<footer><div class="shell">HUMAN VS COMPUTER / учебное исследование · <a href="./source.md">source.md</a> · <a href="../../">Каталог GP</a></div></footer>
+<script>
+(function(){
+const plans={
+ "45":[["4′","Правила","Пробный ход"],["4′","Организация","Команды и роли"],["24′","Основная игра","Раунды и смена ролей"],["7′","Финал","Босс или AI-аудит"],["6′","Индивидуальная проверка","3 вопроса и итог"]],
+ "55":[["0–5","Правила","Пробный ход"],["5–10","Организация","4 команды и роли"],["10–25","Раунды 1–5","Первые задания"],["25–28","Экранная пауза","Бумажная задача"],["28–43","Раунды 6–10","Смена типов задач"],["43–50","Финальный босс","AI-аудит"],["50–55","Выходной билет","Три вопроса"]]
+};
+const p45=document.getElementById("plan45"),p55=document.getElementById("plan55"),pi=document.getElementById("planItems");
+function plan(minutes){p45.setAttribute("aria-pressed",String(minutes===45));p55.setAttribute("aria-pressed",String(minutes===55));pi.replaceChildren();plans[String(minutes)].forEach(function(row){const d=document.createElement("div");d.className="planitem";[["b",row[0]],["span",row[1]],["small",row[2]]].forEach(function(a){const x=document.createElement(a[0]);x.textContent=a[1];d.append(x)});pi.append(d)})}
+p45.addEventListener("click",function(){plan(45)});p55.addEventListener("click",function(){plan(55)});
+const modes=[
+["Класс против AI","Четыре команды по очереди отвечают от имени класса. Все решают вопрос, активная команда фиксирует общий ответ.","AI отвечает на тот же вопрос самостоятельно.","Каждая сторона +1 за верный ответ. Две правильные стороны получают по баллу.","25–35 минут"],
+["Рейд на босса","У компьютера 10 HP, у класса четыре жизни. Каждая команда по очереди атакует босса правильным решением.","AI или скрипт, сохраняющий шанс успешной защиты.","Люди верно, компьютер неверно: −2 HP босса; оба верно: −1 HP; только компьютер верно: −1 жизнь людей.","20–30 минут"],
+["Трио-эстафета","Четыре команды по четыре: трое решают, один тренер проверяет процесс. Тренер меняется каждый раунд.","Алгоритм или AI выполняет собственную версию испытания.","После восьми испытаний выигрывает сторона с большим числом выигранных испытаний.","20–25 минут"],
+["Случайная дуэль","Все сначала думают, а отвечающий выбирается после фиксации ответов. Выбор без повторений.","AI или скрипт решает тот же вопрос.","Ученик и компьютер получают по одному баллу за верность.","15–25 минут"],
+["Поймай ошибку AI","Компьютер предъявляет решение и защищает его. Команды ищут реальную ошибку или обосновывают правильность.","AI выдаёт проверяемое решение; арбитр — ключ преподавателя.","Найдена ошибка: +1 людям, исправлена: ещё +1; необоснованное обвинение или правильный AI-ответ: +1 компьютеру.","15–30 минут"]
+];
+const mt=document.getElementById("modeTitle"),md=document.getElementById("modeDescription"),mc=document.getElementById("modeComputer"),mp=document.getElementById("modePoints"),mti=document.getElementById("modeTime");
+document.querySelectorAll("[data-mode]").forEach(function(b){b.addEventListener("click",function(){let k=Number(b.dataset.mode),v=modes[k];document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));mt.textContent=v[0];md.textContent=v[1];mc.textContent=v[2];mp.textContent=v[3];mti.textContent=v[4]})});
+const search=document.getElementById("taskSearch"),subject=document.getElementById("taskSubject"),level=document.getElementById("taskLevel"),sort=document.getElementById("taskSort"),list=document.getElementById("taskList"),cards=[...list.querySelectorAll(".task")],count=document.getElementById("taskCount");
+function filter(){let q=search.value.toLocaleLowerCase("ru").trim(),n=0;cards.sort((a,b)=>sort.value==="asc"?Number(a.dataset.n)-Number(b.dataset.n):Number(b.dataset.n)-Number(a.dataset.n));cards.forEach(c=>{const ok=(!subject.value||c.dataset.subject===subject.value)&&(!level.value||c.dataset.level===level.value)&&(!q||c.dataset.search.includes(q));c.hidden=!ok;if(ok)n++;list.append(c)});count.textContent="Показано заданий: "+n+" из "+cards.length}
+[search,subject,level,sort].forEach(x=>x.addEventListener(x===search?"input":"change",filter));
+let human=0,computer=0,total=0,ties=0;
+function updateScore(){document.getElementById("humanScore").textContent=human;document.getElementById("computerScore").textContent=computer;document.getElementById("roundInfo").textContent="Сыграно раундов: "+total+" · совпадений ответов: "+ties}
+document.getElementById("playRound").addEventListener("click",function(){let h=document.querySelector('input[name="humanResult"]:checked').value==="yes",p=Number(document.getElementById("computerLevel").value),c=Math.random()<p;human+=h?1:0;computer+=c?1:0;total++;if(h===c)ties++;updateScore();document.getElementById("turnLog").textContent="Раунд "+total+": люди "+(h?"верно":"ошибка")+"; компьютер "+(c?"верно":"ошибка")+". "+(h&&c?"Обе стороны +1.":h?"Люди +1.":c?"Компьютер +1.":"0:0.")});
+document.getElementById("resetRounds").addEventListener("click",function(){human=0;computer=0;total=0;ties=0;updateScore();document.getElementById("turnLog").textContent="Новый матч. Выберите результат ответа людей."});
+})();
+</script>
+</body></html>
