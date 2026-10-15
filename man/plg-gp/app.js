@@ -10,6 +10,7 @@ toggle?.addEventListener("click",()=>{const open=sidebar.classList.toggle("open"
 scrim?.addEventListener("click",closeNav);
 doc.querySelectorAll(".nav-item").forEach(link=>link.addEventListener("click",closeNav));
 
+
 const guideInput=doc.getElementById("guide-search-input");
 const guideStatus=doc.getElementById("guide-search-status");
 const guideClear=doc.getElementById("guide-search-clear");
@@ -18,6 +19,9 @@ const guideEmpty=doc.getElementById("guide-search-empty");
 const guideSections=[...doc.querySelectorAll("main.doc > section[id]")];
 const guideLinks=[...doc.querySelectorAll('.sidebar a[href^="#"]')];
 const guideGroups=[...doc.querySelectorAll(".sidebar .side-group")];
+const backBar=doc.getElementById("focus-bar");
+const backButton=doc.getElementById("back-to-landing");
+const breadcrumb=doc.getElementById("focus-breadcrumb");
 const guideAliases={
  overview:"начало home overview главная обзор",
  vns:"vns collect фото изображения картинки генерации промпты",
@@ -28,6 +32,8 @@ const guideAliases={
  builder:"builder конструктор генератор",
  faq:"faq вопросы ответы ограничения помощь"
 };
+const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",io:"IO",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
+let pageMode="landing";
 function normalQuery(value){return String(value).toLocaleLowerCase("ru").replace(/ё/g,"е").trim().replace(/\s+/g," ")}
 function exactGuideTopic(value){
  const q=normalQuery(value).replace(/^@gp\s+/,"");
@@ -41,42 +47,86 @@ function exactGuideTopic(value){
  if(/^(overview|начало|главная)(\s|$)/.test(q))return "overview";
  return null;
 }
-function applyGuideSearch(shouldScroll){
- if(!guideInput)return;
- const q=normalQuery(guideInput.value),topic=q?exactGuideTopic(q):null;
- const matched=guideSections.filter(section=>!q||(topic?section.id===topic:normalQuery((guideAliases[section.id]||"")+" "+section.textContent).includes(q)));
- const visible=new Set(matched.map(section=>section.id));
- for(const section of guideSections)section.hidden=!visible.has(section.id);
+const scrollBehavior=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth";
+function scrollToElement(element,smooth){
+ if(!element)return;
+ window.requestAnimationFrame(()=>element.scrollIntoView({block:"start",behavior:smooth?scrollBehavior():"instant"}));
+}
+function updateView(visible,opts={}){
+ const active=new Set(visible);
+ for(const section of guideSections)section.hidden=!active.has(section.id);
+ // The sidebar remains a usable menu in focused mode; search narrows it only while typing.
  for(const link of guideLinks){
   const id=decodeURIComponent(link.getAttribute("href").slice(1));
-  link.hidden=Boolean(q)&&!visible.has(id);
-  if(q)link.classList.toggle("active",id===(matched[0]?.id||""));
+  link.hidden=Boolean(opts.searching)&&!active.has(id);
+  link.classList.toggle("active",opts.selected===id);
+  if(link.classList.contains("folder"))link.classList.toggle("selected",opts.selected===id);
  }
- for(const group of guideGroups)group.hidden=Boolean(q)&&![...group.querySelectorAll('a[href^="#"]')].some(link=>!link.hidden);
- doc.body.classList.toggle("guide-filtered",Boolean(q));
- guideClear.hidden=!q;
- guideEmpty.hidden=matched.length>0;
- if(guideStatus)guideStatus.textContent=!q?"Показаны все разделы":matched.length===0?"Ничего не найдено":matched.length===1?"Показан 1 раздел":"Разделов: "+matched.length;
- if(shouldScroll){
-  const target=matched[0]||guideEmpty;
-  window.requestAnimationFrame(()=>target?.scrollIntoView({block:"start",behavior:"instant"}));
+ for(const group of guideGroups){
+  group.hidden=Boolean(opts.searching)&&![...group.querySelectorAll('a[href^="#"]')].some(link=>!link.hidden);
  }
+ const narrowed=Boolean(opts.searching)||pageMode!=="landing";
+ doc.body.classList.toggle("guide-filtered",narrowed);
+ guideClear.hidden=!guideInput?.value;
+ backBar.hidden=!narrowed;
+ guideEmpty.hidden=active.size>0;
+ if(guideStatus)guideStatus.textContent=narrowed?(active.size===0?"Ничего не найдено":active.size===1?"Показан 1 раздел":"Разделов: "+active.size):"Показаны все разделы";
+ if(breadcrumb)breadcrumb.textContent=opts.selected?topicNames[opts.selected]||opts.selected:opts.searching?"Поиск по справке":"";
+ if(opts.scroll)scrollToElement(active.size?guideSections.find(s=>active.has(s.id)):guideEmpty,opts.smooth);
 }
+function setLandingMode(scroll=true,updateUrl=true){
+ pageMode="landing";
+ if(guideInput)guideInput.value="";
+ updateView(guideSections.map(s=>s.id),{selected:"overview",scroll,smooth:true});
+ if(updateUrl&&window.location.hash)window.history.pushState(null,"",window.location.pathname+window.location.search);
+ closeNav();
+}
+function focusSection(id,scroll=true,updateUrl=true){
+ if(!topicNames[id])return setLandingMode(scroll,updateUrl);
+ if(id==="overview")return setLandingMode(scroll,updateUrl);
+ pageMode=id;
+ if(guideInput)guideInput.value="";
+ updateView([id],{selected:id,scroll,smooth:true});
+ if(updateUrl&&window.location.hash!=="#"+id)window.history.pushState({focus:id},"","#"+id);
+ closeNav();
+}
+function applyGuideSearch(scroll=true){
+ const query=normalQuery(guideInput?.value||"");
+ if(!query){setLandingMode(scroll);return;}
+ pageMode="search";
+ const topic=exactGuideTopic(query);
+ const hits=guideSections.filter(section=>topic?section.id===topic:normalQuery((guideAliases[section.id]||"")+" "+section.textContent).includes(query));
+ updateView(hits.map(s=>s.id),{searching:true,selected:hits.length===1?hits[0].id:null,scroll,smooth:false});
+ closeNav();
+}
+function clearGuide(){setLandingMode(true);guideInput?.focus()}
 guideInput?.addEventListener("input",()=>applyGuideSearch(true));
-function clearGuide(){if(!guideInput)return;guideInput.value="";applyGuideSearch(true);guideInput.focus()}
 guideClear?.addEventListener("click",clearGuide);
 guideReset?.addEventListener("click",clearGuide);
-applyGuideSearch(false);
+backButton?.addEventListener("click",()=>setLandingMode(true));
+doc.querySelectorAll("[data-focus]").forEach(button=>button.addEventListener("click",()=>focusSection(button.dataset.focus)));
+doc.querySelectorAll('.sidebar a[href^="#"], .brand[href^="#"], .hero-actions a[href^="#"]').forEach(link=>{
+ link.addEventListener("click",event=>{
+  const id=decodeURIComponent(link.getAttribute("href").slice(1));
+  if(!topicNames[id])return;
+  event.preventDefault();
+  focusSection(id);
+ });
+});
+window.addEventListener("popstate",()=>{
+ const id=decodeURIComponent(window.location.hash.slice(1));
+ if(id&&topicNames[id]&&id!=="overview")focusSection(id,true,false);
+ else setLandingMode(true,false);
+});
+window.addEventListener("hashchange",()=>{
+ const id=decodeURIComponent(window.location.hash.slice(1));
+ if(id&&topicNames[id]&&id!=="overview")focusSection(id,true,false);
+ else setLandingMode(true,false);
+});
+const initial=decodeURIComponent(window.location.hash.slice(1));
+if(initial&&topicNames[initial]&&initial!=="overview")focusSection(initial,false,false);
+else setLandingMode(false,false);
 
-const navLinks=[...doc.querySelectorAll('.nav-item[href^="#"]')];
-if("IntersectionObserver" in window){
-const io=new IntersectionObserver(entries=>{
- const item=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
- if(!item)return;
- for(const link of navLinks){link.classList.toggle("active",link.getAttribute("href")==="#"+item.target.id)}
-},{rootMargin:"-12% 0px -72% 0px",threshold:[0,.3,.7]});
-doc.querySelectorAll("main section[id]").forEach(s=>io.observe(s));
-}
 let toastTimer;
 const toast=doc.getElementById("toast");
 function notify(msg){if(!toast)return;toast.textContent=msg;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2200)}
@@ -123,7 +173,7 @@ doc.addEventListener("keydown",e=>{
  const k=e.key.toLowerCase();
  if((e.ctrlKey||e.metaKey)&&k==="k"){e.preventDefault();guideInput?.focus();guideInput?.scrollIntoView({behavior:"smooth",block:"center"})}
  if(e.key==="/" && !/INPUT|TEXTAREA|SELECT/.test(doc.activeElement?.tagName||"")){e.preventDefault();guideInput?.focus();guideInput?.scrollIntoView({behavior:"smooth",block:"center"})}
- if(e.key==="Escape"){if(sidebar.classList.contains("open"))closeNav();else if(doc.activeElement===guideInput){clearGuide();guideInput.blur()}else if(doc.activeElement===search){search.value="";render();search.blur()}}
+ if(e.key==="Escape"){if(sidebar.classList.contains("open"))closeNav();else if(doc.activeElement===guideInput){if(guideInput.value)clearGuide();else if(pageMode!=="landing")setLandingMode(true);guideInput.blur()}else if(doc.activeElement===search){search.value="";render();search.blur()}}
 });
 const select=doc.getElementById("build-command");
 const path=doc.getElementById("build-path");
