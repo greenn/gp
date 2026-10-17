@@ -15,6 +15,7 @@
   <script src="./builder12.js?v=1.3.0" defer></script>
   <script src="./commands22.js?v=1.2.1" defer></script>
   <script src="./builder22.js?v=1.2.1" defer></script>
+  <script src="./next22.js?v=1.3.2" defer></script>
 </head>
 <body>
   <a class="skip" href="#content">К содержимому</a>
@@ -22,7 +23,7 @@
     <header class="topbar">
       <a class="brand" href="./" aria-label="T2F — главная">
         <span class="brand-mark">T<span>2</span>F</span>
-        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.3.1</small></span>
+        <span class="brand-meta"><strong>PHOTO PROMPT LAB</strong><small>Конструктор команд · v1.3.2</small></span>
       </a>
       <div class="topbar-right">
         <span class="top-status"><i></i> Локальная работа, без загрузки фото</span>
@@ -37,6 +38,7 @@
           <button data-page="builder" class="nav-link active" aria-current="page"><span class="nav-ico">◈</span>Конструктор 32<span class="nav-count">32</span></button>
           <button data-page="commands12" class="nav-link"><span class="nav-ico">▣</span>Конструктор 12<span class="nav-count">12</span></button>
           <button data-page="commands22" class="nav-link"><span class="nav-ico">✳</span>Конструктор 22<span class="nav-count">22</span></button>
+          <button data-page="next" class="nav-link"><span class="nav-ico">⏱</span>22 next · Время<span class="nav-count">NEW</span></button>
           <button data-page="quick" class="nav-link"><span class="nav-ico">⌘</span>Короткие команды<span class="nav-count" id="quickCount">—</span></button>
           <button data-page="guide" class="nav-link"><span class="nav-ico">☷</span>Справочник и примеры</button>
         </nav>
@@ -225,6 +227,74 @@
           </div>
         </div>
 
+
+        <div id="page-next" class="page" aria-label="22 next — перемотка сцены во времени">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> T2F 0.8.0 · ВРЕМЕННЫЕ ПЕРЕХОДЫ</div>
+          <h1>22 <span class="headline-accent">next.</span></h1>
+          <p class="lead">Покажи следующий или предыдущий момент истории. Одно изображение на вызов — не видео. Короткая запись <code>22 next</code> означает +1 секунду. Продолжение строится от последнего кадра.</p>
+          <div class="metrics">
+            <div class="metric"><b>±</b><span>вперёд / назад</span></div>
+            <div class="metric"><b>7</b><span>единиц времени</span></div>
+            <div class="metric"><b>1</b><span>изображение</span></div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="tt-row"><div><div class="section-kicker">КОНСТРУКТОР 22 NEXT</div><h2>Переход по времени</h2></div><button type="button" id="resetNext" class="quiet-btn">↺ Сбросить next</button></div>
+            <div class="next-fields">
+              <div><label for="nextDirection" class="tt-label">Направление</label>
+                <select id="nextDirection"><option value="+">Вперёд (+)</option><option value="-">Назад (−)</option></select></div>
+              <div><label for="nextQuantity" class="tt-label">Количество</label>
+                <input id="nextQuantity" type="number" min="0" max="1000000" step="any" value="1" inputmode="decimal" aria-describedby="nextQuantityHint"></div>
+              <div><label for="nextUnit" class="tt-label">Единица времени</label>
+                <select id="nextUnit">
+                  <option value="s">s · секунда</option><option value="m">m · минута</option>
+                  <option value="h">h · час</option><option value="d">d · день</option>
+                  <option value="w">w · неделя</option><option value="mo">mo · месяц</option>
+                  <option value="y">y · год</option>
+                </select></div>
+            </div>
+            <p class="field-hint" id="nextQuantityHint">m — минута, mo — месяц. Допустимы числа: 5s, -30s, 1.5s, 2h.</p>
+            <div class="tt-custom next-extra">
+              <label for="nextExtra" class="tt-label">Уточнить развитие события (необязательно)</label>
+              <textarea id="nextExtra" maxlength="600" rows="2" placeholder="Например: повернулся к окну, keep outfit"></textarea>
+            </div>
+            <div class="next-result"><div class="section-kicker">ТЕКУЩАЯ КОМАНДА</div><code id="nextPreview">22 next</code><p id="nextHint" class="field-hint">Следующая секунда движения.</p></div>
+            <p class="tt-explanation">Готовую команду можно скопировать или сохранить TXT в правой панели. Параметры этой вкладки не изменяют настройки конструкторов 12, 22 и 32.</p>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="tt-row"><div><div class="section-kicker">ПРИМЕРЫ И ПОИСК</div><h2>Готовые переходы</h2></div><span class="soft-count" id="nextCount" aria-live="polite"></span></div>
+            <label class="search large-search" for="nextSearch"><span>⌕</span><input id="nextSearch" type="search" autocomplete="off" placeholder="Поиск: -h, яблоко, год, назад, секунда..."></label>
+            <div class="next-filters" role="group" aria-label="Фильтр команд 22 next">
+              <button class="quick-tab active" type="button" data-next-filter="all" aria-pressed="true">Все</button>
+              <button class="quick-tab" type="button" data-next-filter="forward" aria-pressed="false">Вперёд</button>
+              <button class="quick-tab" type="button" data-next-filter="backward" aria-pressed="false">Назад</button>
+              <button class="quick-tab" type="button" data-next-filter="long" aria-pressed="false">Длительные</button>
+            </div>
+            <div id="nextCards" class="next-cards"></div><div id="nextEmpty" class="empty-state" hidden>Команды не найдены. Сбросьте фильтр или измените запрос.</div>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="section-kicker">ШКАЛА ВРЕМЕНИ</div><h2>Что меняется в сцене</h2>
+            <div class="next-table-wrap"><table class="next-table"><thead><tr><th>Время</th><th>Ожидаемый переход</th><th>Правило сохранения</th></tr></thead><tbody>
+              <tr><td>s · секунды</td><td>Шаг, взгляд, поза, жест, мимика</td><td>Те же лицо, одежда и локация</td></tr>
+              <tr><td>m · минуты</td><td>Продолжение действия; изменяется состояние предметов</td><td>Логика движения и последовательность действий</td></tr>
+              <tr><td>h · часы</td><td>Новый этап деятельности; возможная обоснованная смена места</td><td>Без телепортации и нелогичных событий</td></tr>
+              <tr><td>d / w / mo</td><td>Быт, занятия, обстановка, освещение</td><td>Без произвольных драматических скачков</td></tr>
+              <tr><td>y · годы</td><td>Постепенное взросление или омоложение</td><td>Та же локация по умолчанию</td></tr>
+            </tbody></table></div>
+            <p class="next-note"><strong>Яблоко:</strong> если сейчас надкушено, при <code>22 next -m</code> оно могло быть целым, а при <code>22 next m</code> — частично съеденным. Это вероятная реконструкция, а не запись произошедшего.</p>
+          </div>
+          <div class="tt-panel tt-wide">
+            <div class="section-kicker">ПРИНЦИПЫ И ОГРАНИЧЕНИЯ</div><h2>Цепочка кадров</h2>
+            <ul class="next-rules">
+              <li><strong>От последнего изображения.</strong> После <code>22 next 5s</code> повторное <code>22 next 5s</code> ведёт примерно к +10s от исходного момента.</li>
+              <li><strong>Назад.</strong> При известном предыдущем кадре использовать его как референс. Если неизвестен — лишь наиболее вероятная предыстория.</li>
+              <li><strong>Сохранять героя.</strong> Внешность, исходный возраст, характерная одежда и объекты меняются только по обоснованной причине.</li>
+              <li><strong>Время не равно числу кадров.</strong> Даже <code>22 next 1y</code> создаёт одно изображение, а не серию.</li>
+              <li><strong>Новый сюжет.</strong> Команда <code>clean</code> сбрасывает контекст временной цепочки T2F; с новой картинкой начинается новый t0.</li>
+              <li><strong>Непредсказуемость.</strong> Это художественная реконструкция по одному кадру, а не физический симулятор или достоверный прогноз.</li>
+            </ul>
+          </div>
+        </div>
+
         <div id="page-quick" class="page">
           <div class="eyebrow"><span class="eyebrow-dot"></span> КАТАЛОГ БЫСТРЫХ КОМАНД</div>
           <h1>Коротко. <span class="headline-accent">Точно.</span></h1>
@@ -274,6 +344,7 @@
             <p class="reference-note">Составлено по исследованию 32 параметров фотореализма, включённому в T2F v0.4.0, и по пользовательским коротким командам. «22» — условный синтаксис для чата; «32» — внутренняя договорённость с инструкциями плагина, а не общепринятый формат генераторов изображений.</p>
           </section>
           <section class="guide-block"><span class="step-num">07</span><h2>Система команд 22</h2><p>Откройте вкладку «Конструктор 22»: режим фото или промпт, уровни S и r, 14 модификаторов, сохранение/изменение 9 свойств, полный набор Fashion и Visual Novel поз. Можно собрать один кадр или серию и сразу скопировать результат.</p></section>
+          <section class="guide-block"><span class="step-num">08</span><h2>22 next: переход во времени</h2><p>Вкладка «22 next · Время» позволяет выбрать направление ±, величину и единицу (s, m, h, d, w, mo, y); просмотреть примеры и скопировать готовую команду. <code>22 next</code> = +1 секунда. Для года та же локация по умолчанию, для часа возможен обоснованный переезд, для секунды — только продолжение движения. <strong>Не видео:</strong> один вызов — один кадр.</p><p><a href="#next" id="openNextGuide">Перейти к временны́м переходам →</a></p></section>
         </div>
       </main>
 
