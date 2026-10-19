@@ -16,6 +16,7 @@
   <script src="./commands22.js?v=1.2.1" defer></script>
   <script src="./builder22.js?v=1.2.1" defer></script>
   <script src="./next22.js?v=1.3.2" defer></script>
+  <script src="./builder55.js?v=0.9.0" defer></script>
 </head>
 <body>
   <a class="skip" href="#content">К содержимому</a>
@@ -40,6 +41,7 @@
           <button data-page="builder" class="nav-link active" aria-current="page"><span class="nav-ico">◈</span>Конструктор 32<span class="nav-count">32</span></button>
           <button data-page="commands12" class="nav-link"><span class="nav-ico">▣</span>Конструктор 12<span class="nav-count">12</span></button>
           <button data-page="commands22" class="nav-link"><span class="nav-ico">✳</span>Конструктор 22<span class="nav-count">22</span></button>
+          <button data-page="commands55" class="nav-link"><span class="nav-ico">◉</span>Конструктор 55<span class="nav-count">55</span></button>
           <button data-page="next" class="nav-link"><span class="nav-ico">⏱</span>22 next · Время<span class="nav-count">NEW</span></button>
           <button data-page="quick" class="nav-link"><span class="nav-ico">⌘</span>Короткие команды<span class="nav-count" id="quickCount">—</span></button>
           <button data-page="guide" class="nav-link"><span class="nav-ico">☷</span>Справочник и примеры</button>
@@ -229,6 +231,32 @@
           </div>
         </div>
 
+
+        <div id="page-commands55" class="page" aria-label="Конструктор режима 55">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> T2F 0.9.0 · СВОБОДНОЕ ФОТО-ВОПЛОЩЕНИЕ</div>
+          <h1>Режим <span class="headline-accent">55.</span></h1>
+          <p class="lead">Максимально естественная фотография по референсу. Не требуется точная копия рук, позы, эмоции и освещения. Выберите эпоху, плёнку и степень творческой свободы. Один результат — один кадр.</p>
+          <div class="metrics"><div class="metric"><b>55</b><span>свободный фотореализм</span></div><div class="metric"><b>8</b><span>десятилетий</span></div><div class="metric"><b>0–5</b><span>свобода интерпретации</span></div></div>
+          <div class="builder" id="builder55">
+   <h3>Конструктор команды 55</h3>
+   <p>Комбинируйте десятилетие, плёнку, свет, фотографические настройки и допустимую свободу переработки. Команда формируется локально — для работы скопируйте её в ChatGPT с T2F.</p>
+   <div class="builder-grid builder55-grid">
+    <div><label for="f55-era">Эпоха</label><select id="f55-era"><option value="">Современная / без эпохи</option><option value="50">1950-е</option><option value="60">1960-е</option><option value="70">1970-е</option><option value="80">1980-е</option><option value="90">1990-е</option><option value="00">2000-е</option><option value="10">2010-е</option><option value="20">2020-е</option></select></div>
+    <div><label for="f55-medium">Носитель и камера</label><select id="f55-medium"><option value="">Естественное фото</option><option value="плёнка">Плёнка · 35 мм</option><option value="плёнка 120">Плёнка · 120</option><option value="полароид">Полароид</option><option value="одноразовая">Одноразовая</option><option value="мыльница">Мыльница</option><option value="цифра">Цифровая камера</option><option value="смартфон">Смартфон</option><option value="зеркалка">Зеркалка</option></select></div>
+    <div><label for="f55-stock">Цвет / фотоплёнка</label><select id="f55-stock"><option value="">Естественно</option><option value="gold">Gold</option><option value="portra">Portra</option><option value="superia">Superia</option><option value="tri-x">Tri-X</option><option value="чб">Чёрно-белая</option><option value="выцветшая">Слегка выцветшая</option></select></div>
+    <div><label for="f55-light">Освещение</label><select id="f55-light"><option value="">По сцене</option><option value="вспышка">Прямая вспышка</option><option value="окно">Свет из окна</option><option value="день">Дневной</option><option value="вечер">Вечер</option><option value="пасмурно">Пасмурно</option><option value="лампы">Лампы</option><option value="закат">Закат</option></select></div>
+    <div><label for="f55-genre">Жанр</label><select id="f55-genre"><option value="">По референсу</option><option value="портрет">Портрет</option><option value="семейная">Семейная фотография</option><option value="домашняя">Домашний снимок</option><option value="уличная">Улица</option><option value="документальная">Документальная</option><option value="момент">Случайный момент</option><option value="полный рост">Полный рост</option></select></div>
+    <div><label for="f55-ratio">Формат кадра</label><select id="f55-ratio"><option value="">Сохранить исходный</option><option value="3:2">3:2</option><option value="4:3">4:3</option><option value="1:1">1:1</option><option value="16:9">16:9</option><option value="9:16">9:16</option></select></div>
+    <div><label for="f55-grain">Зерно · <output id="f55-grain-value">0</output></label><input type="range" id="f55-grain" min="0" max="5" value="0"></div>
+    <div><label for="f55-freedom">Свобода · <output id="f55-freedom-value">4</output>/5</label><input type="range" id="f55-freedom" min="0" max="5" value="4"></div>
+   </div>
+   <div class="f55-checks"><label><input type="checkbox" id="f55-keep-face"> Сохранить лицо</label><label><input type="checkbox" id="f55-keep-age"> Явно сохранить возраст</label><label><input type="checkbox" id="f55-keep-outfit"> Сохранить одежду</label><label><input type="checkbox" id="f55-prompt"> Только промпт, без генерации</label></div>
+   <div class="builder-grid single-field"><div><label for="f55-extra">Свои дополнительные условия</label><input id="f55-extra" type="text" maxlength="240" placeholder="например: немного удивлён, сидит за столом"></div></div>
+   <div class="builder-output"><code id="f55-result">55</code><button class="copy" id="f55-copy" data-copy="55">Копировать</button></div>
+   <p style="font-size:12px;margin-top:11px">Числа 70/80/90/00 обозначают десятилетия, не количество картинок. Плёнка и фотоматериалы — эмуляция внешнего вида, не реальные данные съёмки.</p>
+  </div>
+          <p class="field-hint">Полное описание: <a href="../../man/plg-t2f/#mode55" target="_blank" rel="noopener">справочник режима 55 ↗</a>. Справа команда доступна для копирования и сохранения в TXT.</p>
+        </div>
 
         <div id="page-next" class="page" aria-label="22 next — перемотка сцены во времени">
           <div class="eyebrow"><span class="eyebrow-dot"></span> T2F 0.8.0 · ВРЕМЕННЫЕ ПЕРЕХОДЫ</div>
