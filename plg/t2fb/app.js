@@ -377,7 +377,7 @@
   renderQuick();
   diagnostics();
   attach();
-  showPage(location.hash==='#next'?'next':S.page);
-  window.addEventListener('hashchange',()=>{if(location.hash==='#next')showPage('next');});
+  showPage(location.hash==='#next'?'next':location.hash==='#55'?'commands55':S.page);
+  window.addEventListener('hashchange',()=>{if(location.hash==='#next')showPage('next');else if(location.hash==='#55')showPage('commands55');});
   refresh();
 })();
