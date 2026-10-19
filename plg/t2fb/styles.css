@@ -145,3 +145,24 @@ body.mode-next [data-only32],body.mode-next [data-only-photo]{display:none}
 #page-next .next-rules code{background:#edf5ee;color:#286748;padding:2px 4px}
 @media(max-width:1100px){#page-next .next-fields{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){#page-next .next-fields,#page-next .next-cards{grid-template-columns:1fr}#page-next .next-card{padding:13px}}
+
+/* T2F v0.9.0: photographic embodiment 55 preset builder. */
+#page-commands55 .builder{border:1px solid #dce4df;border-radius:13px;padding:21px;background:#fff;box-shadow:var(--shadow);margin:16px 0 22px}
+#page-commands55 .builder>h3{font-size:20px;line-height:1.3;margin:0 0 8px}
+#page-commands55 .builder>p{color:#647568;font-size:13px;margin:0 0 22px}
+#page-commands55 .builder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:17px 0}
+#page-commands55 .builder-grid>div{min-width:0}
+#page-commands55 .builder label{display:block;color:#425e4d;font-size:12px;font-weight:650;margin-bottom:6px}
+#page-commands55 .builder select,#page-commands55 .builder input[type="text"]{display:block;width:100%;min-width:0;min-height:42px;border:1px solid #d5e1d9;border-radius:8px;background:#fbfcfa;color:#1c3228;padding:9px 11px;font-size:13px}
+#page-commands55 .builder select:focus-visible,#page-commands55 .builder input:focus-visible{outline:2px solid #2d8a64;outline-offset:2px}
+#page-commands55 .builder input[type="range"]{display:block;width:100%;accent-color:#138459;margin:11px 0}
+#page-commands55 .f55-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 13px;margin:19px 0}
+#page-commands55 .f55-checks label{font-weight:500;display:flex;align-items:center;gap:8px;margin:0;cursor:pointer}
+#page-commands55 .f55-checks input[type="checkbox"]{accent-color:#16875e;width:16px;height:16px}
+#page-commands55 .builder-output{display:flex;justify-content:space-between;align-items:center;gap:11px;background:#173528;color:#e6fff1;border-radius:9px;padding:15px 17px;min-height:65px}
+#page-commands55 .builder-output code{font-size:12.5px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7}
+#page-commands55 .builder-output button{flex:none;border:1px solid #54896d;background:#27553d;color:#fff;padding:9px 13px;border-radius:6px;cursor:pointer;font-size:12px}
+#page-commands55 .builder-output button:hover{background:#396f50}
+#page-commands55 .field-hint{font-size:12px;color:#5f7d68}
+#page-commands55 .field-hint a{text-decoration:underline;text-underline-offset:2px}
+@media(max-width:750px){#page-commands55 .builder-grid{grid-template-columns:1fr}#page-commands55 .builder{padding:16px}#page-commands55 .f55-checks{grid-template-columns:1fr}}
