@@ -17,6 +17,7 @@
   <script src="./builder22.js?v=1.2.1" defer></script>
   <script src="./next22.js?v=1.3.2" defer></script>
   <script src="./builder55.js?v=0.9.0" defer></script>
+  <script src="../../man/plg-t2f/builder77.js?v=0.10.0" defer></script>
 </head>
 <body>
   <a class="skip" href="#content">К содержимому</a>
@@ -42,6 +43,7 @@
           <button data-page="commands12" class="nav-link"><span class="nav-ico">▣</span>Конструктор 12<span class="nav-count">12</span></button>
           <button data-page="commands22" class="nav-link"><span class="nav-ico">✳</span>Конструктор 22<span class="nav-count">22</span></button>
           <button data-page="commands55" class="nav-link"><span class="nav-ico">◉</span>Конструктор 55<span class="nav-count">55</span></button>
+          <button data-page="commands77" class="nav-link"><span class="nav-ico">▤</span>Конструктор 77<span class="nav-count">77</span></button>
           <button data-page="next" class="nav-link"><span class="nav-ico">⏱</span>22 next · Время<span class="nav-count">NEW</span></button>
           <button data-page="quick" class="nav-link"><span class="nav-ico">⌘</span>Короткие команды<span class="nav-count" id="quickCount">—</span></button>
           <button data-page="guide" class="nav-link"><span class="nav-ico">☷</span>Справочник и примеры</button>
@@ -258,7 +260,31 @@
           <p class="field-hint">Полное описание: <a href="../../man/plg-t2f/#mode55" target="_blank" rel="noopener">справочник режима 55 ↗</a>. Справа команда доступна для копирования и сохранения в TXT.</p>
         </div>
 
-        <div id="page-next" class="page" aria-label="22 next — перемотка сцены во времени">
+        <div id="page-commands77" class="page" aria-label="Конструктор 77">
+ <div class="eyebrow"><span class="eyebrow-dot"></span>T2F 0.10.0 · FACE + OUTFIT + SCENE</div>
+ <h1>Режим <span class="headline-accent">77.</span></h1>
+ <p class="lead">Лицо модели A + одежда B + локация C → одна естественная каталожная фотография. Для режима 77 контекст «школа» включён автоматически, а лагерь, парк, студия, летний комплект и прочие настройки выбираются дополнительно.</p>
+ <div class="metrics"><div class="metric"><b>A</b><span>референс лица</span></div><div class="metric"><b>B</b><span>референс одежды</span></div><div class="metric"><b>C</b><span>референс места</span></div></div>
+ <div class="builder" id="builder77">
+  <h3>Конструктор 77 · собрать модельную съёмку</h3>
+  <p>Укажите тип съёмки, одежду и место. Школьный контекст применяется автоматически; отдельный референс лица и одежды прикрепляется уже в чате T2F.</p>
+  <div class="builder-grid builder77-grid">
+   <div><label for="t77-theme">Контекст</label><select id="t77-theme"><option value="">Школа · по умолчанию</option><option value="лагерь">Школьный лагерь</option><option value="лето">Летняя школьная съёмка</option><option value="лагерь лето">Лагерь летом</option><option value="catalog">Школьный каталог</option><option value="lookbook">Школьный lookbook</option><option value="sportswear">Спортивная одежда</option><option value="uniform">Школьная форма</option><option value="adult campaign">Отдельная взрослая коммерческая съёмка</option></select></div>
+   <div><label for="t77-outfit">Работа с одеждой</label><select id="t77-outfit"><option value="">По референсу B, если есть</option><option value="match outfit">Точно передать комплект B</option><option value="adapt outfit">Адаптировать комплект</option><option value="keep outfit">Сохранить одежду</option><option value="change outfit">Подобрать новый комплект</option><option value="summer outfit">Летний повседневный комплект</option><option value="uniform">Школьная форма</option></select></div>
+   <div><label for="t77-place">Локация</label><select id="t77-place"><option value="">Уместная локация автоматически</option><option value="schoolyard">Школьный двор</option><option value="classroom">Класс</option><option value="camp">Лагерь</option><option value="park">Парк</option><option value="nature">Природа</option><option value="sports ground">Спортивная площадка</option><option value="studio">Студия</option><option value="street">Улица</option><option value="scene=C">Использовать референс C</option></select></div>
+   <div><label for="t77-frame">Композиция</label><select id="t77-frame"><option value="">Полный рост по возможности</option><option value="full body">В полный рост</option><option value="half body">По пояс</option><option value="portrait">Портрет</option><option value="standing">Стоя</option><option value="walk">В движении</option><option value="seated">Сидя</option></select></div>
+   <div><label for="t77-light">Свет и стиль</label><select id="t77-light"><option value="">Натурально</option><option value="soft light">Мягкий свет</option><option value="sunny">Солнечно</option><option value="overcast">Пасмурно</option><option value="documentary">Документальная подача</option><option value="clean background">Чистый фон</option></select></div>
+   <div><label for="t77-format">Формат</label><select id="t77-format"><option value="">Исходный формат</option><option value="3:2">3:2</option><option value="4:3">4:3</option><option value="1:1">1:1</option><option value="9:16">9:16</option><option value="16:9">16:9</option></select></div>
+  </div>
+  <div class="f55-checks"><label><input type="checkbox" id="t77-face" checked> keep face</label><label><input type="checkbox" id="t77-age" checked> keep age</label><label><input type="checkbox" id="t77-b" checked> match outfit B</label><label><input type="checkbox" id="t77-prompt"> Только промпт (p)</label></div>
+  <div class="builder-grid"><div><label for="t77-extra">Дополнительные детали</label><input id="t77-extra" type="text" maxlength="240" placeholder="например: удобная обувь, лёгкая куртка"></div></div>
+  <div class="builder-output"><code id="t77-result">77</code><button class="copy" id="t77-copy" data-copy="77">Копировать</button></div>
+  <p style="font-size:12px">Если прикреплён только портрет, фигура и сцена создаются как нейтральная художественная постановка, а не точная реконструкция тела человека.</p>
+ </div>
+ <p class="field-hint">Прикрепите фотографии лица и комплекта уже в чате T2F. Лицо будет сохранено; тело и поза достраиваются естественно, без претензии на реальную реконструкцию. <a href="../../man/plg-t2f/#mode77" target="_blank" rel="noopener">Подробнее о 77 ↗</a></p>
+</div>
+
+<div id="page-next" class="page" aria-label="22 next — перемотка сцены во времени">
           <div class="eyebrow"><span class="eyebrow-dot"></span> T2F 0.8.0 · ВРЕМЕННЫЕ ПЕРЕХОДЫ</div>
           <h1>22 <span class="headline-accent">next.</span></h1>
           <p class="lead">Покажи следующий или предыдущий момент истории. Одно изображение на вызов — не видео. Короткая запись <code>22 next</code> означает +1 секунду. Продолжение строится от последнего кадра.</p>
