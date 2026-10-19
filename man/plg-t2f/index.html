@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#e5e7e6">
-<meta name="description" content="Интерактивный справочник T2F 0.8.0: фото и 3D, REAL 1–10, режимы 12, 22, 32, 22 next, clean, примеры, поиск и копирование команд.">
+<meta name="description" content="Интерактивный справочник T2F 0.9.0: фото и 3D, REAL 1–10, режимы 12, 22, 32, 55, 22 next, clean, примеры, поиск и копирование команд.">
 <title>T2F — руководство по командам</title>
 <link rel="stylesheet" href="./style.css">
 <script src="./app.js" defer></script>
@@ -14,7 +14,7 @@
 <div class="mobile-scrim" id="scrim"></div>
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="Навигация по руководству T2F">
- <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.8.0">↗</span></div>
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.9.0">↗</span></div>
  <a class="install" href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener noreferrer">Открыть T2F в ChatGPT <span aria-hidden="true">↗</span></a>
  <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки">
   <a class="nav-item active" href="#overview"><span class="ico">⌂</span>Обзор<span class="num">01</span></a>
@@ -23,10 +23,11 @@
   <a class="nav-item" href="#mode12"><span class="ico">▣</span>12 · фото → 3D<span class="num">04</span></a>
   <a class="nav-item" href="#mode22"><span class="ico">✳</span>22 · позы и фото<span class="num">05</span></a>
   <a class="nav-item" href="#mode32"><span class="ico">◎</span>32 · фотография<span class="num">06</span></a>
-  <a class="nav-item" href="#next"><span class="ico">◷</span>22 next · время<span class="num">07</span></a>
-  <a class="nav-item" href="#clean"><span class="ico">↺</span>clean · сброс<span class="num">08</span></a>
-  <a class="nav-item" href="#commands"><span class="ico">⌘</span>Все команды<span class="num">09</span></a>
-  <a class="nav-item" href="#faq"><span class="ico">?</span>Вопросы и ответы<span class="num">10</span></a>
+  <a class="nav-item" href="#mode55"><span class="ico">◉</span>55 · Живое фото<span class="num">07</span></a>
+  <a class="nav-item" href="#next"><span class="ico">◷</span>22 next · время<span class="num">08</span></a>
+  <a class="nav-item" href="#clean"><span class="ico">↺</span>clean · сброс<span class="num">09</span></a>
+  <a class="nav-item" href="#commands"><span class="ico">⌘</span>Все команды<span class="num">10</span></a>
+  <a class="nav-item" href="#faq"><span class="ico">?</span>Вопросы и ответы<span class="num">11</span></a>
  </nav></div>
  <div class="side-divider"></div>
  <div class="side-group"><h3>Рабочие инструменты</h3>
@@ -35,10 +36,10 @@
   <a class="folder" href="../plg-gp/" target="_blank" rel="noopener"><span aria-hidden="true">⌘</span> Справочник GP ↗</a>
  </div>
  <div class="side-divider"></div>
- <div class="side-foot"><strong>T2F / Справочник</strong><div>Актуальная схема плагина 0.8.0<br>Обновлено 19 октября 2026<br>Документация; не запускает генерацию на сайте.</div></div>
+ <div class="side-foot"><strong>T2F / Справочник</strong><div>Актуальная схема плагина 0.9.0<br>Обновлено 19 октября 2026<br>Документация; не запускает генерацию на сайте.</div></div>
 </aside>
 <div class="main">
- <div class="mobile-top"><button type="button" id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>t2f<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.8.0</span></div>
+ <div class="mobile-top"><button type="button" id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>t2f<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.9.0</span></div>
  <div class="guide-search" role="search" aria-label="Поиск по справке">
   <div class="guide-search-inner"><label for="guide-search-input" class="guide-search-label">Поиск по справке</label>
    <div class="guide-search-control"><span class="guide-search-icon" aria-hidden="true">⌕</span><input id="guide-search-input" type="search" autocomplete="off" placeholder="Например: REAL UP, PS1, 22 next, clean…" aria-controls="content" aria-describedby="guide-search-status"><button id="guide-search-clear" class="guide-search-clear" type="button" hidden>Сбросить ×</button></div>
@@ -59,6 +60,7 @@
    <button type="button" class="stat landing-menu-item" data-focus="mode12"><strong>12</strong><span>Фотография → 3D-кадр</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="mode22"><strong>22</strong><span>Поза, эмоция и ракурс</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="mode32"><strong>32</strong><span>Камера, свет и материалы</span></button>
+   <button type="button" class="stat landing-menu-item" data-focus="mode55"><strong>55</strong><span>Свободное живое фото</span></button>
   </nav>
   <div class="note"><span aria-hidden="true">✳</span><div><strong>По умолчанию — один кадр.</strong> Простой вызов T2F с 3D-рендером превращает его в максимально правдоподобную фотографию. Исходные поза, ракурс, выражение лица, одежда и фон сохраняются. Несколько кадров — только по явному запросу.</div></div>
  </section>
@@ -156,6 +158,48 @@
   <a class="action-light inline-action" href="../../plg/t2fb/" target="_blank" rel="noopener">Собрать все 32 параметра ↗</a>
  </section>
 
+ 
+ <section class="section" id="mode55"><span class="section-marker"></span><p class="eyebrow">06 / свободное фото-воплощение · новый режим</p>
+  <h2 class="section-title">55. Реальное фото, а не копия.</h2>
+  <p class="section-intro">Референс — источник образа и истории, но не жёсткий шаблон позы, камеры и света. Система сама исправляет неестественные детали, чтобы результат выглядел как настоящий снимок.</p>
+  <div class="note"><span aria-hidden="true">◉</span><div><strong>Главное отличие:</strong> можно менять руки, ноги, мимику, посадку ткани, освещение, ракурс и часть композиции ради естественности. Сохраняются узнаваемые признаки человека, примерный возраст, количество людей и смысл сцены. Один запрос — один итоговый кадр.</div></div>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>55</code><button class="copy" data-copy="55">Копировать</button></div><p>Максимально натуральное фото. Не копировать исходный 3D-кадр буквально.</p></div>
+   <div class="cmd-card"><div class="top"><code>55 плёнка</code><button class="copy" data-copy="55 плёнка">Копировать</button></div><p>Правдоподобный снимок на фотоплёнку, без искусственной ретро-грязи.</p></div>
+   <div class="cmd-card"><div class="top"><code>55 70</code><button class="copy" data-copy="55 70">Копировать</button></div><p>Реалистичный фотографический стиль 1970-х.</p></div>
+   <div class="cmd-card"><div class="top"><code>55 80</code><button class="copy" data-copy="55 80">Копировать</button></div><p>Фото в стилистике 1980-х, подходящие свет и детали эпохи.</p></div>
+   <div class="cmd-card"><div class="top"><code>55 90</code><button class="copy" data-copy="55 90">Копировать</button></div><p>Повседневное фото 1990-х, естественные жесты и обстановка.</p></div>
+   <div class="cmd-card"><div class="top"><code>55 00</code><button class="copy" data-copy="55 00">Копировать</button></div><p>Эстетика бытовых цифровых и плёночных фото 2000-х.</p></div>
+   <div class="cmd-card"><div class="top"><code>55 90 плёнка</code><button class="copy" data-copy="55 90 плёнка">Копировать</button></div><p>Сочетание конкретной эпохи с плёночной фотоподачей.</p></div>
+   <div class="cmd-card"><div class="top"><code>55 00 мыльница вспышка</code><button class="copy" data-copy="55 00 мыльница вспышка">Копировать</button></div><p>Снимок с компактной цифровой камеры и прямой вспышкой.</p></div>
+  </div>
+  <h3>Какие настройки поддерживаются</h3>
+  <div class="tag-cloud"><span>50 · 60 · 70 · 80 · 90 · 00 · 10 · 20</span><span>плёнка</span><span>плёнка 120</span><span>полароид</span><span>одноразовая</span><span>мыльница</span><span>цифра</span><span>смартфон</span><span>gold · portra · superia · tri-x</span><span>вспышка</span><span>окно</span><span>пасмурно</span><span>документальная</span><span>портрет</span><span>чб</span><span>grain 0–5</span><span>contrast 0–5</span><span>freedom 0–5</span><span>keep face</span><span>keep age</span><span>3:2 · 4:3 · 1:1</span></div>
+  <div class="columns">
+   <div><h3>Свобода адаптации</h3><p class="text"><strong>freedom 0</strong> — максимально близко к референсу. <strong>freedom 3</strong> — умеренно. <strong>freedom 4</strong> — стандартное естественное воплощение. <strong>freedom 5</strong> — больше творческой свободы, но тот же узнаваемый образ.</p></div>
+   <div><h3>Не менять важное</h3><p class="text"><strong>keep face</strong> — черты лица; <strong>keep age</strong> — возраст; <strong>keep outfit</strong> — одежду; <strong>keep pose</strong> — позу; <strong>keep bg</strong> — фон. Винтажный пресет не означает автоматическое старение персонажа.</p></div>
+  </div>
+  <div class="builder" id="builder55">
+   <h3>Конструктор команды 55</h3>
+   <p>Комбинируйте десятилетие, плёнку, свет, фотографические настройки и допустимую свободу переработки. Команда формируется локально — для работы скопируйте её в ChatGPT с T2F.</p>
+   <div class="builder-grid builder55-grid">
+    <div><label for="f55-era">Эпоха</label><select id="f55-era"><option value="">Современная / без эпохи</option><option value="50">1950-е</option><option value="60">1960-е</option><option value="70">1970-е</option><option value="80">1980-е</option><option value="90">1990-е</option><option value="00">2000-е</option><option value="10">2010-е</option><option value="20">2020-е</option></select></div>
+    <div><label for="f55-medium">Носитель и камера</label><select id="f55-medium"><option value="">Естественное фото</option><option value="плёнка">Плёнка · 35 мм</option><option value="плёнка 120">Плёнка · 120</option><option value="полароид">Полароид</option><option value="одноразовая">Одноразовая</option><option value="мыльница">Мыльница</option><option value="цифра">Цифровая камера</option><option value="смартфон">Смартфон</option><option value="зеркалка">Зеркалка</option></select></div>
+    <div><label for="f55-stock">Цвет / фотоплёнка</label><select id="f55-stock"><option value="">Естественно</option><option value="gold">Gold</option><option value="portra">Portra</option><option value="superia">Superia</option><option value="tri-x">Tri-X</option><option value="чб">Чёрно-белая</option><option value="выцветшая">Слегка выцветшая</option></select></div>
+    <div><label for="f55-light">Освещение</label><select id="f55-light"><option value="">По сцене</option><option value="вспышка">Прямая вспышка</option><option value="окно">Свет из окна</option><option value="день">Дневной</option><option value="вечер">Вечер</option><option value="пасмурно">Пасмурно</option><option value="лампы">Лампы</option><option value="закат">Закат</option></select></div>
+    <div><label for="f55-genre">Жанр</label><select id="f55-genre"><option value="">По референсу</option><option value="портрет">Портрет</option><option value="семейная">Семейная фотография</option><option value="домашняя">Домашний снимок</option><option value="уличная">Улица</option><option value="документальная">Документальная</option><option value="момент">Случайный момент</option><option value="полный рост">Полный рост</option></select></div>
+    <div><label for="f55-ratio">Формат кадра</label><select id="f55-ratio"><option value="">Сохранить исходный</option><option value="3:2">3:2</option><option value="4:3">4:3</option><option value="1:1">1:1</option><option value="16:9">16:9</option><option value="9:16">9:16</option></select></div>
+    <div><label for="f55-grain">Зерно · <output id="f55-grain-value">0</output></label><input type="range" id="f55-grain" min="0" max="5" value="0"></div>
+    <div><label for="f55-freedom">Свобода · <output id="f55-freedom-value">4</output>/5</label><input type="range" id="f55-freedom" min="0" max="5" value="4"></div>
+   </div>
+   <div class="f55-checks"><label><input type="checkbox" id="f55-keep-face"> Сохранить лицо</label><label><input type="checkbox" id="f55-keep-age"> Явно сохранить возраст</label><label><input type="checkbox" id="f55-keep-outfit"> Сохранить одежду</label><label><input type="checkbox" id="f55-prompt"> Только промпт, без генерации</label></div>
+   <div class="builder-grid single-field"><div><label for="f55-extra">Свои дополнительные условия</label><input id="f55-extra" type="text" maxlength="240" placeholder="например: немного удивлён, сидит за столом"></div></div>
+   <div class="builder-output"><code id="f55-result">55</code><button class="copy" id="f55-copy" data-copy="55">Копировать</button></div>
+   <p style="font-size:12px;margin-top:11px">Числа 70/80/90/00 обозначают десятилетия, не количество картинок. Плёнка и фотоматериалы — эмуляция внешнего вида, не реальные данные съёмки.</p>
+  </div>
+  <div class="note warn"><span>!</span><div><strong>Отличие от 22:</strong> режим 22 сохраняет или явно контролирует точные свойства исходника. Режим 55 отдаёт приоритет правдоподобию общей фотографии. При смене эпохи сохраняет узнаваемость и возраст персонажа.</div></div>
+ </section>
+
  <section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">06 / развитие сцены во времени</p>
   <h2 class="section-title">22 next. Следующий момент истории.</h2>
   <p class="section-intro">Переход вперёд или назад относительно последнего кадра. Результат — одна новая фотография, а не видео и не точный прогноз.</p>
@@ -223,6 +267,8 @@
  <section class="section" id="faq"><span class="section-marker"></span><p class="eyebrow">09 / ограничения и ответы</p>
   <h2 class="section-title">Частые вопросы.</h2>
   <p class="section-intro">О поведении T2F, изображениях и сохранении состояния.</p>
+  <details class="details"><summary>Чем режим 55 отличается от 22 и 32?</summary><p><strong>55</strong> позволяет изменить неестественную позу, ракурс, мимику, одежду, свет и часть композиции ради ощущения реального снимка. <strong>22</strong> и <strong>32</strong> дают точный контроль параметров и сохранения исходника.</p></details>
+  <details class="details"><summary>Почему 55 90 не состаривает человека?</summary><p><strong>55 90</strong> означает фотографическую эстетику 1990-х, а не перенос персонажа на 90 лет в будущее. Возраст и основные черты сохраняются, если не попросить иное.</p></details>
   <details class="details"><summary>Можно ли просто прислать новую картинку без команды?</summary><p>В активном контексте T2F это может быть воспринято как продолжение предыдущей сцены. Для гарантированно независимого запроса используйте <strong>@T2F clean</strong> с новой картинкой.</p></details>
   <details class="details"><summary>Чем REAL 10 отличается от простого @T2F?</summary><p>REAL 10 фиксирует абсолютный уровень накопительной шкалы REAL. Простой @T2F и без команды REAL требует максимально качественное реалистичное фото, не ориентируясь на текущий счётчик.</p></details>
   <details class="details"><summary>Чем REAL отличается от r 0–5 в команде 22?</summary><p>REAL — отдельный режим с уровнями качества 1–10. <strong>r 0–5</strong> внутри 22 регулирует свободу натурализации формы при сохранении возраста, а не глобальную шкалу качества.</p></details>
@@ -232,7 +278,7 @@
   <details class="details"><summary>Что означает quality=max или Sunburst?</summary><p>Это предпочтения, заложенные в правилах плагина. Они применимы лишь если реальный инструмент предоставляет выбор модели и уровня качества. Текст плагина не переключает скрытые настройки ChatGPT.</p></details>
   <details class="details"><summary>Можно ли сделать 3D-модель для Blender?</summary><p>Режим 12 формирует 3D-выглядящее изображение, не 3D-файл с сеткой, материалами и костями.</p></details>
   <details class="details"><summary>Для чего отдельный конструктор T2FB?</summary><p>Он помогает собрать команды 12, 22 и 32 с выбором параметров и примерами, а также 22 next. Справочник описывает логику работы; конструктор выдаёт готовый текст для чата с T2F.</p></details>
-  <footer class="footer"><span>T2F · Справочник 0.8.0</span><a href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин ↗</a><a href="../../plg/t2fb/" target="_blank" rel="noopener">Конструктор ↗</a><a href="../../">Каталог GP ↗</a><span>GitHub Pages</span></footer>
+  <footer class="footer"><span>T2F · Справочник 0.9.0</span><a href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин ↗</a><a href="../../plg/t2fb/" target="_blank" rel="noopener">Конструктор ↗</a><a href="../../">Каталог GP ↗</a><span>GitHub Pages</span></footer>
  </section>
  </main>
 </div>
