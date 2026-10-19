@@ -7,8 +7,8 @@
  const sections=[...document.querySelectorAll("main.doc > section[id]")];
  const navs=[...document.querySelectorAll(".sidebar .nav-item")];
  const groups=[...document.querySelectorAll(".sidebar .side-group")];
- const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",next:"22 next",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
- const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
+ const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",next:"22 next",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
+ const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
  let current="landing";
  function norm(x){return String(x||"").toLocaleLowerCase("ru").replace(/ё/g,"е").replace(/\s+/g," ").trim();}
  function navClose(){sidebar.classList.remove("open");scrim.classList.remove("show");toggle?.setAttribute("aria-expanded","false");}
@@ -41,6 +41,7 @@
  }
  function exact(q){
   q=q.replace(/^@t2f\s*/,"");
+  if(/^(77|школ|лагер|outfit|одежд|lookbook|каталог|camp|school|съемк|съёмк)/.test(q))return "mode77";
   if(/^(55|пленк|плёнк|свободн|воплощен)/.test(q))return "mode55";
   if(/^(22\s*next|next|время|секунд|минут|час|год|временн)/.test(q))return "next";
   if(/^(real|реализм|уровень|качество|up|down)/.test(q))return "real";
@@ -155,6 +156,20 @@
  ["55","55 80 плёнка grain 2 freedom 5","Максимально естественное переосмысление референса","freedom"],
  ["55","55 p","Выдать только текст промпта, не генерировать фото","текст"],
  ["55","55 help","Справка и перечень пресетов","помощь"],
+ ["77","77","Школа по умолчанию, создать модельную фотосъёмку по лицу","лицо одежда школа"],
+ ["77","77 школа","Школьный lookbook без дополнительной настройки","школа"],
+ ["77","77 лагерь","Школьная фотосъёмка для лагеря","camp"],
+ ["77","77 лагерь лето full body","Летний лагерный образ в полный рост","лето"],
+ ["77","77 лето park","Летняя одежда в парке, школьный контекст","лето парк"],
+ ["77","77 keep face match outfit nature","Лицо A, комплект B и природная сцена","сохранить лицо"],
+ ["77","77 catalog face=A outfit=B scene=C","Три размеченных референса, одно фото","лицо одежда локация"],
+ ["77","77 lookbook match outfit full body","Целостная модельная съёмка комплекта одежды","каталог"],
+ ["77","77 sportswear schoolyard soft light","Школьная спортивная форма, мягкий свет","спорт"],
+ ["77","77 summer camp park sunny","Летняя лагерная сцена на природе","кампания"],
+ ["77","77 keep hair keep age half body","Сохранение причёски и возраста, съёмка по пояс","портрет"],
+ ["77","77 catalog studio clean background","Студийная каталожная съёмка для школьных задач","студия"],
+ ["77","77 p лагерь лето","Готовый текст промпта без генерации","промпт"],
+ ["77","77 help","Показать синтаксис и пресеты 77","справка"],
  ["next","22 next","Следующая секунда, продолжение движения","время секунда"],
  ["next","22 next 5s","Через пять секунд","вперёд"],
  ["next","22 next -s","За секунду до кадра","назад"],
