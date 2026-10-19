@@ -1,3 +1,241 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0;url=../../plg/t2fb/#next"><title>T2F — единый справочник</title><link rel="canonical" href="../../plg/t2fb/"></head>
-<body><p>Справочник перенесён в существующую страницу T2F: <a href="../../plg/t2fb/#next">Открыть раздел 22 next</a>.</p><script>location.replace('../../plg/t2fb/#next');</script></body></html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e5e7e6">
+<meta name="description" content="Интерактивный справочник T2F 0.8.0: фото и 3D, REAL 1–10, режимы 12, 22, 32, 22 next, clean, примеры, поиск и копирование команд.">
+<title>T2F — руководство по командам</title>
+<link rel="stylesheet" href="./style.css">
+<script src="./app.js" defer></script>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<div class="mobile-scrim" id="scrim"></div>
+<div class="app">
+<aside class="sidebar" id="sidebar" aria-label="Навигация по руководству T2F">
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.8.0">↗</span></div>
+ <a class="install" href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener noreferrer">Открыть T2F в ChatGPT <span aria-hidden="true">↗</span></a>
+ <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки">
+  <a class="nav-item active" href="#overview"><span class="ico">⌂</span>Обзор<span class="num">01</span></a>
+  <a class="nav-item" href="#start"><span class="ico">↗</span>Как использовать<span class="num">02</span></a>
+  <a class="nav-item" href="#real"><span class="ico">◈</span>REAL · уровни 1–10<span class="num">03</span></a>
+  <a class="nav-item" href="#mode12"><span class="ico">▣</span>12 · фото → 3D<span class="num">04</span></a>
+  <a class="nav-item" href="#mode22"><span class="ico">✳</span>22 · позы и фото<span class="num">05</span></a>
+  <a class="nav-item" href="#mode32"><span class="ico">◎</span>32 · фотография<span class="num">06</span></a>
+  <a class="nav-item" href="#next"><span class="ico">◷</span>22 next · время<span class="num">07</span></a>
+  <a class="nav-item" href="#clean"><span class="ico">↺</span>clean · сброс<span class="num">08</span></a>
+  <a class="nav-item" href="#commands"><span class="ico">⌘</span>Все команды<span class="num">09</span></a>
+  <a class="nav-item" href="#faq"><span class="ico">?</span>Вопросы и ответы<span class="num">10</span></a>
+ </nav></div>
+ <div class="side-divider"></div>
+ <div class="side-group"><h3>Рабочие инструменты</h3>
+  <a class="folder" href="../../plg/t2fb/" target="_blank" rel="noopener"><span aria-hidden="true">▦</span> Генератор команд T2F ↗</a>
+  <a class="folder" href="../../plg/t2fb/#next" target="_blank" rel="noopener"><span aria-hidden="true">◷</span> Конструктор 22 next ↗</a>
+  <a class="folder" href="../plg-gp/" target="_blank" rel="noopener"><span aria-hidden="true">⌘</span> Справочник GP ↗</a>
+ </div>
+ <div class="side-divider"></div>
+ <div class="side-foot"><strong>T2F / Справочник</strong><div>Актуальная схема плагина 0.8.0<br>Обновлено 19 октября 2026<br>Документация; не запускает генерацию на сайте.</div></div>
+</aside>
+<div class="main">
+ <div class="mobile-top"><button type="button" id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>t2f<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.8.0</span></div>
+ <div class="guide-search" role="search" aria-label="Поиск по справке">
+  <div class="guide-search-inner"><label for="guide-search-input" class="guide-search-label">Поиск по справке</label>
+   <div class="guide-search-control"><span class="guide-search-icon" aria-hidden="true">⌕</span><input id="guide-search-input" type="search" autocomplete="off" placeholder="Например: REAL UP, PS1, 22 next, clean…" aria-controls="content" aria-describedby="guide-search-status"><button id="guide-search-clear" class="guide-search-clear" type="button" hidden>Сбросить ×</button></div>
+   <span id="guide-search-status" class="guide-search-status" aria-live="polite">Показаны все разделы</span>
+  </div>
+ </div>
+ <div class="focus-bar" id="focus-bar" hidden><button type="button" class="back-to-landing" id="back-to-landing">← Назад к обзору</button><span id="focus-breadcrumb" class="focus-breadcrumb"></span></div>
+ <div class="guide-search-empty" id="guide-search-empty" hidden><strong>Ничего не найдено.</strong><p>Попробуйте REAL, 12, 22, 32, next, pose или clean.</p><button type="button" id="guide-search-reset">Показать всё</button></div>
+ <main class="doc" id="content">
+ <section class="section" id="overview">
+  <p class="overline">IMAGE TRANSFORMATION · СПРАВКА T2F</p>
+  <h1 class="hero-title">Из 3D — в фото.<br>Из фото — в 3D.</h1>
+  <p class="hero-lead">T2F объединяет <em>фотореализм, 3D-стилизацию и управление сценой</em>. Изменяйте позы, ракурсы, свет, детали и даже момент времени одной командой.</p>
+  <p class="hero-note">Команды работают в беседе с подключённым плагином T2F. Страница объясняет синтаксис, даёт копируемые примеры и ссылки на отдельный конструктор. Сама страница не генерирует изображения.</p>
+  <div class="hero-actions"><a class="action-dark" href="#commands">Все команды ↓</a><a class="action-light" href="../../plg/t2fb/" target="_blank" rel="noopener">Открыть конструктор ↗</a></div>
+  <nav class="statline landing-menu" aria-label="Выбор раздела">
+   <button type="button" class="stat landing-menu-item" data-focus="real"><strong>REAL</strong><span>10 уровней фотореализма</span></button>
+   <button type="button" class="stat landing-menu-item" data-focus="mode12"><strong>12</strong><span>Фотография → 3D-кадр</span></button>
+   <button type="button" class="stat landing-menu-item" data-focus="mode22"><strong>22</strong><span>Поза, эмоция и ракурс</span></button>
+   <button type="button" class="stat landing-menu-item" data-focus="mode32"><strong>32</strong><span>Камера, свет и материалы</span></button>
+  </nav>
+  <div class="note"><span aria-hidden="true">✳</span><div><strong>По умолчанию — один кадр.</strong> Простой вызов T2F с 3D-рендером превращает его в максимально правдоподобную фотографию. Исходные поза, ракурс, выражение лица, одежда и фон сохраняются. Несколько кадров — только по явному запросу.</div></div>
+ </section>
+
+ <section class="section" id="start"><span class="section-marker"></span><p class="eyebrow">01 / начало работы</p>
+  <h2 class="section-title">Короткая команда. Понятный результат.</h2>
+  <p class="section-intro">Прикрепите изображение в чат с T2F и выберите режим. Команда может идти после упоминания плагина или без него, когда он уже активен.</p>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>@T2F</code><button class="copy" data-copy="@T2F">Копировать</button></div><p>3D/CGI → максимально реалистичная фотография. Один кадр с исходным ракурсом.</p></div>
+   <div class="cmd-card"><div class="top"><code>12</code><button class="copy" data-copy="12">Копировать</button></div><p>Фото → стилизованное или реалистичное 3D-изображение. По умолчанию AAAAA.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 фото</code><button class="copy" data-copy="22 фото">Копировать</button></div><p>Фотопреобразование с управлением позой, кадром и сохранением деталей.</p></div>
+   <div class="cmd-card"><div class="top"><code>REAL 10</code><button class="copy" data-copy="REAL 10">Копировать</button></div><p>Абсолютный уровень 10/10 по накопительной шкале фотореализма.</p></div>
+  </div>
+  <div class="diagram"><span>Загрузить исходник</span><span class="arrow">→</span><span>Ввести команду T2F</span><span class="arrow">→</span><span>Получить 1 кадр / текст</span><span class="arrow">→</span><span>Уточнить результат</span></div>
+  <h3>Что нужно знать</h3>
+  <p class="text">Команды <span class="inline-code">12</span>, <span class="inline-code">22</span>, <span class="inline-code">32</span> — названия режимов, а не количество изображений. Новая загруженная картинка может продолжать текущую сцену, если не дать команду сброса. Для независимой обработки используйте <span class="inline-code">clean</span>.</p>
+ </section>
+
+ <section class="section" id="real"><span class="section-marker"></span><p class="eyebrow">02 / уровни реализма</p>
+  <h2 class="section-title">REAL. Десять ступеней качества.</h2>
+  <p class="section-intro">Кумулятивная шкала требований: следующий уровень дополняет предыдущие. Это не десять кадров и не физический переключатель модели.</p>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>REAL 5</code><button class="copy" data-copy="REAL 5">Копировать</button></div><p>Установить точный уровень 5/10.</p></div>
+   <div class="cmd-card"><div class="top"><code>REAL UP 2</code><button class="copy" data-copy="REAL UP 2">Копировать</button></div><p>Повысить текущий уровень на две ступени.</p></div>
+   <div class="cmd-card"><div class="top"><code>REAL DOWN</code><button class="copy" data-copy="REAL DOWN">Копировать</button></div><p>Понизить текущий уровень на одну ступень.</p></div>
+   <div class="cmd-card"><div class="top"><code>REAL STATUS</code><button class="copy" data-copy="REAL STATUS">Копировать</button></div><p>Узнать текущий зафиксированный уровень, без генерации.</p></div>
+   <div class="cmd-card"><div class="top"><code>REAL MAX</code><button class="copy" data-copy="REAL MAX">Копировать</button></div><p>Сразу перейти к уровню 10.</p></div>
+   <div class="cmd-card"><div class="top"><code>REAL RESET</code><button class="copy" data-copy="REAL RESET">Копировать</button></div><p>Сбросить только счётчик REAL к 1.</p></div>
+  </div>
+  <div class="level-list">
+   <div><b>01</b><span>Убрать пластик, компьютерный блеск, искусственную симметрию</span></div>
+   <div><b>02</b><span>Камера, перспектива и естественная глубина резкости</span></div>
+   <div><b>03</b><span>Физически согласованный свет</span></div>
+   <div><b>04</b><span>Правдоподобные тени и отражения</span></div>
+   <div><b>05</b><span>Кожа, поры, естественные микродетали</span></div>
+   <div><b>06</b><span>Глаза, волосы и пряди</span></div>
+   <div><b>07</b><span>Мимика и природная асимметрия</span></div>
+   <div><b>08</b><span>Ткани, анатомия и контакты</span></div>
+   <div><b>09</b><span>Единство света, материалов и обработки кадра</span></div>
+   <div><b>10</b><span>Максимальная согласованность фото без агрессивной ретуши</span></div>
+  </div>
+  <div class="note"><span>i</span><div>Начальное состояние REAL — 1/10. Запись <strong>REAL UP 0</strong> также означает +1, а <strong>REAL +2</strong> эквивалентна <strong>REAL UP 2</strong>. Простой <strong>@T2F</strong> использует полный стандарт фотореализма независимо от счётчика REAL. Точный уровень может стать неизвестен, если история беседы обрезана.</div></div>
+ </section>
+
+ <section class="section" id="mode12"><span class="section-marker"></span><p class="eyebrow">03 / фото → 3D</p>
+  <h2 class="section-title">12. От PS1 до AAAAA.</h2>
+  <p class="section-intro">Превратите фотографию в изображение трёхмерной сцены. Выберите эпоху, движковую эстетику, освещение и качество материалов.</p>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>12</code><button class="copy" data-copy="12">Копировать</button></div><p>Один CGI-кадр с уровнем AAAAA по умолчанию.</p></div>
+   <div class="cmd-card"><div class="top"><code>12 {PS1}</code><button class="copy" data-copy="12 {PS1}">Копировать</button></div><p>Низкая полигональность, пиксельные текстуры и ретро-освещение.</p></div>
+   <div class="cmd-card"><div class="top"><code>12 {PS2, ночь, туман}</code><button class="copy" data-copy="12 {PS2, ночь, туман}">Копировать</button></div><p>Эстетика 3D-игр начала 2000-х.</p></div>
+   <div class="cmd-card"><div class="top"><code>12 {AAAAA, PBR, 50mm}</code><button class="copy" data-copy="12 {AAAAA, PBR, 50mm}">Копировать</button></div><p>Максимально детализированный CGI по выбранным условиям.</p></div>
+  </div>
+  <h3>Группы пресетов</h3>
+  <div class="tag-cloud"><span>EARLY_3D</span><span>PS1</span><span>N64</span><span>Dreamcast</span><span>PS2</span><span>DX9</span><span>PS3</span><span>PS4</span><span>PS5</span><span>AAA</span><span>AAAA</span><span>AAAAA</span><span>LOW_POLY</span><span>STYLIZED_3D</span><span>TOON_3D</span><span>VOXEL</span><span>CLAY_RENDER</span><span>WIREFRAME</span></div>
+  <p class="text">AAAA/AAAAA — пользовательские ориентиры детализации, а не официальные технические стандарты. Название консоли обозначает визуальный стиль, а не фактический движок. Результат — растровое изображение 3D, а не редактируемый .blend или .fbx.</p>
+  <div class="note"><span>✓</span><div>Команда <strong>12</strong> или <strong>12 {}</strong> создаёт ровно один 3D-кадр. Число 12 не означает 12 изображений. Серия — только по отдельному запросу.</div></div>
+  <a class="action-light inline-action" href="../../plg/t2fb/" target="_blank" rel="noopener">Настроить 12 в генераторе ↗</a>
+ </section>
+
+ <section class="section" id="mode22"><span class="section-marker"></span><p class="eyebrow">04 / 3D → фото</p>
+  <h2 class="section-title">22. Поза, ракурс и внешность.</h2>
+  <p class="section-intro">Управление фотографией человека: поза и действия, камера, выражение лица, одежда, фон, сила изменений и сохранение особенностей исходника.</p>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>22 фото pose three-quarter</code><button class="copy" data-copy="22 фото pose three-quarter">Копировать</button></div><p>Фотореалистичный ракурс три четверти.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 фото pose over-shoulder cam 50</code><button class="copy" data-copy="22 фото pose over-shoulder cam 50">Копировать</button></div><p>Взгляд через плечо, камера 50 мм.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 p cam 85 raw 2</code><button class="copy" data-copy="22 p cam 85 raw 2">Копировать</button></div><p>Вывести только текст промпта, без генерации.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 фото keep face keep outfit</code><button class="copy" data-copy="22 фото keep face keep outfit">Копировать</button></div><p>Явно сохранять черты лица и одежду.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 фото S2 r 2 clean 2 raw 1</code><button class="copy" data-copy="22 фото S2 r 2 clean 2 raw 1">Копировать</button></div><p>Нейтральная подача, натурализация и устранение артефактов.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 фото pose walking pose cam 35</code><button class="copy" data-copy="22 фото pose walking pose cam 35">Копировать</button></div><p>Естественная ходьба, широкая перспектива 35 мм.</p></div>
+  </div>
+  <div class="columns">
+   <div><h3>Управление</h3><p class="text"><strong>pose</strong> — поза; <strong>cam</strong> — оптика 35/50/85 мм; <strong>keep / change</strong> — сохранить или изменить свойство; <strong>S0–S4</strong> — уровень нейтральной безопасной подачи; <strong>r 0–5</strong> — степень натурализации.</p></div>
+   <div><h3>Тонкая настройка</h3><p class="text">Модификаторы <strong>c, f, o, l, bg, m, e, doc, crop, cloth, sfw, clean, raw, glam</strong> имеют силу 1–5. Действия включают full, stand, outpaint, legs, hands, body, walk, sit и turn.</p></div>
+  </div>
+  <p class="text">В системе 22 доступны библиотеки Fashion и Visual Novel, а также собственный текст позы. Можно указать серию из 2–4 кадров, но по умолчанию генерируется один.</p>
+  <a class="action-light inline-action" href="../../plg/t2fb/" target="_blank" rel="noopener">Открыть библиотеку поз 22 ↗</a>
+ </section>
+
+ <section class="section" id="mode32"><span class="section-marker"></span><p class="eyebrow">05 / 32 параметра фотографии</p>
+  <h2 class="section-title">32. Фотография под контролем.</h2>
+  <p class="section-intro">Глубокая настройка преобразования 3D/CGI в фото: композиция, реальные характеристики камеры, свет, физические материалы, цвет и обработка.</p>
+  <div class="terminal"><pre>32 @PORTRAIT_EDITORIAL {
+  focal_mm=85,
+  photo_intent=portrait,
+  scene_subject=сохранить лицо, возраст, одежду и позу
+}</pre><button class="copy" data-copy="32 @PORTRAIT_EDITORIAL {&#10;  focal_mm=85,&#10;  photo_intent=portrait,&#10;  scene_subject=сохранить лицо, возраст, одежду и позу&#10;}">Копировать</button></div>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>32 @BASE_NEUTRAL {}</code><button class="copy" data-copy="32 @BASE_NEUTRAL {}">Копировать</button></div><p>Сдержанное фото с сохранением исходной композиции.</p></div>
+   <div class="cmd-card"><div class="top"><code>32 @SMARTPHONE_CASUAL {}</code><button class="copy" data-copy="32 @SMARTPHONE_CASUAL {}">Копировать</button></div><p>Естественная любительская фотография со смартфона.</p></div>
+  </div>
+  <h3>Пресеты съёмки</h3>
+  <div class="tag-cloud"><span>BASE_NEUTRAL</span><span>PORTRAIT_EDITORIAL</span><span>SMARTPHONE_CASUAL</span><span>STREET_DOCUMENTARY</span><span>PRODUCT_STUDIO</span><span>ARCH_INTERIOR_DAY</span><span>NIGHT_URBAN</span><span>AUTOMOTIVE_NATURAL</span></div>
+  <p class="text">Параметры P01–P32 группируются по сцене, камере, свету, материалам, рендеру и цвету. Пресет заполняет неизвестное, но не отменяет явные пользовательские условия. Точные значения камеры и света нельзя выдавать за реальные метаданные, если они только заданы в промпте.</p>
+  <a class="action-light inline-action" href="../../plg/t2fb/" target="_blank" rel="noopener">Собрать все 32 параметра ↗</a>
+ </section>
+
+ <section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">06 / развитие сцены во времени</p>
+  <h2 class="section-title">22 next. Следующий момент истории.</h2>
+  <p class="section-intro">Переход вперёд или назад относительно последнего кадра. Результат — одна новая фотография, а не видео и не точный прогноз.</p>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>22 next</code><button class="copy" data-copy="22 next">Копировать</button></div><p>По умолчанию +1 секунда: следующее движение.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 next -s</code><button class="copy" data-copy="22 next -s">Копировать</button></div><p>Предыдущая секунда: вероятная фаза движения.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 next 5s</code><button class="copy" data-copy="22 next 5s">Копировать</button></div><p>Пять секунд спустя.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 next m</code><button class="copy" data-copy="22 next m">Копировать</button></div><p>Через минуту: продолжение действия.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 next -h</code><button class="copy" data-copy="22 next -h">Копировать</button></div><p>Час назад: предыдущий этап истории.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 next y</code><button class="copy" data-copy="22 next y">Копировать</button></div><p>Через год: возраст немного меняется, локация по умолчанию та же.</p></div>
+  </div>
+  <h3>Единицы времени</h3>
+  <div class="time-table"><table><thead><tr><th>Команда</th><th>Время</th><th>Изменения сцены</th></tr></thead><tbody>
+   <tr><td><code>s</code></td><td>Секунды</td><td>Поза, жест, взгляд, шаг</td></tr>
+   <tr><td><code>m</code></td><td>Минуты</td><td>Продолжение действия и состояние предметов</td></tr>
+   <tr><td><code>h</code></td><td>Часы</td><td>Следующий этап, обоснованная смена места</td></tr>
+   <tr><td><code>d</code></td><td>Дни</td><td>Быт, занятия, освещение</td></tr>
+   <tr><td><code>w</code></td><td>Недели</td><td>Естественное развитие ситуации</td></tr>
+   <tr><td><code>mo</code></td><td>Месяцы</td><td>Обстановка и постепенные изменения</td></tr>
+   <tr><td><code>y</code></td><td>Годы</td><td>Умеренное взросление или омоложение</td></tr>
+  </tbody></table></div>
+  <p class="text"><strong>m — минута, mo — месяц.</strong> Отрицательный знак означает прошлое. Например, <span class="inline-code">22 next -30s</span> или <span class="inline-code">22 next 2h</span>. Повторный <span class="inline-code">22 next 5s</span> после первого шага добавляет ещё пять секунд от последнего кадра.</p>
+  <div class="builder">
+   <h3>Быстро собрать 22 next</h3><p>Выберите направление и интервал. Полученная команда работает при вызове в ChatGPT.</p>
+   <div class="builder-grid">
+    <div><label for="next-direction">Направление</label><select id="next-direction"><option value="+">Вперёд</option><option value="-">Назад</option></select></div>
+    <div><label for="next-number">Количество</label><input id="next-number" type="number" min="0" max="1000000" step="any" value="1"></div>
+    <div><label for="next-unit">Единица</label><select id="next-unit"><option value="s">Секунды · s</option><option value="m">Минуты · m</option><option value="h">Часы · h</option><option value="d">Дни · d</option><option value="w">Недели · w</option><option value="mo">Месяцы · mo</option><option value="y">Годы · y</option></select></div>
+   </div>
+   <div class="builder-grid single-field"><div><label for="next-extra">Уточнение сюжета (необязательно)</label><input id="next-extra" type="text" maxlength="240" placeholder="например: заканчивает пить чай"></div></div>
+   <div class="builder-output"><code id="next-built">22 next</code><button class="copy" id="next-copy" data-copy="22 next">Копировать</button></div>
+  </div>
+  <div class="note warn"><span>!</span><div>Прошлое и будущее реконструируются по видимой сцене. Если нет прежнего изображения, результат приблизителен. Одежда, лицо и предметы сохраняются, пока для их изменения нет причины. Один вызов = один кадр.</div></div>
+  <a class="action-light inline-action" href="../../plg/t2fb/#next" target="_blank" rel="noopener">Полный конструктор времени ↗</a>
+ </section>
+
+ <section class="section" id="clean"><span class="section-marker"></span><p class="eyebrow">07 / новый исходник</p>
+  <h2 class="section-title">clean. Новый старт в том же чате.</h2>
+  <p class="section-intro">Сброс состояния T2F, когда нужно обработать другое изображение без наследования прошлых поз, ракурсов и настроек.</p>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>@T2F clean</code><button class="copy" data-copy="@T2F clean">Копировать</button></div><p>Сброс T2F: REAL → 1, старые референсы и параметры 12/22/32 не наследуются.</p></div>
+   <div class="cmd-card"><div class="top"><code>22 фото clean 2</code><button class="copy" data-copy="22 фото clean 2">Копировать</button></div><p>Иное значение слова clean: устранить визуальные артефакты внутри режима 22.</p></div>
+  </div>
+  <div class="note"><span>✓</span><div><strong>clean не удаляет сообщения из чата.</strong> С новым приложенным изображением сразу выполняется одна стандартная фототрансформация. Без изображения команда только сбрасывает состояние и ожидает новый файл.</div></div>
+ </section>
+
+ <section class="section" id="commands"><span class="section-marker"></span><p class="eyebrow">08 / каталог коротких команд</p>
+  <h2 class="section-title">Команды без поиска по чату.</h2>
+  <p class="section-intro">Фильтруйте по режиму и действию. Нажатие «Копировать» не запускает генерацию — команда переносится в буфер обмена.</p>
+  <div class="search-bar"><span class="glass" aria-hidden="true">⌕</span><input type="search" id="command-search" aria-label="Поиск по командам" placeholder="Например: REAL UP, возраст, PS1, keep, next"><span class="keycap">/</span></div>
+  <div class="filterbar" aria-label="Фильтр команд">
+   <button class="filter active" data-filter="all" aria-pressed="true">Все</button>
+   <button class="filter" data-filter="real" aria-pressed="false">REAL</button>
+   <button class="filter" data-filter="12" aria-pressed="false">12</button>
+   <button class="filter" data-filter="22" aria-pressed="false">22</button>
+   <button class="filter" data-filter="32" aria-pressed="false">32</button>
+   <button class="filter" data-filter="next" aria-pressed="false">22 next</button>
+   <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
+  </div>
+  <p class="search-status" id="search-count" aria-live="polite"></p>
+  <div id="command-list" class="command-list"></div>
+  <div id="commands-empty" class="empty-state">Ничего не найдено. Измените поиск или фильтр.</div>
+ </section>
+
+ <section class="section" id="faq"><span class="section-marker"></span><p class="eyebrow">09 / ограничения и ответы</p>
+  <h2 class="section-title">Частые вопросы.</h2>
+  <p class="section-intro">О поведении T2F, изображениях и сохранении состояния.</p>
+  <details class="details"><summary>Можно ли просто прислать новую картинку без команды?</summary><p>В активном контексте T2F это может быть воспринято как продолжение предыдущей сцены. Для гарантированно независимого запроса используйте <strong>@T2F clean</strong> с новой картинкой.</p></details>
+  <details class="details"><summary>Чем REAL 10 отличается от простого @T2F?</summary><p>REAL 10 фиксирует абсолютный уровень накопительной шкалы REAL. Простой @T2F и без команды REAL требует максимально качественное реалистичное фото, не ориентируясь на текущий счётчик.</p></details>
+  <details class="details"><summary>Чем REAL отличается от r 0–5 в команде 22?</summary><p>REAL — отдельный режим с уровнями качества 1–10. <strong>r 0–5</strong> внутри 22 регулирует свободу натурализации формы при сохранении возраста, а не глобальную шкалу качества.</p></details>
+  <details class="details"><summary>Почему 12 не даёт 12 изображений?</summary><p>12 — код режима «фото → 3D-изображение». Он создаёт одно изображение AAAAA, если другой стиль или количество кадров не указаны.</p></details>
+  <details class="details"><summary>22 next создаёт видео или настоящую предысторию?</summary><p>Нет. Он создаёт один возможный следующий или предыдущий кадр. При отсутствии данных о прошлом или будущем результат гипотетический.</p></details>
+  <details class="details"><summary>Как задать другую позу без изменения лица?</summary><p>Укажите новую позу, затем <strong>keep face</strong> и, при необходимости, <strong>keep outfit</strong>. При развороте невидимые детали достраиваются приблизительно.</p></details>
+  <details class="details"><summary>Что означает quality=max или Sunburst?</summary><p>Это предпочтения, заложенные в правилах плагина. Они применимы лишь если реальный инструмент предоставляет выбор модели и уровня качества. Текст плагина не переключает скрытые настройки ChatGPT.</p></details>
+  <details class="details"><summary>Можно ли сделать 3D-модель для Blender?</summary><p>Режим 12 формирует 3D-выглядящее изображение, не 3D-файл с сеткой, материалами и костями.</p></details>
+  <details class="details"><summary>Для чего отдельный конструктор T2FB?</summary><p>Он помогает собрать команды 12, 22 и 32 с выбором параметров и примерами, а также 22 next. Справочник описывает логику работы; конструктор выдаёт готовый текст для чата с T2F.</p></details>
+  <footer class="footer"><span>T2F · Справочник 0.8.0</span><a href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин ↗</a><a href="../../plg/t2fb/" target="_blank" rel="noopener">Конструктор ↗</a><a href="../../">Каталог GP ↗</a><span>GitHub Pages</span></footer>
+ </section>
+ </main>
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
