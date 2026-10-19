@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#e5e7e6">
-<meta name="description" content="Интерактивный справочник T2F 0.9.0: фото и 3D, REAL 1–10, режимы 12, 22, 32, 55, 22 next, clean, примеры, поиск и копирование команд.">
+<meta name="description" content="Интерактивный справочник T2F 0.10.0: фото и 3D, REAL 1–10, режимы 12, 22, 32, 55, 77, 22 next, clean, примеры, поиск и копирование команд.">
 <title>T2F — руководство по командам</title>
 <link rel="stylesheet" href="./style.css">
 <script src="./app.js" defer></script>
+<script src="./builder77.js" defer></script>
 </head>
 <body>
 <div class="backdrop" aria-hidden="true"></div>
 <div class="mobile-scrim" id="scrim"></div>
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="Навигация по руководству T2F">
- <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.9.0">↗</span></div>
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.10.0">↗</span></div>
  <a class="install" href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener noreferrer">Открыть T2F в ChatGPT <span aria-hidden="true">↗</span></a>
  <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки">
   <a class="nav-item active" href="#overview"><span class="ico">⌂</span>Обзор<span class="num">01</span></a>
@@ -24,6 +25,7 @@
   <a class="nav-item" href="#mode22"><span class="ico">✳</span>22 · позы и фото<span class="num">05</span></a>
   <a class="nav-item" href="#mode32"><span class="ico">◎</span>32 · фотография<span class="num">06</span></a>
   <a class="nav-item" href="#mode55"><span class="ico">◉</span>55 · Живое фото<span class="num">07</span></a>
+  <a class="nav-item" href="#mode77"><span class="ico">▤</span>77 · Одежда и сцена<span class="num">08</span></a>
   <a class="nav-item" href="#next"><span class="ico">◷</span>22 next · время<span class="num">08</span></a>
   <a class="nav-item" href="#clean"><span class="ico">↺</span>clean · сброс<span class="num">09</span></a>
   <a class="nav-item" href="#commands"><span class="ico">⌘</span>Все команды<span class="num">10</span></a>
@@ -61,6 +63,7 @@
    <button type="button" class="stat landing-menu-item" data-focus="mode22"><strong>22</strong><span>Поза, эмоция и ракурс</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="mode32"><strong>32</strong><span>Камера, свет и материалы</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="mode55"><strong>55</strong><span>Свободное живое фото</span></button>
+   <button type="button" class="stat landing-menu-item" data-focus="mode77"><strong>77</strong><span>Лицо + одежда + сцена</span></button>
   </nav>
   <div class="note"><span aria-hidden="true">✳</span><div><strong>По умолчанию — один кадр.</strong> Простой вызов T2F с 3D-рендером превращает его в максимально правдоподобную фотографию. Исходные поза, ракурс, выражение лица, одежда и фон сохраняются. Несколько кадров — только по явному запросу.</div></div>
  </section>
@@ -201,7 +204,47 @@
   <div class="note warn"><span>!</span><div><strong>Отличие от 22:</strong> режим 22 сохраняет или явно контролирует точные свойства исходника. Режим 55 отдаёт приоритет правдоподобию общей фотографии. При смене эпохи сохраняет узнаваемость и возраст персонажа.</div></div>
  </section>
 
- <section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">06 / развитие сцены во времени</p>
+ <section class="section" id="mode77"><span class="section-marker"></span><p class="eyebrow">07 / модельная съёмка · face + outfit + scene</p>
+ <h2 class="section-title">77. Лицо, одежда, локация.</h2>
+ <p class="section-intro">Нужен полноценный каталожный или модельный снимок по одному портрету? Режим <strong>77</strong> сохраняет узнаваемое лицо, достраивает подходящие тело и позу, переносит комплект одежды и собирает единую правдоподобную сцену.</p>
+ <div class="note"><span>▤</span><div><strong>«Школа» — по умолчанию.</strong> <code>77</code> работает как <code>77 школа</code>: выездная возрастно-корректная фотосъёмка для школьных задач. <code>лагерь</code>, <code>лето</code>, <code>парк</code>, <code>catalog</code> и прочее добавляются отдельно. Это контекст съёмки, не обязательное изображение школьного здания или формы.</div></div>
+ <h3>Три возможных референса</h3>
+ <div class="cmd-grid">
+  <div class="cmd-card"><div class="top"><code>A · FACE</code></div><p>Лицо или портрет ученика/модели. Сохраняются узнаваемые черты и визуальный возраст. Неизвестное тело не считается реконструкцией реальных пропорций.</p></div>
+  <div class="cmd-card"><div class="top"><code>B · OUTFIT</code></div><p>Отдельный референс одежды или комплекта. Передаются фасон, цвета, принты, ткань и посадка; чужое лицо с одежды не переносится.</p></div>
+  <div class="cmd-card"><div class="top"><code>C · SCENE</code></div><p>Фото локации или её описание. Если нет, сцена строится автоматически — школа, лагерь, природная площадка или другое место по задаче.</p></div>
+ </div>
+ <h3>Готовые команды</h3>
+ <div class="cmd-grid">
+  <div class="cmd-card"><div class="top"><code>77</code><button class="copy" data-copy="77">Копировать</button></div><p>Школьный контекст, спокойный модельный образ и один реалистичный кадр.</p></div>
+  <div class="cmd-card"><div class="top"><code>77 лагерь лето full body</code><button class="copy" data-copy="77 лагерь лето full body">Копировать</button></div><p>Летний образ школьного лагеря по лицу, фигура и локация достраиваются.</p></div>
+  <div class="cmd-card"><div class="top"><code>77 keep face match outfit nature</code><button class="copy" data-copy="77 keep face match outfit nature">Копировать</button></div><p>Лицо A, комплект B и естественный природный фон.</p></div>
+  <div class="cmd-card"><div class="top"><code>77 catalog face=A outfit=B scene=C</code><button class="copy" data-copy="77 catalog face=A outfit=B scene=C">Копировать</button></div><p>Объединить три размеченных референса в одну товарную фотографию.</p></div>
+  <div class="cmd-card"><div class="top"><code>77 school camp keep face match outfit</code><button class="copy" data-copy="77 school camp keep face match outfit">Копировать</button></div><p>Лагерный lookbook для школы, лицо и одежда сохраняются.</p></div>
+  <div class="cmd-card"><div class="top"><code>77 p лагерь лето</code><button class="copy" data-copy="77 p лагерь лето">Копировать</button></div><p>Только полный текст промпта, без запуска генерации.</p></div>
+ </div>
+ <div class="tag-cloud"><span>school · по умолчанию</span><span>camp · лагерь</span><span>summer · лето</span><span>catalog</span><span>lookbook</span><span>sportswear</span><span>uniform</span><span>match outfit</span><span>adapt outfit</span><span>keep face</span><span>keep age</span><span>full body</span><span>half body</span><span>park</span><span>studio</span><span>nature</span><span>soft light</span></div>
+ <div class="builder" id="builder77">
+  <h3>Конструктор 77 · собрать модельную съёмку</h3>
+  <p>Укажите тип съёмки, одежду и место. Школьный контекст применяется автоматически; отдельный референс лица и одежды прикрепляется уже в чате T2F.</p>
+  <div class="builder-grid builder77-grid">
+   <div><label for="t77-theme">Контекст</label><select id="t77-theme"><option value="">Школа · по умолчанию</option><option value="лагерь">Школьный лагерь</option><option value="лето">Летняя школьная съёмка</option><option value="лагерь лето">Лагерь летом</option><option value="catalog">Школьный каталог</option><option value="lookbook">Школьный lookbook</option><option value="sportswear">Спортивная одежда</option><option value="uniform">Школьная форма</option><option value="adult campaign">Отдельная взрослая коммерческая съёмка</option></select></div>
+   <div><label for="t77-outfit">Работа с одеждой</label><select id="t77-outfit"><option value="">По референсу B, если есть</option><option value="match outfit">Точно передать комплект B</option><option value="adapt outfit">Адаптировать комплект</option><option value="keep outfit">Сохранить одежду</option><option value="change outfit">Подобрать новый комплект</option><option value="summer outfit">Летний повседневный комплект</option><option value="uniform">Школьная форма</option></select></div>
+   <div><label for="t77-place">Локация</label><select id="t77-place"><option value="">Уместная локация автоматически</option><option value="schoolyard">Школьный двор</option><option value="classroom">Класс</option><option value="camp">Лагерь</option><option value="park">Парк</option><option value="nature">Природа</option><option value="sports ground">Спортивная площадка</option><option value="studio">Студия</option><option value="street">Улица</option><option value="scene=C">Использовать референс C</option></select></div>
+   <div><label for="t77-frame">Композиция</label><select id="t77-frame"><option value="">Полный рост по возможности</option><option value="full body">В полный рост</option><option value="half body">По пояс</option><option value="portrait">Портрет</option><option value="standing">Стоя</option><option value="walk">В движении</option><option value="seated">Сидя</option></select></div>
+   <div><label for="t77-light">Свет и стиль</label><select id="t77-light"><option value="">Натурально</option><option value="soft light">Мягкий свет</option><option value="sunny">Солнечно</option><option value="overcast">Пасмурно</option><option value="documentary">Документальная подача</option><option value="clean background">Чистый фон</option></select></div>
+   <div><label for="t77-format">Формат</label><select id="t77-format"><option value="">Исходный формат</option><option value="3:2">3:2</option><option value="4:3">4:3</option><option value="1:1">1:1</option><option value="9:16">9:16</option><option value="16:9">16:9</option></select></div>
+  </div>
+  <div class="f55-checks"><label><input type="checkbox" id="t77-face" checked> keep face</label><label><input type="checkbox" id="t77-age" checked> keep age</label><label><input type="checkbox" id="t77-b" checked> match outfit B</label><label><input type="checkbox" id="t77-prompt"> Только промпт (p)</label></div>
+  <div class="builder-grid"><div><label for="t77-extra">Дополнительные детали</label><input id="t77-extra" type="text" maxlength="240" placeholder="например: удобная обувь, лёгкая куртка"></div></div>
+  <div class="builder-output"><code id="t77-result">77</code><button class="copy" id="t77-copy" data-copy="77">Копировать</button></div>
+  <p style="font-size:12px">Если прикреплён только портрет, фигура и сцена создаются как нейтральная художественная постановка, а не точная реконструкция тела человека.</p>
+ </div>
+ <p><a class="action-light inline-action" href="../../plg/t2fb/#77" target="_blank" rel="noopener">Открыть 77 в основном конструкторе ↗</a></p>
+ <div class="note warn"><span>!</span><div>Школьные и лагерные съёмки несовершеннолетних — нейтральные и возрастно-корректные; модельный образ не должен сексуализировать учащихся. Указанный пользователем контекст согласий не отменяет ограничений и приватности. Для бельевого каталога нужны совершеннолетние модели.</div></div>
+</section>
+
+<section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">06 / развитие сцены во времени</p>
   <h2 class="section-title">22 next. Следующий момент истории.</h2>
   <p class="section-intro">Переход вперёд или назад относительно последнего кадра. Результат — одна новая фотография, а не видео и не точный прогноз.</p>
   <div class="cmd-grid">
@@ -258,6 +301,7 @@
    <button class="filter" data-filter="22" aria-pressed="false">22</button>
    <button class="filter" data-filter="32" aria-pressed="false">32</button>
    <button class="filter" data-filter="55" aria-pressed="false">55</button>
+   <button class="filter" data-filter="77" aria-pressed="false">77</button>
    <button class="filter" data-filter="next" aria-pressed="false">22 next</button>
    <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
   </div>
@@ -269,6 +313,7 @@
  <section class="section" id="faq"><span class="section-marker"></span><p class="eyebrow">09 / ограничения и ответы</p>
   <h2 class="section-title">Частые вопросы.</h2>
   <p class="section-intro">О поведении T2F, изображениях и сохранении состояния.</p>
+  <details class="details"><summary>Что означает «школа по умолчанию» в 77?</summary><p>77 использует возрастно-корректную школьную модельную съёмку как рабочую рамку. Это не требование школьной формы или здания школы в кадре: можно указать лагерь, парк или студию. При портретном референсе тело достраивается приблизительно, а не восстанавливается фактически.</p></details>
   <details class="details"><summary>Чем режим 55 отличается от 22 и 32?</summary><p><strong>55</strong> позволяет изменить неестественную позу, ракурс, мимику, одежду, свет и часть композиции ради ощущения реального снимка. <strong>22</strong> и <strong>32</strong> дают точный контроль параметров и сохранения исходника.</p></details>
   <details class="details"><summary>Почему 55 90 не состаривает человека?</summary><p><strong>55 90</strong> означает фотографическую эстетику 1990-х, а не перенос персонажа на 90 лет в будущее. Возраст и основные черты сохраняются, если не попросить иное.</p></details>
   <details class="details"><summary>Можно ли просто прислать новую картинку без команды?</summary><p>В активном контексте T2F это может быть воспринято как продолжение предыдущей сцены. Для гарантированно независимого запроса используйте <strong>@T2F clean</strong> с новой картинкой.</p></details>
