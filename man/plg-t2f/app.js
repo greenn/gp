@@ -7,8 +7,8 @@
  const sections=[...document.querySelectorAll("main.doc > section[id]")];
  const navs=[...document.querySelectorAll(".sidebar .nav-item")];
  const groups=[...document.querySelectorAll(".sidebar .side-group")];
- const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",next:"22 next",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
- const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
+ const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",next:"22 next",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
+ const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
  let current="landing";
  function norm(x){return String(x||"").toLocaleLowerCase("ru").replace(/ё/g,"е").replace(/\s+/g," ").trim();}
  function navClose(){sidebar.classList.remove("open");scrim.classList.remove("show");toggle?.setAttribute("aria-expanded","false");}
@@ -41,6 +41,7 @@
  }
  function exact(q){
   q=q.replace(/^@t2f\s*/,"");
+  if(/^(55|пленк|плёнк|свободн|воплощен)/.test(q))return "mode55";
   if(/^(22\s*next|next|время|секунд|минут|час|год|временн)/.test(q))return "next";
   if(/^(real|реализм|уровень|качество|up|down)/.test(q))return "real";
   if(/^(12|ps1|ps2|ps3|ps4|ps5|n64|aaaa|3d|3д)/.test(q))return "mode12";
@@ -134,6 +135,26 @@
  ["32","32 @SMARTPHONE_CASUAL {}","Повседневный снимок на смартфон","камера"],
  ["32","32 @NIGHT_URBAN {}","Ночная городская съёмка","ночь"],
  ["32","32 @PRODUCT_STUDIO {}","Студийное фото предмета","предмет"],
+ ["55","55","Натуральное фото-воплощение вместо точного копирования","свободная фотография"],
+ ["55","55 плёнка","Правдоподобная аналоговая фотография","35 мм film"],
+ ["55","55 50","Фотостиль 1950-х","ретро"],
+ ["55","55 60","Фотостиль 1960-х","ретро"],
+ ["55","55 70","Фотостиль 1970-х","эпоха"],
+ ["55","55 80","Фотостиль 1980-х","эпоха"],
+ ["55","55 90","Фотостиль 1990-х","девяностые"],
+ ["55","55 00","Фотостиль 2000-х","нулевые"],
+ ["55","55 10","Фотостиль 2010-х","десятые"],
+ ["55","55 20","Фотостиль 2020-х","современное"],
+ ["55","55 90 плёнка","Девяностые на плёночном фото","film"],
+ ["55","55 80 вспышка","Восьмидесятые с прямой накамерной вспышкой","flash"],
+ ["55","55 00 мыльница","Повседневная цифровая компактная камера 2000-х","цифра"],
+ ["55","55 00 мыльница вспышка","Типичное домашнее фото начала 2000-х","flash"],
+ ["55","55 70 чб окно","Чёрно-белое фото 1970-х при оконном свете","монохром"],
+ ["55","55 90 плёнка grain 2 freedom 4","Плёночный снимок 90-х с умеренным зерном и свободной позой","grain"],
+ ["55","55 90 плёнка keep face keep age","Стилистика 1990-х с сохранением узнаваемого лица и возраста","сходство"],
+ ["55","55 80 плёнка grain 2 freedom 5","Максимально естественное переосмысление референса","freedom"],
+ ["55","55 p","Выдать только текст промпта, не генерировать фото","текст"],
+ ["55","55 help","Справка и перечень пресетов","помощь"],
  ["next","22 next","Следующая секунда, продолжение движения","время секунда"],
  ["next","22 next 5s","Через пять секунд","вперёд"],
  ["next","22 next -s","За секунду до кадра","назад"],
@@ -180,6 +201,28 @@
  }
  ["next-number","next-unit","next-direction","next-extra"].forEach(id=>$(id).addEventListener("input",buildNext));
  buildNext();
+
+ // T2F 55: builder for combining natural-photo presets. Uses only local DOM state.
+ const fiftyIds=["f55-era","f55-medium","f55-stock","f55-light","f55-genre","f55-ratio","f55-grain","f55-freedom","f55-keep-face","f55-keep-age","f55-keep-outfit","f55-prompt","f55-extra"];
+ function build55(){
+  const val=id=>$(id).value;
+  const flags=[val("f55-era"),val("f55-medium"),val("f55-stock"),val("f55-light"),val("f55-genre"),val("f55-ratio")].filter(Boolean);
+  if($("f55-grain").value!=="0")flags.push("grain",$("f55-grain").value);
+  if($("f55-freedom").value!=="4")flags.push("freedom",$("f55-freedom").value);
+  if($("f55-keep-face").checked)flags.push("keep face");
+  if($("f55-keep-age").checked)flags.push("keep age");
+  if($("f55-keep-outfit").checked)flags.push("keep outfit");
+  const extra=val("f55-extra").replace(/\s+/g," ").trim();
+  const prompt=$("f55-prompt").checked?"p":null;
+  const cmd=["55",prompt,...flags,extra].filter(Boolean).join(" ");
+  $("f55-result").textContent=cmd;
+  $("f55-copy").dataset.copy=cmd;
+  $("f55-grain-value").textContent=val("f55-grain");
+  $("f55-freedom-value").textContent=val("f55-freedom");
+ }
+ fiftyIds.forEach(id=>$(id)?.addEventListener("input",build55));
+ build55();
+
  document.addEventListener("keydown",e=>{
   const tag=document.activeElement?.tagName||"";
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();guide.focus();}
