@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1222">
+<meta name="description" content="Интерактивный перевод чисел между системами счисления от 2 до 36: деление с остатком, разложение по степеням, дроби и периоды.">
+<title>INFA / SS — перевод систем счисления с решением</title>
+<style>
+:root{color-scheme:dark;--bg:#090e19;--panel:#111b2c;--panel2:#162339;--line:#2b3b52;--white:#ecf5ff;--muted:#a1b4ca;--mint:#89f4d0;--blue:#91b6ff;--amber:#ffce77;--bad:#ff9cab}*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;color:var(--white);background:radial-gradient(circle at 84% 5%,#182b4b 0,transparent 32%),radial-gradient(circle at 6% 18%,#132c34 0,transparent 32%),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+button,input,select{font:inherit}button{cursor:pointer}a{color:var(--mint)}:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 28px 72px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:49px}.brand{display:flex;align-items:center;gap:12px;color:var(--white);text-decoration:none;font-size:19px;font-weight:900;letter-spacing:-.5px}.brand-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;color:#091f23;background:var(--mint);font-family:ui-monospace,monospace;font-weight:900;font-size:18px}.brand span span{color:var(--mint)}.toplink{color:var(--muted);text-decoration:none;font-size:14px}.toplink:hover{color:var(--white)}.eyebrow{display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:2px;font-size:12px;color:var(--mint);font-weight:800}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint)}h1{font-weight:850;font-size:clamp(36px,5vw,64px);letter-spacing:-2.4px;line-height:1.08;margin:17px 0}h1 .accent{color:var(--mint)}.lead{color:var(--muted);font-size:clamp(15px,1.75vw,19px);max-width:760px;line-height:1.7;margin:0 0 35px}.lead strong{color:var(--white)}
+.workbench{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(160deg,rgba(25,39,61,.93),rgba(15,25,41,.99));padding:27px;min-width:0;box-shadow:0 10px 38px #0002}.panel-title{font-size:13px;font-weight:800;letter-spacing:1.35px;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:14px;margin-bottom:21px}.label{font-size:13px;color:var(--muted);font-weight:700;margin:0 0 9px;display:block}.number-input{width:100%;background:#0a1322;border:1px solid #3c4c61;border-radius:14px;color:white;padding:14px 17px;font-size:clamp(21px,3vw,31px);font-weight:750;letter-spacing:1px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.number-input::placeholder{color:#56667c}.number-input:focus{border-color:var(--mint)}.base-row{display:grid;grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr);gap:10px;align-items:end;margin-top:20px}.base-row select,.precision select{width:100%;appearance:none;background:#0a1322;color:var(--white);border:1px solid #3c4c61;border-radius:11px;padding:12px 32px 12px 13px;background-image:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="%23c4d6ea" stroke-width="2" viewBox="0 0 24 24"%3E%3Cpath d="m6 9 6 6 6-6"/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 9px center}.swap{border:1px solid var(--line);background:var(--panel2);color:var(--mint);border-radius:12px;height:47px;font-size:24px;display:grid;place-items:center}.swap:hover{border-color:var(--mint)}.controls{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:22px}.precision{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}.precision select{width:auto;min-width:92px;padding:9px 28px 9px 10px}.primary{border:0;background:var(--mint);color:#06332e;font-weight:850;border-radius:11px;padding:12px 20px;box-shadow:0 8px 18px #59eab52b}.primary:hover{background:#b4ffe7}.status{min-height:20px;font-size:12px;color:var(--muted);margin:16px 0 0}.status.ok{color:#a5c2d1}.status.bad{color:var(--bad)}.examples{margin-top:18px;padding-top:17px;border-top:1px solid var(--line)}.example-label{color:var(--muted);font-size:12px;margin-bottom:10px}.example-list{display:flex;flex-wrap:wrap;gap:8px}.pill{background:#1b2b40;color:#c5ddf1;border:1px solid #36475d;padding:7px 10px;border-radius:999px;font-size:12px;white-space:nowrap}.pill:hover{border-color:var(--mint);color:white}
+.result-card{border-color:#37665e;background:radial-gradient(circle at 100% 0%,#20484166,transparent 52%),linear-gradient(155deg,#142b31,#102028)}.quality{color:var(--mint);font-size:11px;letter-spacing:1px;font-weight:850}.quality.warn{color:var(--amber)}.answer-label{color:#b3d2d2;font-size:14px;margin:0 0 10px}.answer{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--mint);font-size:clamp(37px,5vw,67px);font-weight:900;line-height:1.15;word-break:break-all;letter-spacing:-2px;margin:16px 0 12px;min-height:78px}.answer.is-long{font-size:clamp(24px,3.25vw,42px);letter-spacing:-1px}.answer-base{color:#b0c8c9;font-size:14px}.result-divider{height:1px;background:#375d57;margin:30px 0 22px}.result-actions{display:flex;gap:9px;flex-wrap:wrap}.secondary{color:#d6f3ef;background:#20413d;border:1px solid #41776c;border-radius:11px;padding:10px 13px;font-size:13px;font-weight:750}.secondary:hover{border-color:var(--mint)}.secondary:disabled{opacity:.45;cursor:not-allowed}.hint{color:#a8c5c5;font-size:12px;margin:18px 0 0}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:50px 0 20px}.section-heading h2{font-size:clamp(26px,3vw,37px);letter-spacing:-.8px;line-height:1.15;margin:0}.section-heading p{color:var(--muted);font-size:13px;margin:0}.solution{display:grid;gap:15px}.step{border:1px solid var(--line);border-radius:18px;background:#111a2a;padding:24px 27px;min-width:0}.step-top{display:flex;gap:14px;align-items:center;margin-bottom:13px}.step-index{background:#223c47;color:var(--mint);width:39px;height:39px;border-radius:11px;display:grid;place-items:center;font:800 14px ui-monospace,monospace}.step h3{font-size:18px;letter-spacing:-.25px;margin:0}.step-help{color:var(--muted);font-size:14px;margin:10px 0 15px}.step-help strong{color:var(--white)}.equation,.formula{color:#dcebf9;background:#0a1423;border:1px solid #23384e;border-radius:12px;padding:16px;overflow-x:auto;white-space:nowrap;font:500 16px/1.5 ui-monospace,Consolas,monospace}.equation{white-space:normal;overflow-wrap:anywhere}.equation sub,.formula sub,.answer-row sub{font-size:10px;color:var(--muted);margin-left:2px}.formula{margin-top:14px}.formula strong{color:var(--mint)}.table-scroll{max-height:450px;overflow:auto;border:1px solid #293a50;border-radius:11px}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th{color:#a9c3d9;background:#1a2a40;position:sticky;top:0;font-weight:800;white-space:nowrap}th,td{padding:11px 15px;border-bottom:1px solid #293a50}tr:last-child td{border-bottom:0}td{color:#d2e0ee}tbody tr:nth-child(even){background:#142237}.mono{font-family:ui-monospace,Consolas,monospace;word-break:break-all}.emphasis{color:var(--mint);font-weight:900}.small-note{color:var(--muted);font-size:13px;margin:12px 0 0}.answer-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:clamp(17px,2.5vw,23px)}.answer-row .equal{color:var(--muted)}.answer-row .strong{color:var(--mint);font-weight:900}.empty-state{padding:25px;color:var(--muted);text-align:center}
+.cheat{border:1px solid var(--line);border-radius:18px;margin-top:32px;padding:23px;background:#0f1928}.cheat h3{margin:0 0 8px;font-size:17px}.cheat p{color:var(--muted);font-size:14px;margin:0}.cheat-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:18px}.cheat-grid article{border:1px solid var(--line);background:#121f30;border-radius:12px;padding:16px}.cheat-grid b{color:var(--mint);font-size:13px}.cheat-grid code{display:block;margin-top:10px;font-size:14px;color:#e8f4ff;white-space:normal}.footer{padding-top:38px;color:#728ba4;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:850px){.workbench{grid-template-columns:1fr}.topbar{margin-bottom:32px}.wrap{padding:20px 17px 60px}.panel{padding:22px}.answer{font-size:clamp(36px,8vw,65px)}}@media(max-width:560px){h1{letter-spacing:-1.4px}.base-row{grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr)}.base-row select{font-size:12px;padding:11px 21px 11px 9px}.swap{height:43px}.step{padding:18px 15px}.section-heading{align-items:start;flex-direction:column}.cheat-grid{grid-template-columns:1fr}.table-scroll{max-width:100%}}
+@media print{:root{color-scheme:light}body{background:white;color:black}.wrap{max-width:none}.topbar,.toplink,.workbench,.cheat,.footer,.section-heading p,.result-actions{display:none!important}.step{background:white;color:black;border:1px solid #aaa;break-inside:avoid}.step-help,.small-note,.step h3,.step-index{color:black}.equation,.formula{background:white;color:black;border:1px solid #ddd}th,td{color:black;background:white}.section-heading{margin:5px 0 16px}.solution{display:block}.step{margin-bottom:15px}.table-scroll{max-height:none;overflow:visible}.emphasis,.formula strong,.answer-row .strong{color:black}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="topbar">
+<a class="brand" href="../../"><span class="brand-icon">01</span><span>INFA <span>/ SS</span></span></a>
+<a href="../../" class="toplink">← Все инструменты GP</a>
+</header>
+<section aria-labelledby="title">
+<div class="eyebrow">Интерактивный тренажёр · 2–36</div>
+<h1 id="title">Перевод чисел<br><span class="accent">из любой системы в любую.</span></h1>
+<p class="lead">Введите число и выберите основания. Калькулятор покажет <strong>ответ и решение по шагам</strong>: разложение по степеням, деление с остатком и перевод дробной части.</p>
+</section>
+<section class="workbench" aria-label="Калькулятор перевода">
+<div class="panel">
+<div class="panel-title"><span>01 / Ввод числа</span><span>0–9 · A–Z</span></div>
+<label class="label" for="numberInput">Исходное число</label>
+<input id="numberInput" class="number-input" autocomplete="off" spellcheck="false" value="156" placeholder="Например, 101101 или A3.F">
+<div class="base-row">
+<div><label class="label" for="fromBase">Из системы</label><select id="fromBase" aria-label="Основание исходной системы"></select></div>
+<button id="swap" class="swap" title="Поменять направление перевода" aria-label="Поменять системы местами">⇄</button>
+<div><label class="label" for="toBase">В систему</label><select id="toBase" aria-label="Основание системы результата"></select></div>
+</div>
+<div class="controls">
+<div class="precision"><label for="precision">Знаков дроби</label><select id="precision"><option value="16">16</option><option value="32">32</option><option value="48" selected>48</option><option value="96">96</option></select></div>
+<button id="convert" class="primary">Перевести →</button>
+</div>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<div class="examples">
+<div class="example-label">Быстрые примеры</div>
+<div class="example-list">
+<button class="pill" data-example data-num="156" data-from="10" data-to="2">156₁₀ → 2</button>
+<button class="pill" data-example data-num="101101" data-from="2" data-to="10">101101₂ → 10</button>
+<button class="pill" data-example data-num="A3.F" data-from="16" data-to="10">A3.F₁₆ → 10</button>
+<button class="pill" data-example data-num="255" data-from="10" data-to="16">255₁₀ → 16</button>
+<button class="pill" data-example data-num="0,1" data-from="10" data-to="2">0,1₁₀ → 2</button>
+</div></div>
+</div>
+<div class="panel result-card">
+<div class="panel-title"><span>02 / Результат</span><span id="answerQuality" class="quality">ТОЧНЫЙ РЕЗУЛЬТАТ</span></div>
+<p class="answer-label">Полученное число</p>
+<div id="answer" class="answer" aria-live="polite">10011100</div>
+<div class="answer-base" id="outBase">основание 2</div>
+<div class="result-divider"></div>
+<div class="result-actions">
+<button id="copyAnswer" class="secondary" type="button">⧉ Скопировать ответ</button>
+<button id="copySteps" class="secondary" type="button">⧉ Скопировать решение</button>
+<button id="print" class="secondary" type="button">↧ Печать решения</button>
+</div>
+<p class="hint">Расчёты происходят прямо в браузере. Данные никуда не отправляются.</p>
+</div>
+</section>
+<section id="solution" aria-labelledby="solveTitle">
+<div class="section-heading"><h2 id="solveTitle">Решение по шагам</h2><p>Так можно записать в тетради</p></div>
+<div id="steps" class="solution" aria-live="polite"><p class="empty-state">Здесь появится подробный разбор.</p></div>
+</section>
+<section class="cheat" aria-label="Памятка по переводу">
+<h3>Как выполнять перевод самостоятельно?</h3>
+<p>Два основных приёма работают для любых оснований от 2 до 36. Буквы A–Z обозначают цифры 10–35.</p>
+<div class="cheat-grid">
+<article><b>Целая часть</b><code>Делить на новое основание.<br>Записать остатки снизу вверх.</code></article>
+<article><b>Дробная часть</b><code>Умножать остаток на новое основание.<br>Записать целые части сверху вниз.</code></article>
+</div>
+</section>
+<footer class="footer"><span>INFA / SS · учебный калькулятор систем счисления</span><span>2–36 · BigInt · без сервера</span></footer>
+<noscript><p>Для интерактивного перевода включите JavaScript в браузере.</p></noscript>
+</main>
+<script>
+
+const DIGITS='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+function gcd(a,b){while(b!==0n){const t=a%b;a=b;b=t;}return a;}
+function parseRadix(raw,base){
+ if(!Number.isInteger(base)||base<2||base>36)throw Error('Основание должно быть от 2 до 36.');
+ let s=String(raw).trim().toUpperCase().replace(/[ _\u00a0]/g,'').replace(/,/g,'.').replace(/\u2212/g,'-');
+ if(!s)throw Error('Введите число для перевода.');
+ if(s.length>120)throw Error('Слишком длинное число: максимум 120 символов.');
+ let sign=1;if(s[0]==='-'||s[0]==='+'){if(s[0]==='-')sign=-1;s=s.slice(1);}
+ if(s[0]==='.')s='0'+s;
+ if(s.endsWith('.'))s=s.slice(0,-1);
+ if(!/^[0-9A-Z]+(\.[0-9A-Z]+)?$/.test(s))throw Error('Допустимы цифры, буквы A–Z и одна десятичная точка или запятая.');
+ const pieces=s.split('.'),wholeText=pieces[0],fractionText=pieces[1]||'';
+ if(fractionText.length>64)throw Error('Не больше 64 цифр после разделителя.');
+ const all=wholeText+fractionText;
+ for(const ch of all){if(DIGITS.indexOf(ch)>=base)throw Error('Цифра «'+ch+'» недопустима для основания '+base+'.');}
+ const b=BigInt(base);
+ function read(part){let acc=0n;for(const ch of part)acc=acc*b+BigInt(DIGITS.indexOf(ch));return acc;}
+ const integer=read(wholeText),frac=read(fractionText),den0=b**BigInt(fractionText.length);
+ const total=integer*den0+frac,div=gcd(total,den0),num=total/div,den=den0/div;
+ return {number:s,sign:total===0n?1:sign,integer,frac,wholeText,fractionText,source:base,num,den};
+}
+function convertRadix(parsed,target,limit){
+ if(!Number.isInteger(target)||target<2||target>36)throw Error('Недопустимое основание результата.');
+ limit=Math.max(8,Math.min(96,Number(limit)||48));
+ const b=BigInt(target),whole=parsed.num/parsed.den;
+ let r=parsed.num%parsed.den;
+ let n=whole,intDigits=[],divisions=[];
+ if(n===0n){intDigits=['0'];divisions.push({value:'0',quotient:'0',digit:'0'});}
+ else while(n>0n){
+  const q=n/b,mod=n%b,digit=DIGITS[Number(mod)];
+  divisions.push({value:String(n),quotient:String(q),digit});
+  intDigits.push(digit);n=q;
+ }
+ const integerResult=intDigits.reverse().join('');
+ const seen=new Map(),fractionDigits=[],multiplications=[];
+ let repeat=-1;
+ while(r!==0n&&fractionDigits.length<limit){
+  const key=String(r);
+  if(seen.has(key)){repeat=seen.get(key);break;}
+  seen.set(key,fractionDigits.length);
+  const multiplied=r*b,digitIndex=Number(multiplied/parsed.den),next=multiplied%parsed.den;
+  const digit=DIGITS[digitIndex];
+  multiplications.push({remainder:String(r),multiplied:String(multiplied),denominator:String(parsed.den),digit,next:String(next)});
+  fractionDigits.push(digit);r=next;
+ }
+ let fractionalResult='';
+ if(fractionDigits.length){
+  fractionalResult=repeat>=0?fractionDigits.slice(0,repeat).join('')+'('+fractionDigits.slice(repeat).join('')+')':fractionDigits.join('');
+ }
+ const truncated=r!==0n&&repeat<0;
+ const sign=parsed.sign<0?'-':'';
+ const output=sign+integerResult+(fractionDigits.length?'.'+fractionalResult:'')+(truncated?'…':'');
+ return {output,integerResult,fractionalResult,divisions,multiplications,repeat,truncated,finite:r===0n,target,sign};
+}
+function positionalTerms(parsed){
+ let parts=[];
+ for(let i=0;i<parsed.wholeText.length;i++){
+  const ch=parsed.wholeText[i];if(ch==='0')continue;
+  parts.push(DIGITS.indexOf(ch)+' × '+parsed.source+'^'+(parsed.wholeText.length-1-i));
+ }
+ for(let i=0;i<parsed.fractionText.length;i++){
+  const ch=parsed.fractionText[i];if(ch==='0')continue;
+  parts.push(DIGITS.indexOf(ch)+' × '+parsed.source+'^−'+(i+1));
+ }
+ return parts.length?parts:['0'];
+}
+
+(function(){
+ const el=id=>document.getElementById(id);
+ const from=el('fromBase'),to=el('toBase'),entry=el('numberInput'),output=el('answer'),message=el('status'),steps=el('steps');
+ const captions={2:'двоичная',3:'троичная',8:'восьмеричная',10:'десятичная',12:'двенадцатеричная',16:'шестнадцатеричная',36:'тридцатишестиричная'};
+ for(let b=2;b<=36;b++){for(const sel of [from,to]){const o=document.createElement('option');o.value=String(b);o.textContent=b+(captions[b]?' · '+captions[b]:'');sel.appendChild(o);}}
+ from.value='10';to.value='2';
+ let last=null;
+ function h(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+ function table(head,items){return '<div class="table-scroll"><table><thead><tr>'+head.map(x=>'<th>'+h(x)+'</th>').join('')+'</tr></thead><tbody>'+items.join('')+'</tbody></table></div>';}
+ function step(title,number,body){return '<section class="step"><div class="step-top"><span class="step-index">'+number+'</span><h3>'+title+'</h3></div>'+body+'</section>';}
+ function render(p,c){
+  const terms=positionalTerms(p);
+  const prefix=p.sign<0?'-(':'',suffix=p.sign<0?')':'';
+  const sign=p.sign<0?'-':'';
+  const sourceFormatted=(p.sign<0?'-':'')+p.number;
+  const val=p.den===1n?String(p.num):String(p.num)+' / '+String(p.den);
+  let breakdown=step('Разложение исходного числа','01',
+   '<p class="step-help">Каждая цифра умножается на основание исходной системы в соответствующей степени.</p>'+
+   '<div class="equation">('+h(sourceFormatted)+')<sub>'+p.source+'</sub> = '+h(prefix+terms.join(' + ')+suffix)+'</div>'+
+   '<p class="step-help">Значение в десятичной системе: <strong>'+h(sign+val)+'</strong>'+(p.den!==1n?' (точная дробь)':'')+'.</p>');
+  const intRows=c.divisions.slice(0,100).map((r,i)=>'<tr><td>'+(i+1)+'</td><td class="mono">'+h(r.value)+' ÷ '+c.target+'</td><td class="mono">'+h(r.quotient)+'</td><td class="mono emphasis">'+h(r.digit)+'</td></tr>');
+  const divTable=table(['Шаг','Делим','Частное','Остаток'],intRows);
+  const intNote=c.divisions.length>100?'<p class="small-note">Показаны первые 100 шагов из '+c.divisions.length+'. Все цифры ответа рассчитаны.</p>':'';
+  let integral=step('Перевод целой части','02',
+   '<p class="step-help">Последовательно делим целую часть на '+c.target+'. Остатки записываем <strong>снизу вверх</strong>.</p>'+
+   divTable+intNote+'<div class="formula">Целая часть: <strong>'+h(c.integerResult)+'</strong><sub>'+c.target+'</sub></div>');
+  let fractional='';
+  if(p.num%p.den===0n) fractional=step('Дробная часть','03','<p class="step-help">Дробной части нет. Дополнительные вычисления не нужны.</p>');
+  else {
+   const fracRows=c.multiplications.map((r,i)=>'<tr><td>'+(i+1)+'</td><td class="mono">'+h(r.remainder)+' / '+h(r.denominator)+'</td><td class="mono">'+h(r.multiplied)+' / '+h(r.denominator)+'</td><td class="mono emphasis">'+h(r.digit)+'</td><td class="mono">'+h(r.next)+' / '+h(r.denominator)+'</td></tr>');
+   const repeatLabel=c.repeat>=0?'Обнаружен период. Цифры в скобках повторяются бесконечно.':c.truncated?'Достигнут предел точности. Результат показан без округления, с многоточием.':'Остаток стал равен нулю. Дробь конечная.';
+   fractional=step('Перевод дробной части','03',
+    '<p class="step-help">Умножаем дробный остаток на '+c.target+'. Целая часть произведения — следующая цифра после точки.</p>'+
+    table(['Шаг','Остаток','После × '+c.target,'Цифра','Новый остаток'],fracRows)+
+    '<p class="small-note">'+h(repeatLabel)+'</p>'+
+    '<div class="formula">Дробная часть: <strong>0.'+h(c.fractionalResult)+(c.truncated?'…':'')+'</strong><sub>'+c.target+'</sub></div>');
+  }
+  const note=c.repeat>=0?'Точное значение с обозначенным периодом.':c.truncated?'Приближённая запись: количество знаков ограничено.':'Точный результат.';
+  const lastStep=step('Ответ','04','<div class="answer-row"><span class="mono">('+h(sourceFormatted)+')<sub>'+p.source+'</sub></span><span class="equal">=</span><span class="mono strong">('+h(c.output)+')<sub>'+c.target+'</sub></span></div><p class="small-note">'+h(note)+'</p>');
+  return breakdown+integral+fractional+lastStep;
+ }
+ function convert(){
+  try {
+   const p=parseRadix(entry.value,Number(from.value)),c=convertRadix(p,Number(to.value),Number(el('precision').value));
+   last={parsed:p,converted:c,from:Number(from.value),to:Number(to.value)};
+   output.textContent=c.output;
+   output.classList.toggle('is-long',c.output.length>22);
+   el('outBase').textContent='основание '+c.target;
+   el('answerQuality').textContent=c.truncated?'ЗАПИСЬ ОГРАНИЧЕНА':c.repeat>=0?'ТОЧНО · ПЕРИОД':'ТОЧНЫЙ РЕЗУЛЬТАТ';
+   el('answerQuality').className='quality '+(c.truncated?'warn':'');
+   steps.innerHTML=render(p,c);
+   message.textContent='Готово. Вычисления выполнены точно'+(c.truncated?'; показаны первые '+el('precision').value+' дробных разрядов.':'.');
+   message.className='status ok';
+   el('copyAnswer').disabled=false;el('copySteps').disabled=false;
+  } catch(e) {
+   last=null;output.textContent='—';steps.innerHTML='<p class="empty-state">Введите корректное число, чтобы увидеть решение.</p>';
+   message.textContent=e.message;message.className='status bad';
+   el('answerQuality').textContent='НЕТ РЕЗУЛЬТАТА';el('answerQuality').className='quality';
+   el('outBase').textContent='основание '+to.value;
+   el('copyAnswer').disabled=true;el('copySteps').disabled=true;
+  }
+ }
+ function doSwap(){
+  const a=from.value;from.value=to.value;to.value=a;
+  if(last&&last.from===Number(a)&&last.to===Number(from.value)&&last.converted.finite){
+   entry.value=last.converted.output;
+  }else if(last&&!last.converted.finite){entry.value='';message.textContent='Основания поменяны. Введите новое число: периодическую или сокращённую дробь нельзя автоматически подставить как конечную.';}
+  convert();
+ }
+ function report(){
+  if(!last)return '';
+  const p=last.parsed,c=last.converted,lines=[
+   'ПЕРЕВОД МЕЖДУ СИСТЕМАМИ СЧИСЛЕНИЯ',
+   '('+(p.sign<0?'-':'')+p.number+')_'+p.source+' = ('+c.output+')_'+c.target,
+   '',
+   '1. Разложение по разрядам:',
+   (p.sign<0?'-':'')+positionalTerms(p).join(' + '),
+   'Точное десятичное значение: '+(p.sign<0?'-':'')+String(p.num)+(p.den===1n?'':'/'+String(p.den)),
+   '',
+   '2. Деление целой части на '+c.target+':',
+   ...c.divisions.map(r=>r.value+' ÷ '+c.target+' = '+r.quotient+', остаток '+r.digit),
+   'Остатки читаются снизу вверх.',
+   '',
+   '3. Дробная часть:',
+   ...(c.multiplications.length?c.multiplications.map(r=>r.remainder+'/'+r.denominator+' × '+c.target+' = '+r.multiplied+'/'+r.denominator+'; цифра '+r.digit+', остаток '+r.next+'/'+r.denominator):['Дробной части нет.']),
+   c.repeat>=0?'Период обозначен скобками.':c.truncated?'Разряды ограничены; без округления.':'Дробная часть конечная.',
+   '',
+   '4. Ответ: '+c.output+' (основание '+c.target+')'
+  ];
+  return lines.join('\n');
+ }
+ async function copy(text,button){
+  try{
+   if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}
+   else{const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove();}
+   const old=button.textContent;button.textContent='Скопировано ✓';setTimeout(()=>button.textContent=old,1600);
+  }catch(e){message.textContent='Копирование недоступно. Выделите текст вручную.';message.className='status bad';}
+ }
+ el('convert').addEventListener('click',convert);
+ el('swap').addEventListener('click',doSwap);
+ entry.addEventListener('input',convert);
+ entry.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();convert();}});
+ from.addEventListener('change',convert);to.addEventListener('change',convert);el('precision').addEventListener('change',convert);
+ el('copyAnswer').addEventListener('click',()=>last&&copy(last.converted.output,el('copyAnswer')));
+ el('copySteps').addEventListener('click',()=>last&&copy(report(),el('copySteps')));
+ el('print').addEventListener('click',()=>window.print());
+ document.querySelectorAll('[data-example]').forEach(b=>b.addEventListener('click',()=>{
+  entry.value=b.dataset.num;from.value=b.dataset.from;to.value=b.dataset.to;convert();entry.focus();
+ }));
+ convert();
+})();
+
+</script>
+</body>
+</html>
