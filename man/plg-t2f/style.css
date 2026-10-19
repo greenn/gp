@@ -218,3 +218,17 @@ body.guide-filtered .guide-search-empty{scroll-margin-top:145px}
 .section a.inline-action{font-weight:600}
 @media(max-width:800px){.level-list{grid-template-columns:1fr}}
 @media(max-width:540px){.tag-cloud{gap:6px}.tag-cloud span{font-size:11px;padding:6px}.level-list>div{padding:10px 0}}
+
+/* T2F 55 — responsive five-mode menu and preset builder. */
+.landing-menu{grid-template-columns:repeat(5,minmax(0,1fr))}
+.landing-menu-item strong{font-size:22px}
+.builder55-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.builder55-grid>div{min-width:0}
+.builder55-grid input[type="range"]{padding:0;border:0;min-height:25px;accent-color:#188563}
+.f55-checks{display:flex;flex-wrap:wrap;gap:9px 20px;padding:6px 0 19px}
+.f55-checks label{display:inline-flex;align-items:center;gap:7px;margin:0;cursor:pointer;font-weight:500;font-size:12.5px}
+.f55-checks input[type="checkbox"]{width:15px;height:15px;min-height:15px;accent-color:#168565}
+#f55-result{overflow-wrap:anywhere}
+@media(max-width:1000px){.landing-menu{grid-template-columns:repeat(3,minmax(0,1fr))}.landing-menu-item:nth-child(3){border-right:0}}
+@media(max-width:800px){.landing-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.landing-menu-item:nth-child(3){border-right:1px solid var(--line)}.landing-menu-item:nth-child(even){border-right:0}}
+@media(max-width:540px){.landing-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.landing-menu-item{padding:11px 9px!important}.landing-menu-item strong{font-size:23px}.builder55-grid{grid-template-columns:1fr}.f55-checks{display:grid;grid-template-columns:1fr 1fr;gap:10px}}
