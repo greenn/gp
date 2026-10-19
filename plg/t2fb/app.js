@@ -47,7 +47,7 @@
     result.subjectType=['student','adult','object'].includes(data.subjectType)?data.subjectType:defaults.subjectType;
     result.views=['1','2','3','4'].includes(String(data.views))?String(data.views):defaults.views;
     result.viewMode=['angles','cameras','mixed'].includes(data.viewMode)?data.viewMode:defaults.viewMode;
-    result.page=['builder','commands12','commands22','commands55','next','quick','guide'].includes(data.page)?data.page:'builder';
+    result.page=['builder','commands12','commands22','commands55','commands77','next','quick','guide'].includes(data.page)?data.page:'builder';
     result.group=D.groups.some(x=>x.id===data.group)?data.group:'all';
     result.quickGroup=qgroup.includes(data.quickGroup)?data.quickGroup:'Все';
     result.output=['full','code','quick'].includes(data.output)?data.output:'full';
@@ -254,14 +254,17 @@
     const page12=S.page==='commands12' && !!window.T2FB12;
     const page22=S.page==='commands22' && !!window.T2FB22;
     const page55=S.page==='commands55' && !!window.T2FB55;
+    const page77=S.page==='commands77' && !!window.T2FB77;
     const pageNext=S.page==='next';
     const nextOutput=window.T2FB_NEXT && typeof window.T2FB_NEXT.output==='function'?window.T2FB_NEXT.output():'22 next';
     $('#promptOutput').textContent=pageNext?(nextOutput+(S.note?' '+S.note.trim():'')):(page12?window.T2FB12.output():(page22?window.T2FB22.output():(S.output==='code'?compileCode():(S.output==='quick'?quickPrompt():fullPrompt()))));
     if(page55)$('#promptOutput').textContent=window.T2FB55.output()+(S.note?' '+S.note.trim():'');
-    $('.output-switch').style.display=(S.page==='commands12'||S.page==='commands22'||page55||pageNext)?'none':'';
-    const warnings=page12||page22||page55||pageNext?[]:analyze();
+    if(page77)$('#promptOutput').textContent=window.T2FB77.output()+(S.note?' '+S.note.trim():'');
+    $('.output-switch').style.display=(S.page==='commands12'||S.page==='commands22'||page55||page77||pageNext)?'none':'';
+    const warnings=page12||page22||page55||page77||pageNext?[]:analyze();
     $('#validation').innerHTML=pageNext?'<div class="success">✓ 22 next · Одно изображение на один временной переход. Готовую команду можно скопировать.</div>':(page12?'<div class="success">✓ Команда 12: фото → 3D-изображение. Проверьте подсказки слева, затем скопируйте результат.</div>':(page22?'<div class="success">✓ Режим 22. Используйте выбор формата слева, затем «Скопировать».</div>':(warnings.length?warnings.map(w=>'<div class="notice">⚠ '+htmlEsc(w)+'</div>').join(''):'<div class="success">✓ Автоматическая проверка не нашла очевидных конфликтов.</div>')));
     if(page55)$('#validation').innerHTML='<div class="success">✓ Режим 55: естественное воплощение референса, одна фотография. Скопируйте команду для T2F.</div>';
+    if(page77)$('#validation').innerHTML='<div class="success">✓ Режим 77: школа по умолчанию, лицо A + одежда B + сцена C. Возрастно-корректный один кадр.</div>';
     $$('.output-switch button').forEach(b=>{const v=b.dataset.output===S.output;b.classList.toggle('active',v);b.setAttribute('aria-pressed',String(v));});
   }
   async function copyText(text){
@@ -278,7 +281,7 @@
     const url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),400);
   }
   function showPage(id){
-    S.page=id;save();document.body.classList.toggle('mode-22',id==='commands22');document.body.classList.toggle('mode-55',id==='commands55');document.body.classList.toggle('mode-12',id==='commands12');document.body.classList.toggle('mode-next',id==='next');document.querySelectorAll('.page').forEach(p=>p.classList.toggle('visible',p.id==='page-'+id));
+    S.page=id;save();document.body.classList.toggle('mode-22',id==='commands22');document.body.classList.toggle('mode-55',id==='commands55');document.body.classList.toggle('mode-77',id==='commands77');document.body.classList.toggle('mode-12',id==='commands12');document.body.classList.toggle('mode-next',id==='next');document.querySelectorAll('.page').forEach(p=>p.classList.toggle('visible',p.id==='page-'+id));
     document.querySelectorAll('.nav-link').forEach(b=>{const active=b.dataset.page===id;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
     refresh();
   }
@@ -377,7 +380,7 @@
   renderQuick();
   diagnostics();
   attach();
-  showPage(location.hash==='#next'?'next':location.hash==='#55'?'commands55':S.page);
-  window.addEventListener('hashchange',()=>{if(location.hash==='#next')showPage('next');else if(location.hash==='#55')showPage('commands55');});
+  showPage(location.hash==='#next'?'next':location.hash==='#55'?'commands55':location.hash==='#77'?'commands77':S.page);
+  window.addEventListener('hashchange',()=>{if(location.hash==='#next')showPage('next');else if(location.hash==='#55')showPage('commands55');else if(location.hash==='#77')showPage('commands77');});
   refresh();
 })();
