@@ -1,0 +1,107 @@
+/* Trip views and seating interface */
+.trip-tabs{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1;margin:0 0 19px;padding:5px;background:#111a2d;border:1px solid #34415e;border-radius:15px;width:max-content;max-width:100%}
+.trip-tab{font:700 14px/1.3 system-ui,sans-serif;border:0;background:transparent;color:#98a8c6;cursor:pointer;border-radius:10px;padding:12px 21px}
+.trip-tab:hover{background:#263452;color:#fff}
+.trip-tab.active{background:#3e426f;color:#fff;box-shadow:0 4px 15px #0004}
+.trip-view[hidden]{display:none!important}
+body.bus-mode .toolbar{display:none}
+body.bus-mode .hero-stat{display:none}
+.bus-view{--bus-mint:#9edfc4;--bus-gold:#f5cc7a;--bus-violet:#b9a2ff}
+.bus-section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;padding:8px 3px 20px;flex-wrap:wrap}
+.bus-section-head h2{font-size:clamp(25px,3vw,41px);letter-spacing:-.055em;line-height:1.1;margin:7px 0 9px}
+.bus-section-head p,.bus-roster-top p{font-size:13px;color:#a8b7d0;margin:0;max-width:70ch}
+.bus-actions{display:flex;flex-wrap:wrap;gap:8px}
+.bus-actions button,.bus-roster-top button,.pair-panel-top button{border:1px solid #475672;color:#eef4ff;border-radius:9px;padding:10px 12px;background:#263451;cursor:pointer;font-size:12px;font-weight:700}
+.bus-actions button:hover,.bus-roster-top button:hover,.pair-panel-top button:hover{background:#344568}
+#busReset{color:#efb3b8}
+.bus-status{display:flex;flex-wrap:wrap;gap:10px 19px;background:#1a263a;border:1px solid #334362;border-radius:13px;padding:12px 15px;color:#a9b8d3;font-size:12px;margin-bottom:15px}
+.bus-status b{font-size:17px;color:#fff}
+#busFeedback{margin-left:auto;color:#baa4f7}
+.bus-workspace{display:grid;grid-template-columns:minmax(310px,1.35fr) minmax(300px,.93fr);gap:15px;align-items:stretch}
+.bus-vehicle-zone,.bus-pair-station,.bus-roster{background:#172238;border:1px solid #35415e;border-radius:19px;min-width:0;box-shadow:0 13px 45px #0003}
+.bus-vehicle-zone{padding:25px 15px 17px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.bus-frame{width:min(100%,435px);background:#f8fbfd;border:5px solid #e9bd4d;border-radius:90px 90px 47px 47px;box-shadow:inset 0 0 0 5px #3f4652,0 0 0 2px #171b28,0 15px 35px #0005;color:#1b2638;position:relative;padding:21px 28px 22px}
+.bus-frame:before,.bus-frame:after{content:'';position:absolute;top:87px;width:13px;height:40px;background:#f3c94c;border:3px solid #31343c;border-radius:9px}
+.bus-frame:before{left:-17px}.bus-frame:after{right:-17px}
+.bus-windshield{height:33px;border:2px solid #576575;border-radius:45% 45% 25% 25%;background:linear-gradient(180deg,#d6eff7,#eefcff);color:#57798c;text-align:center;letter-spacing:.22em;font-size:9px;font-weight:800;display:grid;place-items:center;margin:-7px 0 16px}
+.bus-cabin{display:flex;flex-direction:column;gap:8px}
+.bus-seat-row{display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr);align-items:center;min-height:58px;gap:4px}
+.bus-aisle{text-align:center;align-self:stretch;display:grid;place-items:center;color:#b5c2cf;font-size:19px;line-height:1}
+.bus-bench{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;min-width:0}
+.bus-seat{position:relative;min-height:61px;min-width:0;border:2px solid #7e90a5;background:#e9eef4;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#25344b;cursor:pointer;padding:11px 2px 4px;font-family:inherit;box-shadow:inset 0 -5px 0 #c8d2dd}
+.bus-seat:hover{border-color:#6751bb;transform:translateY(-1px)}
+.bus-seat.empty{border-style:dashed;background:#f2f7fb}
+.bus-seat-num{position:absolute;top:2px;left:5px;color:#4b5364;font-size:10px;font-weight:800}
+.bus-seat-code{font-size:18px;line-height:1;font-weight:850;letter-spacing:-.05em}
+.bus-seat-name{max-width:92%;font-size:8px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bus-seat-plus{font-size:21px;color:#a2b3c7;font-weight:700}
+.bus-seat.filled.bus-student{background:#ddd5fa;border-color:#8773bb;box-shadow:inset 0 -4px 0 #b9a8e7}
+.bus-seat.filled.bus-guest{background:#c7f0dd;border-color:#4f9d7d;box-shadow:inset 0 -4px 0 #85c9a6}
+.bus-seat.filled.bus-escort{background:#ffe3a4;border-color:#be9850;box-shadow:inset 0 -4px 0 #e2c074}
+.bus-seat-clear{position:absolute;right:3px;top:0;font-size:14px;line-height:16px;padding:2px 3px;color:#6d7483}
+.bus-seat-clear:hover{color:#d63a4f}
+.bus-fixture{height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;color:#53617c;font-size:26px}
+.bus-fixture small{font-size:10px;font-weight:800}
+.bus-driver{color:#37435c}
+.bus-door{border:1px dashed #abc6d4;border-radius:9px;margin-left:auto;width:84%;background:#e6f7fb}
+.bus-tail{font-size:10px;font-weight:800;color:#7c8a9d;border-top:2px solid #d9e0ea;margin-top:15px;padding-top:14px;text-align:center;letter-spacing:.1em}
+.bus-small-note{font-size:11px;color:#8393af;max-width:420px;margin:0;text-align:center}
+.bus-pair-station{padding:20px 18px 25px}
+.pair-panel-top{display:flex;align-items:center;justify-content:space-between;gap:9px}
+.pair-panel-top h3,.bus-roster-top h3{font-size:22px;margin:5px 0;letter-spacing:-.03em}
+.bus-pair-help{font-size:12px;color:#9eacc7;line-height:1.5}
+.bus-pair-auto{cursor:pointer;text-align:center;border:2px dashed #607396;background:#202f48;color:#bacbf0;border-radius:12px;padding:14px 8px;margin:15px 0;font-size:12px}
+.bus-pair-auto:hover,.bus-drop-over{outline:2px dashed #b69bff!important;outline-offset:-3px;background:#b7a2ff26!important}
+.bus-pairs{display:flex;flex-direction:column;gap:12px}
+.bus-pair-empty{color:#7588a7;text-align:center;font-size:12px;padding:24px 0;font-style:italic}
+.bus-pair-card{border:1px solid #526383;background:#202d46;border-radius:13px;padding:12px;box-shadow:inset 0 2px 0 #ffffff09}
+.bus-pair-card.is-selected{outline:2px solid #b7a2ff}
+.bus-pair-card-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#99aacf;font-weight:900;letter-spacing:.08em;margin-bottom:9px}
+.bus-delete-pair,.bus-reset-average{cursor:pointer;border:1px solid #4b5b78;color:#c8d2e7;background:#243653;border-radius:7px;padding:3px 9px}
+.bus-pair-members{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.bus-pair-slot{font:700 12px/1.2 system-ui,sans-serif;cursor:pointer;border:1px dashed #617595;border-radius:9px;padding:14px 5px;color:#acbad5;background:#151f32;min-height:50px;white-space:normal;overflow-wrap:anywhere}
+.bus-pair-slot.has-person.bus-student{background:#474064;color:#eadcff;border:1px solid #927fbb}
+.bus-pair-slot.has-person.bus-guest{background:#244b3f;color:#c7fbe1;border:1px solid #65b08d}
+.bus-pair-slot.has-person.bus-escort{background:#5b452d;color:#ffe3aa;border:1px solid #d5ac65}
+.bus-pair-bottom{display:flex;align-items:center;gap:6px;margin:11px 0}
+.bus-pair-bottom label{display:flex;align-items:center;gap:6px;font-size:11px;color:#9eaccb;flex:1}
+.bus-pair-bottom input{width:80px;min-width:0;border:1px solid #536884;border-radius:7px;background:#101a2d;color:white;padding:7px 8px;font-size:13px}
+.bus-pair-move{cursor:grab;width:100%;background:#4b436c;color:#e9e2ff;border:1px solid #7667a3;border-radius:8px;padding:8px 10px;font-size:12px;font-weight:800}
+.bus-pair-move:hover{background:#605389}
+.bus-roster{padding:23px;margin-top:17px}
+.bus-roster-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.bus-people{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px;margin-top:20px}
+.bus-person-card{display:flex;align-items:center;gap:6px;background:#202b43;border:1px solid #425371;border-radius:11px;min-width:0;padding:6px}
+.bus-person-card.bus-guest{border-color:#59977c;background:#1b4035}
+.bus-person-card.bus-escort{border-color:#b58d4d;background:#483a2a}
+.bus-person-card.is-selected{outline:2px solid #e7d4ff}
+.bus-person-pick{cursor:grab;display:flex;flex:1;align-items:center;gap:7px;min-width:0;border:0;background:transparent;color:#f2f5ff;text-align:left;padding:3px}
+.bus-person-pick strong{min-width:34px;height:36px;background:#3a345f;color:#e4d8ff;display:grid;place-items:center;border-radius:9px;font-size:15px}
+.bus-guest .bus-person-pick strong{background:#336c52;color:#dbffed}
+.bus-escort .bus-person-pick strong{background:#806137;color:#ffe3b3}
+.bus-person-pick span{font-size:11px;font-weight:700;min-width:0;overflow-wrap:anywhere}
+.bus-person-pick small{display:block;color:#98a9c4;font-size:10px;margin-top:2px}
+.bus-guest .bus-person-pick small{color:#a2d6be}
+.bus-score-label{display:flex;flex-direction:column;align-items:center;font-size:9px;color:#a7b6d0;min-width:46px}
+.bus-score-label input{background:#111b2e;border:1px solid #56698a;border-radius:6px;color:white;width:48px;text-align:center;font-size:12px;padding:7px 2px}
+.bus-foot{color:#8797b3;font-size:11px;margin:13px 5px 0}
+@media(max-width:930px){.bus-workspace{grid-template-columns:1fr}.bus-vehicle-zone{padding:22px 12px}.bus-pair-station{padding:20px}.bus-frame{max-width:420px}}
+@media(max-width:630px){.trip-tabs{width:100%}.trip-tab{flex:1;padding:11px 5px;font-size:12px}.bus-section-head{align-items:flex-start}.bus-actions{width:100%}.bus-actions button{flex:1;padding:9px 6px;font-size:11px}.bus-frame{padding:20px 12px;border-width:4px;border-radius:50px 50px 27px 27px}.bus-seat-row{gap:2px;grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr)}.bus-bench{gap:3px}.bus-seat{min-height:55px}.bus-seat-code{font-size:15px}.bus-vehicle-zone{padding:22px 10px}.bus-people{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}.bus-roster{padding:13px}.bus-roster-top{flex-direction:column}}
+@media print{
+ body.bus-mode{background:white;color:#111}
+ body.bus-mode .backdrop,body.bus-mode .toolbar,body.bus-mode .trip-tabs,body.bus-mode .hero,body.bus-mode .bus-roster,body.bus-mode .bus-actions,body.bus-mode .bus-foot,body.bus-mode .bus-pair-auto,body.bus-mode #busAddPair,body.bus-mode .bus-delete-pair,body.bus-mode .bus-pair-move,body.bus-mode .bus-reset-average{display:none!important}
+ body.bus-mode .layout{padding:0}
+ body.bus-mode .bus-section-head{color:#111}
+ body.bus-mode .bus-section-head p{color:#444}
+ body.bus-mode .bus-workspace{grid-template-columns:minmax(0,1fr) minmax(0,.75fr);gap:20px}
+ body.bus-mode .bus-frame{box-shadow:none;border:3px solid #b28b17;max-width:380px}
+ body.bus-mode .bus-vehicle-zone,body.bus-mode .bus-pair-station{border:0;background:white;box-shadow:none;color:#111}
+ body.bus-mode .bus-seat{break-inside:avoid}
+ body.bus-mode .bus-status{color:#111;background:white;border:0;padding:0}
+ body.bus-mode .bus-status b{color:#111}
+ body.bus-mode #busFeedback{display:none}
+ body.bus-mode .bus-pair-card{background:white;color:#111;border-color:#aaa}
+ body.bus-mode .bus-pair-card-top,body.bus-mode .bus-pair-help{color:#333}
+ body.bus-mode .bus-pair-bottom input{color:#111;border-color:#999;background:white}
+ body.bus-mode .bus-pair-slot{color:#111;background:white}
+}

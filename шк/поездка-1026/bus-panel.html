@@ -1,0 +1,11 @@
+<div class="bus-section-head">
+  <div><div class="eyebrow">СХЕМА АВТОБУСА · 22 МЕСТА</div><h2>Рассадка по местам</h2><p>Составьте пары справа и перенесите их на соседние места. Отдельного участника можно посадить на любое место.</p></div>
+  <div class="bus-actions"><button type="button" id="busCopy">▢ Скопировать</button><button type="button" id="busPrint">⎙ Печать</button><button type="button" id="busReset">↺ Очистить</button></div>
+</div>
+<div class="bus-status"><span>Занято <b id="busOccupied">0</b> / 22</span><span>В парах <b id="busPairCount">0</b></span><span>Свободно <b id="busVacant">22</b></span><span id="busFeedback">Нажмите на карточку человека или перетащите её</span></div>
+<div class="bus-workspace">
+  <section class="bus-vehicle-zone" aria-label="Салон автобуса"><div class="bus-frame"><div class="bus-windshield">▱ ЛОБОВОЕ СТЕКЛО ▱</div><div class="bus-cabin" id="busSeats" aria-label="22 пассажирских места"></div><div class="bus-tail">◁ ЗАДНЯЯ ЧАСТЬ АВТОБУСА ▷</div></div><p class="bus-small-note">Расположение и нумерация как на исходной схеме. Нажмите на занятое место, чтобы выбрать пассажира; «×» освобождает место.</p></section>
+  <aside class="bus-pair-station"><div class="pair-panel-top"><div><div class="eyebrow">ПОДГОТОВКА</div><h3>Пары пассажиров</h3></div><button type="button" id="busAddPair">＋ Пара</button></div><p class="bus-pair-help">Перетащите двух участников в ячейки пары. Среднее двух баллов рассчитывается автоматически, но его можно изменить вручную. Готовая пара занимает два соседних места.</p><div class="bus-pair-auto" data-bus-dock="1" role="button" tabindex="0">＋ Перетащите сюда человека — добавим в пару</div><div id="busPairs" class="bus-pairs"></div><p class="bus-pair-empty" id="busEmptyPairs">Пары пока не составлены.</p></aside>
+</div>
+<section class="bus-roster" id="busRoster" data-bus-pool="1"><div class="bus-roster-top"><div><div class="eyebrow">ВСЕ УЧАСТНИКИ</div><h3>Люди и баллы</h3><p>Баллы редактируются в карточках. Зелёные — гости, золотистые — сопровождающие. Неуказанные баллы не учитываются в среднем.</p></div><button type="button" id="busClearSelect">Снять выбор</button></div><div class="bus-people" id="busPeople"></div></section>
+<div class="bus-foot">✓ Сохраняется в браузере · Квесты не изменяются · На телефоне выберите карточку и нажмите на место.</div>
