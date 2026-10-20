@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Спортивный рейтинг — шесть фото | GP IO</title><meta name="description" content="Интерактивный шаблон спортивного рейтинга на шесть участников: загрузка фото, масштабирование, экспорт PNG и скачивание отдельных слоёв.">
+<style>
+:root{color-scheme:dark;--bg:#080c11;--panel:#111820;--card:#171f29;--line:#2a3440;--txt:#f1f5f8;--muted:#a4b1c1;--gold:#ffd66f}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse at 70% -12%,#253242 0,transparent 48%),#090e14;color:var(--txt)}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding:20px 32px;background:rgba(12,17,24,.85)}.brand{display:flex;align-items:center;gap:12px;font-weight:850;font-size:19px;letter-spacing:.06em}.logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(130deg,#fff6aa,#e7ac37 58%,#785116);color:#1e1c18;display:grid;place-items:center;font-family:Georgia,serif;font-size:24px}small,.muted{color:var(--muted)}.chip{font-size:12px;border:1px solid #3f4d5d;color:#cdd9e7;border-radius:999px;padding:7px 12px;white-space:nowrap}.layout{display:grid;grid-template-columns:minmax(500px,1fr) 350px;gap:22px;padding:24px 32px;max-width:1900px;margin:auto}.stage{min-width:0}.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}.bar h1{font-size:22px;margin:0;letter-spacing:-.03em}.bar p{font-size:12px;color:#a9b7c6;margin:3px 0 0}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #445064;background:#202b38;border-radius:10px;padding:11px 15px;color:#ecf4ff;font-weight:700;font-size:13px;transition:background .15s}.btn:hover{background:#29394b}.btn.primary{background:linear-gradient(145deg,#fbe298,#efb943);color:#1b1b20;border-color:#ffecad}.btn.primary:hover{background:linear-gradient(145deg,#fff1ae,#f3c456)}.btn.ghost{background:transparent}.canvas-shell{border-radius:16px;padding:11px;border:1px solid #3b4654;background:linear-gradient(150deg,#303c49,#131a22);box-shadow:0 20px 70px #0009}.canvas-holder{position:relative;overflow:hidden;border-radius:9px;aspect-ratio:20/9;background:#070b12}.canvas-holder:focus-within{outline:2px solid #e7c46d}canvas{display:block;max-width:100%;width:100%;height:auto;cursor:crosshair;touch-action:none}.tip{color:#9cabbc;margin:13px 3px;font-size:13px;line-height:1.6}.key{border:1px solid #485460;border-radius:5px;background:#18212d;padding:2px 6px;white-space:nowrap;color:#c7d0d8}.steps{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.step{border:1px solid #293542;background:linear-gradient(140deg,#171f2a,#0d141d);padding:15px;border-radius:12px}.step b{display:block;color:#e6edf6;font-size:13px;margin:2px 0 4px}.step span{color:#94a5b5;font-size:12px;line-height:1.4;display:block}.step em{font-style:normal;color:#f0cb73;margin-right:7px}
+aside{border:1px solid #303b48;background:#131c26;border-radius:16px;padding:18px;height:max-content;position:sticky;top:20px;box-shadow:0 16px 55px #050a1090}aside h2{font-size:17px;margin:0 0 8px}aside p{font-size:12px;margin:0 0 14px;color:#9fadbc;line-height:1.5}.slots{display:grid;gap:8px}.slot{display:flex;align-items:center;gap:11px;width:100%;border:1px solid #2d3b49;border-radius:10px;padding:9px;background:#192430;color:#d7e1ef;text-align:left}.slot.active{border-color:#dec478;background:#28303a}.medal{display:grid;place-items:center;width:38px;height:42px;border-radius:7px;background:#0c121b;border:1px solid var(--slotcolor);color:var(--slotcolor);font-size:22px;font-family:Georgia,serif;font-weight:bold;box-shadow:inset 0 0 13px #ffffff0d}.slotmain{flex:1;min-width:0}.slotmain strong{display:block;font-size:13px}.slotmain small{font-size:11px}.dot{width:8px;height:8px;border-radius:100%;background:#465564}.dot.ready{background:#66e4a1;box-shadow:0 0 12px #66e4a166}.editor{margin-top:17px;border-top:1px solid #34414e;padding-top:17px}.editor>h3{font-size:15px;margin:0 0 12px}.field{display:block;color:#adbecd;font-size:12px;margin:12px 0 5px}.field input[type=text]{width:100%;border:1px solid #40505f;background:#0e1620;color:#fff;padding:10px;border-radius:8px;outline:none}.edit-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.edit-actions .btn{flex:1;padding:9px}.sliderline{display:flex;align-items:center;justify-content:space-between;margin-top:16px;font-size:12px;color:#c1cbd5}.sliderline output{color:#ffd77b;font-weight:bold}.range{display:block;width:100%;accent-color:#eec25b;margin:12px 0 15px}.toggle{display:flex;gap:9px;font-size:13px;color:#cfdae7;align-items:center;margin-top:12px}.toggle input{accent-color:#e9c064}.divider{height:1px;background:#303e4a;margin:16px 0}footer{border-top:1px solid #26323e;margin:24px 32px;color:#788a9e;padding:16px 0 25px;font-size:12px;text-align:center}.status{min-height:16px;font-size:12px;color:#80e0ae;margin:12px 0 0}#filePicker,#projectPicker{display:none}
+@media(max-width:1100px){.layout{grid-template-columns:1fr;gap:16px;padding:14px}aside{position:static}.slots{grid-template-columns:repeat(3,1fr)}.slotmain small{font-size:10px}header{padding:16px}.steps{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:550px){.slots{grid-template-columns:repeat(2,1fr)}.bar h1{font-size:18px}.steps{grid-template-columns:1fr}.btn{padding:9px;font-size:12px}.layout{padding:10px}.slot{gap:7px}.brand{font-size:14px}footer{margin:12px}}
+</style></head><body>
+<header><div class="brand"><div class="logo">1</div><div>SPORT RANKING <span style="color:#f9cf68">/ 06</span></div></div><span class="chip">OFFLINE · БЕЗ РЕГИСТРАЦИИ</span></header>
+<div class="layout"><main class="stage"><div class="bar"><div><h1>Шаблон спортивного рейтинга</h1><p>Шесть фото · разрешение 2400 × 1080 · исходные слои сохраняются</p></div><div class="actions"><button class="btn ghost" id="saveProject" title="Сохранить снимки и настройки для продолжения работы">Сохранить проект</button><button class="btn ghost" id="loadProject">Открыть проект</button><button class="btn primary" id="exportPNG">↓ Скачать PNG</button></div></div>
+<div class="canvas-shell"><div class="canvas-holder" id="dropZone"><canvas width="2400" height="1080" id="poster" aria-label="Поле из шести фото для перетаскивания изображений"></canvas></div></div>
+<p class="tip"><b>Как вставить фото:</b> перетащите файл прямо на рамку или щёлкните по ней. Для кадрирования выделите место и перетаскивайте изображение мышью; масштаб меняйте ползунком справа. Все файлы остаются на вашем компьютере.</p>
+<div class="steps"><div class="step"><span><em>01</em>ВЫБОР</span><b>Загрузите 6 фотографий</b><span>В любую рамку можно поместить своё изображение.</span></div><div class="step"><span><em>02</em>КАДРИРОВАНИЕ</span><b>Выставьте лица</b><span>Перемещайте фото, настраивайте масштаб и чёрно-белый эффект.</span></div><div class="step"><span><em>03</em>ЭКСПОРТ</span><b>Скачайте итог</b><span>PNG 2400 × 1080. Проект отдельно сохраняется для продолжения.</span></div></div>
+</main><aside><h2>Места на пьедестале</h2><p>Нажмите на участника, чтобы загрузить фотографию и изменить кадрирование.</p><div id="slots" class="slots"></div>
+<div class="editor"><h3 id="editorTitle">1 место · Золото</h3><button class="btn primary" style="width:100%" id="choosePhoto">+ Загрузить / заменить фото</button>
+<label class="field" for="personName">Подпись под фотографией (необязательно)</label><input type="text" id="personName" placeholder="Например: Иван Иванов" maxlength="36">
+<div class="sliderline"><label for="zoom">Масштаб фотографии</label><output id="zoomValue">100%</output></div><input class="range" type="range" id="zoom" min="1" max="3.5" step=".05" value="1">
+<label class="toggle"><input type="checkbox" id="grayscale" checked> Чёрно-белое фото, как в оригинале</label>
+<div class="edit-actions"><button id="resetPosition" class="btn">По центру</button><button id="removePhoto" class="btn">Убрать фото</button></div><p id="status" class="status" role="status"></p>
+<div class="divider"></div><button id="resetAll" class="btn ghost" style="width:100%">Очистить все 6 мест</button></div></aside></div>
+<footer>Автономный редактор · Личные фотографии не передаются на сервер · Экспорт PNG без водяных знаков</footer>
+<section class="asset-downloads" aria-label="Исходные файлы" style="max-width:1280px;margin:0 auto 30px;padding:0 32px"><details style="border:1px solid #344251;border-radius:14px;background:#131b24;padding:18px"><summary style="cursor:pointer;font-weight:750;color:#f8d27b">Скачать заготовки, слои и автономный редактор</summary><p style="color:#acbac8">Все элементы — отдельные файлы. Чтобы вставлять фотографии, используйте редактор выше; для самостоятельной сборки скачайте слои.</p><ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding-left:18px;line-height:1.7"><li><a download href="./editor-offline.html">Редактор без интернета (HTML)</a></li><li><a download href="./assets/01_mountains_background.jpg">Тёмный фон гор (JPG)</a></li><li><a download href="./assets/02_panel_backplates.png">Подложки мест (PNG)</a></li><li><a download href="./assets/03_frames_laurels_numbers.png">Рамки, номера, лавры (PNG)</a></li><li><a download href="./layout.json">Координаты всех мест (JSON)</a></li><li><a href="./README.md">Инструкция и порядок слоёв</a></li></ul><p style="color:#acbac8">Маски: <a style="display:inline-block;margin:2px 9px 2px 0" download href="./assets/photo-mask-1.svg">место 1 (SVG)</a><a style="display:inline-block;margin:2px 9px 2px 0" download href="./assets/photo-mask-2.svg">место 2 (SVG)</a><a style="display:inline-block;margin:2px 9px 2px 0" download href="./assets/photo-mask-3.svg">место 3 (SVG)</a><a style="display:inline-block;margin:2px 9px 2px 0" download href="./assets/photo-mask-4.svg">место 4 (SVG)</a><a style="display:inline-block;margin:2px 9px 2px 0" download href="./assets/photo-mask-5.svg">место 5 (SVG)</a><a style="display:inline-block;margin:2px 9px 2px 0" download href="./assets/photo-mask-6.svg">место 6 (SVG)</a></p><p style="font-size:12px;color:#92a7ba">Ваши фотографии остаются в вашем браузере; выгрузка на сервер не производится.</p></details></section>
+<input type="file" id="filePicker" accept="image/*"><input type="file" id="projectPicker" accept="application/json,.json">
+<script>
+'use strict';
+const BG_URL='./assets/01_mountains_background.jpg';
+const BASE_URL='./assets/02_panel_backplates.png';
+const FRAME_URL='./assets/03_frames_laurels_numbers.png';
+const config={"width":2400,"height":1080,"slots":[{"id":1,"x":122,"y":183,"w":308,"h":850,"color":"#f9c44b","label":"ЗОЛОТО","inner":{"x":134,"y":195,"w":284,"h":826}},{"id":2,"x":502,"y":337,"w":308,"h":696,"color":"#d4dce3","label":"СЕРЕБРО","inner":{"x":514,"y":349,"w":284,"h":672}},{"id":3,"x":882,"y":459,"w":308,"h":574,"color":"#d89869","label":"БРОНЗА","inner":{"x":894,"y":471,"w":284,"h":550}},{"id":4,"x":1262,"y":563,"w":308,"h":470,"color":"#48b5fa","label":"СИНИЙ","inner":{"x":1274,"y":575,"w":284,"h":446}},{"id":5,"x":1642,"y":655,"w":308,"h":378,"color":"#45d7a0","label":"ЗЕЛЁНЫЙ","inner":{"x":1654,"y":667,"w":284,"h":354}},{"id":6,"x":2022,"y":750,"w":308,"h":283,"color":"#fe6376","label":"КРАСНЫЙ","inner":{"x":2034,"y":762,"w":284,"h":259}}],"layer_order":["01_mountains_background.png","02_panel_backplates.png","user_photo_masked","03_frames_laurels_numbers.png","optional_name_text"]};
+const W=config.width,H=config.height,slots=config.slots;
+const canvas=document.querySelector('#poster');
+const ctx=canvas.getContext('2d');
+const elements={slots:document.querySelector('#slots'),filePicker:document.querySelector('#filePicker'),projectPicker:document.querySelector('#projectPicker'),personName:document.querySelector('#personName'),zoom:document.querySelector('#zoom'),zoomValue:document.querySelector('#zoomValue'),grayscale:document.querySelector('#grayscale'),title:document.querySelector('#editorTitle'),status:document.querySelector('#status')};
+let art={},selected=0,pendingUpload=0,dragging=null;
+const photos=slots.map(()=>({img:null,data:null,zoom:1,ox:0,oy:0,mono:true,name:''}));
+function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('Не удалось открыть изображение'));img.src=src})}
+function dataURL(file){return new Promise((resolve,reject)=>{let rd=new FileReader();rd.onload=()=>resolve(rd.result);rd.onerror=reject;rd.readAsDataURL(file)})}
+function hexToRGBA(h,a){let k=h.replace('#','');return `rgba(${parseInt(k.slice(0,2),16)},${parseInt(k.slice(2,4),16)},${parseInt(k.slice(4,6),16)},${a})`}
+function status(msg){elements.status.textContent=msg;}
+function drawScene(c,showHints=true){
+ c.clearRect(0,0,W,H);c.drawImage(art.bg,0,0,W,H);c.drawImage(art.base,0,0,W,H);
+ for(let i=0;i<slots.length;i++){
+  const slot=slots[i],r=slot.inner,p=photos[i];
+  c.save();c.beginPath();c.rect(r.x,r.y,r.w,r.h);c.clip();
+  if(p.img){
+   const img=p.img,scale=Math.max(r.w/img.naturalWidth,r.h/img.naturalHeight)*p.zoom;
+   const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
+   let dx=r.x+r.w/2-dw/2+p.ox,dy=r.y+r.h/2-dh/2+p.oy;
+   dx=dw>=r.w?Math.max(r.x+r.w-dw,Math.min(r.x,dx)):r.x+(r.w-dw)/2;
+   dy=dh>=r.h?Math.max(r.y+r.h-dh,Math.min(r.y,dy)):r.y+(r.h-dh)/2;
+   c.filter=p.mono?'grayscale(100%) contrast(1.13)':'contrast(1.04)';c.drawImage(img,dx,dy,dw,dh);c.filter='none';
+   c.fillStyle=hexToRGBA(slot.color,.12);c.fillRect(r.x,r.y,r.w,r.h);
+   const fade=c.createLinearGradient(0,r.y+r.h-150,0,r.y+r.h);
+   fade.addColorStop(0,'rgba(0,0,0,0)');fade.addColorStop(1,'rgba(1,3,6,.65)');c.fillStyle=fade;c.fillRect(r.x,r.y+r.h-150,r.w,150);
+  }else if(showHints){
+   c.fillStyle='rgba(5,12,19,.62)';c.fillRect(r.x,r.y,r.w,r.h);
+   c.textAlign='center';c.textBaseline='middle';c.fillStyle='rgba(239,246,255,.69)';c.font='bold 26px system-ui,sans-serif';c.fillText('ВАШЕ ФОТО',r.x+r.w/2,r.y+r.h/2-11,r.w-22);
+   c.fillStyle='rgba(197,210,221,.65)';c.font='17px system-ui,sans-serif';c.fillText('ПЕРЕТАЩИТЕ СНИМОК',r.x+r.w/2,r.y+r.h/2+27,r.w-22);
+  }
+  c.restore();
+ }
+ c.drawImage(art.frame,0,0,W,H);
+ for(let i=0;i<slots.length;i++){
+  let name=photos[i].name.trim();if(!name)continue;
+  let r=slots[i].inner;
+  c.save();c.textAlign='center';c.textBaseline='middle';c.font='bold 29px system-ui,sans-serif';
+  c.shadowColor='rgba(0,0,0,.95)';c.shadowBlur=13;c.shadowOffsetY=3;
+  c.fillStyle='#fff';c.fillText(name,r.x+r.w/2,r.y+r.h-35,r.w-12);c.restore();
+ }
+}
+function render(){if(art.bg)drawScene(ctx,true)}
+function displaySlots(){
+ elements.slots.innerHTML='';
+ for(let i=0;i<slots.length;i++){
+  const s=slots[i];const btn=document.createElement('button');btn.className='slot'+(selected===i?' active':'');btn.style.setProperty('--slotcolor',s.color);
+  const label=photos[i].name.trim()||s.label.toLowerCase();
+  btn.innerHTML=`<span class="medal">${i+1}</span><span class="slotmain"><strong>${i+1} место</strong><small>${label.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</small></span><span class="dot ${photos[i].img?'ready':''}"></span>`;
+  btn.addEventListener('click',()=>select(i));elements.slots.appendChild(btn);
+ }
+}
+function select(i){selected=i;let p=photos[i],s=slots[i];elements.title.textContent=`${i+1} место · ${s.label[0]+s.label.slice(1).toLowerCase()}`;elements.personName.value=p.name;elements.zoom.value=String(p.zoom);elements.zoomValue.textContent=`${Math.round(p.zoom*100)}%`;elements.grayscale.checked=p.mono;displaySlots();status(p.img?'Фото загружено. Перетаскивайте изображение мышью.':'Это место пока пустое. Перетащите или загрузите фото.');}
+async function acceptPhoto(file,i){if(!file)return;if(!file.type.startsWith('image/')){status('Нужен файл изображения: JPG, PNG, WEBP и др.');return;}
+ try{const data=await dataURL(file);let img=await loadImage(data);Object.assign(photos[i],{img,data,zoom:1,ox:0,oy:0});select(i);render();status('Фото загружено: '+file.name)}catch(e){status('Ошибка загрузки фото: '+e.message)}
+}
+function localPos(ev){const b=canvas.getBoundingClientRect();return{x:(ev.clientX-b.left)*W/b.width,y:(ev.clientY-b.top)*H/b.height}}
+function hitSlot(p){return slots.findIndex(s=>p.x>=s.x-6&&p.x<=s.x+s.w+6&&p.y>=s.y-5&&p.y<=s.y+s.h+5)}
+canvas.addEventListener('pointerdown',ev=>{let p=localPos(ev);let i=hitSlot(p);if(i<0)return;select(i);if(photos[i].img){dragging={i,x:p.x,y:p.y,ox:photos[i].ox,oy:photos[i].oy,moved:false};canvas.setPointerCapture(ev.pointerId);}});
+canvas.addEventListener('pointermove',ev=>{if(!dragging)return;const p=localPos(ev),d=dragging;photos[d.i].ox=d.ox+p.x-d.x;photos[d.i].oy=d.oy+p.y-d.y;d.moved=d.moved||Math.hypot(p.x-d.x,p.y-d.y)>8;render()});
+canvas.addEventListener('pointerup',()=>{if(dragging)dragging=null;});
+canvas.addEventListener('click',ev=>{if(dragging)return;const i=hitSlot(localPos(ev));if(i>=0&&!photos[i].img){select(i);pendingUpload=i;elements.filePicker.click()}});
+canvas.addEventListener('wheel',ev=>{const i=hitSlot(localPos(ev));if(i<0||!photos[i].img)return;ev.preventDefault();photos[i].zoom=Math.max(1,Math.min(3.5,Math.round((photos[i].zoom+(ev.deltaY>0?-.05:.05))*20)/20));select(i);render()},{passive:false});
+const drop=document.querySelector('#dropZone');drop.addEventListener('dragover',ev=>{ev.preventDefault();ev.dataTransfer.dropEffect='copy';drop.style.outline='3px dashed #ffdc80'});drop.addEventListener('dragleave',()=>drop.style.outline='');drop.addEventListener('drop',ev=>{ev.preventDefault();drop.style.outline='';const i=hitSlot(localPos(ev));const file=[...ev.dataTransfer.files].find(f=>f.type.startsWith('image/'));acceptPhoto(file,i>=0?i:selected)});
+document.querySelector('#choosePhoto').addEventListener('click',()=>{pendingUpload=selected;elements.filePicker.click()});
+elements.filePicker.addEventListener('change',()=>{acceptPhoto(elements.filePicker.files[0],pendingUpload);elements.filePicker.value=''});
+elements.personName.addEventListener('input',()=>{photos[selected].name=elements.personName.value;displaySlots();render()});
+elements.zoom.addEventListener('input',()=>{photos[selected].zoom=Number(elements.zoom.value);elements.zoomValue.textContent=Math.round(photos[selected].zoom*100)+'%';render()});
+elements.grayscale.addEventListener('change',()=>{photos[selected].mono=elements.grayscale.checked;render()});
+document.querySelector('#resetPosition').addEventListener('click',()=>{Object.assign(photos[selected],{zoom:1,ox:0,oy:0});select(selected);render()});
+document.querySelector('#removePhoto').addEventListener('click',()=>{Object.assign(photos[selected],{img:null,data:null,zoom:1,ox:0,oy:0});select(selected);render()});
+document.querySelector('#resetAll').addEventListener('click',()=>{if(!confirm('Очистить все 6 мест и подписи?'))return;for(let p of photos)Object.assign(p,{img:null,data:null,zoom:1,ox:0,oy:0,mono:true,name:''});select(0);render()});
+function downloadBlob(blob,filename){const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+document.querySelector('#exportPNG').addEventListener('click',()=>{const out=document.createElement('canvas');out.width=W;out.height=H;drawScene(out.getContext('2d'),false);out.toBlob(blob=>{if(blob){downloadBlob(blob,'sport_ranking_6.png');status('Готово: PNG 2400 × 1080 сохранён.')}else status('Не удалось сохранить PNG.')},'image/png')});
+document.querySelector('#saveProject').addEventListener('click',()=>{const obj={app:'SPORT_RANKING_6',version:1,photos:photos.map(p=>({data:p.data,zoom:p.zoom,ox:p.ox,oy:p.oy,mono:p.mono,name:p.name}))};downloadBlob(new Blob([JSON.stringify(obj)],{type:'application/json'}),'sport_ranking_6_project.json');status('Проект сохранён. Его можно открыть позже.')});
+document.querySelector('#loadProject').addEventListener('click',()=>elements.projectPicker.click());
+elements.projectPicker.addEventListener('change',async()=>{try{const f=elements.projectPicker.files[0];if(!f)return;const obj=JSON.parse(await f.text());if(obj.app!=='SPORT_RANKING_6'||!Array.isArray(obj.photos)||obj.photos.length!==6)throw Error('Неверный формат проекта');for(let i=0;i<6;i++){let p=obj.photos[i];let img=p.data?await loadImage(p.data):null;Object.assign(photos[i],{img,data:p.data||null,zoom:Math.max(1,Math.min(3.5,Number(p.zoom)||1)),ox:Number(p.ox)||0,oy:Number(p.oy)||0,mono:p.mono!==false,name:String(p.name||'').slice(0,36)});}select(0);render();status('Проект успешно загружен.')}catch(e){status('Ошибка открытия проекта: '+e.message)}elements.projectPicker.value=''});
+(async()=>{try{const [bg,base,frame]=await Promise.all([loadImage(BG_URL),loadImage(BASE_URL),loadImage(FRAME_URL)]);art={bg,base,frame};select(0);render();}catch(e){status('Ошибка загрузки оформления: '+e.message)}})();
+</script></body></html>
