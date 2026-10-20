@@ -29,18 +29,20 @@ const guideAliases={
  archive:"drive-log drive-all drive-txt log журнал история архив zip экспорт переписка вложения",
  doc:"doc docs google документы вкладки pdf docx deep research file all",
  io:"io github github-pages публикация сайт страница web",
+  upd:"upd update обновить обновление исправить изменить страница подпуть неполное название ключ существующая публикация",
  commands:"commands команды справочник каталог",
  builder:"builder конструктор генератор",
  faq:"faq вопросы ответы ограничения помощь"
 };
-const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",doc:"Google Docs",io:"IO",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
+const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",doc:"Google Docs",io:"IO",upd:"UPD · Обновить страницу",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
 let pageMode="landing";
 function normalQuery(value){return String(value).toLocaleLowerCase("ru").replace(/ё/g,"е").trim().replace(/\s+/g," ")}
 function exactGuideTopic(value){
  const q=normalQuery(value).replace(/^@gp\s+/,"");
  if(/^(drive-(log|txt|all))([\s-]|$)/.test(q) || /^(лог|архив|журнал|история|zip)(\s|$)/.test(q))return "archive";
  if(/^(doc|docs|вкладк|документ)(\s|$)/.test(q))return "doc";
- if(/^(io|github|публикац|сайт)(\s|$)/.test(q))return "io";
+ if(/^(upd|update|обнов|изменить|правка)(\s|$)/.test(q))return "upd";
+  if(/^(io|github|публикац|сайт)(\s|$)/.test(q))return "io";
  if(/^(vns|collect|фото|изображения|картинки)(\s|$)/.test(q))return "vns";
  if(/^(drive|google|облако)(\s|$)/.test(q))return "drive";
  if(/^(commands|команды|справочник)(\s|$)/.test(q))return "commands";
@@ -202,7 +204,8 @@ const labels={
  "vns-next-drive":"Только новые генерации + Drive",
  "doc-tab":"Добавить новую вкладку в существующий Google Документ",
  "io":"Публикация страницы на GitHub Pages",
- "io-ds":"Интерактивная страница исследования"
+ "io-ds":"Интерактивная страница исследования",
+  "upd":"Обновить существующую опубликованную страницу по ключу или части пути"
 };
 function build(){
  if(!select||!path||!date||!output)return;
@@ -210,13 +213,14 @@ function build(){
  const isVns=kind.startsWith("vns-");
  const isIo=kind.startsWith("io");
  const isDoc=kind==="doc-tab";
- const supportDate=!isVns&&!isIo&&!isDoc;
+  const isUpd=kind==="upd";
+ const supportDate=!isVns&&!isIo&&!isDoc&&!isUpd;
  if(docTitleWrap)docTitleWrap.hidden=!isDoc;
  if(docModeWrap)docModeWrap.hidden=!isDoc;
- if(dateWrap)dateWrap.hidden=isDoc;
+ if(dateWrap)dateWrap.hidden=isDoc||isUpd;
  date.disabled=!supportDate;
  date.closest(".last")?.classList.toggle("disabled",!supportDate);
- path.placeholder=isDoc?"@nws или ссылка Google Docs":isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
+ path.placeholder=isUpd?"Например, plg-t2f или man/plg-t2f":isDoc?"@nws или ссылка Google Docs":isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
  path.disabled=isIo;
  const sub=path.value.trim().replace(/^\/+|\/+$/g,"");
  let command="";
@@ -224,7 +228,8 @@ function build(){
   const target=sub||"@nws";
   const title=(docTitle?.value||"").trim().replace(/"/g,"");
   command="@gp doc tab "+target+(title?' "'+title+'"':"")+(docMode?.value&&docMode.value!=="current"?" "+docMode.value:"");
- }else if(isIo)command=kind==="io-ds"?"@gp io ds":"@gp io";
+ }else if(isUpd)command="@gp upd";
+  else if(isIo)command=kind==="io-ds"?"@gp io ds":"@gp io";
  else if(isVns)command=kind==="vns-next-drive"?"@gp vns next drive":"@gp vns drive";
  else command="@gp "+kind;
  if(!isIo&&!isDoc&&sub)command+=" "+sub;
