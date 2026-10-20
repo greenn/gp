@@ -7,8 +7,8 @@
  const sections=[...document.querySelectorAll("main.doc > section[id]")];
  const navs=[...document.querySelectorAll(".sidebar .nav-item")];
  const groups=[...document.querySelectorAll(".sidebar .side-group")];
- const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",next:"22 next",new:"NEW · изоляция",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
- const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",new:"new 1 2 3 независимая изоляция чистый контекст генерация отдельный чат fresh independent",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
+ const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",mode11:"Режим 11 · Fashion Series",next:"22 next",new:"NEW · изоляция",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
+ const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",mode11:"11 lineup height numbers off start continue group seq jeans top looks fashion studio групповая студия четыре кадра модели рост нумерация джинсы одежда",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",new:"new 1 2 3 независимая изоляция чистый контекст генерация отдельный чат fresh independent",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
  let current="landing";
  function norm(x){return String(x||"").toLocaleLowerCase("ru").replace(/ё/g,"е").replace(/\s+/g," ").trim();}
  function navClose(){sidebar.classList.remove("open");scrim.classList.remove("show");toggle?.setAttribute("aria-expanded","false");}
@@ -42,6 +42,7 @@
  function exact(q){
   q=q.replace(/^@t2f\s*/,"");
   if(/^(new(?:\s|$)|изоляц|независим)/.test(q))return "new";
+  if(/^(11(?:\s|$)|lineup|seq\s|fashion series)/.test(q))return "mode11";
   if(/^(77|школ|лагер|outfit|одежд|lookbook|каталог|camp|school|съемк|съёмк)/.test(q))return "mode77";
   if(/^(55|пленк|плёнк|свободн|воплощен)/.test(q))return "mode55";
   if(/^(22\s*next|next|время|секунд|минут|час|год|временн)/.test(q))return "next";
@@ -165,6 +166,17 @@
  ["55","55 80 плёнка grain 2 freedom 5","Максимально естественное переосмысление референса","freedom"],
  ["55","55 p","Выдать только текст промпта, не генерировать фото","текст"],
  ["55","55 help","Справка и перечень пресетов","помощь"],
+ ["11","11","Группа по референсам, белая студия, номера 01…","lineup group"],
+ ["11","11 lineup height","Все модели на одной линии пола с относительным ростом","рост высота"],
+ ["11","11 numbers off","Убрать двузначные подписи","без номеров"],
+ ["11","11 lineup start 07","Начать номера с 07","нумерация"],
+ ["11","11 continue","Продолжить счётчик по известному предыдущему набору","нумерация"],
+ ["11","11 seq jeans","Четыре кадра взрослой модели с закрытым нижним слоем","джинсы"],
+ ["11","11 seq top","Четыре кадра взрослой модели со снятием наружной вещи","верх"],
+ ["11","11 seq looks","Четыре закрытых каталожных образа, подходит школьникам","lookbook"],
+ ["11","11 p lineup height","Вернуть подробный промпт, без картинки","промпт"],
+ ["11","11 help","Справка и подкоманды","помощь"],
+ ["new","NEW 1 11 lineup","Новые фото для независимой групповой студийной съёмки","11 независимая"],
  ["77","77","Школа по умолчанию, создать модельную фотосъёмку по лицу","лицо одежда школа"],
  ["77","77 школа","Школьный lookbook без дополнительной настройки","школа"],
  ["77","77 лагерь","Школьная фотосъёмка для лагеря","camp"],
