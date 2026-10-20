@@ -1,4 +1,4 @@
-/* T2F 11 Fashion Series command builder. */
+/* T2F 11 Fashion Series command builder — true scale and fashion silhouette are automatic. */
 (function(){
  "use strict";
  const el=id=>document.getElementById(id);
