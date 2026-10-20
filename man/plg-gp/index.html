@@ -14,7 +14,7 @@
 <div class="mobile-scrim" id="scrim"></div>
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="Навигация по руководству">
- <div class="brand-row"><a href="#overview" class="brand" aria-label="GP — начало">gp<span class="brand-dot">.</span></a><span class="brand-mark" title="Версия 0.2.4">↗</span></div>
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="GP — начало">gp<span class="brand-dot">.</span></a><span class="brand-mark" title="Версия 0.2.5">↗</span></div>
  <a class="install" href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть GP в ChatGPT <span aria-hidden="true">↗</span></a>
  <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки"><a class="nav-item active" href="#overview"><span class="ico" aria-hidden="true">⌂</span>Начало<span class="num">01</span></a>
 <a class="nav-item" href="#vns"><span class="ico" aria-hidden="true">▧</span>Изображения · VNS<span class="num">02</span></a>
@@ -22,6 +22,7 @@
 <a class="nav-item" href="#archive"><span class="ico" aria-hidden="true">≡</span>История и архив<span class="num">04</span></a>
 <a class="nav-item" href="#doc"><span class="ico" aria-hidden="true">▤</span>Google Docs · вкладки<span class="num">05</span></a>
 <a class="nav-item" href="#io"><span class="ico" aria-hidden="true">↗</span>GitHub Pages · IO<span class="num">05</span></a>
+<a class="nav-item" href="#upd"><span class="ico" aria-hidden="true">↻</span>Обновить страницу · UPD<span class="num">06</span></a>
 <a class="nav-item" href="#commands"><span class="ico" aria-hidden="true">⌘</span>Все команды<span class="num">06</span></a>
 <a class="nav-item" href="#builder"><span class="ico" aria-hidden="true">⚙</span>Конструктор<span class="num">07</span></a>
 <a class="nav-item" href="#faq"><span class="ico" aria-hidden="true">?</span>Вопросы и ответы<span class="num">08</span></a></nav></div>
@@ -31,13 +32,14 @@
    <a class="folder" href="#drive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Файлы и облако</a>
    <a class="folder" href="#archive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Архив переписки</a>
    <a class="folder" href="#doc">▤ Google Документы</a>
-   <a class="folder" href="#io"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Публикации</a>
+   <a class="folder" href="#upd">↻ Обновить страницу</a>
+    <a class="folder" href="#io"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Публикации</a>
  </div>
  <div class="side-divider"></div>
- <div class="side-foot"><strong>GP / Справочник</strong><div>Документация возможностей версии 0.2.4<br>Обновлено 15 октября 2026</div></div>
+ <div class="side-foot"><strong>GP / Справочник</strong><div>Документация возможностей версии 0.2.5<br>Обновлено 20 октября 2026</div></div>
 </aside>
 <div class="main">
-<div class="mobile-top"><button id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>gp<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.2.4</span></div>
+<div class="mobile-top"><button id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>gp<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.2.5</span></div>
 <div class="guide-search" role="search" aria-label="Поиск по всей справке">
  <div class="guide-search-inner">
   <label for="guide-search-input" class="guide-search-label">Поиск по справке</label>
@@ -66,6 +68,7 @@
   <button type="button" class="stat landing-menu-item" data-focus="drive"><strong>Drive</strong><span>Файлы и журнал чата</span></button>
   <button type="button" class="stat landing-menu-item" data-focus="doc"><strong>Docs</strong><span>Вкладки Google Документов</span></button>
   <button type="button" class="stat landing-menu-item" data-focus="io"><strong>IO</strong><span>Публичные веб-страницы</span></button>
+<button type="button" class="stat landing-menu-item" data-focus="upd"><strong>UPD</strong><span>Обновить существующую страницу по ключу</span></button>
  </nav>
  <div class="note"><span aria-hidden="true">✳</span><div><strong>Как начать.</strong> Выберите команду ниже, нажмите «Копировать» и вставьте её в беседу с подключённым GP. Примеры не запускают действия на этой справочной странице.</div></div>
 </section>
@@ -153,6 +156,20 @@
  <p class="text">Папка получает короткое понятное английское название. Внутри — <span class="inline-code">index.html</span> и доступные исходные материалы. Запись также появляется в главном каталоге сайта. Для исследований могут быть добавлены поиск, оглавление и фильтры, если они полезны по содержанию.</p>
  <div class="note warn"><span aria-hidden="true">↗</span><div>Публикация через <strong>io</strong> общедоступна. Не переносите туда пароли, личные данные или закрытые файлы. <strong>Drive</strong> и <strong>IO</strong> — разные места сохранения.</div></div>
 </section>
+<section class="section" id="upd">
+<span class="section-marker" aria-hidden="true"></span><p class="eyebrow">05 / адресное обновление</p>
+<h2 class="section-title">UPD. Обновить страницу по короткому ключу.</h2>
+<p class="section-intro">Не нужно вводить полный URL. GP ищет уже опубликованную страницу в <code>greenn/gp</code> по точному пути, фрагменту названия или ключевым словам. После проверки цели изменяет её на прежнем адресе.</p>
+<div class="cmd-grid">
+<div class="cmd-card"><div class="top"><code>@gp upd plg-t2f</code><button class="copy" data-copy="@gp upd plg-t2f">Копировать</button></div><p>Найти справочник T2F в <code>man/plg-t2f/</code> и обновить его содержимое по текущему запросу.</p></div>
+<div class="cmd-card"><div class="top"><code>@gp upd man/plg-gp</code><button class="copy" data-copy="@gp upd man/plg-gp">Копировать</button></div><p>Явно указать уже существующую подпапку страницы.</p></div>
+<div class="cmd-card"><div class="top"><code>@gp upd plg-t2f добавь раздел частых команд</code><button class="copy" data-copy="@gp upd plg-t2f добавь раздел частых команд">Копировать</button></div><p>Ключ страницы и задача в одной команде.</p></div>
+<div class="cmd-card"><div class="top"><code>@gp upd https://greenn.github.io/gp/man/plg-t2f/</code><button class="copy" data-copy="@gp upd https://greenn.github.io/gp/man/plg-t2f/">Копировать</button></div><p>Полный точный URL также поддерживается, только в границах публикаций <code>greenn/gp</code>.</p></div>
+</div>
+<h3>Как выбирается страница</h3><div class="diagram"><span>Ключ: plg-t2f</span><span class="arrow">→</span><span>Поиск существующего каталога</span><span class="arrow">→</span><span>Сверка совпадения</span><span class="arrow">→</span><span>Правка и проверка</span></div>
+<p class="text">Приоритет совпадений: точный URL или путь, точное имя каталога, уникальная часть пути, затем название страницы и ключевые слова. Если кандидатов несколько и однозначного победителя нет — GP показывает варианты и не редактирует ничего до выбора. Если ничего не найдено — новую страницу автоматически не создаёт.</p>
+<div class="note"><span>✓</span><div><strong>Сохраняются URL и существующий UI:</strong> работающие разделы, адаптивность, поиск, JS и копирование команд. Сторонние файлы не перезаписываются, старые страницы не удаляются. Права записи и успешный коммит проверяются отдельно.</div></div>
+</section>
 <section class="section" id="commands">
  <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">05 / справочник</p>
  <h2 class="section-title">Команды без поиска по чату.</h2>
@@ -164,7 +181,7 @@
   <button class="filter" data-filter="drive" aria-pressed="false">Drive</button>
   <button class="filter" data-filter="archive" aria-pressed="false">Журнал</button>
   <button class="filter" data-filter="doc" aria-pressed="false">Docs</button>
-  <button class="filter" data-filter="io" aria-pressed="false">IO</button>
+  <button class="filter" data-filter="io" aria-pressed="false">IO</button><button class="filter" data-filter="upd" aria-pressed="false">UPD</button>
   <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
  </div>
  <p class="search-status" id="search-count" aria-live="polite">Найдено команд: 26 из 26</p>
@@ -193,7 +210,9 @@
 <div class="command-row" data-group="io" data-keywords="deep research github"><code class="syntax">@gp io ds</code><span class="desc">Интерактивная веб-версия исследования в /ds/</span><button class="copy" data-copy="@gp io ds" aria-label="Скопировать @gp io ds">Копировать</button></div>
 <div class="command-row" data-group="io" data-keywords="ссылка github"><code class="syntax">@gp io ds ?url</code><span class="desc">То же с явным запросом URL (необязательный флаг)</span><button class="copy" data-copy="@gp io ds ?url" aria-label="Скопировать @gp io ds ?url">Копировать</button></div>
 <div class="command-row" data-group="general" data-keywords="помощь"><code class="syntax">@gp help</code><span class="desc">Показать подсказку по доступным командам</span><button class="copy" data-copy="@gp help" aria-label="Скопировать @gp help">Копировать</button></div>
-<div class="command-row" data-group="general" data-keywords="помощь список"><code class="syntax">@gp list</code><span class="desc">Показать список зарегистрированных команд</span><button class="copy" data-copy="@gp list" aria-label="Скопировать @gp list">Копировать</button></div></div><div id="empty-state" class="empty-state">Ничего не найдено. Попробуйте другой запрос или выберите «Все».</div>
+<div class="command-row" data-group="general" data-keywords="помощь список"><code class="syntax">@gp list</code><span class="desc">Показать список зарегистрированных команд</span><button class="copy" data-copy="@gp list" aria-label="Скопировать @gp list">Копировать</button><div class="command-row" data-group="upd" data-keywords="обновление существующая страница название ключ t2f"><code class="syntax">@gp upd plg-t2f</code><span class="desc">Найти и обновить существующую страницу по фрагменту имени</span><button class="copy" data-copy="@gp upd plg-t2f">Копировать</button></div>
+<div class="command-row" data-group="upd" data-keywords="обновить точный путь"><code class="syntax">@gp upd man/plg-gp</code><span class="desc">Обновить по точному каталогу</span><button class="copy" data-copy="@gp upd man/plg-gp">Копировать</button></div>
+<div class="command-row" data-group="upd" data-keywords="частичный ключ задача"><code class="syntax">@gp upd plg-t2f добавь частые команды</code><span class="desc">Ключ + конкретная задача правки</span><button class="copy" data-copy="@gp upd plg-t2f добавь частые команды">Копировать</button></div></div><div id="empty-state" class="empty-state">Ничего не найдено. Попробуйте другой запрос или выберите «Все».</div>
 </section>
 <section class="section" id="builder">
  <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">06 / попробовать</p>
@@ -206,7 +225,7 @@
     <option value="drive">drive</option><option value="drive-all">drive-all</option><option value="drive-all-gpt">drive-all-gpt</option>
     <option value="drive-log">drive-log</option><option value="drive-log-gpt">drive-log-gpt</option><option value="drive-log-my">drive-log-my</option>
     <option value="drive-txt">drive-txt</option><option value="drive-txt-all">drive-txt-all</option><option value="drive-txt-my">drive-txt-my</option>
-    <option value="vns-drive">vns drive</option><option value="vns-next-drive">vns next drive</option><option value="doc-tab">doc tab</option><option value="io">io</option><option value="io-ds">io ds</option>
+    <option value="vns-drive">vns drive</option><option value="vns-next-drive">vns next drive</option><option value="doc-tab">doc tab</option><option value="io">io</option><option value="io-ds">io ds</option><option value="upd">upd</option>
    </select></div>
    <div><label for="build-path">Подпапка (необязательно)</label><input type="text" id="build-path" autocomplete="off" placeholder="например, vns или s/2025"></div>
    <div class="doc-builder-extra" id="doc-builder-title-wrap" hidden><label for="build-tab-title">Название вкладки (необязательно)</label><input id="build-tab-title" type="text" autocomplete="off" placeholder="Deep Research"></div>
@@ -227,8 +246,9 @@
  <details class="details"><summary>Почему в drive-log могут отсутствовать сообщения?</summary><p>GP не получает полный системный экспорт чата и не может прочитать скрытые служебные данные. Файлы, для которых нет исходных байтов, и обрезанная история фиксируются как пропуски.</p></details>
  <details class="details"><summary>Зачем cur+ вместо cur?</summary><p><strong>cur</strong> повторно использует календарную папку, например <span class="inline-code">gp/vns/1015</span>. <strong>cur+</strong> ищет первую свободную номерную папку, например <span class="inline-code">gp/vns/1015-2</span>. Это снижает риск смешать отдельные выгрузки.</p></details>
  <details class="details"><summary>Что означает ?url у io?</summary><p>Это необязательный сигнал «покажи ссылку». URL формируется автоматически после записи публикации в репозиторий даже без этого параметра. Работу GitHub Pages после коммита нужно отдельно проверять.</p></details>
- <details class="details"><summary>GP работает автоматически между сообщениями?</summary><p>Нет. Он выполняет команды при вызове в чате и зависит от подключённых инструментов. Фоновое копирование или доступ ко всем сообщениям из других чатов не подразумевается.</p></details>
- <footer class="footer"><span>GP · Справочник версии 0.2.4</span><a href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть плагин ↗</a><a href="../../" target="_blank" rel="noopener noreferrer">Каталог публикаций ↗</a><span>Создано для GitHub Pages</span></footer>
+ <details class="details"><summary>Как обновить существующую страницу, не зная полного названия?</summary><p>Введите <code>@gp upd plg-t2f</code> и опишите изменения. GP найдёт кандидата по ключу в репозитории. При неоднозначности попросит выбрать страницу. Старый URL сохранится.</p></details>
+<details class="details"><summary>GP работает автоматически между сообщениями?</summary><p>Нет. Он выполняет команды при вызове в чате и зависит от подключённых инструментов. Фоновое копирование или доступ ко всем сообщениям из других чатов не подразумевается.</p></details>
+ <footer class="footer"><span>GP · Справочник версии 0.2.5</span><a href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть плагин ↗</a><a href="../../" target="_blank" rel="noopener noreferrer">Каталог публикаций ↗</a><span>Создано для GitHub Pages</span></footer>
 </section>
 </main>
 </div>
