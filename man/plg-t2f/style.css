@@ -239,3 +239,6 @@ body.guide-filtered .guide-search-empty{scroll-margin-top:145px}
 .builder77-grid>div{min-width:0}
 #builder77 .builder-output code{overflow-wrap:anywhere}
 @media(max-width:540px){.builder77-grid{grid-template-columns:1fr}}
+
+/* Popular T2F recipes: keep long prompts readable and variants copyable. */
+.frequent-grid{align-items:stretch}.frequent-card{min-width:0}.frequent-card .top{align-items:flex-start;gap:10px;flex-wrap:wrap}.frequent-card .top code{white-space:normal;overflow-wrap:anywhere;line-height:1.65}.frequent-comment{font-size:12px;color:var(--muted);border-left:2px solid #c8d9d2;padding-left:10px}.frequent-variant{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap}.frequent-variant span{font-size:10px;font-weight:700;color:var(--sage-d);text-transform:uppercase}.frequent-variant code{font-size:11px;line-height:1.5;overflow-wrap:anywhere;flex:1 1 70%}.frequent-variant .copy{margin-left:auto}
