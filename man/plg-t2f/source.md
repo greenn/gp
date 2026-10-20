@@ -38,6 +38,17 @@
 
 ## Часто используемые команды (20.10.2026)
 
-Публичная страница `index.html#frequent` содержит 16 проверенных синтаксических рецептов из текущей переписки и для каждого — копируемую вариацию. Основные запросы: `REAL MAX full body` с `keep face keep age keep outfit keep pose keep bg keep light keep mood`; `22 outpaint 3`; одиночная модель `solo` на `white seamless paper backdrop`; `77 studio full body solo`; модель в кресле, камера снизу с широким углом и прямым взглядом (`sitting in armchair, low angle, wide lens, looking into camera`); `22 pose ref`; `22 next 5s`; `55 90 плёнка`; `32 @PORTRAIT_EDITORIAL`; `NEW 1/2/3`; `clean`; `12 {PS1}`; `11 lineup`; `77 p`.
+Публичная страница `index.html#frequent` содержит 20 проверенных синтаксических рецептов из текущей переписки и для каждого — копируемую вариацию. Основные запросы: `REAL MAX full body` с `keep face keep age keep outfit keep pose keep bg keep light keep mood`; `22 outpaint 3`; одиночная модель `solo` на `white seamless paper backdrop`; `77 studio full body solo`; модель в кресле, камера снизу с широким углом и прямым взглядом (`sitting in armchair, low angle, wide lens, looking into camera`); `22 pose ref`; `22 next 5s`; `55 90 плёнка`; `32 @PORTRAIT_EDITORIAL`; `NEW 1/2/3`; `clean`; `12 {PS1}`; `11 lineup`; `77 p`.
 
 **Важно:** если фон меняется на студийный, `keep bg` не добавляют. Полный рост из крупного плана достраивается предположительно. `REAL MAX` — максимальный уровень требований к фотореализму, а не техническая гарантия. Для несовершеннолетних все постановки возрастно-корректны.
+
+## Дополнение: повседневная фотография и взрослый каталог (20.10.2026)
+
+Четыре новых популярных сценария:
+
+- `55 keep face keep age keep outfit\nsame pose, ordinary real-life photo, natural casual snapshot, not a fashion shoot` — обычная натуральная фотография человека. Поза сохраняется приблизительно, `55` свободнее перерабатывает кадр.
+- `22 keep face keep age keep outfit keep pose\nordinary casual photo, not fashion, natural light` — повседневный снимок при более строгом сохранении исходной позы.
+- `77 adult campaign swimwear catalog\nstudio full body solo\nkeep face keep age match outfit` — только совершеннолетняя модель, коммерческий каталог купальников, нейтральная поза, акцент на изделии и качестве фотографии, без эротизации.
+- `77 adult campaign swimwear catalog FACE=A OUTFIT=B full body solo keep face keep age match outfit` — референс A содержит лицо, B — изделие. Дополнительный C может задавать сцену.
+
+В разделе `#frequent` каждая команда сопровождается комментарием и копируемой вариацией. `55` — повседневная естественность, `22` — более строгое сохранение позы, `77` — постановочная коммерческая съёмка. Для `77` уточнение `adult campaign` снимает школьный контекст по умолчанию, но не заменяет проверку возраста.
