@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101627"><meta name="robots" content="noindex,nofollow">
+<title>Поездка 24.10 — распределение по хоррор-квестам</title>
+<meta name="description" content="Интерактивная доска для распределения участников поездки.">
+<link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script>
+</head><body><div class="backdrop"></div>
+<div class="layout">
+<header class="hero">
+  <div class="eyebrow"><span class="dot"></span> ПОЕЗДКА КЛАССА <span class="sep">/</span> 24 ОКТЯБРЯ 2026</div>
+  <div class="hero-top"><div><h1>Кто идёт <em>куда?</em></h1><p>Распределение по хоррор-квестам · Великий Новгород</p></div>
+    <div class="hero-stat"><strong id="assignedTotal">0</strong><span>из 22 распределены</span></div></div>
+  <div class="trip-details"><span>↗ Поддорье → Великий Новгород</span><span>↗ Выезд <strong>09:00</strong></span><span>↗ Обратно <strong>16:00</strong></span><span>↗ Студенческая, 33</span></div>
+</header>
+<div class="toolbar">
+ <div class="toolbar-hint"><span class="help-icon">↔</span><span><b>Перетащите карточку</b> в нужный квест. На телефоне: нажмите на карточку, затем на область квеста.</span></div>
+ <div class="actions"><button id="copyBtn" class="action" type="button">▢ Скопировать</button><button id="printBtn" class="action" type="button">⎙ Печать</button><button id="resetBtn" class="action danger" type="button">↺ Сбросить</button><button id="lockBtn" class="action" type="button">⌁ Закрыть</button></div>
+</div>
+<main><div class="board">
+ <aside class="names names-left" data-zone="obsessed"><div class="panel-top"><span>01 / СПИСОК</span><span class="pill" id="listOCount">0</span></div><h2>Идут на «Одержимую»</h2><ol id="listO" class="names-list"><li class="empty-names">Пока никого</li></ol></aside>
+ <section class="quest quest-one" aria-label="Квест Одержимая"><div class="quest-head"><div class="quest-num">КВЕСТ 01</div><h2>Одержимая</h2><p>Перетащите участников сюда</p><div class="quest-count"><b id="countO">0</b> человек</div></div><div class="quest-floor zone-target" data-zone="obsessed" tabindex="0" role="button" aria-label="Добавить выбранного участника на квест Одержимая"><div class="tiles" id="tilesO"></div><div class="drop-hint" id="hintO">＋<span>ПЕРЕТАЩИТЕ СЮДА</span></div></div></section>
+ <section class="quest quest-two" aria-label="Квест Сдаётся квартира"><div class="quest-head"><div class="quest-num">КВЕСТ 02</div><h2>Сдаётся квартира</h2><p>Перетащите участников сюда</p><div class="quest-count"><b id="countA">0</b> человек</div></div><div class="quest-floor zone-target" data-zone="apartment" tabindex="0" role="button" aria-label="Добавить выбранного участника на квест Сдаётся квартира"><div class="tiles" id="tilesA"></div><div class="drop-hint" id="hintA">＋<span>ПЕРЕТАЩИТЕ СЮДА</span></div></div></section>
+ <aside class="names names-right" data-zone="apartment"><div class="panel-top"><span>02 / СПИСОК</span><span class="pill" id="listACount">0</span></div><h2>Идут на квест «Сдаётся квартира»</h2><ol id="listA" class="names-list"><li class="empty-names">Пока никого</li></ol></aside>
+</div>
+<section class="bench zone-target" id="bench" data-zone="pool" tabindex="0" role="button" aria-label="Вернуть выбранного участника в общий список">
+ <div class="bench-head"><div><div class="eyebrow muted">ЕЩЁ НЕ РАСПРЕДЕЛЕНЫ</div><h2>Участники поездки</h2></div><div class="bench-note">Осталось <strong id="remaining">22</strong> · можно вернуть сюда из любого квеста</div></div>
+ <div class="bench-row"><div class="row-label"><span class="row-icon">✦</span><div><strong>Дети</strong><small>20 участников</small></div></div><div class="tiles pool-tiles" id="poolStudents"></div></div>
+ <div class="bench-row escorts-row"><div class="row-label"><span class="row-icon">◇</span><div><strong>Сопровождающие</strong><small>2 взрослых</small></div></div><div class="tiles pool-tiles" id="poolEscorts"></div></div>
+</section>
+<div class="footline"><span id="saveStatus">Изменения сохраняются автоматически в этом браузере</span><span>Данные не отправляются на сервер · <b>GP / ШК</b></span></div>
+</main></div>
+<div id="lockScreen" class="lock-screen" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+ <form id="unlockForm" class="lock-card"><div class="lock-mark">◇</div><div class="eyebrow">ДОСТУП К СПИСКУ</div><h2 id="lockTitle">Распределение по квестам</h2><p>Для защиты фамилий школьников список встроен в страницу в зашифрованном виде. Импортировать файлы не нужно.</p><label for="accessCode">Код доступа</label><input id="accessCode" type="password" autocomplete="off" spellcheck="false" required placeholder="Введите код" /><label class="remember"><input type="checkbox" id="rememberCode" checked> Запомнить на этом устройстве</label><button class="unlock-button" id="unlockSubmit" type="submit">Открыть доску →</button><p class="error" id="unlockError" role="status"></p><small>На общем компьютере снимите галочку «Запомнить».</small></form>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body></html>
