@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#e5e7e6">
-<meta name="description" content="Интерактивный справочник T2F 0.10.0: фото и 3D, REAL 1–10, режимы 12, 22, 32, 55, 77, 22 next, clean, примеры, поиск и копирование команд.">
+<meta name="description" content="Интерактивный справочник T2F 0.10.1: фото и 3D, REAL 1–10, режимы 12, 22, 32, 55, 77, 22 next, NEW 1–3, clean, примеры, поиск и копирование команд.">
 <title>T2F — руководство по командам</title>
 <link rel="stylesheet" href="./style.css">
 <script src="./app.js" defer></script>
@@ -15,7 +15,7 @@
 <div class="mobile-scrim" id="scrim"></div>
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="Навигация по руководству T2F">
- <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.10.0">↗</span></div>
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.10.1">↗</span></div>
  <a class="install" href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener noreferrer">Открыть T2F в ChatGPT <span aria-hidden="true">↗</span></a>
  <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки">
   <a class="nav-item active" href="#overview"><span class="ico">⌂</span>Обзор<span class="num">01</span></a>
@@ -26,10 +26,11 @@
   <a class="nav-item" href="#mode32"><span class="ico">◎</span>32 · фотография<span class="num">06</span></a>
   <a class="nav-item" href="#mode55"><span class="ico">◉</span>55 · Живое фото<span class="num">07</span></a>
   <a class="nav-item" href="#mode77"><span class="ico">▤</span>77 · Одежда и сцена<span class="num">08</span></a>
-  <a class="nav-item" href="#next"><span class="ico">◷</span>22 next · время<span class="num">08</span></a>
-  <a class="nav-item" href="#clean"><span class="ico">↺</span>clean · сброс<span class="num">09</span></a>
-  <a class="nav-item" href="#commands"><span class="ico">⌘</span>Все команды<span class="num">10</span></a>
-  <a class="nav-item" href="#faq"><span class="ico">?</span>Вопросы и ответы<span class="num">11</span></a>
+  <a class="nav-item" href="#next"><span class="ico">◷</span>22 next · время<span class="num">09</span></a>
+  <a class="nav-item" href="#new"><span class="ico">◌</span>NEW · изоляция<span class="num">10</span></a>
+  <a class="nav-item" href="#clean"><span class="ico">↺</span>clean · сброс<span class="num">11</span></a>
+  <a class="nav-item" href="#commands"><span class="ico">⌘</span>Все команды<span class="num">12</span></a>
+  <a class="nav-item" href="#faq"><span class="ico">?</span>Вопросы и ответы<span class="num">13</span></a>
  </nav></div>
  <div class="side-divider"></div>
  <div class="side-group"><h3>Рабочие инструменты</h3>
@@ -38,18 +39,18 @@
   <a class="folder" href="../plg-gp/" target="_blank" rel="noopener"><span aria-hidden="true">⌘</span> Справочник GP ↗</a>
  </div>
  <div class="side-divider"></div>
- <div class="side-foot"><strong>T2F / Справочник</strong><div>Актуальная схема плагина 0.9.0<br>Обновлено 19 октября 2026<br>Документация; не запускает генерацию на сайте.</div></div>
+ <div class="side-foot"><strong>T2F / Справочник</strong><div>Актуальная схема плагина 0.10.1<br>Обновлено 20 октября 2026<br>Документация; не запускает генерацию на сайте.</div></div>
 </aside>
 <div class="main">
- <div class="mobile-top"><button type="button" id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>t2f<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.9.0</span></div>
+ <div class="mobile-top"><button type="button" id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>t2f<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.10.1</span></div>
  <div class="guide-search" role="search" aria-label="Поиск по справке">
   <div class="guide-search-inner"><label for="guide-search-input" class="guide-search-label">Поиск по справке</label>
-   <div class="guide-search-control"><span class="guide-search-icon" aria-hidden="true">⌕</span><input id="guide-search-input" type="search" autocomplete="off" placeholder="Например: REAL UP, PS1, 22 next, clean…" aria-controls="content" aria-describedby="guide-search-status"><button id="guide-search-clear" class="guide-search-clear" type="button" hidden>Сбросить ×</button></div>
+   <div class="guide-search-control"><span class="guide-search-icon" aria-hidden="true">⌕</span><input id="guide-search-input" type="search" autocomplete="off" placeholder="Например: NEW 1, REAL UP, PS1, clean…" aria-controls="content" aria-describedby="guide-search-status"><button id="guide-search-clear" class="guide-search-clear" type="button" hidden>Сбросить ×</button></div>
    <span id="guide-search-status" class="guide-search-status" aria-live="polite">Показаны все разделы</span>
   </div>
  </div>
  <div class="focus-bar" id="focus-bar" hidden><button type="button" class="back-to-landing" id="back-to-landing">← Назад к обзору</button><span id="focus-breadcrumb" class="focus-breadcrumb"></span></div>
- <div class="guide-search-empty" id="guide-search-empty" hidden><strong>Ничего не найдено.</strong><p>Попробуйте REAL, 12, 22, 32, next, pose или clean.</p><button type="button" id="guide-search-reset">Показать всё</button></div>
+ <div class="guide-search-empty" id="guide-search-empty" hidden><strong>Ничего не найдено.</strong><p>Попробуйте NEW, REAL, 12, 22, 32, next или clean.</p><button type="button" id="guide-search-reset">Показать всё</button></div>
  <main class="doc" id="content">
  <section class="section" id="overview">
   <p class="overline">IMAGE TRANSFORMATION · СПРАВКА T2F</p>
@@ -64,6 +65,7 @@
    <button type="button" class="stat landing-menu-item" data-focus="mode32"><strong>32</strong><span>Камера, свет и материалы</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="mode55"><strong>55</strong><span>Свободное живое фото</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="mode77"><strong>77</strong><span>Лицо + одежда + сцена</span></button>
+   <button type="button" class="stat landing-menu-item" data-focus="new"><strong>NEW</strong><span>Независимые генерации 1–3</span></button>
   </nav>
   <div class="note"><span aria-hidden="true">✳</span><div><strong>По умолчанию — один кадр.</strong> Простой вызов T2F с 3D-рендером превращает его в максимально правдоподобную фотографию. Исходные поза, ракурс, выражение лица, одежда и фон сохраняются. Несколько кадров — только по явному запросу.</div></div>
  </section>
@@ -76,10 +78,11 @@
    <div class="cmd-card"><div class="top"><code>12</code><button class="copy" data-copy="12">Копировать</button></div><p>Фото → стилизованное или реалистичное 3D-изображение. По умолчанию AAAAA.</p></div>
    <div class="cmd-card"><div class="top"><code>22 фото</code><button class="copy" data-copy="22 фото">Копировать</button></div><p>Фотопреобразование с управлением позой, кадром и сохранением деталей.</p></div>
    <div class="cmd-card"><div class="top"><code>REAL 10</code><button class="copy" data-copy="REAL 10">Копировать</button></div><p>Абсолютный уровень 10/10 по накопительной шкале фотореализма.</p></div>
+   <div class="cmd-card"><div class="top"><code>NEW 1 77 studio full body</code><button class="copy" data-copy="NEW 1 77 studio full body">Копировать</button></div><p>Новая самостоятельная съёмка в режиме 77 без наследования прошлых изображений.</p></div>
   </div>
   <div class="diagram"><span>Загрузить исходник</span><span class="arrow">→</span><span>Ввести команду T2F</span><span class="arrow">→</span><span>Получить 1 кадр / текст</span><span class="arrow">→</span><span>Уточнить результат</span></div>
   <h3>Что нужно знать</h3>
-  <p class="text">Команды <span class="inline-code">12</span>, <span class="inline-code">22</span>, <span class="inline-code">32</span> — названия режимов, а не количество изображений. Новая загруженная картинка может продолжать текущую сцену, если не дать команду сброса. Для независимой обработки используйте <span class="inline-code">clean</span>.</p>
+  <p class="text">Команды <span class="inline-code">12</span>, <span class="inline-code">22</span>, <span class="inline-code">32</span> — названия режимов, а не количество изображений. Новая загруженная картинка может продолжать текущую сцену, если не дать команду сброса. Для независимой генерации в выбранном режиме используйте <span class="inline-code">NEW</span>; для сброса к стандартной фототрансформации — <span class="inline-code">clean</span>.</p>
  </section>
 
  <section class="section" id="real"><span class="section-marker"></span><p class="eyebrow">02 / уровни реализма</p>
@@ -244,7 +247,7 @@
  <div class="note warn"><span>!</span><div>Школьные и лагерные съёмки несовершеннолетних — нейтральные и возрастно-корректные; модельный образ не должен сексуализировать учащихся. Указанный пользователем контекст согласий не отменяет ограничений и приватности. Для бельевого каталога нужны совершеннолетние модели.</div></div>
 </section>
 
-<section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">06 / развитие сцены во времени</p>
+<section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">08 / развитие сцены во времени</p>
   <h2 class="section-title">22 next. Следующий момент истории.</h2>
   <p class="section-intro">Переход вперёд или назад относительно последнего кадра. Результат — одна новая фотография, а не видео и не точный прогноз.</p>
   <div class="cmd-grid">
@@ -280,20 +283,51 @@
   <a class="action-light inline-action" href="../../plg/t2fb/#next" target="_blank" rel="noopener">Полный конструктор времени ↗</a>
  </section>
 
- <section class="section" id="clean"><span class="section-marker"></span><p class="eyebrow">07 / новый исходник</p>
+
+ <section class="section" id="new"><span class="section-marker"></span><p class="eyebrow">09 / независимые генерации · T2F 0.10.1</p>
+  <h2 class="section-title">NEW. Новая картинка без наследования старой.</h2>
+  <p class="section-intro"><strong>NEW</strong> ставится первым словом команды и начинает отдельную логическую задачу в том же чате. Предыдущие лица, люди, референсы, одежда, позы, ракурсы, сцены, свет, стиль, seed и параметры не используются. Каждый новый независимый запрос снова начинается с NEW.</p>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>NEW</code><button class="copy" data-copy="NEW">Копировать</button></div><p>Сокращение NEW 1. Новый кадр только по текущему тексту и новым вложениям.</p></div>
+   <div class="cmd-card"><div class="top"><code>NEW 1</code><button class="copy" data-copy="NEW 1">Копировать</button></div><p>Независимая генерация в этом чате. Можно указать 12, 22, 32, 55, 77 или REAL.</p></div>
+   <div class="cmd-card"><div class="top"><code>NEW 2</code><button class="copy" data-copy="NEW 2">Копировать</button></div><p>Строгий выбор источников. Используются только новые, однозначно указанные вложения A/FACE, B/OUTFIT, C/SCENE, SOURCE или REF. Если роли очевидны, метки не обязательны.</p></div>
+   <div class="cmd-card"><div class="top"><code>NEW 3</code><button class="copy" data-copy="NEW 3">Копировать</button></div><p>Составить автономный промпт для нового чата. По умолчанию не генерирует изображение здесь и не открывает чат автоматически.</p></div>
+  </div>
+  <h3>Совместимость с режимами</h3>
+  <div class="cmd-grid">
+   <div class="cmd-card"><div class="top"><code>NEW 1 77 studio full body</code><button class="copy" data-copy="NEW 1 77 studio full body">Копировать</button></div><p>Новая студийная фотосъёмка. Не использовать лица и одежду из предыдущих кадров.</p></div>
+   <div class="cmd-card"><div class="top"><code>NEW 2 77 FACE=A OUTFIT=B SCENE=C</code><button class="copy" data-copy="NEW 2 77 FACE=A OUTFIT=B SCENE=C">Копировать</button></div><p>Строгая сборка сцены только из трёх новых референсов, вложенных в это сообщение.</p></div>
+   <div class="cmd-card"><div class="top"><code>NEW 2 красный автомобиль на снегу</code><button class="copy" data-copy="NEW 2 красный автомобиль на снегу">Копировать</button></div><p>Генерация нового изображения по тексту. При отсутствии исходника не искать прежние файлы.</p></div>
+   <div class="cmd-card"><div class="top"><code>NEW 3 22 frontal portrait 85mm</code><button class="copy" data-copy="NEW 3 22 frontal portrait 85mm">Копировать</button></div><p>Подготовить самостоятельный промпт, который затем нужно отправить в отдельный чат.</p></div>
+  </div>
+  <div class="builder" id="builder-new">
+   <h3>Конструктор NEW</h3>
+   <p>Выберите способ изоляции, режим T2F и допишите текущий запрос. Справочник формирует и копирует команду, но не запускает генерацию.</p>
+   <div class="builder-grid">
+    <div><label for="new-isolation">Тип изоляции</label><select id="new-isolation"><option value="1">NEW 1 · независимый кадр</option><option value="2">NEW 2 · строгие источники</option><option value="3">NEW 3 · промпт для нового чата</option></select></div>
+    <div><label for="new-mode">Режим T2F</label><select id="new-mode"><option value="">Стандартный режим</option><option value="12">12 · фото → 3D</option><option value="22">22 · позы</option><option value="32">32 · фото-параметры</option><option value="55">55 · живое фото</option><option value="77">77 · лицо + одежда + сцена</option><option value="REAL 10">REAL 10 · фотореализм</option></select></div>
+    <div><label for="new-details">Промпт и новые источники</label><input id="new-details" type="text" placeholder="Например: studio full body FACE=A OUTFIT=B"></div>
+   </div>
+   <div class="builder-output"><code id="new-built">NEW 1</code><button class="copy" id="new-copy" data-copy="NEW 1">Копировать</button></div>
+  </div>
+  <div class="note warn"><span>!</span><div><strong>Это не техническое удаление контекста.</strong> NEW 1 и NEW 2 инструктируют модель не использовать историю, но не стирают сообщения или вложения чата и не гарантируют изоляцию серверного контекста. Для максимально независимого результата используйте отдельный новый чат; NEW 3 помогает подготовить для него промпт и требует повторно приложить нужные изображения.</div></div>
+  <p class="text"><strong>Отличие от clean:</strong> <span class="inline-code">clean</span> сбрасывает настройки и при новом исходнике выполняет стандартное фото-преобразование. <span class="inline-code">NEW</span> позволяет начать новую задачу с любым явно заданным режимом, включая генерацию только по тексту. <span class="inline-code">NEW 77</span> означает сокращённо <span class="inline-code">NEW 1 77</span>.</p>
+ </section>
+
+ <section class="section" id="clean"><span class="section-marker"></span><p class="eyebrow">10 / новый исходник</p>
   <h2 class="section-title">clean. Новый старт в том же чате.</h2>
   <p class="section-intro">Сброс состояния T2F, когда нужно обработать другое изображение без наследования прошлых поз, ракурсов и настроек.</p>
   <div class="cmd-grid">
    <div class="cmd-card"><div class="top"><code>@T2F clean</code><button class="copy" data-copy="@T2F clean">Копировать</button></div><p>Сброс T2F: REAL → 1, старые референсы и параметры 12/22/32 не наследуются.</p></div>
    <div class="cmd-card"><div class="top"><code>22 фото clean 2</code><button class="copy" data-copy="22 фото clean 2">Копировать</button></div><p>Иное значение слова clean: устранить визуальные артефакты внутри режима 22.</p></div>
   </div>
-  <div class="note"><span>✓</span><div><strong>clean не удаляет сообщения из чата.</strong> С новым приложенным изображением сразу выполняется одна стандартная фототрансформация. Без изображения команда только сбрасывает состояние и ожидает новый файл.</div></div>
+  <div class="note"><span>✓</span><div><strong>clean, как и NEW, не удаляет сообщения из чата.</strong> С новым приложенным изображением сразу выполняется одна стандартная фототрансформация. Без изображения команда только сбрасывает состояние и ожидает новый файл.</div></div>
  </section>
 
- <section class="section" id="commands"><span class="section-marker"></span><p class="eyebrow">08 / каталог коротких команд</p>
+ <section class="section" id="commands"><span class="section-marker"></span><p class="eyebrow">11 / каталог коротких команд</p>
   <h2 class="section-title">Команды без поиска по чату.</h2>
   <p class="section-intro">Фильтруйте по режиму и действию. Нажатие «Копировать» не запускает генерацию — команда переносится в буфер обмена.</p>
-  <div class="search-bar"><span class="glass" aria-hidden="true">⌕</span><input type="search" id="command-search" aria-label="Поиск по командам" placeholder="Например: REAL UP, возраст, PS1, keep, next"><span class="keycap">/</span></div>
+  <div class="search-bar"><span class="glass" aria-hidden="true">⌕</span><input type="search" id="command-search" aria-label="Поиск по командам" placeholder="Например: NEW 2, REAL UP, PS1, keep, next"><span class="keycap">/</span></div>
   <div class="filterbar" aria-label="Фильтр команд">
    <button class="filter active" data-filter="all" aria-pressed="true">Все</button>
    <button class="filter" data-filter="real" aria-pressed="false">REAL</button>
@@ -303,6 +337,7 @@
    <button class="filter" data-filter="55" aria-pressed="false">55</button>
    <button class="filter" data-filter="77" aria-pressed="false">77</button>
    <button class="filter" data-filter="next" aria-pressed="false">22 next</button>
+   <button class="filter" data-filter="new" aria-pressed="false">NEW</button>
    <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
   </div>
   <p class="search-status" id="search-count" aria-live="polite"></p>
@@ -310,13 +345,15 @@
   <div id="commands-empty" class="empty-state">Ничего не найдено. Измените поиск или фильтр.</div>
  </section>
 
- <section class="section" id="faq"><span class="section-marker"></span><p class="eyebrow">09 / ограничения и ответы</p>
+ <section class="section" id="faq"><span class="section-marker"></span><p class="eyebrow">12 / ограничения и ответы</p>
   <h2 class="section-title">Частые вопросы.</h2>
   <p class="section-intro">О поведении T2F, изображениях и сохранении состояния.</p>
   <details class="details"><summary>Что означает «школа по умолчанию» в 77?</summary><p>77 использует возрастно-корректную школьную модельную съёмку как рабочую рамку. Это не требование школьной формы или здания школы в кадре: можно указать лагерь, парк или студию. При портретном референсе тело достраивается приблизительно, а не восстанавливается фактически.</p></details>
   <details class="details"><summary>Чем режим 55 отличается от 22 и 32?</summary><p><strong>55</strong> позволяет изменить неестественную позу, ракурс, мимику, одежду, свет и часть композиции ради ощущения реального снимка. <strong>22</strong> и <strong>32</strong> дают точный контроль параметров и сохранения исходника.</p></details>
   <details class="details"><summary>Почему 55 90 не состаривает человека?</summary><p><strong>55 90</strong> означает фотографическую эстетику 1990-х, а не перенос персонажа на 90 лет в будущее. Возраст и основные черты сохраняются, если не попросить иное.</p></details>
-  <details class="details"><summary>Можно ли просто прислать новую картинку без команды?</summary><p>В активном контексте T2F это может быть воспринято как продолжение предыдущей сцены. Для гарантированно независимого запроса используйте <strong>@T2F clean</strong> с новой картинкой.</p></details>
+  <details class="details"><summary>Можно ли просто прислать новую картинку без команды?</summary><p>В активном контексте T2F это может быть воспринято как продолжение предыдущей сцены. Для независимой логической задачи используйте <strong>NEW</strong> или <strong>NEW 2</strong> с новыми вложениями. Полного технического сброса контекста в одном чате нет.</p></details>
+  <details class="details"><summary>Разница между NEW 1, NEW 2 и NEW 3?</summary><p><strong>NEW 1</strong> игнорирует предыдущие изображения и настройки, <strong>NEW 2</strong> дополнительно требует однозначные новые источники, <strong>NEW 3</strong> выводит самостоятельный промпт для нового чата без генерации здесь.</p></details>
+  <details class="details"><summary>NEW полностью стирает контекст?</summary><p>Нет. Это инструкция о выборе источников для текущей задачи, а не функция удаления истории. Для наиболее надёжного разделения открывайте новый чат и переносите только нужные новые вложения.</p></details>
   <details class="details"><summary>Чем REAL 10 отличается от простого @T2F?</summary><p>REAL 10 фиксирует абсолютный уровень накопительной шкалы REAL. Простой @T2F и без команды REAL требует максимально качественное реалистичное фото, не ориентируясь на текущий счётчик.</p></details>
   <details class="details"><summary>Чем REAL отличается от r 0–5 в команде 22?</summary><p>REAL — отдельный режим с уровнями качества 1–10. <strong>r 0–5</strong> внутри 22 регулирует свободу натурализации формы при сохранении возраста, а не глобальную шкалу качества.</p></details>
   <details class="details"><summary>Почему 12 не даёт 12 изображений?</summary><p>12 — код режима «фото → 3D-изображение». Он создаёт одно изображение AAAAA, если другой стиль или количество кадров не указаны.</p></details>
@@ -325,7 +362,7 @@
   <details class="details"><summary>Что означает quality=max или Sunburst?</summary><p>Это предпочтения, заложенные в правилах плагина. Они применимы лишь если реальный инструмент предоставляет выбор модели и уровня качества. Текст плагина не переключает скрытые настройки ChatGPT.</p></details>
   <details class="details"><summary>Можно ли сделать 3D-модель для Blender?</summary><p>Режим 12 формирует 3D-выглядящее изображение, не 3D-файл с сеткой, материалами и костями.</p></details>
   <details class="details"><summary>Для чего отдельный конструктор T2FB?</summary><p>Он помогает собрать команды 12, 22 и 32 с выбором параметров и примерами, а также 22 next. Справочник описывает логику работы; конструктор выдаёт готовый текст для чата с T2F.</p></details>
-  <footer class="footer"><span>T2F · Справочник 0.9.0</span><a href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин ↗</a><a href="../../plg/t2fb/" target="_blank" rel="noopener">Конструктор ↗</a><a href="../../">Каталог GP ↗</a><span>GitHub Pages</span></footer>
+  <footer class="footer"><span>T2F · Справочник 0.10.1</span><a href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин ↗</a><a href="../../plg/t2fb/" target="_blank" rel="noopener">Конструктор ↗</a><a href="../../">Каталог GP ↗</a><span>GitHub Pages</span></footer>
  </section>
  </main>
 </div>

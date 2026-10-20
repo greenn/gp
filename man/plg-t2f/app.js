@@ -7,8 +7,8 @@
  const sections=[...document.querySelectorAll("main.doc > section[id]")];
  const navs=[...document.querySelectorAll(".sidebar .nav-item")];
  const groups=[...document.querySelectorAll(".sidebar .side-group")];
- const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",next:"22 next",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
- const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
+ const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",next:"22 next",new:"NEW · изоляция",clean:"clean",commands:"Все команды",faq:"Вопросы и ответы"};
+ const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",new:"new 1 2 3 независимая изоляция чистый контекст генерация отдельный чат fresh independent",clean:"clean сброс очистить контекст новая картинка",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения"};
  let current="landing";
  function norm(x){return String(x||"").toLocaleLowerCase("ru").replace(/ё/g,"е").replace(/\s+/g," ").trim();}
  function navClose(){sidebar.classList.remove("open");scrim.classList.remove("show");toggle?.setAttribute("aria-expanded","false");}
@@ -41,6 +41,7 @@
  }
  function exact(q){
   q=q.replace(/^@t2f\s*/,"");
+  if(/^(new(?:\s|$)|изоляц|независим)/.test(q))return "new";
   if(/^(77|школ|лагер|outfit|одежд|lookbook|каталог|camp|school|съемк|съёмк)/.test(q))return "mode77";
   if(/^(55|пленк|плёнк|свободн|воплощен)/.test(q))return "mode55";
   if(/^(22\s*next|next|время|секунд|минут|час|год|временн)/.test(q))return "next";
@@ -88,6 +89,14 @@
  const items=[
  ["general","@T2F","Один максимально реалистичный кадр исходного 3D-рендера","основная команда фото"],
  ["general","@T2F clean","Сбросить настройки и начать обработку нового изображения","сброс контекста новый старт"],
+ ["new","NEW","NEW 1: независимая генерация по текущему сообщению","новый кадр"],
+ ["new","NEW 1","Не использовать предыдущие изображения и настройки","изоляция"],
+ ["new","NEW 2","Строго использовать только новые однозначные источники","источники"],
+ ["new","NEW 3","Подготовить самостоятельный промпт для нового чата","отдельный чат"],
+ ["new","NEW 1 77 studio full body","Новый студийный кадр с отдельными референсами","фотосъёмка"],
+ ["new","NEW 2 77 FACE=A OUTFIT=B SCENE=C","Взять только явно новые референсы A/B/C","одежда локация"],
+ ["new","NEW 2 красный автомобиль на снегу","Создать новый кадр по тексту, без прошлого изображения","генерация"],
+ ["new","NEW 3 22 frontal portrait 85mm","Подготовить самостоятельный промпт для нового чата","портрет"],
  ["real","REAL 1","Установить первую ступень фотореализма","начальный уровень"],
  ["real","REAL 5","Установить уровень 5/10","кожа"],
  ["real","REAL 10","Установить максимальный уровень 10/10","максимальный реализм"],
@@ -216,6 +225,18 @@
  }
  ["next-number","next-unit","next-direction","next-extra"].forEach(id=>$(id).addEventListener("input",buildNext));
  buildNext();
+
+ // T2F 0.10.1: NEW command builder; does not call any image service.
+ function buildNew(){
+  const isolation=$("new-isolation").value;
+  const mode=$("new-mode").value;
+  const details=$("new-details").value.replace(/\s+/g," ").trim();
+  const command=["NEW",isolation,mode,details].filter(Boolean).join(" ");
+  $("new-built").textContent=command;
+  $("new-copy").dataset.copy=command;
+ }
+ ["new-isolation","new-mode","new-details"].forEach(id=>$(id).addEventListener("input",buildNew));
+ buildNew();
 
  // T2F 55: builder for combining natural-photo presets. Uses only local DOM state.
  const fiftyIds=["f55-era","f55-medium","f55-stock","f55-light","f55-genre","f55-ratio","f55-grain","f55-freedom","f55-keep-face","f55-keep-age","f55-keep-outfit","f55-prompt","f55-extra"];
