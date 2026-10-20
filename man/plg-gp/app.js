@@ -30,15 +30,17 @@ const guideAliases={
  doc:"doc docs google документы вкладки pdf docx deep research file all",
  io:"io github github-pages публикация сайт страница web",
   upd:"upd update обновить обновление исправить изменить страница подпуть неполное название ключ существующая публикация",
+ "fnd-my":"fnd-my личный поиск найти рассадка архив gmail google docs sheets chatgpt библиотека library картинки тексты прошлые чаты",
  commands:"commands команды справочник каталог",
  builder:"builder конструктор генератор",
  faq:"faq вопросы ответы ограничения помощь"
 };
-const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",doc:"Google Docs",io:"IO",upd:"UPD · Обновить страницу",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
+const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",doc:"Google Docs",io:"IO",upd:"UPD · Обновить страницу","fnd-my":"FND-MY · Поиск личных материалов",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
 let pageMode="landing";
 function normalQuery(value){return String(value).toLocaleLowerCase("ru").replace(/ё/g,"е").trim().replace(/\s+/g," ")}
 function exactGuideTopic(value){
  const q=normalQuery(value).replace(/^@gp\s+/,"");
+ if(/^(fnd-my)(-|\s|$)/.test(q)||/^(поиск личных|найти свое|мои документы)/.test(q))return "fnd-my";
  if(/^(drive-(log|txt|all))([\s-]|$)/.test(q) || /^(лог|архив|журнал|история|zip)(\s|$)/.test(q))return "archive";
  if(/^(doc|docs|вкладк|документ)(\s|$)/.test(q))return "doc";
  if(/^(upd|update|обнов|изменить|правка)(\s|$)/.test(q))return "upd";
@@ -205,7 +207,17 @@ const labels={
  "doc-tab":"Добавить новую вкладку в существующий Google Документ",
  "io":"Публикация страницы на GitHub Pages",
  "io-ds":"Интерактивная страница исследования",
-  "upd":"Обновить существующую опубликованную страницу по ключу или части пути"
+  "upd":"Обновить существующую опубликованную страницу по ключу или части пути",
+  "fnd-my":"Поиск личных материалов: fnd-my",
+  "fnd-my-gmail":"Поиск личных материалов: fnd-my-gmail",
+  "fnd-my-drive":"Поиск личных материалов: fnd-my-drive",
+  "fnd-my-docs":"Поиск личных материалов: fnd-my-docs",
+  "fnd-my-sheets":"Поиск личных материалов: fnd-my-sheets",
+  "fnd-my-gpt":"Поиск личных материалов: fnd-my-gpt",
+  "fnd-my-chat":"Поиск личных материалов: fnd-my-chat",
+  "fnd-my-lib":"Поиск личных материалов: fnd-my-lib",
+  "fnd-my-images":"Поиск личных материалов: fnd-my-images",
+  "fnd-my-text":"Поиск личных материалов: fnd-my-text"
 };
 function build(){
  if(!select||!path||!date||!output)return;
@@ -214,13 +226,14 @@ function build(){
  const isIo=kind.startsWith("io");
  const isDoc=kind==="doc-tab";
   const isUpd=kind==="upd";
- const supportDate=!isVns&&!isIo&&!isDoc&&!isUpd;
+ const isFind=kind.startsWith("fnd-my");
+ const supportDate=!isVns&&!isIo&&!isDoc&&!isUpd&&!isFind;
  if(docTitleWrap)docTitleWrap.hidden=!isDoc;
  if(docModeWrap)docModeWrap.hidden=!isDoc;
- if(dateWrap)dateWrap.hidden=isDoc||isUpd;
+ if(dateWrap)dateWrap.hidden=isDoc||isUpd||isFind;
  date.disabled=!supportDate;
  date.closest(".last")?.classList.toggle("disabled",!supportDate);
- path.placeholder=isUpd?"Например, plg-t2f или man/plg-t2f":isDoc?"@nws или ссылка Google Docs":isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
+ path.placeholder=isFind?"Например, последняя рассадка в автобусе":isUpd?"Например, plg-t2f или man/plg-t2f":isDoc?"@nws или ссылка Google Docs":isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
  path.disabled=isIo;
  const sub=path.value.trim().replace(/^\/+|\/+$/g,"");
  let command="";
@@ -228,7 +241,8 @@ function build(){
   const target=sub||"@nws";
   const title=(docTitle?.value||"").trim().replace(/"/g,"");
   command="@gp doc tab "+target+(title?' "'+title+'"':"")+(docMode?.value&&docMode.value!=="current"?" "+docMode.value:"");
- }else if(isUpd)command="@gp upd";
+ }else if(isFind)command="@gp "+kind;
+ else if(isUpd)command="@gp upd";
   else if(isIo)command=kind==="io-ds"?"@gp io ds":"@gp io";
  else if(isVns)command=kind==="vns-next-drive"?"@gp vns next drive":"@gp vns drive";
  else command="@gp "+kind;

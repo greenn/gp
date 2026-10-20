@@ -202,3 +202,6 @@ body.guide-filtered .guide-search-empty{scroll-margin-top:145px}
 @media(min-width:801px){.landing-menu:has(.landing-menu-item:nth-child(5)){grid-template-columns:repeat(5,minmax(0,1fr))}}
 #upd .cmd-card code{overflow-wrap:anywhere;white-space:normal}
 @media(max-width:800px){.landing-menu:has(.landing-menu-item:nth-child(5)){grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* GP 0.2.6: personal search reference */
+#fnd-my code{overflow-wrap:anywhere}#fnd-my .cmd-card{min-width:0}#fnd-my .section-intro{max-width:76ch}@media(max-width:640px){#fnd-my .cmd-grid{grid-template-columns:minmax(0,1fr)}#fnd-my .top{flex-wrap:wrap}}

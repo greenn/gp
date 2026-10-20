@@ -14,7 +14,7 @@
 <div class="mobile-scrim" id="scrim"></div>
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="Навигация по руководству">
- <div class="brand-row"><a href="#overview" class="brand" aria-label="GP — начало">gp<span class="brand-dot">.</span></a><span class="brand-mark" title="Версия 0.2.5">↗</span></div>
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="GP — начало">gp<span class="brand-dot">.</span></a><span class="brand-mark" title="Версия 0.2.6">↗</span></div>
  <a class="install" href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть GP в ChatGPT <span aria-hidden="true">↗</span></a>
  <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки"><a class="nav-item active" href="#overview"><span class="ico" aria-hidden="true">⌂</span>Начало<span class="num">01</span></a>
 <a class="nav-item" href="#vns"><span class="ico" aria-hidden="true">▧</span>Изображения · VNS<span class="num">02</span></a>
@@ -23,6 +23,7 @@
 <a class="nav-item" href="#doc"><span class="ico" aria-hidden="true">▤</span>Google Docs · вкладки<span class="num">05</span></a>
 <a class="nav-item" href="#io"><span class="ico" aria-hidden="true">↗</span>GitHub Pages · IO<span class="num">05</span></a>
 <a class="nav-item" href="#upd"><span class="ico" aria-hidden="true">↻</span>Обновить страницу · UPD<span class="num">06</span></a>
+<a class="nav-item" href="#fnd-my"><span class="ico" aria-hidden="true">⌕</span>Личный поиск · FND-MY<span class="num">07</span></a>
 <a class="nav-item" href="#commands"><span class="ico" aria-hidden="true">⌘</span>Все команды<span class="num">06</span></a>
 <a class="nav-item" href="#builder"><span class="ico" aria-hidden="true">⚙</span>Конструктор<span class="num">07</span></a>
 <a class="nav-item" href="#faq"><span class="ico" aria-hidden="true">?</span>Вопросы и ответы<span class="num">08</span></a></nav></div>
@@ -33,13 +34,14 @@
    <a class="folder" href="#archive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Архив переписки</a>
    <a class="folder" href="#doc">▤ Google Документы</a>
    <a class="folder" href="#upd">↻ Обновить страницу</a>
+<a class="folder" href="#fnd-my">⌕ Поиск своих файлов</a>
     <a class="folder" href="#io"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3z"/></svg> Публикации</a>
  </div>
  <div class="side-divider"></div>
- <div class="side-foot"><strong>GP / Справочник</strong><div>Документация возможностей версии 0.2.5<br>Обновлено 20 октября 2026</div></div>
+ <div class="side-foot"><strong>GP / Справочник</strong><div>Документация возможностей версии 0.2.6<br>Обновлено 20 октября 2026</div></div>
 </aside>
 <div class="main">
-<div class="mobile-top"><button id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>gp<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.2.5</span></div>
+<div class="mobile-top"><button id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>gp<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.2.6</span></div>
 <div class="guide-search" role="search" aria-label="Поиск по всей справке">
  <div class="guide-search-inner">
   <label for="guide-search-input" class="guide-search-label">Поиск по справке</label>
@@ -55,12 +57,12 @@
  <button type="button" id="back-to-landing" class="back-to-landing" aria-label="Вернуться к полной справке">← Назад к обзору</button>
  <span class="focus-breadcrumb" id="focus-breadcrumb" aria-live="polite"></span>
 </div>
-<div id="guide-search-empty" class="guide-search-empty" hidden><strong>Ничего не найдено.</strong><p>Попробуйте io, vns, drive или другой запрос.</p><button id="guide-search-reset" type="button">Показать всё</button></div>
+<div id="guide-search-empty" class="guide-search-empty" hidden><strong>Ничего не найдено.</strong><p>Попробуйте fnd-my, io, vns, drive или другой запрос.</p><button id="guide-search-reset" type="button">Показать всё</button></div>
 <main class="doc" id="content">
 <section id="overview" class="section">
  <p class="overline">YOUR HOME FOR RESULTS · СПРАВКА GP</p>
  <h1 class="hero-title">Все результаты —<br>в одном движении.</h1>
- <p class="hero-lead">GP помогает <em>собирать изображения</em>, сохранять материалы в Google Drive, архивировать переписку, создавать вкладки в Google Документах и публиковать интерактивные страницы на GitHub Pages.</p>
+ <p class="hero-lead">GP помогает <em>искать личные материалы</em>, собирать изображения, сохранять материалы в Google Drive, архивировать переписку, создавать вкладки в Google Документах и публиковать интерактивные страницы на GitHub Pages.</p>
  <p class="hero-note">Это набор команд внутри ChatGPT. Вы даёте короткую инструкцию через <span class="inline-code">@gp</span>, а GP выбирает нужный рабочий процесс и доступные инструменты. Никаких серверов, сложных настроек или отдельной панели управления.</p>
  <div class="hero-actions"><a href="#commands" class="action-dark">Смотреть все команды ↓</a><a href="#builder" class="action-light">Собрать команду →</a></div>
  <nav class="statline landing-menu" aria-label="Быстрый переход к разделам">
@@ -170,6 +172,7 @@
 <p class="text">Приоритет совпадений: точный URL или путь, точное имя каталога, уникальная часть пути, затем название страницы и ключевые слова. Если кандидатов несколько и однозначного победителя нет — GP показывает варианты и не редактирует ничего до выбора. Если ничего не найдено — новую страницу автоматически не создаёт.</p>
 <div class="note"><span>✓</span><div><strong>Сохраняются URL и существующий UI:</strong> работающие разделы, адаптивность, поиск, JS и копирование команд. Сторонние файлы не перезаписываются, старые страницы не удаляются. Права записи и успешный коммит проверяются отдельно.</div></div>
 </section>
+<section class="section" id="fnd-my"><p class="eyebrow">GP 0.2.6 / личный поиск</p><h2 class="section-title">FND-MY — найти свою последнюю версию.</h2><p class="section-intro">Ищет в доступных Gmail, Google Drive, Docs, Sheets, ChatGPT Library (картинки и тексты) и прошлых чатах. Источники проверяются по датам и содержимому; отсутствие доступа отличается от нулевого результата.</p><div class="cmd-grid"><div class="cmd-card"><div class="top"><code>@gp fnd-my последняя рассадка в автобусе</code><button class="copy" data-copy="@gp fnd-my последняя рассадка в автобусе">Копировать</button></div><p>Поиск по всем доступным личным источникам с сопоставлением версий.</p></div><div class="cmd-card"><div class="top"><code>@gp fnd-my-gmail поездка в Новгород</code><button class="copy" data-copy="@gp fnd-my-gmail поездка в Новгород">Копировать</button></div><p>Проверка писем и приложенных документов.</p></div></div><p class="section-intro">Точные команды: <code>fnd-my</code>, <code>fnd-my-gmail</code>, <code>fnd-my-drive</code>, <code>fnd-my-docs</code>, <code>fnd-my-sheets</code>, <code>fnd-my-gpt</code>, <code>fnd-my-chat</code>, <code>fnd-my-lib</code>, <code>fnd-my-images</code>, <code>fnd-my-text</code>. Не гарантируется доступ ко всем прежним изображениям и беседам; последней считается только версия с подтверждённой датой и содержимым.</p></section>
 <section class="section" id="commands">
  <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">05 / справочник</p>
  <h2 class="section-title">Команды без поиска по чату.</h2>
@@ -182,10 +185,22 @@
   <button class="filter" data-filter="archive" aria-pressed="false">Журнал</button>
   <button class="filter" data-filter="doc" aria-pressed="false">Docs</button>
   <button class="filter" data-filter="io" aria-pressed="false">IO</button><button class="filter" data-filter="upd" aria-pressed="false">UPD</button>
-  <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
+  <button class="filter" data-filter="fnd-my" aria-pressed="false">FND-MY</button>
+<button class="filter" data-filter="general" aria-pressed="false">Другие</button>
  </div>
- <p class="search-status" id="search-count" aria-live="polite">Найдено команд: 26 из 26</p>
- <div class="command-list" id="command-list"><div class="command-row" data-group="vns" data-keywords="фотографии рисунки нейросеть"><code class="syntax">@gp vns</code><span class="desc">Все изображения ассистента + MD, JSON и ZIP</span><button class="copy" data-copy="@gp vns" aria-label="Скопировать @gp vns">Копировать</button></div>
+ <p class="search-status" id="search-count" aria-live="polite">Найдено команд: 36 из 36</p>
+ <div class="command-list" id="command-list">
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my"><code class="syntax">@gp fnd-my &lt;запрос&gt;</code><span class="desc">Все доступные личные источники</span><button class="copy" data-copy="@gp fnd-my рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-gmail"><code class="syntax">@gp fnd-my-gmail &lt;запрос&gt;</code><span class="desc">Письма и вложения Gmail</span><button class="copy" data-copy="@gp fnd-my-gmail рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-drive"><code class="syntax">@gp fnd-my-drive &lt;запрос&gt;</code><span class="desc">Google Drive, файлы и папки</span><button class="copy" data-copy="@gp fnd-my-drive рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-docs"><code class="syntax">@gp fnd-my-docs &lt;запрос&gt;</code><span class="desc">Документы Google Docs</span><button class="copy" data-copy="@gp fnd-my-docs рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-sheets"><code class="syntax">@gp fnd-my-sheets &lt;запрос&gt;</code><span class="desc">Таблицы Google Sheets</span><button class="copy" data-copy="@gp fnd-my-sheets рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-gpt"><code class="syntax">@gp fnd-my-gpt &lt;запрос&gt;</code><span class="desc">История и файлы ChatGPT</span><button class="copy" data-copy="@gp fnd-my-gpt рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-chat"><code class="syntax">@gp fnd-my-chat &lt;запрос&gt;</code><span class="desc">История бесед ChatGPT</span><button class="copy" data-copy="@gp fnd-my-chat рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-lib"><code class="syntax">@gp fnd-my-lib &lt;запрос&gt;</code><span class="desc">Библиотека ChatGPT</span><button class="copy" data-copy="@gp fnd-my-lib рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-images"><code class="syntax">@gp fnd-my-images &lt;запрос&gt;</code><span class="desc">Картинки в Library и Drive</span><button class="copy" data-copy="@gp fnd-my-images рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="fnd-my" data-keywords="поиск найти личный fnd-my-text"><code class="syntax">@gp fnd-my-text &lt;запрос&gt;</code><span class="desc">Тексты в личных источниках</span><button class="copy" data-copy="@gp fnd-my-text рассадка в автобусе">Копировать</button></div>
+<div class="command-row" data-group="vns" data-keywords="фотографии рисунки нейросеть"><code class="syntax">@gp vns</code><span class="desc">Все изображения ассистента + MD, JSON и ZIP</span><button class="copy" data-copy="@gp vns" aria-label="Скопировать @gp vns">Копировать</button></div>
 <div class="command-row" data-group="vns" data-keywords="инкрементальный"><code class="syntax">@gp vns next</code><span class="desc">Только новые, ещё не собранные изображения</span><button class="copy" data-copy="@gp vns next" aria-label="Скопировать @gp vns next">Копировать</button></div>
 <div class="command-row" data-group="vns" data-keywords="google drive архив"><code class="syntax">@gp vns drive</code><span class="desc">Сборка и загрузка в gp/vns/MMDD-N</span><button class="copy" data-copy="@gp vns drive" aria-label="Скопировать @gp vns drive">Копировать</button></div>
 <div class="command-row" data-group="vns" data-keywords="google"><code class="syntax">@gp vns next drive</code><span class="desc">Новые изображения + загрузка на Drive</span><button class="copy" data-copy="@gp vns next drive" aria-label="Скопировать @gp vns next drive">Копировать</button></div>
@@ -226,9 +241,9 @@
     <option value="drive">drive</option><option value="drive-all">drive-all</option><option value="drive-all-gpt">drive-all-gpt</option>
     <option value="drive-log">drive-log</option><option value="drive-log-gpt">drive-log-gpt</option><option value="drive-log-my">drive-log-my</option>
     <option value="drive-txt">drive-txt</option><option value="drive-txt-all">drive-txt-all</option><option value="drive-txt-my">drive-txt-my</option>
-    <option value="vns-drive">vns drive</option><option value="vns-next-drive">vns next drive</option><option value="doc-tab">doc tab</option><option value="io">io</option><option value="io-ds">io ds</option><option value="upd">upd</option>
+    <option value="vns-drive">vns drive</option><option value="vns-next-drive">vns next drive</option><option value="doc-tab">doc tab</option><option value="io">io</option><option value="io-ds">io ds</option><option value="upd">upd</option><option value="fnd-my">fnd-my</option><option value="fnd-my-gmail">fnd-my-gmail</option><option value="fnd-my-drive">fnd-my-drive</option><option value="fnd-my-docs">fnd-my-docs</option><option value="fnd-my-sheets">fnd-my-sheets</option><option value="fnd-my-gpt">fnd-my-gpt</option><option value="fnd-my-chat">fnd-my-chat</option><option value="fnd-my-lib">fnd-my-lib</option><option value="fnd-my-images">fnd-my-images</option><option value="fnd-my-text">fnd-my-text</option>
    </select></div>
-   <div><label for="build-path">Подпапка (необязательно)</label><input type="text" id="build-path" autocomplete="off" placeholder="например, vns или s/2025"></div>
+   <div><label for="build-path">Подпапка или поисковый запрос</label><input type="text" id="build-path" autocomplete="off" placeholder="например, vns или s/2025"></div>
    <div class="doc-builder-extra" id="doc-builder-title-wrap" hidden><label for="build-tab-title">Название вкладки (необязательно)</label><input id="build-tab-title" type="text" autocomplete="off" placeholder="Deep Research"></div>
    <div class="doc-builder-extra" id="doc-builder-mode-wrap" hidden><label for="build-doc-mode">Источник</label><select id="build-doc-mode"><option value="current">current — текущий ответ</option><option value="file">file — PDF/DOCX</option><option value="all">all — оба источника</option></select></div>
    <div class="last" id="build-date-wrap"><label for="build-date">Каталог по дате</label><select id="build-date"><option value="none">Без</option><option value="cur">cur</option><option value="cur+">cur+</option></select></div>
@@ -249,7 +264,7 @@
  <details class="details"><summary>Что означает ?url у io?</summary><p>Это необязательный сигнал «покажи ссылку». URL формируется автоматически после записи публикации в репозиторий даже без этого параметра. Работу GitHub Pages после коммита нужно отдельно проверять.</p></details>
  <details class="details"><summary>Как обновить существующую страницу, не зная полного названия?</summary><p>Введите <code>@gp upd plg-t2f</code> и опишите изменения. GP найдёт кандидата по ключу в репозитории. При неоднозначности попросит выбрать страницу. Старый URL сохранится.</p></details>
 <details class="details"><summary>GP работает автоматически между сообщениями?</summary><p>Нет. Он выполняет команды при вызове в чате и зависит от подключённых инструментов. Фоновое копирование или доступ ко всем сообщениям из других чатов не подразумевается.</p></details>
- <footer class="footer"><span>GP · Справочник версии 0.2.5</span><a href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть плагин ↗</a><a href="../../" target="_blank" rel="noopener noreferrer">Каталог публикаций ↗</a><span>Создано для GitHub Pages</span></footer>
+ <footer class="footer"><span>GP · Справочник версии 0.2.6</span><a href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть плагин ↗</a><a href="../../" target="_blank" rel="noopener noreferrer">Каталог публикаций ↗</a><span>Создано для GitHub Pages</span></footer>
 </section>
 </main>
 </div>
