@@ -30,7 +30,7 @@
   if(!app.includes(marker)||!app.includes(catchMarker))throw Error('Изменился загрузчик посещаемости');
   const patched=app.replace(marker,marker+'else if(window.__GP_LOCAL_ATTENDANCE)state=normalize(window.__GP_LOCAL_ATTENDANCE);')
     .replace(catchMarker,"catch(e){if(window.__GP_LOCAL_ATTENDANCE)state=normalize(window.__GP_LOCAL_ATTENDANCE);else{persistent=false;flash('Не удалось восстановить сохранённую таблицу.',true);}}}");
-  const seed='window.__GP_LOCAL_ATTENDANCE='+safe(data)+';try{const k="gp.pb-2627-1.attendance.v1";if(!localStorage.getItem(k))localStorage.setItem(k,JSON.stringify(window.__GP_LOCAL_ATTENDANCE))}catch(_){}';
+  const seed='window.__GP_LOCAL_ATTENDANCE='+safe(data)+';try{const k="gp.pb-2627-1.attendance.v1";const raw=localStorage.getItem(k);const old=raw?JSON.parse(raw):null;if(!old||!Array.isArray(old.students)||!old.students.length)localStorage.setItem(k,JSON.stringify(window.__GP_LOCAL_ATTENDANCE))}catch(_){}';
   return inline(html,css,[seed,patched]);
  }
  async function makeTrip(data){
@@ -38,7 +38,7 @@
   const [html,css,busCss,panel,app,bus,swap]=await Promise.all(paths.map(load));
   const fetchLine="try{const response=await fetch('./bus-panel.html',{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);busView.innerHTML=await response.text()}";
   if(!bus.includes(fetchLine))throw Error('Изменился загрузчик автобуса');
-  const start=app.lastIndexOf('(async()=>{let pin=privateLinkCode');if(start<0)throw Error('Изменился загрузчик поездки');
+  const start=app.lastIndexOf('(async()=>{');if(start<0)throw Error('Изменился загрузчик поездки');
   const patched=app.slice(0,start)+'(()=>{const rows=readRoster()||window.__GP_LOCAL_TRIP_ROSTER;if(rows){applyPeople(rows);forgetOldCodes()}else missingRoster()})();\n})();';
   const seed='window.__GP_LOCAL_TRIP_ROSTER='+safe(data.people)+';window.__GP_LOCAL_BUS_PANEL='+safe(panel)+';try{const k="gp.trip-1026.roster.v1";if(!localStorage.getItem(k))localStorage.setItem(k,JSON.stringify(window.__GP_LOCAL_TRIP_ROSTER))}catch(_){}';
   return inline(html,css+busCss,[seed,bus.replace(fetchLine,'try{busView.innerHTML=window.__GP_LOCAL_BUS_PANEL}'),patched,swap]);
