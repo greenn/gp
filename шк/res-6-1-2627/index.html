@@ -46,10 +46,11 @@
   <form id="unlockForm">
     <h2 id="unlockTitle">Открыть данные 6-1 класса</h2>
     <p>Встроенная база содержит 21 ученика, пропуски и оценки по 12 предметам. Для первого открытия нужен код доступа. JSON загружать не требуется.</p>
-    <label>Код доступа<input type="password" id="unlockPassword" autocomplete="off" required placeholder="Введите код доступа" spellcheck="false"></label>
+    <label>Код доступа<input type="password" id="unlockPassword" autocomplete="off" required placeholder="Введите код один раз" spellcheck="false"></label>
+    <label class="remember-access"><input type="checkbox" id="rememberAccessCode" checked> Запомнить код в этом браузере</label>
     <p class="unlock-message" id="unlockMessage" role="status" aria-live="polite"></p>
     <menu><button type="button" class="btn" id="unlockCancel">Позже</button><button type="submit" class="btn primary" id="unlockSubmit">Открыть данные</button></menu>
-    <p class="unlock-hint">После первого открытия данные сохранятся в браузере, включая изменения и закрепления. Для другого браузера потребуется повторно ввести код.</p>
+    <p class="unlock-hint">После первого ввода с отметкой «Запомнить» браузер будет открывать данные автоматически. На общем компьютере снимите отметку. Код не публикуется на сайте.</p>
   </form>
 </dialog>
 </body>

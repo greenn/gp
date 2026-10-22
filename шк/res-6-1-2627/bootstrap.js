@@ -2,10 +2,13 @@
 'use strict';
 (() => {
   const storageKey = 'gp.pb-2627-1.attendance.v1';
+  const codeKey = 'gp.res-6-1-2627.device-code.v1';
+  const sessionKey = 'gp.res-6-1-2627.session-code.v1';
   const dialog = document.getElementById('unlockDialog');
   const form = document.getElementById('unlockForm');
   const message = document.getElementById('unlockMessage');
   const password = document.getElementById('unlockPassword');
+  const remember = document.getElementById('rememberAccessCode');
   const submit = document.getElementById('unlockSubmit');
   const openButton = document.getElementById('unlockBtn');
   if (!dialog || !form || !password || !openButton) return;
@@ -63,23 +66,46 @@
     if (!Array.isArray(parsed.students) || parsed.students.length !== 21) throw new Error('Ошибка структуры данных.');
     return parsed;
   }
+  async function unlockWithCode(pin, saveCode) {
+    const initial = await decryptData(pin);
+    const merged = mergePreservingLocalData(initial, getStored());
+    localStorage.setItem(storageKey, JSON.stringify(merged));
+    const cleanCode = pin.trim();
+    if (saveCode) localStorage.setItem(codeKey, cleanCode);
+    else localStorage.removeItem(codeKey);
+    try { sessionStorage.setItem(sessionKey, cleanCode); } catch (_) {}
+    password.value = '';
+    if (dialog.open) dialog.close();
+    location.reload();
+  }
   form.addEventListener('submit', async event => {
     event.preventDefault();
     submit.disabled = true;
-    message.textContent='Открываю встроенную базу…';
+    message.textContent = 'Открываю встроенную базу…';
     try {
-      const initial = await decryptData(password.value);
-      const current = getStored();
-      const merged = mergePreservingLocalData(initial,current);
-      localStorage.setItem(storageKey, JSON.stringify(merged));
-      password.value='';
-      dialog.close();
-      location.reload();
+      await unlockWithCode(password.value, Boolean(remember?.checked));
     } catch (e) {
       message.textContent = e.name === 'OperationError' ? 'Неверный код доступа. Проверьте ввод.' : (e.message || 'Не удалось открыть данные.');
-    } finally { submit.disabled=false; }
+    } finally { submit.disabled = false; }
   });
-  document.getElementById('unlockCancel').addEventListener('click',() => dialog.close());
-  openButton.addEventListener('click',openDialog);
-  if (!(getStored()?.students?.length)) openDialog();
+  document.getElementById('unlockCancel').addEventListener('click', () => dialog.close());
+  openButton.addEventListener('click', openDialog);
+  if (!(getStored()?.students?.length)) {
+    (async () => {
+      let savedCode = null, persistentCode = false;
+      try {
+        persistentCode = Boolean(localStorage.getItem(codeKey));
+        savedCode = sessionStorage.getItem(sessionKey) || localStorage.getItem(codeKey);
+      } catch (_) {}
+      if (savedCode) {
+        try {
+          await unlockWithCode(savedCode, persistentCode);
+          return;
+        } catch (_) {
+          try { sessionStorage.removeItem(sessionKey); localStorage.removeItem(codeKey); } catch (_) {}
+        }
+      }
+      openDialog();
+    })();
+  }
 })();
