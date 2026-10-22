@@ -1,6 +1,16 @@
 'use strict';
 (()=> {
 const STORE='gp.trip-1026.assignments.v1',CODE='gp.trip-1026.device-code.v1',SESSION='gp.trip-1026.session-code.v1';
+// A private one-time link may supply the access code via URL fragment.
+// The fragment is removed immediately and never published in repository files.
+function takePrivateLinkCode(){
+ if(!location.hash.startsWith('#access-code='))return null;
+ const value=new URLSearchParams(location.hash.slice(1)).get('access-code');
+ history.replaceState(null,'',location.pathname+location.search);
+ return value?value.trim():null;
+}
+const privateLinkCode=takePrivateLinkCode();
+
 const ZONES=['obsessed','apartment','pool'],$=id=>document.getElementById(id);
 let people=[],byId=new Map(),positions={},selected=null,dragId=null,toastTimer=null,unlocked=false;
 function readStore(key){try{return localStorage.getItem(key)}catch(_){return null}}
@@ -48,5 +58,5 @@ $('printBtn').addEventListener('click',()=>{if(unlocked)window.print()});
 $('copyBtn').addEventListener('click',async()=>{if(!unlocked)return;const lines=['Поездка 24 октября 2026','Поддорье — Великий Новгород','Выезд 09:00 · обратно 16:00'];[['Одержимая','obsessed'],['Сдаётся квартира','apartment'],['Не распределены','pool']].forEach(pair=>{const list=zonePeople(pair[1]);lines.push('',pair[0]+' ('+list.length+'):');list.forEach((p,i)=>lines.push((i+1)+'. '+nameOf(p)+(p.role==='escort'?' — сопровождающий':'')))});const value=lines.join('\n');try{await navigator.clipboard.writeText(value);notify('Списки скопированы')}catch(_){const node=document.createElement('textarea');node.value=value;document.body.append(node);node.select();document.execCommand('copy');node.remove();notify('Списки скопированы')}});
 $('lockBtn').addEventListener('click',()=>{try{sessionStorage.removeItem(SESSION);localStorage.removeItem(CODE)}catch(_){}location.reload()});
 $('unlockForm').addEventListener('submit',async event=>{event.preventDefault();const input=$('accessCode'),error=$('unlockError'),button=$('unlockSubmit');error.textContent='';button.disabled=true;button.textContent='Открываем…';try{await attempt(input.value,$('rememberCode').checked);input.value='';notify('Открыто: 20 детей и 2 сопровождающих')}catch(e){error.textContent=e.name==='OperationError'?'Неверный код доступа. Проверьте ввод.':(e.message||'Не удалось открыть.')}finally{button.disabled=false;button.textContent='Открыть доску →'}});
-(async()=>{let pin=null;try{pin=sessionStorage.getItem(SESSION)||readStore(CODE)}catch(_){}if(pin){try{await attempt(pin,!!readStore(CODE));return}catch(_){try{localStorage.removeItem(CODE);sessionStorage.removeItem(SESSION)}catch(_){}}}$('lockScreen').hidden=false;$('accessCode').focus()})();
+(async()=>{let pin=privateLinkCode;try{pin ||= sessionStorage.getItem(SESSION)||readStore(CODE)}catch(_){}if(pin){try{await attempt(pin,Boolean(privateLinkCode||readStore(CODE)));return}catch(_){try{localStorage.removeItem(CODE);sessionStorage.removeItem(SESSION)}catch(_){}}}$('lockScreen').hidden=false;$('accessCode').focus()})();
 })();
