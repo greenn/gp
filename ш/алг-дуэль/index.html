@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10141d">
+  <title>Алгебраическая дуэль — команды А и Б</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="site">
+    <header class="top">
+      <div class="brand"><div class="brand-mark">×</div><div><div class="overline">ИНТЕРАКТИВНАЯ ДОСКА · АЛГЕБРА</div><h1>АЛГЕБРАИЧЕСКАЯ <span>ДУЭЛЬ</span></h1></div></div>
+      <div class="top-actions"><span id="saveStatus" class="saved" aria-live="polite">Сохранено на этом устройстве</span><button type="button" class="ghost compact" data-act="fullscreen" title="Полноэкранный режим">⛶ Экран</button><button type="button" class="ghost compact" data-act="backup" title="Скачать все данные">↓ Резервная копия</button></div>
+    </header>
+    <section class="scorebar" id="scorebar" aria-label="Счёт команд"></section>
+    <nav class="tabs" id="tabs" aria-label="Разделы"></nav>
+    <main class="main" id="screen" aria-live="polite"></main>
+    <footer class="footer"><span>АЛГЕБРАИЧЕСКАЯ ДУЭЛЬ · автономная версия</span><span>Без сервера · результаты хранятся в браузере</span></footer>
+  </div>
+  <input id="taskFile" type="file" accept=".json,application/json" hidden>
+  <input id="backupFile" type="file" accept=".json,application/json" hidden>
+  <dialog id="gradeDialog" class="modal">
+    <form id="gradeForm">
+      <div class="modal-top"><div><div class="overline">ИТОГ РАУНДА</div><h2 id="gradeTitle">Оценивание</h2></div><button type="button" class="iconbtn" data-act="close-grade" aria-label="Закрыть">×</button></div>
+      <p class="muted" id="gradeHint"></p>
+      <div class="grade-grid">
+        <label><span id="gradeLabelA">Участник А</span><select id="gradeA" required><option value="">Выберите оценку</option><option>10</option><option>9</option><option>8</option><option>7</option><option>6</option><option>5</option><option>4</option><option>3</option><option>2</option></select></label>
+        <label><span id="gradeLabelB">Участник Б</span><select id="gradeB" required><option value="">Выберите оценку</option><option>10</option><option>9</option><option>8</option><option>7</option><option>6</option><option>5</option><option>4</option><option>3</option><option>2</option></select></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="ghost" data-act="close-grade">Отмена</button><button class="primary" type="submit">Сохранить результат →</button></div>
+    </form>
+  </dialog>
+  <dialog id="profileDialog" class="modal"><div id="profileContent"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
