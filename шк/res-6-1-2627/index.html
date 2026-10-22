@@ -14,7 +14,7 @@
 <div class="topline"><span class="brandmark">ПБ</span><span>Рабочий журнал</span><span class="topright">2026 / 2027</span></div>
 <main class="shell">
   <header class="hero">
-    <div><div class="eyebrow">Классный руководитель <span id="teacher">не указан</span></div><h1>Результаты 6-1 класса</h1><p class="subtitle">Посещаемость, средние баллы по 12 предметам и рейтинг. После разблокировки данные сохраняются в этом браузере.</p></div>
+    <div><div class="eyebrow">Классный руководитель <span id="teacher">не указан</span></div><h1>Результаты 6-1 класса</h1><p class="subtitle">Посещаемость, средние баллы по 12 предметам и рейтинг. Данные сохраняются локально и открываются автоматически на этом устройстве.</p></div>
     <div class="hero-actions"><span class="status" id="saveStatus">Ожидается загрузка данных</span><button type="button" id="settingsBtn" class="btn subtle">Настройки</button></div>
   </header>
   <nav class="views" role="tablist" aria-label="Раздел журнала"><button class="view-btn active" type="button" data-view="attendance" role="tab" aria-selected="true">Посещаемость</button><button class="view-btn" type="button" data-view="grades" role="tab" aria-selected="false">Средние баллы</button><button class="view-btn" type="button" data-view="rating" role="tab" aria-selected="false">Рейтинг учеников</button></nav>
@@ -31,7 +31,7 @@
     <article class="stat"><span>Ниже 3,00</span><strong id="statUnder3">0</strong><small>учеников по выбранному показателю</small></article>
   </section>
   <section class="workspace">
-    <div class="workspace-head"><div><h2><span id="listTitle">Список учеников</span> <span id="filteredCount" class="count">0</span></h2><p>Закреплённые строки видны всегда и не участвуют в поиске, фильтрации и сортировке. Места в рейтинге вычисляются по всему классу.</p></div><div class="action-row"><button id="unlockBtn" type="button" class="btn subtle">🔐 Встроенные данные</button><button id="importBtn" type="button" class="btn primary">↑ Загрузить JSON</button><button id="gradeImportBtn" type="button" class="btn">+ Загрузить оценки</button><input id="fileInput" type="file" accept=".json,application/json" hidden><input id="gradeFileInput" type="file" accept=".json,application/json" hidden><button id="exportBtn" type="button" class="btn">↓ Сохранить JSON</button><button id="csvBtn" type="button" class="btn">CSV</button><button id="printBtn" type="button" class="btn">Печать</button></div></div>
+    <div class="workspace-head"><div><h2><span id="listTitle">Список учеников</span> <span id="filteredCount" class="count">0</span></h2><p>Закреплённые строки видны всегда и не участвуют в поиске, фильтрации и сортировке. Места в рейтинге вычисляются по всему классу.</p></div><div class="action-row"><button id="importBtn" type="button" class="btn primary">↑ Загрузить JSON</button><button id="gradeImportBtn" type="button" class="btn">+ Загрузить оценки</button><input id="fileInput" type="file" accept=".json,application/json" hidden><input id="gradeFileInput" type="file" accept=".json,application/json" hidden><button id="exportBtn" type="button" class="btn">↓ Сохранить JSON</button><button id="csvBtn" type="button" class="btn">CSV</button><button id="printBtn" type="button" class="btn">Печать</button></div></div>
     <div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Найти по фамилии..." autocomplete="off" aria-label="Поиск ученика"></label><label class="control-label">Показать <select id="filter"><option value="all">Всех</option><option value="missed">Есть пропуски</option><option value="sick">Пропуски по болезни</option><option value="clear">Без пропусков</option></select></label><label class="control-label">Порядок <select id="sort"><option value="manual">Мой порядок (DnD)</option><option value="nameAsc">ФИО: А → Я</option><option value="nameDesc">ФИО: Я → А</option><option value="daysDesc">Дни: больше сначала</option><option value="daysAsc">Дни: меньше сначала</option><option value="lessonsDesc">Уроки: больше сначала</option><option value="lessonsSickDesc">Уроки по болезни</option><option value="lateDesc">Опоздания</option><option value="ratingDesc">Баллы: больше сначала</option><option value="ratingAsc">Баллы: меньше сначала</option></select></label><label class="control-label grade-only" id="subjectWrap" hidden>Рейтинг по <select id="subject"><option value="all">Всем предметам (среднее)</option></select></label><label class="control-label grade-only" id="gradeFilterWrap" hidden>Успеваемость <select id="gradeFilter"><option value="all">Все</option><option value="low">Ниже 3,00</option><option value="high">От 4,50</option><option value="missing">Нет данных</option><option value="top5">Топ-5 рейтинга</option><option value="top10">Топ-10 рейтинга</option></select></label><label class="final-switch grade-only" id="finalWrap" hidden><input type="checkbox" id="showFinal"> Показывать итоговые оценки</label><button type="button" id="resetView" class="btn subtle">Сбросить фильтры</button></div>
     <div id="flash" role="status" aria-live="polite" class="flash" hidden></div>
     <div class="table-scroll" id="tableScroll">
@@ -42,16 +42,6 @@
   <footer><p><strong>Локальные данные.</strong> Начальные сведения хранятся на сайте только в зашифрованном виде. Расшифровка происходит в браузере, данные не отправляются на сервер. На общем компьютере сведения могут быть доступны другим пользователям этого браузера. Делайте резервные копии через «Сохранить JSON».</p><button id="clearBtn" class="text-danger" type="button">Удалить локальные данные</button></footer>
 </main>
 <dialog id="settings"><form method="dialog"><h2>Настройки таблицы</h2><label>Классный руководитель<input id="teacherInput" type="text" placeholder="Фамилия Имя"></label><label>Учебный год<input id="yearInput" type="text" placeholder="2026/27"></label><menu><button class="btn" value="cancel">Отмена</button><button class="btn primary" value="save" id="settingsSave">Сохранить</button></menu></form></dialog>
-<dialog id="unlockDialog" aria-labelledby="unlockTitle">
-  <form id="unlockForm">
-    <h2 id="unlockTitle">Открыть данные 6-1 класса</h2>
-    <p>Встроенная база содержит 21 ученика, пропуски и оценки по 12 предметам. Для первого открытия нужен код доступа. JSON загружать не требуется.</p>
-    <label>Код доступа<input type="password" id="unlockPassword" autocomplete="off" required placeholder="Введите код один раз" spellcheck="false"></label>
-    <label class="remember-access"><input type="checkbox" id="rememberAccessCode" checked> Запомнить код в этом браузере</label>
-    <p class="unlock-message" id="unlockMessage" role="status" aria-live="polite"></p>
-    <menu><button type="button" class="btn" id="unlockCancel">Позже</button><button type="submit" class="btn primary" id="unlockSubmit">Открыть данные</button></menu>
-    <p class="unlock-hint">После первого ввода с отметкой «Запомнить» браузер будет открывать данные автоматически. На общем компьютере снимите отметку. Код не публикуется на сайте.</p>
-  </form>
-</dialog>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 'use strict';
 (()=> {
-const STORE='gp.trip-1026.assignments.v1',CODE='gp.trip-1026.device-code.v1',SESSION='gp.trip-1026.session-code.v1';
+const STORE='gp.trip-1026.assignments.v1',CODE='gp.trip-1026.device-code.v1',SESSION='gp.trip-1026.session-code.v1',ROSTER='gp.trip-1026.roster.v1';
 // A private one-time link may supply the access code via URL fragment.
 // The fragment is removed immediately and never published in repository files.
 function takePrivateLinkCode(){
@@ -36,8 +36,11 @@ async function decrypt(pin){
 }
 function readAssignments(){try{const parsed=JSON.parse(readStore(STORE)||'{}');return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:{}}catch(_){return {}}}
 function save(){if(!writeStore(STORE,JSON.stringify(positions)))notify('Не удалось сохранить данные в браузере');else $('saveStatus').textContent='✓ Сохранено на этом устройстве · '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}
-function applyPeople(rows){people=rows;byId=new Map(rows.map(p=>[p.id,p]));const stored=readAssignments();positions={};rows.forEach(p=>positions[p.id]=ZONES.includes(stored[p.id])?stored[p.id]:'pool');unlocked=true;$('lockScreen').hidden=true;render();window.dispatchEvent(new CustomEvent('gp:trip-roster',{detail:{people:rows}}))}
-async function attempt(pin,remember){const result=await decrypt(pin);if(remember)writeStore(CODE,pin.trim().toUpperCase());else try{localStorage.removeItem(CODE)}catch(_){}try{sessionStorage.setItem(SESSION,pin.trim().toUpperCase())}catch(_){}applyPeople(result)}
+function applyPeople(rows){people=rows;byId=new Map(rows.map(p=>[p.id,p]));const stored=readAssignments();positions={};rows.forEach(p=>positions[p.id]=ZONES.includes(stored[p.id])?stored[p.id]:'pool');unlocked=true;$('rosterStatus').hidden=true;render();window.dispatchEvent(new CustomEvent('gp:trip-roster',{detail:{people:rows}}))}
+async function attempt(pin){const result=await decrypt(pin);writeStore(ROSTER,JSON.stringify(result));forgetOldCodes();applyPeople(result)}
+function forgetOldCodes(){try{localStorage.removeItem(CODE);sessionStorage.removeItem(SESSION)}catch(_){}}
+function readRoster(){try{const rows=JSON.parse(readStore(ROSTER)||'null');return Array.isArray(rows)&&rows.length===22&&rows.filter(x=>x.role==='student').length===20&&rows.filter(x=>x.role==='escort').length===2?rows:null}catch(_){return null}}
+function missingRoster(){const note=$('rosterStatus');note.hidden=false;$('saveStatus').textContent='Нет локальных данных участников · используйте личную ссылку';}
 function makeTile(p){const el=document.createElement('button');el.type='button';el.className='tile'+(p.role==='escort'?' escort':isGuest(p)?' guest':'')+(p.id===selected?' selected':'');el.draggable=true;el.dataset.id=p.id;el.textContent=initials(p);el.title=nameOf(p)+(p.role==='escort'?' · сопровождающий':isGuest(p)?' · гость':'');el.setAttribute('aria-label',nameOf(p)+', выбрать');el.setAttribute('aria-pressed',p.id===selected?'true':'false');return el}
 function addTiles(id,items){const frag=document.createDocumentFragment();items.forEach(p=>frag.append(makeTile(p)));$(id).replaceChildren(frag)}
 function addNames(id,items){const frag=document.createDocumentFragment();if(!items.length){const li=document.createElement('li');li.className='empty-names';li.textContent='Пока никого';frag.append(li)}else items.forEach((p,i)=>{const li=document.createElement('li');if(p.role==='escort')li.className='name-escort';else if(isGuest(p))li.className='name-guest';const num=document.createElement('span');num.className='name-n';num.textContent=String(i+1).padStart(2,'0');li.append(num,document.createTextNode(nameOf(p)));frag.append(li)});$(id).replaceChildren(frag)}
@@ -56,7 +59,15 @@ document.addEventListener('dragend',()=>{dragId=null;document.querySelectorAll('
 $('resetBtn').addEventListener('click',()=>{if(!unlocked)return;if(confirm('Вернуть всех 22 участников в нижний блок?')){people.forEach(p=>positions[p.id]='pool');selected=null;save();render();notify('Распределение сброшено')}});
 $('printBtn').addEventListener('click',()=>{if(unlocked)window.print()});
 $('copyBtn').addEventListener('click',async()=>{if(!unlocked)return;const lines=['Поездка 24 октября 2026','Поддорье — Великий Новгород','Выезд 09:00 · обратно 16:00'];[['Одержимая','obsessed'],['Сдаётся квартира','apartment'],['Не распределены','pool']].forEach(pair=>{const list=zonePeople(pair[1]);lines.push('',pair[0]+' ('+list.length+'):');list.forEach((p,i)=>lines.push((i+1)+'. '+nameOf(p)+(p.role==='escort'?' — сопровождающий':'')))});const value=lines.join('\n');try{await navigator.clipboard.writeText(value);notify('Списки скопированы')}catch(_){const node=document.createElement('textarea');node.value=value;document.body.append(node);node.select();document.execCommand('copy');node.remove();notify('Списки скопированы')}});
-$('lockBtn').addEventListener('click',()=>{try{sessionStorage.removeItem(SESSION);localStorage.removeItem(CODE)}catch(_){}location.reload()});
-$('unlockForm').addEventListener('submit',async event=>{event.preventDefault();const input=$('accessCode'),error=$('unlockError'),button=$('unlockSubmit');error.textContent='';button.disabled=true;button.textContent='Открываем…';try{await attempt(input.value,$('rememberCode').checked);input.value='';notify('Открыто: 20 детей и 2 сопровождающих')}catch(e){error.textContent=e.name==='OperationError'?'Неверный код доступа. Проверьте ввод.':(e.message||'Не удалось открыть.')}finally{button.disabled=false;button.textContent='Открыть доску →'}});
-(async()=>{let pin=privateLinkCode;try{pin ||= sessionStorage.getItem(SESSION)||readStore(CODE)}catch(_){}if(pin){try{await attempt(pin,Boolean(privateLinkCode||readStore(CODE)));return}catch(_){try{localStorage.removeItem(CODE);sessionStorage.removeItem(SESSION)}catch(_){}}}$('lockScreen').hidden=false;$('accessCode').focus()})();
+(async()=>{
+ const rows=readRoster();
+ if(rows)applyPeople(rows);
+ if(!privateLinkCode && rows){forgetOldCodes();return;}
+ let pin=privateLinkCode;
+ try{pin ||= sessionStorage.getItem(SESSION)||readStore(CODE)}catch(_){}
+ if(pin){
+   try{await attempt(pin);return}catch(_){forgetOldCodes()}
+ }
+ if(!rows)missingRoster();
+})();
 })();

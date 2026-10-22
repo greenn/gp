@@ -15,7 +15,7 @@
 </header>
 <div class="toolbar">
  <div class="toolbar-hint"><span class="help-icon">↔</span><span><b>Перетащите карточку</b> в нужный квест. На телефоне: нажмите на карточку, затем на область квеста.</span></div>
- <div class="actions"><button id="copyBtn" class="action" type="button">▢ Скопировать</button><button id="printBtn" class="action" type="button">⎙ Печать</button><button id="resetBtn" class="action danger" type="button">↺ Сбросить</button><button id="lockBtn" class="action" type="button">⌁ Закрыть</button></div>
+ <div class="actions"><button id="copyBtn" class="action" type="button">▢ Скопировать</button><button id="printBtn" class="action" type="button">⎙ Печать</button><button id="resetBtn" class="action danger" type="button">↺ Сбросить</button></div>
 </div>
 <main><div class="board">
  <aside class="names names-left" data-zone="obsessed"><div class="panel-top"><span>01 / СПИСОК</span><span class="pill" id="listOCount">0</span></div><h2>Идут на «Одержимую»</h2><ol id="listO" class="names-list"><li class="empty-names">Пока никого</li></ol></aside>
@@ -30,8 +30,6 @@
 </section>
 <div class="footline"><span id="saveStatus">Изменения сохраняются автоматически в этом браузере</span><span>Данные не отправляются на сервер · <b>GP / ШК</b></span></div>
 </main></div>
-<div id="lockScreen" class="lock-screen" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
- <form id="unlockForm" class="lock-card"><div class="lock-mark">◇</div><div class="eyebrow">ДОСТУП К СПИСКУ</div><h2 id="lockTitle">Распределение по квестам</h2><p>Для защиты фамилий школьников список встроен в страницу в зашифрованном виде. Импортировать файлы не нужно.</p><label for="accessCode">Код доступа</label><input id="accessCode" type="password" autocomplete="off" spellcheck="false" required placeholder="Введите код один раз" /><label class="remember"><input type="checkbox" id="rememberCode" checked> Запомнить на этом устройстве</label><button class="unlock-button" id="unlockSubmit" type="submit">Открыть доску →</button><p class="error" id="unlockError" role="status"></p><small>Сохранённый код позволит открывать доску автоматически в этом браузере. На общем компьютере снимите галочку «Запомнить».</small></form>
-</div>
+<div id="rosterStatus" role="status" aria-live="polite" hidden style="max-width:1120px;margin:14px auto;padding:14px 18px;border:1px solid #b5a379;border-radius:12px;background:#2a2b34;color:#eee2ca;font-size:14px;">На этом устройстве пока нет списка участников. Откройте ранее выданную личную ссылку для подключения данных.</div>
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 </body></html>
