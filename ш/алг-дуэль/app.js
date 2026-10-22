@@ -119,7 +119,7 @@ return '<article class="task-item"><h3><span class="pill">'+esc(t.topic)+'</span
 }
 function taskEditor(){
 const t=state.tasks.find(q=>q.id===state.editTaskId),input=(name,value,placeholder)=>'<input name="'+name+'" value="'+esc(value||"")+'" placeholder="'+esc(placeholder||"")+'" required maxlength="400">';
-return '<form id="taskForm" class="add-block"><div class="section-head"><h2>'+(t?"Редактировать пару":"Добавить пару примеров")+'</h2>'+(t?'<button class="ghost compact" type="button" data-act="cancel-task">Отмена</button>':'')+'</div><div class="form-grid"><label class="field"><span>Тема</span>'+input("topic",t?.topic,"Например: Раскрытие скобок")+'</label><label class="field"><span>Сложность</span><select name="level">'+[1,2,3].map(n=>'<option value="'+n+'" '+(t?.level===n?"selected":"")+'>'+n+'</option>').join("")+'</select></label></div><div class="form-grid" style="margin-top:14px"><div class="field"><span>Пример для А</span>'+input("qA",t?.a.question,"2(x + 3)")+'<span>Ответ А</span>'+input("ansA",t?.a.answer,"2x + 6")+'<span>Решение А (один шаг в строке)</span><textarea name="stepsA" placeholder="2x + 6">'+esc(t?.a.steps.join("\\n")||"")+'</textarea></div><div class="field"><span>Пример для Б</span>'+input("qB",t?.b.question,"3(x + 2)")+'<span>Ответ Б</span>'+input("ansB",t?.b.answer,"3x + 6")+'<span>Решение Б (один шаг в строке)</span><textarea name="stepsB" placeholder="3x + 6">'+esc(t?.b.steps.join("\\n")||"")+'</textarea></div></div><div class="actions-center"><button class="primary" type="submit">'+(t?"Сохранить изменения":"Добавить в базу")+'</button></div></form>';
+return '<form id="taskForm" class="add-block"><div class="section-head"><h2>'+(t?"Редактировать пару":"Добавить пару примеров")+'</h2>'+(t?'<button class="ghost compact" type="button" data-act="cancel-task">Отмена</button>':'')+'</div><div class="form-grid"><label class="field"><span>Тема</span>'+input("topic",t?.topic,"Например: Раскрытие скобок")+'</label><label class="field"><span>Сложность</span><select name="level">'+[1,2,3].map(n=>'<option value="'+n+'" '+(t?.level===n?"selected":"")+'>'+n+'</option>').join("")+'</select></label></div><div class="form-grid" style="margin-top:14px"><div class="field"><span>Пример для А</span>'+input("qA",t?.a.question,"2(x + 3)")+'<span>Ответ А</span>'+input("ansA",t?.a.answer,"2x + 6")+'<span>Решение А (один шаг в строке)</span><textarea name="stepsA" placeholder="2x + 6">'+esc(t?.a.steps.join("\n")||"")+'</textarea></div><div class="field"><span>Пример для Б</span>'+input("qB",t?.b.question,"3(x + 2)")+'<span>Ответ Б</span>'+input("ansB",t?.b.answer,"3x + 6")+'<span>Решение Б (один шаг в строке)</span><textarea name="stepsB" placeholder="3x + 6">'+esc(t?.b.steps.join("\n")||"")+'</textarea></div></div><div class="actions-center"><button class="primary" type="submit">'+(t?"Сохранить изменения":"Добавить в базу")+'</button></div></form>';
 }
 function renderTasks(){
 const by=state.topic==="Все темы"?state.tasks:state.tasks.filter(t=>t.topic===state.topic);
@@ -174,9 +174,9 @@ save();render();notify((replace?"Состав заменён: ":"Добавле�
 function safeFilename(prefix,ext){return prefix+"-"+new Date().toISOString().slice(0,10)+"."+ext;}
 function download(name,data,type){const file=new Blob([data],{type:type||"application/json;charset=utf-8"}),url=URL.createObjectURL(file),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function exportCsv(){const cells=[["Команда","Ученик","Активен","Раундов","Побед","Поражений","Средний балл"]];for(const p of state.students){const st=pStats(p.id);cells.push([teamLabel(p.team),p.name,p.active?"Да":"Нет",st.count,st.wins,st.losses,st.avg===null?"":fmt(st.avg)]);}
-const csv="\\uFEFF"+cells.map(row=>row.map(s=>'"'+String(s).replace(/"/g,'""')+'"').join(";")).join("\\r\\n");download(safeFilename("algebra-duel-results","csv"),csv,"text/csv;charset=utf-8");}
+const csv="\uFEFF"+cells.map(row=>row.map(s=>'"'+String(s).replace(/"/g,'""')+'"').join(";")).join("\r\n");download(safeFilename("algebra-duel-results","csv"),csv,"text/csv;charset=utf-8");}
 function handleTaskEditor(form){
-const f=new FormData(form),clean=x=>String(f.get(x)||"").trim(),split=x=>clean(x).split(/\\r?\\n/).map(s=>s.trim()).filter(Boolean);
+const f=new FormData(form),clean=x=>String(f.get(x)||"").trim(),split=x=>clean(x).split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
 const t={id:state.editTaskId||"t-"+slug(),topic:clean("topic"),level:Number(clean("level")),a:{question:clean("qA"),answer:clean("ansA"),steps:split("stepsA")},b:{question:clean("qB"),answer:clean("ansB"),steps:split("stepsB")}};
 if(!validTask(t)){notify("Заполните оба примера, ответы и тему.");return;}
 const normalized=normalizeTask(t);
@@ -204,7 +204,7 @@ else if(act==="close-profile")$("profileDialog").close();
 else if(act==="profile")openProfile(btn.dataset.id);
 else if(act==="stats-filter"){state.statsFilter=btn.dataset.filter;save();render();}
 else if(act==="remove-player"){const p=player(btn.dataset.id);if(p&&confirm("Удалить «"+p.name+"» из списка?")){state.students=state.students.filter(x=>x.id!==p.id);save();render();}}
-else if(act==="bulk-add"||act==="bulk-replace"){const t=btn.dataset.team,names=$("bulk-"+t).value.split(/\\r?\\n/);addPlayers(t,names,act==="bulk-replace");}
+else if(act==="bulk-add"||act==="bulk-replace"){const t=btn.dataset.team,names=$("bulk-"+t).value.split(/\r?\n/);addPlayers(t,names,act==="bulk-replace");}
 else if(act==="backup")download(safeFilename("algebra-duel-backup","json"),JSON.stringify({application:"algebra-duel",savedAt:new Date().toISOString(),data:state},null,2));
 else if(act==="restore")$("backupFile").click();
 else if(act==="csv")exportCsv();
