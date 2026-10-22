@@ -105,7 +105,9 @@ def build_attendance(data: dict) -> str:
 try {
   const k = 'gp.pb-2627-1.attendance.v1';
   const value = localStorage.getItem(k);
-  if (!value) localStorage.setItem(k, JSON.stringify(window.__GP_LOCAL_ATTENDANCE));
+  const saved = value ? JSON.parse(value) : null;
+  if (!saved || !Array.isArray(saved.students) || !saved.students.length)
+    localStorage.setItem(k, JSON.stringify(window.__GP_LOCAL_ATTENDANCE));
 } catch (_) {}"""
     app = source(ATTENDANCE / "app.js")
     needle = "const saved=localStorage.getItem(KEY);if(saved)state=normalize(JSON.parse(saved));"
@@ -113,6 +115,11 @@ try {
     if app.count(needle) != 1:
         raise ValueError("Не найден блок загрузки посещаемости в app.js")
     app = app.replace(needle, replacement)
+    old_catch = "catch(e){persistent=false;flash('Не удалось восстановить сохранённую таблицу. Импортируйте резервную копию.',true);}}"
+    new_catch = "catch(e){if(window.__GP_LOCAL_ATTENDANCE)state=normalize(window.__GP_LOCAL_ATTENDANCE);else{persistent=false;flash('Не удалось восстановить сохранённую таблицу.',true);}}}"
+    if app.count(old_catch) != 1:
+        raise ValueError("Не найден обработчик локального хранилища")
+    app = app.replace(old_catch, new_catch)
     return bundle_html(
         ATTENDANCE / "index.html", [ATTENDANCE / "style.css"], [app], seed
     )
