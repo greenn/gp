@@ -1,0 +1,217 @@
+{
+  "type": "Скобки · множитель после скобок",
+  "sourceExample": "(a − 4b) · 3",
+  "count": 10,
+  "tasks": [
+    {
+      "id": "oct26-expand-right-factor-01",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 4b) · 3",
+        "steps": [
+          "a · 3 − 4b · 3",
+          "Итог: 3a − 12b"
+        ],
+        "answer": "3a − 12b"
+      },
+      "b": {
+        "question": "(a − 7b) · 4",
+        "steps": [
+          "a · 4 − 7b · 4",
+          "Итог: 4a − 28b"
+        ],
+        "answer": "4a − 28b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-02",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 10b) · 5",
+        "steps": [
+          "a · 5 − 10b · 5",
+          "Итог: 5a − 50b"
+        ],
+        "answer": "5a − 50b"
+      },
+      "b": {
+        "question": "(a − 4b) · 6",
+        "steps": [
+          "a · 6 − 4b · 6",
+          "Итог: 6a − 24b"
+        ],
+        "answer": "6a − 24b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-03",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 7b) · 7",
+        "steps": [
+          "a · 7 − 7b · 7",
+          "Итог: 7a − 49b"
+        ],
+        "answer": "7a − 49b"
+      },
+      "b": {
+        "question": "(a − 10b) · 8",
+        "steps": [
+          "a · 8 − 10b · 8",
+          "Итог: 8a − 80b"
+        ],
+        "answer": "8a − 80b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-04",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 4b) · 9",
+        "steps": [
+          "a · 9 − 4b · 9",
+          "Итог: 9a − 36b"
+        ],
+        "answer": "9a − 36b"
+      },
+      "b": {
+        "question": "(a − 7b) · 10",
+        "steps": [
+          "a · 10 − 7b · 10",
+          "Итог: 10a − 70b"
+        ],
+        "answer": "10a − 70b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-05",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 10b) · 11",
+        "steps": [
+          "a · 11 − 10b · 11",
+          "Итог: 11a − 110b"
+        ],
+        "answer": "11a − 110b"
+      },
+      "b": {
+        "question": "(a − 4b) · 12",
+        "steps": [
+          "a · 12 − 4b · 12",
+          "Итог: 12a − 48b"
+        ],
+        "answer": "12a − 48b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-06",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 7b) · 13",
+        "steps": [
+          "a · 13 − 7b · 13",
+          "Итог: 13a − 91b"
+        ],
+        "answer": "13a − 91b"
+      },
+      "b": {
+        "question": "(a − 10b) · 14",
+        "steps": [
+          "a · 14 − 10b · 14",
+          "Итог: 14a − 140b"
+        ],
+        "answer": "14a − 140b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-07",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 4b) · 15",
+        "steps": [
+          "a · 15 − 4b · 15",
+          "Итог: 15a − 60b"
+        ],
+        "answer": "15a − 60b"
+      },
+      "b": {
+        "question": "(a − 7b) · 16",
+        "steps": [
+          "a · 16 − 7b · 16",
+          "Итог: 16a − 112b"
+        ],
+        "answer": "16a − 112b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-08",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 10b) · 17",
+        "steps": [
+          "a · 17 − 10b · 17",
+          "Итог: 17a − 170b"
+        ],
+        "answer": "17a − 170b"
+      },
+      "b": {
+        "question": "(a − 4b) · 18",
+        "steps": [
+          "a · 18 − 4b · 18",
+          "Итог: 18a − 72b"
+        ],
+        "answer": "18a − 72b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-09",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 7b) · 19",
+        "steps": [
+          "a · 19 − 7b · 19",
+          "Итог: 19a − 133b"
+        ],
+        "answer": "19a − 133b"
+      },
+      "b": {
+        "question": "(a − 10b) · 20",
+        "steps": [
+          "a · 20 − 10b · 20",
+          "Итог: 20a − 200b"
+        ],
+        "answer": "20a − 200b"
+      }
+    },
+    {
+      "id": "oct26-expand-right-factor-10",
+      "topic": "Скобки · множитель после скобок",
+      "level": 1,
+      "a": {
+        "question": "(a − 4b) · 21",
+        "steps": [
+          "a · 21 − 4b · 21",
+          "Итог: 21a − 84b"
+        ],
+        "answer": "21a − 84b"
+      },
+      "b": {
+        "question": "(a − 7b) · 22",
+        "steps": [
+          "a · 22 − 7b · 22",
+          "Итог: 22a − 154b"
+        ],
+        "answer": "22a − 154b"
+      }
+    }
+  ]
+}

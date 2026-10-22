@@ -1,0 +1,217 @@
+{
+  "type": "Скобки · множитель перед разностью",
+  "sourceExample": "7(x − y)",
+  "count": 10,
+  "tasks": [
+    {
+      "id": "oct26-expand-difference-01",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "7(x − y)",
+        "steps": [
+          "7 · x − 7 · y",
+          "Итог: 7x − 7y"
+        ],
+        "answer": "7x − 7y"
+      },
+      "b": {
+        "question": "9(x − y)",
+        "steps": [
+          "9 · x − 9 · y",
+          "Итог: 9x − 9y"
+        ],
+        "answer": "9x − 9y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-02",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "11(x − y)",
+        "steps": [
+          "11 · x − 11 · y",
+          "Итог: 11x − 11y"
+        ],
+        "answer": "11x − 11y"
+      },
+      "b": {
+        "question": "13(x − y)",
+        "steps": [
+          "13 · x − 13 · y",
+          "Итог: 13x − 13y"
+        ],
+        "answer": "13x − 13y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-03",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "15(x − y)",
+        "steps": [
+          "15 · x − 15 · y",
+          "Итог: 15x − 15y"
+        ],
+        "answer": "15x − 15y"
+      },
+      "b": {
+        "question": "17(x − y)",
+        "steps": [
+          "17 · x − 17 · y",
+          "Итог: 17x − 17y"
+        ],
+        "answer": "17x − 17y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-04",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "19(x − y)",
+        "steps": [
+          "19 · x − 19 · y",
+          "Итог: 19x − 19y"
+        ],
+        "answer": "19x − 19y"
+      },
+      "b": {
+        "question": "21(x − y)",
+        "steps": [
+          "21 · x − 21 · y",
+          "Итог: 21x − 21y"
+        ],
+        "answer": "21x − 21y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-05",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "23(x − y)",
+        "steps": [
+          "23 · x − 23 · y",
+          "Итог: 23x − 23y"
+        ],
+        "answer": "23x − 23y"
+      },
+      "b": {
+        "question": "25(x − y)",
+        "steps": [
+          "25 · x − 25 · y",
+          "Итог: 25x − 25y"
+        ],
+        "answer": "25x − 25y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-06",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "27(x − y)",
+        "steps": [
+          "27 · x − 27 · y",
+          "Итог: 27x − 27y"
+        ],
+        "answer": "27x − 27y"
+      },
+      "b": {
+        "question": "29(x − y)",
+        "steps": [
+          "29 · x − 29 · y",
+          "Итог: 29x − 29y"
+        ],
+        "answer": "29x − 29y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-07",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "31(x − y)",
+        "steps": [
+          "31 · x − 31 · y",
+          "Итог: 31x − 31y"
+        ],
+        "answer": "31x − 31y"
+      },
+      "b": {
+        "question": "33(x − y)",
+        "steps": [
+          "33 · x − 33 · y",
+          "Итог: 33x − 33y"
+        ],
+        "answer": "33x − 33y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-08",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "35(x − y)",
+        "steps": [
+          "35 · x − 35 · y",
+          "Итог: 35x − 35y"
+        ],
+        "answer": "35x − 35y"
+      },
+      "b": {
+        "question": "37(x − y)",
+        "steps": [
+          "37 · x − 37 · y",
+          "Итог: 37x − 37y"
+        ],
+        "answer": "37x − 37y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-09",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "39(x − y)",
+        "steps": [
+          "39 · x − 39 · y",
+          "Итог: 39x − 39y"
+        ],
+        "answer": "39x − 39y"
+      },
+      "b": {
+        "question": "41(x − y)",
+        "steps": [
+          "41 · x − 41 · y",
+          "Итог: 41x − 41y"
+        ],
+        "answer": "41x − 41y"
+      }
+    },
+    {
+      "id": "oct26-expand-difference-10",
+      "topic": "Скобки · множитель перед разностью",
+      "level": 1,
+      "a": {
+        "question": "43(x − y)",
+        "steps": [
+          "43 · x − 43 · y",
+          "Итог: 43x − 43y"
+        ],
+        "answer": "43x − 43y"
+      },
+      "b": {
+        "question": "45(x − y)",
+        "steps": [
+          "45 · x − 45 · y",
+          "Итог: 45x − 45y"
+        ],
+        "answer": "45x − 45y"
+      }
+    }
+  ]
+}

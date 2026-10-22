@@ -1,0 +1,176 @@
+{
+  "date": "2026-10-22",
+  "totalPairs": 210,
+  "totalExamples": 420,
+  "allFile": "all-21-types.json",
+  "types": [
+    {
+      "id": "expand-difference",
+      "topic": "Скобки · множитель перед разностью",
+      "group": 1,
+      "example": "7(x − y)",
+      "filename": "expand-difference.json",
+      "pairs": 10
+    },
+    {
+      "id": "expand-right-factor",
+      "topic": "Скобки · множитель после скобок",
+      "group": 1,
+      "example": "(a − 4b) · 3",
+      "filename": "expand-right-factor.json",
+      "pairs": 10
+    },
+    {
+      "id": "expand-negative-trinomial",
+      "topic": "Скобки · отрицательный множитель (3 слагаемых)",
+      "group": 1,
+      "example": "−23(2a − 3b + 1)",
+      "filename": "expand-negative-trinomial.json",
+      "pairs": 10
+    },
+    {
+      "id": "expand-decimal-trinomial",
+      "topic": "Скобки · десятичный множитель (3 слагаемых)",
+      "group": 1,
+      "example": "1,5 · (−3x + 4y − 5z)",
+      "filename": "expand-decimal-trinomial.json",
+      "pairs": 10
+    },
+    {
+      "id": "open-minus-negative",
+      "topic": "Скобки · минус перед разностью",
+      "group": 2,
+      "example": "5 − (a − 3)",
+      "filename": "open-minus-negative.json",
+      "pairs": 10
+    },
+    {
+      "id": "open-plus-difference",
+      "topic": "Скобки · плюс перед разностью",
+      "group": 2,
+      "example": "7 + (12 − 2b)",
+      "filename": "open-plus-difference.json",
+      "pairs": 10
+    },
+    {
+      "id": "open-minus-sum",
+      "topic": "Скобки · минус перед суммой",
+      "group": 2,
+      "example": "64 − (14 + 7x)",
+      "filename": "open-minus-sum.json",
+      "pairs": 10
+    },
+    {
+      "id": "open-plus-variable-first",
+      "topic": "Скобки · плюс и приведение подобного",
+      "group": 2,
+      "example": "38 + (12p − 8)",
+      "filename": "open-plus-variable-first.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-decimal-minus-int",
+      "topic": "Числа · десятичное минус целое",
+      "group": 3,
+      "example": "4,2 − 8",
+      "filename": "signed-decimal-minus-int.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-negative-plus",
+      "topic": "Числа · отрицательное плюс положительное",
+      "group": 3,
+      "example": "−2,4 + 5,6",
+      "filename": "signed-negative-plus.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-negative-minus",
+      "topic": "Числа · отрицательное минус положительное",
+      "group": 3,
+      "example": "−2,1 − 3,2",
+      "filename": "signed-negative-minus.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-mul-decimal-negative-int",
+      "topic": "Умножение · десятичное на отрицательное целое",
+      "group": 4,
+      "example": "1,2 · (−5)",
+      "filename": "signed-mul-decimal-negative-int.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-mul-negative-int-decimal",
+      "topic": "Умножение · отрицательное целое на десятичное",
+      "group": 4,
+      "example": "−8 · 4,5",
+      "filename": "signed-mul-negative-int-decimal.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-mul-two-negatives",
+      "topic": "Умножение · два отрицательных десятичных",
+      "group": 4,
+      "example": "−0,9 · (−0,1)",
+      "filename": "signed-mul-two-negatives.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-div-int-by-negative-decimal",
+      "topic": "Деление · целое на отрицательное десятичное",
+      "group": 5,
+      "example": "38 : (−0,19)",
+      "filename": "signed-div-int-by-negative-decimal.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-div-negative-int-positive-decimal",
+      "topic": "Деление · отрицательное целое на положительное десятичное",
+      "group": 5,
+      "example": "−16 : 0,2",
+      "filename": "signed-div-negative-int-positive-decimal.json",
+      "pairs": 10
+    },
+    {
+      "id": "signed-div-two-negatives",
+      "topic": "Деление · два отрицательных числа",
+      "group": 5,
+      "example": "−6,4 : (−8)",
+      "filename": "signed-div-two-negatives.json",
+      "pairs": 10
+    },
+    {
+      "id": "fraction-add",
+      "topic": "Дроби · сложение с разными знаменателями",
+      "group": 6,
+      "example": "5/6 + 1/4",
+      "filename": "fraction-add.json",
+      "pairs": 10
+    },
+    {
+      "id": "fraction-sub",
+      "topic": "Дроби · вычитание с разными знаменателями",
+      "group": 6,
+      "example": "7/8 − 5/6",
+      "filename": "fraction-sub.json",
+      "pairs": 10
+    },
+    {
+      "id": "fraction-multiply",
+      "topic": "Дроби · умножение числителей и знаменателей",
+      "group": 7,
+      "example": "4/9 · 3/8",
+      "filename": "fraction-multiply.json",
+      "pairs": 10
+    },
+    {
+      "id": "fraction-cross-cancel",
+      "topic": "Дроби · перекрёстное сокращение при умножении",
+      "group": 7,
+      "example": "5/8 · 9/10",
+      "filename": "fraction-cross-cancel.json",
+      "pairs": 10
+    }
+  ]
+}

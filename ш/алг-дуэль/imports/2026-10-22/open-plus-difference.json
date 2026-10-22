@@ -1,0 +1,217 @@
+{
+  "type": "Скобки · плюс перед разностью",
+  "sourceExample": "7 + (12 − 2b)",
+  "count": 10,
+  "tasks": [
+    {
+      "id": "oct26-open-plus-difference-01",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "7 + (12 − 2b)",
+        "steps": [
+          "7 + 12 − 2b",
+          "Итог: 19 − 2b"
+        ],
+        "answer": "19 − 2b"
+      },
+      "b": {
+        "question": "10 + (14 − 3b)",
+        "steps": [
+          "10 + 14 − 3b",
+          "Итог: 24 − 3b"
+        ],
+        "answer": "24 − 3b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-02",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "13 + (16 − 4b)",
+        "steps": [
+          "13 + 16 − 4b",
+          "Итог: 29 − 4b"
+        ],
+        "answer": "29 − 4b"
+      },
+      "b": {
+        "question": "16 + (18 − 5b)",
+        "steps": [
+          "16 + 18 − 5b",
+          "Итог: 34 − 5b"
+        ],
+        "answer": "34 − 5b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-03",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "19 + (20 − 6b)",
+        "steps": [
+          "19 + 20 − 6b",
+          "Итог: 39 − 6b"
+        ],
+        "answer": "39 − 6b"
+      },
+      "b": {
+        "question": "22 + (22 − 7b)",
+        "steps": [
+          "22 + 22 − 7b",
+          "Итог: 44 − 7b"
+        ],
+        "answer": "44 − 7b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-04",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "25 + (24 − 8b)",
+        "steps": [
+          "25 + 24 − 8b",
+          "Итог: 49 − 8b"
+        ],
+        "answer": "49 − 8b"
+      },
+      "b": {
+        "question": "28 + (26 − 9b)",
+        "steps": [
+          "28 + 26 − 9b",
+          "Итог: 54 − 9b"
+        ],
+        "answer": "54 − 9b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-05",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "31 + (28 − 2b)",
+        "steps": [
+          "31 + 28 − 2b",
+          "Итог: 59 − 2b"
+        ],
+        "answer": "59 − 2b"
+      },
+      "b": {
+        "question": "34 + (30 − 3b)",
+        "steps": [
+          "34 + 30 − 3b",
+          "Итог: 64 − 3b"
+        ],
+        "answer": "64 − 3b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-06",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "37 + (32 − 4b)",
+        "steps": [
+          "37 + 32 − 4b",
+          "Итог: 69 − 4b"
+        ],
+        "answer": "69 − 4b"
+      },
+      "b": {
+        "question": "40 + (34 − 5b)",
+        "steps": [
+          "40 + 34 − 5b",
+          "Итог: 74 − 5b"
+        ],
+        "answer": "74 − 5b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-07",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "43 + (36 − 6b)",
+        "steps": [
+          "43 + 36 − 6b",
+          "Итог: 79 − 6b"
+        ],
+        "answer": "79 − 6b"
+      },
+      "b": {
+        "question": "46 + (38 − 7b)",
+        "steps": [
+          "46 + 38 − 7b",
+          "Итог: 84 − 7b"
+        ],
+        "answer": "84 − 7b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-08",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "49 + (40 − 8b)",
+        "steps": [
+          "49 + 40 − 8b",
+          "Итог: 89 − 8b"
+        ],
+        "answer": "89 − 8b"
+      },
+      "b": {
+        "question": "52 + (42 − 9b)",
+        "steps": [
+          "52 + 42 − 9b",
+          "Итог: 94 − 9b"
+        ],
+        "answer": "94 − 9b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-09",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "55 + (44 − 2b)",
+        "steps": [
+          "55 + 44 − 2b",
+          "Итог: 99 − 2b"
+        ],
+        "answer": "99 − 2b"
+      },
+      "b": {
+        "question": "58 + (46 − 3b)",
+        "steps": [
+          "58 + 46 − 3b",
+          "Итог: 104 − 3b"
+        ],
+        "answer": "104 − 3b"
+      }
+    },
+    {
+      "id": "oct26-open-plus-difference-10",
+      "topic": "Скобки · плюс перед разностью",
+      "level": 1,
+      "a": {
+        "question": "61 + (48 − 4b)",
+        "steps": [
+          "61 + 48 − 4b",
+          "Итог: 109 − 4b"
+        ],
+        "answer": "109 − 4b"
+      },
+      "b": {
+        "question": "64 + (50 − 5b)",
+        "steps": [
+          "64 + 50 − 5b",
+          "Итог: 114 − 5b"
+        ],
+        "answer": "114 − 5b"
+      }
+    }
+  ]
+}
