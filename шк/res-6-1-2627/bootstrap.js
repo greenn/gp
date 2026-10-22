@@ -2,6 +2,16 @@
 'use strict';
 (() => {
   const storageKey = 'gp.pb-2627-1.attendance.v1';
+  // A one-time private link passes its code in the URL fragment, never in the
+  // public HTML. Remove it from the address bar before any asynchronous work.
+  function takePrivateLinkCode() {
+    if (!location.hash.startsWith('#access-code=')) return null;
+    const value = new URLSearchParams(location.hash.slice(1)).get('access-code');
+    history.replaceState(null, '', location.pathname + location.search);
+    return value ? value.trim() : null;
+  }
+  const privateLinkCode = takePrivateLinkCode();
+
   const codeKey = 'gp.res-6-1-2627.device-code.v1';
   const sessionKey = 'gp.res-6-1-2627.session-code.v1';
   const dialog = document.getElementById('unlockDialog');
@@ -90,12 +100,12 @@
   });
   document.getElementById('unlockCancel').addEventListener('click', () => dialog.close());
   openButton.addEventListener('click', openDialog);
-  if (!(getStored()?.students?.length)) {
+  if (privateLinkCode || !(getStored()?.students?.length)) {
     (async () => {
-      let savedCode = null, persistentCode = false;
+      let savedCode = privateLinkCode, persistentCode = Boolean(privateLinkCode);
       try {
-        persistentCode = Boolean(localStorage.getItem(codeKey));
-        savedCode = sessionStorage.getItem(sessionKey) || localStorage.getItem(codeKey);
+        persistentCode ||= Boolean(localStorage.getItem(codeKey));
+        savedCode ||= sessionStorage.getItem(sessionKey) || localStorage.getItem(codeKey);
       } catch (_) {}
       if (savedCode) {
         try {
