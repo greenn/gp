@@ -62,17 +62,19 @@ gp/
 Корень репозитория содержит `.nojekyll`.
 Не удалять его без явной причины.
 
-Ожидаемый публичный URL публикации:
+**До активации собственного домена:**
 
 ```text
 https://greenn.github.io/gp/<subdir>/<publication>/
 ```
 
-Например:
+**После активации** корневого `CNAME=gp.nadube.ru`, настройки GitHub Pages и DNS:
 
 ```text
-https://greenn.github.io/gp/ds/codex-model-report-2026-08-20/
+https://gp.nadube.ru/<subdir>/<publication>/
 ```
+
+Инструкция безопасного подключения: [`docs/DOMAIN_NADUBE.md`](docs/DOMAIN_NADUBE.md). Никогда не меняйте NS, A/AAAA или другие записи `nadube.ru`/`brusina.nadube.ru` ради GitHub Pages. До DNS-проверки не считайте собственный домен рабочим; в публичном ответе используйте проверенный адрес.
 
 ## Корневой индекс
 
