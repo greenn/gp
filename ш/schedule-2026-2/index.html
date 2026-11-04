@@ -165,10 +165,11 @@ li{margin:5px 0}
   klass.append(choice('','Все классы'));classes.forEach(c=>klass.append(choice(c,c+' класс')));
   const qp=new URLSearchParams(location.search);if(qp.get('teacher'))teachers.value=qp.get('teacher');if(qp.get('class'))klass.value=qp.get('class');if(qp.get('day'))weekday.value=qp.get('day');
   const ambiguous=(db.uncertainties||[]),allDiff=[];
+  const normalizeGrade=x=>/^7[АБ]?$/.test(String(x??''))?'7':String(x??'');
   for(const d of days)for(const t of db.teachers)for(let i=0;i<8;i++){
     const current=db.schedule[d]?.[String(t.id)]?.[i]??null;
     const previous=old.schedule[d]?.[String(t.id)]?.[i]??null;
-    if(String(current??'')!==String(previous??''))allDiff.push({day:d,lesson:i+1,teacherId:t.id,teacher:t.name,before:previous,after:current});
+    if(normalizeGrade(current)!==normalizeGrade(previous))allDiff.push({day:d,lesson:i+1,teacherId:t.id,teacher:t.name,before:previous,after:current});
   }
   function filtered(e){return(!teachers.value||String(e.teacherId)===teachers.value)&&(!klass.value||e.klass===klass.value)&&(!weekday.value||e.day===weekday.value)}
   function filterRisk(r){return(!teachers.value||String(r.teacherId)===teachers.value)&&(!weekday.value||r.day===weekday.value)}
@@ -184,7 +185,7 @@ li{margin:5px 0}
       const dayRows=rows.filter(e=>e.day===d),sec=document.createElement('section');sec.className='day';
       sec.innerHTML='<div class="dayhead"><h2>'+esc(d)+'</h2><div class="day-actions"><span class="text-muted">'+dayRows.length+' зан.</span><button type="button">Копировать</button></div></div><div class="tablewrap"><table><thead><tr><th>Урок</th><th>Время</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>';
       const tbody=sec.querySelector('tbody');
-      const maxLesson=Math.max(weekday.value==='Пятница'?7:8, ...dayRows.map(x=>x.lesson),0);
+      const maxLesson=Math.max(d==='Пятница'?7:8, ...dayRows.map(x=>x.lesson),0);
       for(let l=1;l<=maxLesson;l++){
         const rr=dayRows.filter(e=>e.lesson===l);
         if(!rr.length){
