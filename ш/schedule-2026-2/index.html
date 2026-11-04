@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4f7fb">
+<title>Расписание · II четверть · 2026–2027</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#182338;--muted:#617085;--line:#dfe5ee;--blue:#2658d4;--soft:#eef3ff;--orange:#a35d0a;--warn:#fff8e8;--mint:#e9f8f2}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.48 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+main{max-width:1160px;margin:0 auto;padding:25px 18px 60px}
+h1{font-size:clamp(27px,4vw,40px);letter-spacing:-.04em;margin:0 0 6px}
+h2{font-size:20px;margin:0}
+h3{font-size:17px;margin:0 0 10px}
+a{color:var(--blue)}
+.eyebrow{font-size:13px;text-transform:uppercase;color:var(--blue);font-weight:800;letter-spacing:.09em}
+.sub{color:var(--muted);max-width:830px;margin:5px 0 18px}
+nav{display:flex;gap:9px;flex-wrap:wrap;font-size:14px;margin-top:12px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;margin:13px 0}
+.warning{background:var(--warn);border-color:#efd9ac;color:#704713}
+.warning strong{color:#533500}
+.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}
+select{display:block;width:100%;border-radius:10px;padding:11px;border:1px solid #d5deed;background:#fff;color:var(--ink);font:inherit}
+.kpis{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.kpi{background:#f4f7fc;border:1px solid #e4ebf6;border-radius:10px;padding:9px 12px;font-size:13px;color:var(--muted)}
+.kpi b{color:var(--ink);font-size:18px;display:block}
+.day{margin:22px 0}
+.dayhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 9px}
+.day-actions{display:flex;align-items:center;gap:10px}
+button{border:1px solid var(--line);border-radius:9px;padding:8px 11px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}
+button:hover{background:#f8faff}
+.tablewrap{border:1px solid var(--line);border-radius:13px;overflow:auto;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:670px}
+th,td{padding:10px 11px;text-align:left;vertical-align:top;border-bottom:1px solid #e9edf3}
+th{background:#f9fbfe;color:var(--muted);font-size:12px;position:sticky;top:0}
+tr:last-child td{border-bottom:none}
+.lesson-num{font-weight:750;width:55px}
+.time{color:var(--muted);white-space:nowrap;font-size:13px}
+.classpill{display:inline-block;white-space:nowrap;background:var(--soft);color:#21449d;padding:3px 8px;border-radius:20px;font-size:13px}
+.uncertain{background:#fff0d4;color:var(--orange)}
+.text-muted{color:var(--muted)}
+.subject{font-weight:650}
+.flags{font-size:12px;color:var(--orange);margin-top:3px}
+details>summary{cursor:pointer;font-weight:700}
+li{margin:5px 0}
+.old{color:var(--muted);text-decoration:line-through}
+.new{font-weight:700}
+.diffrow{display:grid;grid-template-columns:210px 1fr;gap:7px;padding:8px 2px;border-bottom:1px solid var(--line)}
+.diffrow:last-child{border:0}
+.footer{font-size:13px;color:var(--muted);margin-top:20px}
+#message{padding:20px;color:#98571f}
+@media(max-width:740px){main{padding:17px 11px 35px}.filters{grid-template-columns:1fr}.panel{padding:12px}.diffrow{grid-template-columns:1fr}.dayhead h2{font-size:18px}nav{gap:10px}th,td{padding:8px}}
+</style>
+</head>
+<body><main>
+<header>
+  <div class="eyebrow">МАОУ СОШ · 2026/2027</div>
+  <h1>Расписание · II четверть</h1>
+  <p class="sub">Расшифровка бумажного расписания с пометкой «со 2 четверти». Обновлено 4 ноября 2026 года. Исходный вариант первой четверти сохранён без изменений.</p>
+  <nav><a href="../schedule-2026/">I четверть</a><a href="./schedule.json">JSON II четверти</a><a href="./schedule-first-quarter.json">Исходная база I четверти</a><a href="#check">Сверка и спорные места</a></nav>
+</header>
+<div class="panel warning"><strong>Предварительная версия.</strong> Фото имеет разрешение 960×557. Часть цифр, индексов 7А/7Б и исправлений неразборчива. Спорные записи отмечены, а не выданы за проверенные. По этому сайту нельзя без дополнительной проверки утверждать точное расписание занятий.</div>
+<section class="panel">
+  <div class="filters">
+    <div><label for="teacher">Учитель</label><select id="teacher"></select></div>
+    <div><label for="klass">Класс</label><select id="klass"></select></div>
+    <div><label for="weekday">День недели</label><select id="weekday"></select></div>
+  </div>
+  <div class="kpis"><div class="kpi"><b id="kEntries">—</b>Уроков по фильтрам</div><div class="kpi"><b id="kDiff">—</b>Изменённых ячеек*</div><div class="kpi"><b id="kRisk">—</b>Спорных пометок</div></div>
+  <p class="footer">* Сравниваются цифры в клетках на фотографии с прежней JSON-базой. Это не означает, что каждое изменение уже подтверждено.</p>
+</section>
+<div id="output"><div class="panel">Загрузка расписания…</div></div>
+<section class="panel" id="check">
+  <h2>Сверка с I четвертью</h2>
+  <p class="text-muted">Показаны изменения для выбранных фильтров. «—» означает пустую или нераспознанную ячейку; неизвестные записи требуют уточнения.</p>
+  <details><summary id="diffSummary">Показать отличия</summary><div id="diffs" style="margin-top:12px"></div></details>
+  <details style="margin-top:17px" open><summary>Сомнительные записи на фотографии</summary><div id="risks" style="margin-top:12px"></div></details>
+</section>
+<section class="panel">
+  <h3>Как читать данные</h3>
+  <ul>
+    <li><b>7?</b> — по фотографии не удалось подтвердить, 7А это или 7Б. Отдельные совпавшие позиции 7А/7Б восстановлены по прежним согласованным записям.</li>
+    <li>Названия предметов определяются по правилам I четверти, если на фото указаны только классы; это предположение, не новая ведомость предметов.</li>
+    <li>Сентябрьские временные замены не переносились автоматически. Учителей, добавленных на новом фото, можно выбрать в фильтре.</li>
+    <li>Строки учителя «Шабанов А.М.» на фотографии и в старой базе нет. Строка «Рожков С.» оставлена под прежним именем.</li>
+  </ul>
+  <p class="footer">Источник: предоставленная фотография от 04.11.2026. Уточнения можно вносить в <a href="./schedule.json">JSON-базу</a>. Ранее согласованный вариант доступен по ссылке «I четверть».</p>
+</section>
+</main>
+<script>
+(async function(){
+  const file=async p=>{const r=await fetch(p);if(!r.ok)throw Error(p+' '+r.status);return r.json()};
+  const [db,old,c7]=await Promise.all([file('./schedule.json'),file('./schedule-first-quarter.json'),file('./class7-reference.json')]);
+  const $=id=>document.getElementById(id);
+  const esc=x=>String(x===undefined||x===null?'':x).replace(/[&<>"']/g,k=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[k]));
+  const days=db.days,teacherMap=new Map(db.teachers.map(t=>[t.id,t])),teachers=$('teacher'),klass=$('klass'),weekday=$('weekday');
+  const choice=(v,t)=>{const o=document.createElement('option');o.value=v;o.textContent=t;return o};
+  teachers.append(choice('','Все учителя'));
+  db.teachers.forEach(t=>teachers.append(choice(String(t.id),t.name+(t.subjects.length?' · '+t.subjects.join(', '):''))));
+  weekday.append(choice('','Вся неделя'));
+  days.forEach(d=>weekday.append(choice(d,d)));
+  const times=['','09:00–09:40','09:55–10:35','10:45–11:25','11:40–12:20','12:30–13:10','13:25–14:05','14:15–14:55','15:05–15:45'];
+  const key=(d,l,t)=>d+'|'+l+'|'+t;
+  const exactA=new Map((c7.grade7A||[]).filter(x=>x.teacherId!=null).map(x=>[key(x.day,x.lesson,x.teacherId),x]));
+  const exactB=new Map((c7.grade7BOverrides||[]).filter(x=>x.teacherId!=null).map(x=>[key(x.day,x.lesson,x.teacherId),x]));
+  const manual7=new Map((old.manualCorrections||[]).map(x=>[key(x.day,x.lesson,x.teacherId),x]));
+  const all=[];
+  for(const d of days)for(const t of db.teachers){
+    const vals=db.schedule[d]&&db.schedule[d][String(t.id)]||[];
+    vals.forEach((raw,i)=>{
+      if(raw===null||raw===''||raw===undefined)return;
+      const l=i+1,slot=key(d,l,t.id),pa=exactA.get(slot),pb=exactB.get(slot),pm=manual7.get(slot);
+      let cl=String(raw),uncertain=false,special='';
+      if(cl==='7'){
+        if(pa){cl='7А';special=pa.subject||''}
+        else if(pm){cl=pm.class}
+        else if(pb){cl='7Б';special=pb.subject||''}
+        else{cl='7?';uncertain=true}
+      }
+      all.push({day:d,lesson:l,teacherId:t.id,teacher:t.name,klass:cl,raw:String(raw),uncertain,special,subject:''});
+    });
+  }
+  function basicSubject(e){
+    if(e.special)return e.special;
+    const id=e.teacherId,c=e.klass;
+    if(id===1)return 'Английский язык';
+    if(id===2)return 'Химия / физика';
+    if(id===3)return 'Биология';
+    if(id===4)return 'История';
+    if(id===5)return c==='6'?'ИЗО':'География';
+    if(id===6)return 'Музыка';
+    if(id===7)return 'ОБЗР';
+    if(id===8)return 'Труд (технология)';
+    if(id===11||id===12)return 'Математика';
+    if(id===14)return 'Физкультура';
+    if(id===18)return 'Ритмика (по прежней базе)';
+    if(id===9||id===10)return 'Русский язык / литература';
+    if(id===13)return 'Информатика / математика';
+    return 'Предмет не указан';
+  }
+  all.forEach(e=>e.subject=basicSubject(e));
+  for(const id of [9,10])for(const d of days){
+    const groups={};
+    all.filter(e=>e.teacherId===id&&e.day===d&&!(d==='Понедельник'&&e.lesson===1)&&!(d==='Четверг'&&e.lesson===1)&&!e.special).sort((a,b)=>a.lesson-b.lesson).forEach(e=>(groups[e.klass]??=[]).push(e));
+    Object.values(groups).forEach(g=>g.forEach((e,i)=>e.subject=(d==='Четверг'&&e.klass==='6')?'Русский язык':(i===0?'Русский язык':'Литература')));
+  }
+  const grade7Math=d=>d==='Понедельник'||d==='Среда'?'Алгебра':d==='Вторник'?'Алгебра (геометрия)':d==='Четверг'?'Геометрия (алгебра)':'Геометрия';
+  for(const d of days){
+    const row=all.filter(e=>e.teacherId===13&&e.day===d);
+    row.forEach(e=>{
+      if(e.special)return;
+      if(e.klass==='6'){e.subject=row.some(x=>x!==e&&x.klass==='6'&&Math.abs(x.lesson-e.lesson)===1)?'Труды':'Математика'}
+      else if(e.klass.startsWith('7'))e.subject=e.klass==='7?'?'Математика / информатика (?)':grade7Math(d);
+      else e.subject='Информатика';
+    });
+    for(const cl of ['7А','7Б']){
+      const rr=row.filter(e=>e.klass===cl&&!e.special).sort((a,b)=>a.lesson-b.lesson);
+      rr.forEach((e,i)=>e.subject=i===0?grade7Math(d):'Информатика');
+    }
+  }
+  all.forEach(e=>{if(e.special)return;if(e.day==='Понедельник'&&e.lesson===1)e.subject='Разговоры о важном';else if(e.day==='Четверг'&&e.lesson===1)e.subject='Билет в будущее'});
+  const classes=[...new Set(all.map(e=>e.klass))].sort((a,b)=>(parseInt(a)-parseInt(b))||a.localeCompare(b,'ru'));
+  klass.append(choice('','Все классы'));classes.forEach(c=>klass.append(choice(c,c+' класс')));
+  const qp=new URLSearchParams(location.search);if(qp.get('teacher'))teachers.value=qp.get('teacher');if(qp.get('class'))klass.value=qp.get('class');if(qp.get('day'))weekday.value=qp.get('day');
+  const ambiguous=(db.uncertainties||[]),allDiff=[];
+  for(const d of days)for(const t of db.teachers)for(let i=0;i<8;i++){
+    const current=db.schedule[d]?.[String(t.id)]?.[i]??null;
+    const previous=old.schedule[d]?.[String(t.id)]?.[i]??null;
+    if(String(current??'')!==String(previous??''))allDiff.push({day:d,lesson:i+1,teacherId:t.id,teacher:t.name,before:previous,after:current});
+  }
+  function filtered(e){return(!teachers.value||String(e.teacherId)===teachers.value)&&(!klass.value||e.klass===klass.value)&&(!weekday.value||e.day===weekday.value)}
+  function filterRisk(r){return(!teachers.value||String(r.teacherId)===teachers.value)&&(!weekday.value||r.day===weekday.value)}
+  function copy(txt,btn){const changed=()=>{const prior=btn.textContent;btn.textContent='Скопировано';setTimeout(()=>btn.textContent=prior,1200)};if(navigator.clipboard?.writeText)navigator.clipboard.writeText(txt).then(changed).catch(()=>fallback());else fallback();function fallback(){const a=document.createElement('textarea');a.value=txt;document.body.append(a);a.select();document.execCommand('copy');a.remove();changed()}}
+  function render(){
+    const rows=all.filter(filtered).sort((a,b)=>days.indexOf(a.day)-days.indexOf(b.day)||a.lesson-b.lesson||a.teacherId-b.teacherId);
+    const dr=allDiff.filter(x=>(!teachers.value||String(x.teacherId)===teachers.value)&&(!weekday.value||x.day===weekday.value));
+    const risk=ambiguous.filter(filterRisk);
+    $('kEntries').textContent=rows.length;$('kDiff').textContent=dr.length;$('kRisk').textContent=risk.length;
+    const selected=weekday.value?[weekday.value]:days;
+    const output=$('output');output.innerHTML='';
+    for(const d of selected){
+      const dayRows=rows.filter(e=>e.day===d),sec=document.createElement('section');sec.className='day';
+      sec.innerHTML='<div class="dayhead"><h2>'+esc(d)+'</h2><div class="day-actions"><span class="text-muted">'+dayRows.length+' зан.</span><button type="button">Копировать</button></div></div><div class="tablewrap"><table><thead><tr><th>Урок</th><th>Время</th><th>Класс</th><th>Предмет</th><th>Учитель</th></tr></thead><tbody></tbody></table></div>';
+      const tbody=sec.querySelector('tbody');
+      const maxLesson=Math.max(weekday.value==='Пятница'?7:8, ...dayRows.map(x=>x.lesson),0);
+      for(let l=1;l<=maxLesson;l++){
+        const rr=dayRows.filter(e=>e.lesson===l);
+        if(!rr.length){
+          const tr=document.createElement('tr');tr.innerHTML='<td class="lesson-num">'+l+'</td><td class="time">'+times[l]+'</td><td colspan="3" class="text-muted">—</td>';tbody.append(tr);continue;
+        }
+        rr.forEach((e,j)=>{
+          const flags=ambiguous.filter(a=>a.day===e.day&&a.lesson===e.lesson&&a.teacherId===e.teacherId);
+          const tr=document.createElement('tr');
+          tr.innerHTML='<td class="lesson-num">'+(j===0?l:'')+'</td><td class="time">'+(j===0?times[l]:'')+'</td><td><span class="classpill'+(e.uncertain?' uncertain':'')+'">'+esc(e.klass)+'</span></td><td><div class="subject">'+esc(e.subject)+'</div>'+(flags.length?'<div class="flags" title="'+esc(flags.map(a=>a.note).join('; '))+'">Требует проверки</div>':'')+'</td><td>'+esc(e.teacher)+'</td>';tbody.append(tr);
+        });
+      }
+      const btn=sec.querySelector('button');btn.disabled=!dayRows.length;
+      btn.onclick=()=>copy(d+'\n'+dayRows.map(e=>e.lesson+'. '+e.klass+' — '+e.subject+' — '+e.teacher).join('\n'),btn);
+      output.append(sec);
+    }
+    $('diffSummary').textContent='Показать отличия ('+dr.length+')';
+    $('diffs').innerHTML=dr.length?dr.slice(0,180).map(x=>'<div class="diffrow"><strong>'+esc(x.day)+', '+x.lesson+' урок</strong><span>'+esc(x.teacher)+': <span class="old">'+esc(x.before??'—')+'</span> → <span class="new">'+esc(x.after??'—')+'</span></span></div>').join('')+(dr.length>180?'<p>Показаны первые 180 отличий. Выберите учителя для полного списка.</p>':''):'<p>По выбранным фильтрам отличий не обнаружено.</p>';
+    $('risks').innerHTML=risk.length?risk.map(x=>'<div class="diffrow"><strong>'+esc(x.day)+', '+x.lesson+' урок</strong><span>'+esc(teacherMap.get(x.teacherId)?.name||'')+': '+esc(x.note)+'</span></div>').join(''):'<p class="text-muted">Для выбранного учителя отдельные спорные пометки не зарегистрированы. Индексы 7? по-прежнему требуют уточнения.</p>';
+    const params=new URLSearchParams();if(teachers.value)params.set('teacher',teachers.value);if(klass.value)params.set('class',klass.value);if(weekday.value)params.set('day',weekday.value);history.replaceState(null,'',location.pathname+(params.size?'?'+params:''));
+  }
+  [teachers,klass,weekday].forEach(el=>el.addEventListener('change',render));
+  render();
+})().catch(err=>{document.getElementById('output').innerHTML='<div class="panel" id="message">Не удалось загрузить данные. Проверьте JSON-файлы рядом с index.html.</div>';console.error(err)});
+</script>
+</body></html>
