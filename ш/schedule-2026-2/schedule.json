@@ -1,0 +1,1305 @@
+{
+  "schemaVersion": 6,
+  "title": "Расписание уроков 2026–2027 — II четверть",
+  "quarter": 2,
+  "updatedAt": "2026-11-04",
+  "status": "предварительная расшифровка; требует проверки",
+  "source": "Фотография бумажного расписания «со 2 четверти», получена 04.11.2026 (960×557 px)",
+  "days": [
+    "Понедельник",
+    "Вторник",
+    "Среда",
+    "Четверг",
+    "Пятница"
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "name": "Иванова Т.И.",
+      "subjects": [
+        "Английский"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Артемьева Г.М.",
+      "subjects": [
+        "Химия",
+        "Физика"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Шишкова Е.В.",
+      "subjects": [
+        "Биология"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Спиридонова Е.Ю.",
+      "subjects": [
+        "История"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Фетисова Н.Е.",
+      "subjects": [
+        "География"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Кириллова О.Н.",
+      "subjects": [
+        "Музыка"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Иванова Г.В.",
+      "subjects": [
+        "ОБЗР"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Писарева Е.В.",
+      "subjects": [
+        "Труды (5 класс)"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Краснова Е.П.",
+      "subjects": [
+        "Русский",
+        "Литература"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Иванова С.А.",
+      "subjects": [
+        "Русский",
+        "Литература"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Коляго Т.И.",
+      "subjects": [
+        "Математика"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Васильева Т.В.",
+      "subjects": [
+        "Математика"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Рожков С.",
+      "subjects": [
+        "Информатика",
+        "Труды",
+        "Математика",
+        "Алгебра",
+        "Геометрия"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Вальцева К.Д.",
+      "subjects": [
+        "Физкультура"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Еремеева М.Н.",
+      "subjects": []
+    },
+    {
+      "id": 16,
+      "name": "Тихомирова М.Е.",
+      "subjects": []
+    },
+    {
+      "id": 17,
+      "name": "Иванова А.А.",
+      "subjects": []
+    },
+    {
+      "id": 18,
+      "name": "Меркулова Г.А.",
+      "subjects": [
+        "Ритмика"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Фёдорова Г.Е.",
+      "subjects": []
+    },
+    {
+      "id": 20,
+      "name": "Балаева С.В.",
+      "subjects": []
+    },
+    {
+      "id": 21,
+      "name": "Савицкая Н.М.",
+      "subjects": []
+    }
+  ],
+  "schedule": {
+    "Понедельник": {
+      "1": [
+        10,
+        5,
+        6,
+        3,
+        7,
+        7,
+        null,
+        null
+      ],
+      "2": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "3": [
+        9,
+        6,
+        7,
+        7,
+        5,
+        9,
+        null,
+        null
+      ],
+      "4": [
+        7,
+        9,
+        7,
+        2,
+        11,
+        7,
+        10,
+        null
+      ],
+      "5": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "6": [
+        null,
+        2,
+        4,
+        10,
+        10,
+        6,
+        null,
+        null
+      ],
+      "7": [
+        11,
+        null,
+        11,
+        null,
+        null,
+        10,
+        9,
+        null
+      ],
+      "8": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        7,
+        7
+      ],
+      "9": [
+        8,
+        8,
+        5,
+        7,
+        6,
+        5,
+        6,
+        null
+      ],
+      "10": [
+        7,
+        7,
+        9,
+        9,
+        null,
+        null,
+        null,
+        null
+      ],
+      "11": [
+        5,
+        7,
+        10,
+        11,
+        9,
+        null,
+        null,
+        null
+      ],
+      "12": [
+        null,
+        null,
+        8,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "13": [
+        6,
+        null,
+        null,
+        6,
+        8,
+        11,
+        7,
+        7
+      ],
+      "14": [
+        null,
+        null,
+        3,
+        1,
+        7,
+        8,
+        5,
+        9
+      ],
+      "15": [
+        2,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "16": [
+        3,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "17": [
+        4,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "18": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "19": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "20": [
+        null,
+        null,
+        null,
+        5,
+        null,
+        2,
+        null,
+        null
+      ],
+      "21": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        8,
+        null
+      ]
+    },
+    "Вторник": {
+      "1": [
+        4,
+        9,
+        2,
+        2,
+        6,
+        11,
+        null,
+        null
+      ],
+      "2": [
+        11,
+        10,
+        7,
+        7,
+        8,
+        null,
+        9,
+        9
+      ],
+      "3": [
+        8,
+        11,
+        9,
+        6,
+        10,
+        null,
+        null,
+        null
+      ],
+      "4": [
+        7,
+        7,
+        5,
+        null,
+        11,
+        10,
+        null,
+        null
+      ],
+      "5": [
+        5,
+        8,
+        3,
+        9,
+        7,
+        6,
+        7,
+        null
+      ],
+      "6": [
+        null,
+        null,
+        10,
+        1,
+        3,
+        4,
+        null,
+        null
+      ],
+      "7": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "8": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        5,
+        8,
+        null
+      ],
+      "9": [
+        7,
+        null,
+        6,
+        5,
+        5,
+        8,
+        11,
+        11
+      ],
+      "10": [
+        10,
+        null,
+        null,
+        7,
+        9,
+        7,
+        10,
+        null
+      ],
+      "11": [
+        9,
+        5,
+        11,
+        10,
+        7,
+        null,
+        null,
+        null
+      ],
+      "12": [
+        null,
+        null,
+        8,
+        11,
+        null,
+        null,
+        null,
+        null
+      ],
+      "13": [
+        6,
+        7,
+        null,
+        null,
+        null,
+        9,
+        null,
+        null
+      ],
+      "14": [
+        null,
+        6,
+        7,
+        2,
+        null,
+        null,
+        null,
+        8
+      ],
+      "15": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "16": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "17": [
+        null,
+        null,
+        null,
+        null,
+        4,
+        null,
+        null,
+        null
+      ],
+      "18": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        7,
+        null,
+        null
+      ],
+      "19": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "20": [
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        7,
+        null
+      ],
+      "21": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "Среда": {
+      "1": [
+        2,
+        5,
+        3,
+        9,
+        7,
+        7,
+        null,
+        null
+      ],
+      "2": [
+        9,
+        11,
+        7,
+        7,
+        10,
+        9,
+        8,
+        10
+      ],
+      "3": [
+        7,
+        7,
+        null,
+        11,
+        2,
+        null,
+        9,
+        9
+      ],
+      "4": [
+        10,
+        6,
+        5,
+        null,
+        9,
+        8,
+        null,
+        null
+      ],
+      "5": [
+        6,
+        null,
+        10,
+        null,
+        11,
+        3,
+        6,
+        null
+      ],
+      "6": [
+        null,
+        3,
+        null,
+        null,
+        6,
+        10,
+        null,
+        null
+      ],
+      "7": [
+        7,
+        null,
+        6,
+        5,
+        null,
+        null,
+        null,
+        7
+      ],
+      "8": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        7,
+        7,
+        null
+      ],
+      "9": [
+        11,
+        8,
+        11,
+        6,
+        5,
+        6,
+        7,
+        11
+      ],
+      "10": [
+        null,
+        10,
+        null,
+        7,
+        null,
+        null,
+        null,
+        null
+      ],
+      "11": [
+        5,
+        9,
+        9,
+        10,
+        7,
+        11,
+        null,
+        null
+      ],
+      "12": [
+        null,
+        null,
+        8,
+        8,
+        null,
+        null,
+        null,
+        null
+      ],
+      "13": [
+        null,
+        7,
+        null,
+        null,
+        6,
+        null,
+        null,
+        null
+      ],
+      "14": [
+        null,
+        null,
+        7,
+        1,
+        3,
+        5,
+        11,
+        7
+      ],
+      "15": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "16": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "17": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "18": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "19": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "20": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        4,
+        5,
+        null
+      ],
+      "21": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "Четверг": {
+      "1": [
+        2,
+        11,
+        9,
+        10,
+        6,
+        null,
+        null,
+        null
+      ],
+      "2": [
+        9,
+        7,
+        10,
+        7,
+        2,
+        11,
+        8,
+        9
+      ],
+      "3": [
+        10,
+        8,
+        5,
+        null,
+        7,
+        9,
+        9,
+        null
+      ],
+      "4": [
+        7,
+        7,
+        null,
+        6,
+        11,
+        null,
+        null,
+        7
+      ],
+      "5": [
+        3,
+        5,
+        8,
+        7,
+        10,
+        null,
+        7,
+        7
+      ],
+      "6": [
+        null,
+        null,
+        null,
+        null,
+        3,
+        4,
+        10,
+        null
+      ],
+      "7": [
+        11,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "8": [
+        null,
+        null,
+        null,
+        null,
+        5,
+        5,
+        5,
+        null
+      ],
+      "9": [
+        8,
+        6,
+        7,
+        9,
+        4,
+        6,
+        11,
+        null
+      ],
+      "10": [
+        7,
+        null,
+        7,
+        9,
+        null,
+        null,
+        null,
+        null
+      ],
+      "11": [
+        5,
+        9,
+        11,
+        11,
+        7,
+        10,
+        null,
+        null
+      ],
+      "12": [
+        null,
+        null,
+        null,
+        8,
+        null,
+        null,
+        null,
+        null
+      ],
+      "13": [
+        6,
+        10,
+        6,
+        null,
+        null,
+        7,
+        7,
+        null
+      ],
+      "14": [
+        null,
+        null,
+        2,
+        1,
+        9,
+        null,
+        6,
+        null
+      ],
+      "15": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "16": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "17": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "18": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        7,
+        null,
+        null
+      ],
+      "19": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "20": [
+        null,
+        null,
+        null,
+        null,
+        11,
+        5,
+        null,
+        null
+      ],
+      "21": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        8,
+        null,
+        null
+      ]
+    },
+    "Пятница": {
+      "1": [
+        11,
+        4,
+        7,
+        10,
+        7,
+        8,
+        null,
+        null
+      ],
+      "2": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "3": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "4": [
+        null,
+        6,
+        5,
+        9,
+        8,
+        10,
+        null,
+        null
+      ],
+      "5": [
+        2,
+        9,
+        7,
+        7,
+        3,
+        null,
+        null,
+        null
+      ],
+      "6": [
+        7,
+        8,
+        1,
+        5,
+        10,
+        7,
+        null,
+        null
+      ],
+      "7": [
+        null,
+        11,
+        11,
+        8,
+        11,
+        null,
+        null,
+        null
+      ],
+      "8": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        5,
+        null,
+        null
+      ],
+      "9": [
+        5,
+        7,
+        6,
+        6,
+        5,
+        7,
+        11,
+        null
+      ],
+      "10": [
+        10,
+        10,
+        9,
+        7,
+        9,
+        9,
+        null,
+        null
+      ],
+      "11": [
+        9,
+        5,
+        10,
+        11,
+        7,
+        null,
+        null,
+        null
+      ],
+      "12": [
+        null,
+        null,
+        8,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "13": [
+        6,
+        7,
+        null,
+        null,
+        6,
+        6,
+        null,
+        null
+      ],
+      "14": [
+        7,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "15": [
+        null,
+        null,
+        null,
+        null,
+        2,
+        null,
+        null,
+        null
+      ],
+      "16": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "17": [
+        null,
+        null,
+        null,
+        4,
+        null,
+        null,
+        null,
+        null
+      ],
+      "18": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "19": [
+        null,
+        null,
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "20": [
+        null,
+        null,
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "21": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  },
+  "uncertainties": [
+    {
+      "day": "Понедельник",
+      "lesson": 2,
+      "teacherId": 14,
+      "note": "пометка возле 2-го урока Вальцевой не читается"
+    },
+    {
+      "day": "Понедельник",
+      "lesson": 4,
+      "teacherId": 2,
+      "note": "бледная пометка в строке Артемьевой; не учтена"
+    },
+    {
+      "day": "Понедельник",
+      "lesson": 4,
+      "teacherId": 8,
+      "note": "пометка в строке Писаревой; не учтена"
+    },
+    {
+      "day": "Вторник",
+      "lesson": 4,
+      "teacherId": 13,
+      "note": "пометка в строке Рожкова похожа на исправление; не учтена"
+    },
+    {
+      "day": "Вторник",
+      "lesson": 7,
+      "teacherId": 14,
+      "note": "исправление в строке Вальцевой; не учтено"
+    },
+    {
+      "day": "Среда",
+      "lesson": 3,
+      "teacherId": 13,
+      "note": "пометка Рожкова; не учтена"
+    },
+    {
+      "day": "Среда",
+      "lesson": 7,
+      "teacherId": 14,
+      "note": "запись 11 у Вальцевой требует проверки"
+    },
+    {
+      "day": "Четверг",
+      "lesson": 3,
+      "teacherId": 8,
+      "note": "пометка Писаревой; не учтена"
+    },
+    {
+      "day": "Четверг",
+      "lesson": 8,
+      "teacherId": 14,
+      "note": "возможно есть запись у Вальцевой; не учтена"
+    },
+    {
+      "day": "Пятница",
+      "lesson": 2,
+      "teacherId": 8,
+      "note": "исправление Писаревой; не учтено"
+    },
+    {
+      "day": "Пятница",
+      "lesson": 4,
+      "teacherId": 8,
+      "note": "исправление Писаревой; не учтено"
+    },
+    {
+      "day": "Пятница",
+      "lesson": 7,
+      "teacherId": 9,
+      "note": "7-й урок Красновой (11 класс), вопреки прежнему ограничению до 6 уроков; нужна проверка"
+    }
+  ],
+  "notes": [
+    "Новая база — предварительная ручная расшифровка с фотографии, а не утверждённая электронная копия. Частично неразборчивые записи оставлены пустыми и перечислены в uncertainties.",
+    "В фото у 7-х классов индексы А/Б и исправления читаются неполно. Классы 7А и 7Б уточняются по прежней базе, если совпадают учитель, день и урок; остальные отображаются как 7?.",
+    "Предметы берутся из прежних правил по преподавателям, если конкретный предмет на фото не указан. Для новых педагогов предмет не определён.",
+    "Временные замены сентября автоматически не переносились во вторую четверть.",
+    "В новом фото в пятницу возможно есть 7-й урок; не применяется прежний глобальный предел в 6 уроков.",
+    "Фото не содержит строки Шабанов А.М.; в старой базе информатика/математика указаны на строке Рожков С.",
+    "Пустая ячейка может означать отсутствие урока либо неразборчивую запись; для спорных мест смотрите uncertainties."
+  ],
+  "baseline": "ш/schedule-2026/schedule.json"
+}
