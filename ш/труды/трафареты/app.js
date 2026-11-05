@@ -1,7 +1,7 @@
 (function website(){
 "use strict";
 const root=document.getElementById("app"),id=document.body.dataset.page||"home",pre=document.body.dataset.base||"./";
-const menus=[["home","","Обзор"],["school","school/","Урок 45 мин"],["technology","technology/","Технология"],["spray","spray/","Граффити"],["templates","templates/","Шаблоны"],["videos","videos/","Видео"],["materials","materials/","Материалы"],["safety","safety/","Безопасность"]];
+const menus=[["home","","Обзор"],["school","school/","Урок 45 мин"],["technology","technology/","Технология"],["spray","spray/","Граффити"],["templates","templates/","Шаблоны"],["examples","examples/","Примеры"],["videos","videos/","Видео"],["materials","materials/","Материалы"],["safety","safety/","Безопасность"]];
 const path=x=>pre+(menus.find(y=>y[0]===x)||menus[0])[1], asset=x=>pre+"assets/"+x;
 const htmlEscape=s=>String(s).replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]));
 const a=(label,url,cls="btn")=>`<a class="${cls}" href="${htmlEscape(url)}" ${url.startsWith("http")?'target="_blank" rel="noopener noreferrer"':""}>${htmlEscape(label)}</a>`;
@@ -16,7 +16,7 @@ const section=(t,body)=>`<section class="section"><h3>${t}</h3>${body}</section>
 function home(){
 return intro("От бумаги до многоцветного граффити","Полный справочник на основе исследований: цветоделение, изготовление отдельных трафаретов, контрольные метки, работа губкой и аэрозолями, прямые ссылки и готовые шаблоны.")+
 `<div class="grid two" style="margin-top:21px"><div class="panel" style="margin:0"><span class="kicker">Для 6 класса</span><h3>45 минут · 2 слоя</h3><p>Два бумажных трафарета, два цвета гуаши, поролон. Только безопасная техника в помещении.</p>${a("Открыть урок",path("school"),"btn primary")}</div><div class="panel" style="margin:0"><span class="kicker">Печатные шаблоны</span><h3>10 сюжетов · 20 масок</h3><p>Для каждого изображения по два листа А4 с общей системой меток, плюс цветной образец.</p>${a("Выбрать сюжет",path("templates"),"btn primary")}</div></div>`+
-section("Разделы",`<div class="grid">${menus.slice(1).map((m,i)=>`<div class="card"><a class="tile cardbody" href="${path(m[0])}"><div class="kicker">0${i+1}</div><h3>${m[2]}</h3><p>${({school:"Этапы, время, оценивание и подготовка учителя.",technology:"Цветоделение, мостики, регистрация, способы резки.",spray:"Работа с аэрозолем: порядок, фиксация, расстояния, ошибки.",templates:"Печатные SVG, изображения, быстрый и подробный процесс.",videos:"YouTube, примеры и исследовательские источники.",materials:"Личный список инструментов и фильтрация по наличию.",safety:"Безопасность шестиклассников и профессиональные требования."})[m[0]]}</p><span class="small">Перейти →</span></a></div>`).join("")}</div>`)+
+section("Разделы",`<div class="grid">${menus.slice(1).map((m,i)=>`<div class="card"><a class="tile cardbody" href="${path(m[0])}"><div class="kicker">0${i+1}</div><h3>${m[2]}</h3><p>${({school:"Этапы, время, оценивание и подготовка учителя.",technology:"Цветоделение, мостики, регистрация, способы резки.",spray:"Работа с аэрозолем: порядок, фиксация, расстояния, ошибки.",templates:"Печатные SVG, изображения, быстрый и подробный процесс.",examples:"Отдельная страница каждого сюжета с картинками, цветами и материалами.",videos:"YouTube, примеры и исследовательские источники.",materials:"Личный список инструментов и фильтрация по наличию.",safety:"Безопасность шестиклассников и профессиональные требования."})[m[0]]}</p><span class="small">Перейти →</span></a></div>`).join("")}</div>`)+
 section("Пример двухцветной печати",`<div class="grid two"><div class="panel"><img src="${asset("robot-final.svg")}" alt="Робот, сложенный из двух цветовых масок" style="max-height:230px;width:100%;object-fit:contain"/><p class="muted small">Светлый корпус и отдельный тёмный слой с деталями.</p></div><div class="panel"><h3>Главное правило</h3>${steps(["Один цвет = отдельный лист с прорезями.","Все листы имеют одинаковые контрольные метки.","Следующий слой накладывается только после подсыхания предыдущего.","В результате получается единый многоцветный отпечаток."])}</div></div>`);
 }
 function school(){
@@ -48,7 +48,7 @@ section("Частые ошибки",table(["Проблема","Причина","
 let catFilter="Все",diffFilter="Все",searchValue="",availableOnly=false,videoLang="Все",videoType="Все";
 function templateCard(x){
 const absent=missing(x);
-return `<article class="card"><div class="preview"><img loading="lazy" src="${asset(x.id+"-final.svg")}" alt="Образец: ${htmlEscape(x.name)}"/></div><div class="cardbody"><div class="meta"><span class="pill ok">2 слоя</span><span class="pill">${x.difficulty}</span><span class="pill">${x.minutes} мин</span></div><h3>${x.name}</h3><p>${x.category}</p><p><span class="colordot" style="background:${x.colors[0]}"></span>Цвет 1 <span class="colordot" style="background:${x.colors[1]};margin-left:12px"></span>Цвет 2</p><p class="availability ${absent.length?"":"ok"}">${absent.length?"Не отмечены: "+htmlEscape(absent.join(", ")):"Все материалы отмечены"}</p><div class="actions">${a("Слой 1 · SVG",asset(x.id+"-1.svg"))}${a("Слой 2 · SVG",asset(x.id+"-2.svg"))}${a("Образец",asset(x.id+"-final.svg"))}</div><details><summary>Быстро / подробно</summary><p><strong>Быстро:</strong> цвет 1 → подсушить → регистрация → цвет 2.</p><ol>${x.quick.map(z=>`<li>${z}</li>`).join("")}</ol><p>Материалы: ${needed(x).join(", ")}. Печатать в масштабе 100%.</p></details></div></article>`;
+return `<article class="card"><div class="preview"><img loading="lazy" src="${asset(x.id+"-final.svg")}" alt="Образец: ${htmlEscape(x.name)}"/></div><div class="cardbody"><div class="meta"><span class="pill ok">2 слоя</span><span class="pill">${x.difficulty}</span><span class="pill">${x.minutes} мин</span></div><h3>${x.name}</h3><p>${x.category}</p><p><span class="colordot" style="background:${x.colors[0]}"></span>Цвет 1 <span class="colordot" style="background:${x.colors[1]};margin-left:12px"></span>Цвет 2</p><p class="availability ${absent.length?"":"ok"}">${absent.length?"Не отмечены: "+htmlEscape(absent.join(", ")):"Все материалы отмечены"}</p><div class="actions">${a("Открыть пример →",path("examples")+x.id+"/","btn primary")}${a("Слой 1 · SVG",asset(x.id+"-1.svg"))}${a("Слой 2 · SVG",asset(x.id+"-2.svg"))}${a("Образец",asset(x.id+"-final.svg"))}</div><details><summary>Быстро / подробно</summary><p><strong>Быстро:</strong> цвет 1 → подсушить → регистрация → цвет 2.</p><ol>${x.quick.map(z=>`<li>${z}</li>`).join("")}</ol><p>Материалы: ${needed(x).join(", ")}. Печатать в масштабе 100%.</p></details></div></article>`;
 }
 function filterTemplates(){
 const list=data.motifs.filter(x=>(catFilter==="Все"||x.category===catFilter)&&(diffFilter==="Все"||x.difficulty===diffFilter)&&(!searchValue||(`${x.name} ${x.category}`).toLowerCase().includes(searchValue))&&(!availableOnly||missing(x).length===0));
@@ -61,7 +61,7 @@ return intro("Сюжеты и шаблоны А4","Десять собствен
 section("Поиск и фильтр",`<div class="filters"><input type="search" id="q" placeholder="Найти: кот, сова, робот..." aria-label="Поиск"/><select id="category"><option>Все</option>${[...new Set(data.motifs.map(x=>x.category))].map(x=>`<option>${x}</option>`).join("")}</select><select id="difficulty"><option>Все</option><option>Легко</option><option>Средне</option></select><label><input id="available" type="checkbox"/> Только с имеющимися материалами</label></div><p class="muted small" id="shown"></p><div class="grid" id="templateList"></div>`);
 }
 function videoCard(x){
-return `<div class="card video"><div class="play">▶</div><div><span class="pill">${x.lang}</span><span class="pill ok">${x.type}</span><h4>${htmlEscape(x.title)}</h4><p>${htmlEscape(x.description)}</p>${a("Открыть на YouTube ↗",x.url)}</div></div>`;
+return `<div class="card video"><div class="play">▶</div><div><span class="pill">${x.lang}</span><span class="pill ok">${x.type}</span><h4>${htmlEscape(x.title)}</h4><p>${htmlEscape(x.description)}</p>${a("Разбор, изображения, материалы",path("videos")+"watch-"+data.videos.indexOf(x)+"/","btn primary")}${a("YouTube ↗",x.url)}</div></div>`;
 }
 function filterVideos(){
 const q=document.getElementById("vq").value.toLowerCase();
@@ -73,6 +73,18 @@ return intro("YouTube и примеры работ","Практические с
 section("Видеоуроки",`<div class="filters"><input id="vq" type="search" placeholder="Найти видео..."/><select id="lang"><option>Все</option><option>RU</option><option>EN</option></select><select id="kind"><option>Все</option>${[...new Set(data.videos.map(x=>x.type))].map(x=>`<option>${x}</option>`).join("")}</select></div><div class="grid" id="videosList"></div>`)+
 section("Примеры реального stencil art",`<div class="grid">${data.examples.map((x,i)=>`<div class="card"><img class="preview" style="height:160px;width:100%;object-fit:contain" alt="Собственный учебный пример" src="${asset(data.motifs[i].id+"-final.svg")}"/><div class="cardbody"><h3>${x.title}</h3><p>${x.detail}</p>${a("Авторская работа ↗",x.url)}</div></div>`).join("")}</div><p class="muted small">Миниатюры здесь — наши учебные SVG, а не изображения чужих работ. Ссылка открывает оригинальный сайт правообладателя.</p>`)+
 section("Библиография и методика",`<div class="panel sourcegroup">${data.references.map(x=>`<p><span class="pill">${x.type}</span> ${a(x.title,x.url)}</p>`).join("")}</div>`);
+}
+
+function examples(){
+return intro("Примеры работ и проекты","У каждого сюжета собственная страница: готовый рисунок, два слоя, материалы для конкретного варианта и быстрый/подробный процесс.")+
+section("10 учебных сюжетов",'<div class="filters"><input type="search" id="eq" placeholder="Найти сюжет..."/><select id="ecat"><option>Все</option>'+[...new Set(data.motifs.map(x=>x.category))].map(x=>'<option>'+x+'</option>').join("")+'</select><label><input type="checkbox" id="eready"/> Только по имеющимся материалам</label></div><p class="muted small" id="ecount"></p><div class="grid" id="exgrid"></div>')+
+section("Примеры граффити из исследований",'<div class="notice">Для чужих работ использованы отдельные учебные схемы, а не копии оригиналов. В каждой карточке есть ссылка на исходную работу.</div><div class="grid">'+data.examples.map((x,i)=>'<article class="card"><a class="tile" href="'+path("examples")+'case-'+i+'/"><div class="preview"><img src="'+asset('study-'+i+'.svg')+'" style="height:175px;object-fit:contain" alt="Схема многослойной печати"></div><div class="cardbody"><span class="pill">Кейс</span><h3>'+htmlEscape(x.title)+'</h3><p>'+htmlEscape(x.detail)+'</p><span class="btn primary">Картинки и материалы</span></div></a></article>').join("")+'</div>');
+}
+function filterExamples(){
+const q=document.getElementById("eq").value.toLowerCase(),c=document.getElementById("ecat").value,only=document.getElementById("eready").checked;
+const arr=data.motifs.filter(x=>(c==="Все"||x.category===c)&&(x.name+" "+x.category).toLowerCase().includes(q)&&(!only||!missing(x).length));
+document.getElementById("ecount").textContent="Показано "+arr.length+" из "+data.motifs.length;
+document.getElementById("exgrid").innerHTML=arr.length?arr.map(x=>'<article class="card"><a class="tile" href="'+path("examples")+x.id+'/"><div class="preview"><img alt="'+htmlEscape(x.name)+'" src="'+asset(x.id+'-final.svg')+'" style="height:180px;object-fit:contain"/></div><div class="cardbody"><span class="pill ok">2 слоя</span><span class="pill">'+x.minutes+' мин</span><h3>'+htmlEscape(x.name)+'</h3><p>'+htmlEscape(x.category)+'</p><p>'+(!missing(x).length?"Материалы отмечены":"Не отмечены: "+missing(x).join(", "))+'</p><span class="btn primary">Открыть карточку проекта</span></div></a></article>').join(""):'<div class="empty">Нет подходящих примеров. Измените фильтр.</div>';
 }
 function materials(){
 return intro("Наличие материалов и инструментов","Отметьте имеющееся. Выбор сохраняется только в localStorage этого браузера и влияет на фильтр доступных сюжетов.")+
@@ -94,7 +106,7 @@ document.getElementById("stockProjects").innerHTML=data.motifs.map(x=>`<div clas
 }
 function init(){
 document.getElementById("links").innerHTML=menus.map(m=>`<a class="tab ${m[0]===id?"active":""}" href="${path(m[0])}" ${m[0]===id?'aria-current="page"':""}>${m[2]}</a>`).join("");
-const sections={home,school,technology,spray,templates,videos,materials,safety};
+const sections={home,school,technology,spray,templates,examples,videos,materials,safety};
 root.innerHTML=(sections[id]||home)();
 if(id==="templates"){
 document.getElementById("q").oninput=e=>{searchValue=e.target.value.toLowerCase();filterTemplates()};
@@ -103,6 +115,7 @@ document.getElementById("difficulty").onchange=e=>{diffFilter=e.target.value;fil
 document.getElementById("available").onchange=e=>{availableOnly=e.target.checked;filterTemplates()};
 filterTemplates();
 }
+if(id==="examples"){["eq","ecat","eready"].forEach(k=>document.getElementById(k).addEventListener("input",filterExamples));filterExamples()}
 if(id==="videos"){
 document.getElementById("vq").oninput=filterVideos;
 document.getElementById("lang").onchange=e=>{videoLang=e.target.value;filterVideos()};
