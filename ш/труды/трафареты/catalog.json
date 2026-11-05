@@ -1,0 +1,480 @@
+{
+  "title": "Многослойная трафаретная печать",
+  "updated": "2026-11-05",
+  "materials": [
+    {
+      "id": "paper",
+      "name": "Бумага А4",
+      "group": "База"
+    },
+    {
+      "id": "card",
+      "name": "Плотная бумага / картон",
+      "group": "База"
+    },
+    {
+      "id": "scissors",
+      "name": "Ножницы",
+      "group": "База"
+    },
+    {
+      "id": "pencil",
+      "name": "Карандаш / линейка",
+      "group": "База"
+    },
+    {
+      "id": "tape",
+      "name": "Малярный скотч",
+      "group": "База"
+    },
+    {
+      "id": "sponge",
+      "name": "Поролон",
+      "group": "Краска"
+    },
+    {
+      "id": "gouache",
+      "name": "Гуашь",
+      "group": "Краска"
+    },
+    {
+      "id": "acrylic",
+      "name": "Акриловая краска",
+      "group": "Краска"
+    },
+    {
+      "id": "printer",
+      "name": "Принтер",
+      "group": "Оборудование"
+    },
+    {
+      "id": "knife",
+      "name": "Макетный нож (для взрослых)",
+      "group": "Оборудование"
+    },
+    {
+      "id": "mylar",
+      "name": "Плёнка Mylar",
+      "group": "Оборудование"
+    },
+    {
+      "id": "plotter",
+      "name": "Режущий плоттер",
+      "group": "Оборудование"
+    },
+    {
+      "id": "spray",
+      "name": "Аэрозоль",
+      "group": "Профессиональное"
+    },
+    {
+      "id": "ppe",
+      "name": "Подходящие СИЗ",
+      "group": "Профессиональное"
+    },
+    {
+      "id": "site",
+      "name": "Разрешённая площадка",
+      "group": "Профессиональное"
+    }
+  ],
+  "motifs": [
+    {
+      "id": "cat",
+      "name": "Кот",
+      "category": "Животные",
+      "difficulty": "Легко",
+      "colors": [
+        "#d2a16b",
+        "#283646"
+      ],
+      "minutes": 33,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "owl",
+      "name": "Сова",
+      "category": "Животные",
+      "difficulty": "Средне",
+      "colors": [
+        "#ba8a68",
+        "#293d51"
+      ],
+      "minutes": 38,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "robot",
+      "name": "Робот",
+      "category": "Предметы",
+      "difficulty": "Легко",
+      "colors": [
+        "#aab9c8",
+        "#2d4056"
+      ],
+      "minutes": 30,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "rocket",
+      "name": "Ракета",
+      "category": "Предметы",
+      "difficulty": "Легко",
+      "colors": [
+        "#d96950",
+        "#405981"
+      ],
+      "minutes": 32,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "flower",
+      "name": "Цветок",
+      "category": "Растения",
+      "difficulty": "Средне",
+      "colors": [
+        "#d980a7",
+        "#467f67"
+      ],
+      "minutes": 39,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "fish",
+      "name": "Рыба",
+      "category": "Животные",
+      "difficulty": "Средне",
+      "colors": [
+        "#50a6b9",
+        "#2d405a"
+      ],
+      "minutes": 37,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "apple",
+      "name": "Яблоко",
+      "category": "Растения",
+      "difficulty": "Легко",
+      "colors": [
+        "#d4514c",
+        "#4d8c61"
+      ],
+      "minutes": 31,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "mushroom",
+      "name": "Гриб",
+      "category": "Растения",
+      "difficulty": "Легко",
+      "colors": [
+        "#d55c4d",
+        "#f0cf9c"
+      ],
+      "minutes": 35,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "forest",
+      "name": "Горы и лес",
+      "category": "Пейзаж",
+      "difficulty": "Средне",
+      "colors": [
+        "#90a9c4",
+        "#376752"
+      ],
+      "minutes": 40,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    },
+    {
+      "id": "geometry",
+      "name": "Геометрия",
+      "category": "Узоры",
+      "difficulty": "Легко",
+      "colors": [
+        "#e9b75f",
+        "#37627c"
+      ],
+      "minutes": 30,
+      "layers": 2,
+      "needs": [
+        "paper",
+        "card",
+        "scissors",
+        "pencil",
+        "tape",
+        "sponge",
+        "gouache"
+      ],
+      "quick": [
+        "Вырезать слой 1",
+        "Нанести первый цвет губкой",
+        "Подсушить и совместить метки",
+        "Напечатать второй цвет"
+      ],
+      "note": "Печатать оба листа в масштабе 100%"
+    }
+  ],
+  "videos": [
+    {
+      "title": "Wicked Paint — Multi Layer Color Stencil",
+      "url": "https://www.youtube.com/watch?v=AOyCWP7V4ss",
+      "lang": "EN",
+      "type": "Полный цикл",
+      "description": "Цветоделение, перемычки, вырезание и 12 цветовых слоёв"
+    },
+    {
+      "title": "Wicked Paint — Multi Layer Graffiti",
+      "url": "https://www.youtube.com/watch?v=MAsmcYP1e-g",
+      "lang": "EN",
+      "type": "Полный цикл",
+      "description": "Фотография → тональные маски → граффити"
+    },
+    {
+      "title": "Silhouette Secrets — Layered Stencil Design",
+      "url": "https://www.youtube.com/watch?v=Lq2vwgEO-I4",
+      "lang": "EN",
+      "type": "Цветоделение",
+      "description": "Регистрация слоёв и подготовка к резке"
+    },
+    {
+      "title": "Cody Lusby — Simple Two Layer Stencil",
+      "url": "https://www.youtube.com/watch?v=4lX30mw9518",
+      "lang": "EN",
+      "type": "Вручную",
+      "description": "Ручной двухслойный трафарет"
+    },
+    {
+      "title": "PONSHOP — Cutting a Stencil",
+      "url": "https://www.youtube.com/watch?v=3iJpReTqNok",
+      "lang": "EN",
+      "type": "Вырезание",
+      "description": "Показ ручного вырезания"
+    },
+    {
+      "title": "PONSHOP — Spraying a Stencil",
+      "url": "https://www.youtube.com/watch?v=fCcWgv_s8bM",
+      "lang": "EN",
+      "type": "Аэрозоль",
+      "description": "Базовая техника распыления"
+    },
+    {
+      "title": "Stenciling for Kids",
+      "url": "https://www.youtube.com/watch?v=nypkK1G7DkM&t=283s",
+      "lang": "EN",
+      "type": "Школа",
+      "description": "Бумажный трафарет, губка, крепление"
+    },
+    {
+      "title": "CREARTE — Многослойный трафарет",
+      "url": "https://www.youtube.com/watch?v=_Bp00p9KwS4",
+      "lang": "RU",
+      "type": "Декор",
+      "description": "Декоративная многослойная техника; не полный граффити-цикл"
+    }
+  ],
+  "references": [
+    {
+      "title": "Трафареты и регистрация — Stencil Stop",
+      "url": "https://help.stencilstop.com/en/articles/6101157-how-to-paint-layered-stencils",
+      "type": "Процесс"
+    },
+    {
+      "title": "Информация о цветовых слоях — Stencil Stop",
+      "url": "https://stencilstop.com/pages/custom-layered-stencils-information",
+      "type": "Цветоделение"
+    },
+    {
+      "title": "STORCH — руководство по трафаретам",
+      "url": "https://www.storch.de/fileadmin/user_upload/STORCH/downloads/manuals/storch-2501-2507-a5-manual-web.pdf",
+      "type": "Процесс"
+    },
+    {
+      "title": "OSHA — Paint Hazards",
+      "url": "https://www.osha.gov/sites/default/files/2019-04/Chemicals_in_Painting_Materials.pdf",
+      "type": "Безопасность"
+    },
+    {
+      "title": "OSHA — Painting PPE",
+      "url": "https://www.osha.gov/etools/shipyard/general-requirements/ppe/ppe-selection/painting",
+      "type": "Безопасность"
+    },
+    {
+      "title": "Ручное изготовление сложных трафаретов — Instructables",
+      "url": "https://www.instructables.com/Creating-Complex-Spraypaint-Stencils-by-Hand/",
+      "type": "Процесс"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Kurt Cobain, 4 слоя",
+      "url": "https://www.idealstencils.co.uk/products/kurt-cobain-multilayer-stencil",
+      "detail": "Четыре цветовых маски и регистрационные отверстия"
+    },
+    {
+      "title": "Anthony Kiedis, 2 слоя",
+      "url": "https://www.idealstencils.co.uk/products/anthony-kiedis-rhcp-multilayer-stencil",
+      "detail": "Серый и чёрный, контрольные метки"
+    },
+    {
+      "title": "Bob Marley, 4 слоя",
+      "url": "https://stencilmepretty.com/products/custom-layered-stencils-set",
+      "detail": "Чёрный, зелёный, красный и жёлтый"
+    },
+    {
+      "title": "Stencil Stop — цветной портрет",
+      "url": "https://stencilstop.com/pages/custom-stencils",
+      "detail": "Примеры отдельных масок и готовых работ"
+    },
+    {
+      "title": "Wicked Paint — 12 слоёв",
+      "url": "https://www.youtube.com/watch?v=AOyCWP7V4ss",
+      "detail": "Профессиональный пример полного цикла"
+    }
+  ]
+}
