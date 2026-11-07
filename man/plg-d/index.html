@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e5e7e6">
+<meta name="description" content="Интерактивная инструкция D 0.1.1: промпты для Codex, Cursor, Claude Code и Grok, UI из изображения, планы, исправления, правила проекта и конструктор команд.">
+<title>D — интерактивное руководство для coding agents</title>
+<link rel="stylesheet" href="./style.css">
+<script src="./app.js" defer></script>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<div class="scrim" id="scrim"></div>
+<div class="app">
+<aside class="sidebar" id="sidebar" aria-label="Разделы документации">
+ <div class="brand-row"><a class="brand" href="#overview" aria-label="D — начало">d<span class="brand-dot">.</span></a><span class="version-stamp">V 0.1.1</span></div>
+ <a class="install" href="https://chatgpt.com/plugins/plugins_6aef6a93393481919e7300c22efd2897" target="_blank" rel="noopener noreferrer">Открыть D в ChatGPT <span aria-hidden="true">↗</span></a>
+ <div class="side-group"><h3>РУКОВОДСТВО</h3><nav id="site-nav" aria-label="Оглавление">
+ <a class="nav-item active" href="#overview"><span class="nav-glyph">⌂</span>Обзор<span class="nav-num">01</span></a>
+ <a class="nav-item" href="#start"><span class="nav-glyph">▷</span>Быстрый старт<span class="nav-num">02</span></a>
+ <a class="nav-item" href="#commands"><span class="nav-glyph">⌘</span>Команды<span class="nav-num">03</span></a>
+ <a class="nav-item" href="#platforms"><span class="nav-glyph">▥</span>Платформы<span class="nav-num">04</span></a>
+ <a class="nav-item" href="#ui"><span class="nav-glyph">▧</span>UI из изображения<span class="nav-num">05</span></a>
+ <a class="nav-item" href="#plan"><span class="nav-glyph">☷</span>План и реализация<span class="nav-num">06</span></a>
+ <a class="nav-item" href="#builder"><span class="nav-glyph">⚙</span>Конструктор<span class="nav-num">07</span></a>
+ <a class="nav-item" href="#rules"><span class="nav-glyph">▤</span>Правила проекта<span class="nav-num">08</span></a>
+ <a class="nav-item" href="#faq"><span class="nav-glyph">?</span>Вопросы и ответы<span class="nav-num">09</span></a>
+ </nav></div>
+ <div class="side-divider"></div>
+ <div class="side-group"><h3>НАПРАВЛЕНИЯ</h3>
+ <a class="folder" href="#ui">◫ Макет → интерфейс</a>
+ <a class="folder" href="#plan">≡ ТЗ и план</a>
+ <a class="folder" href="#platforms">◇ Различия агентов</a>
+ <a class="folder" href="#builder">⚙ Собрать команду</a>
+ </div>
+ <div class="side-divider"></div>
+ <div class="side-foot"><strong>D / Development Agent</strong><p>Справка по активному плагину 0.1.1.<br>7 ноября 2026. Статическое руководство, не исполнитель кода.</p><a href="https://greenn.github.io/gp/man/plg-gp/" target="_blank" rel="noopener">Справочник GP ↗</a></div>
+</aside>
+<div class="main-column">
+<div class="mobile-top"><button class="menu-toggle" id="menu-toggle" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Открыть меню">☰</button><strong>d<span class="brand-dot">.</span></strong><small>СПРАВКА / 0.1.1</small></div>
+<div class="searchbar" role="search"><label class="search-label" for="guide-search">Поиск по справке</label><div class="search-control"><span aria-hidden="true">⌕</span><input type="search" id="guide-search" autocomplete="off" placeholder="Например: cursor grok, ui, rules, build..."><button class="small-btn" id="search-clear" type="button" hidden>Очистить ×</button></div><span class="search-status" id="search-status" role="status" aria-live="polite">Все разделы доступны · Ctrl + K — поиск</span></div>
+<main class="doc" id="content">
+<section class="guide-section" id="overview" data-search="главная обзор d development agents промпт разработка codex cursor claude grok">
+ <p class="overline">YOUR DEVELOPMENT WORKFLOW · D / 0.1.1</p>
+ <h1 class="hero-title">От идеи —<br>к работающему коду.</h1>
+ <p class="hero-lead">D превращает обычное описание задачи, <em>скриншот интерфейса</em> или ошибку в точный запрос для coding agent.</p>
+ <p class="hero-note">Не заставляет сильные модели повторять подробный алгоритм. Вместо этого фиксирует результат, контекст, ограничения, самостоятельность и проверку. Учитывает среду Codex, Cursor, Claude Code и Grok.</p>
+ <div class="hero-actions"><a class="action-dark" href="#commands">Список команд ↓</a><a class="action-light" href="#builder">Конструктор →</a></div>
+ <div class="statline" aria-label="Возможности"><a href="#commands" class="stat"><strong>Prompt</strong><span>Короткое точное задание</span></a><a href="#ui" class="stat"><strong>UI</strong><span>Картинка → приложение</span></a><a href="#plan" class="stat"><strong>Plan</strong><span>Полное проектирование</span></a><a href="#platforms" class="stat"><strong>4 среды</strong><span>Адаптация промпта</span></a></div>
+ <div class="note"><span class="note-icon">✳</span><div><strong>Что такое D.</strong> Инструкционный плагин внутри ChatGPT. По умолчанию <b>пишет промпт</b>, а не изменяет код. Для фактической разработки нужна явная команда <code>@D build</code> и доступ к нужным инструментам.</div></div>
+</section>
+<section class="guide-section" id="start" data-search="быстрый старт примеры первые шаги как пользоваться вставить промпт">
+ <span class="section-marker"></span><p class="eyebrow">01 / начать за минуту</p><h2>Начни с результата.</h2><p class="section-intro">Выбери нужный сценарий. Скопируй команду и отправь в ChatGPT с подключённым D.</p>
+ <div class="cmd-grid">
+ <article class="command-card" data-tags="prompt codex" data-search="код простой промпт codex"><div class="card-top"><code>@D Добавь экспорт JSON в текущий проект</code><button class="copy" data-copy="@D Добавь экспорт JSON в текущий проект">Копировать</button></div><p>Один промпт для Codex по умолчанию.</p></article>
+ <article class="command-card" data-tags="prompt cursor" data-search="курсор меню фильтр"><div class="card-top"><code>@D cursor Исправь мобильное меню</code><button class="copy" data-copy="@D cursor Исправь мобильное меню">Копировать</button></div><p>Промпт под среду Cursor.</p></article>
+ <article class="command-card" data-tags="ui cursor" data-search="картинка дизайн screenshot ui"><div class="card-top"><code>@D ui cursor Сделай приложение по изображению</code><button class="copy" data-copy="@D ui cursor Сделай приложение по изображению">Копировать</button></div><p>Превращает прикреплённый референс в техническую задачу.</p></article>
+ <article class="command-card" data-tags="plan claude" data-search="полный подробный план"><div class="card-top"><code>@D plan claude Спроектируй приложение</code><button class="copy" data-copy="@D plan claude Спроектируй приложение">Копировать</button></div><p>Подробный план с критериями готовности, но без изменения кода.</p></article>
+ </div>
+ <div class="steps"><div><span>01</span><p><strong>Сформулируй задачу</strong><small>Можно обычным языком, без формального ТЗ.</small></p></div><div><span>02</span><p><strong>Назови среду</strong><small>Codex по умолчанию или Cursor / Claude / Grok.</small></p></div><div><span>03</span><p><strong>Добавь материалы</strong><small>Скриншоты, текст ошибки, ограничения, репозиторий.</small></p></div><div><span>04</span><p><strong>Передай результат агенту</strong><small>Если нужна внешняя IDE, отдельно передай туда вложения.</small></p></div></div>
+</section>
+<section class="guide-section" id="commands" data-search="все команды каталог фильтры prompt plan ui build fix rules audit check help codex cursor claude grok">
+ <span class="section-marker"></span><p class="eyebrow">02 / каталог команд</p><h2>Выбирай намерение, а не сценарий исполнения.</h2><p class="section-intro">Команда указывает, что нужно получить. Платформа уточняет, под какую среду формируется результат.</p>
+ <div class="filters" aria-label="Фильтры каталога">
+ <button class="filter active" type="button" data-filter="all" aria-pressed="true">Все</button><button class="filter" type="button" data-filter="prompt" aria-pressed="false">Промпты</button><button class="filter" type="button" data-filter="ui" aria-pressed="false">UI</button><button class="filter" type="button" data-filter="plan" aria-pressed="false">Планы</button><button class="filter" type="button" data-filter="build" aria-pressed="false">Разработка</button><button class="filter" type="button" data-filter="tools" aria-pressed="false">Служебные</button>
+ </div>
+ <p class="counter" id="command-count" aria-live="polite">Команды доступны ниже</p>
+ <div class="cmd-grid" id="command-grid">
+ <article class="command-card" data-tags="prompt" data-search="по умолчанию короткий промпт codex"><div class="card-top"><code>@D [задача]</code><button class="copy" data-copy="@D Добавь поиск по каталогу">Копировать</button></div><p>Готовый короткий промпт. Цель по умолчанию — Codex.</p></article>
+ <article class="command-card" data-tags="prompt" data-search="prompt конкретная платформа"><div class="card-top"><code>@D prompt cursor [задача]</code><button class="copy" data-copy="@D prompt cursor Добавь поиск по каталогу">Копировать</button></div><p>Промпт с учётом выбранной среды.</p></article>
+ <article class="command-card" data-tags="prompt" data-search="короткая форма cursor"><div class="card-top"><code>@D cursor [задача]</code><button class="copy" data-copy="@D cursor Добавь поиск по каталогу">Копировать</button></div><p>То же, что «@D prompt cursor».</p></article>
+ <article class="command-card" data-tags="prompt" data-search="cursor grok модель в среде"><div class="card-top"><code>@D cursor grok [задача]</code><button class="copy" data-copy="@D cursor grok Добавь поиск по каталогу">Копировать</button></div><p>Cursor — harness, Grok — выбранная модель.</p></article>
+ <article class="command-card" data-tags="prompt" data-search="cursor claude модель в среде"><div class="card-top"><code>@D cursor claude [задача]</code><button class="copy" data-copy="@D cursor claude Добавь поиск по каталогу">Копировать</button></div><p>Cursor с моделью Claude, если она доступна.</p></article>
+ <article class="command-card" data-tags="plan" data-search="этапы тз подробная спецификация"><div class="card-top"><code>@D plan [задача]</code><button class="copy" data-copy="@D plan Создай проект интерактивной игры">Копировать</button></div><p>Полный план, этапы, риски, критерии приёмки.</p></article>
+ <article class="command-card" data-tags="plan" data-search="claude plan"><div class="card-top"><code>@D plan claude [задача]</code><button class="copy" data-copy="@D plan claude Спроектируй приложение">Копировать</button></div><p>План с учётом работы Claude Code.</p></article>
+ <article class="command-card" data-tags="ui" data-search="ui приложение изображение картинка дизайн"><div class="card-top"><code>@D ui [платформа] [задача]</code><button class="copy" data-copy="@D ui cursor Сделай приложение по приложенному изображению">Копировать</button></div><p>Скриншот → промпт на функциональный интерфейс.</p></article>
+ <article class="command-card" data-tags="ui plan" data-search="ui plan экраны состояния"><div class="card-top"><code>@D ui plan cursor [задача]</code><button class="copy" data-copy="@D ui plan cursor Спроектируй приложение по макету">Копировать</button></div><p>Подробный план экранов, данных и переходов.</p></article>
+ <article class="command-card" data-tags="ui build" data-search="ui build код реализация макет"><div class="card-top"><code>@D ui build [задача]</code><button class="copy" data-copy="@D ui build Создай UI по приложенному макету">Копировать</button></div><p>Прямая реализация с доступными инструментами.</p></article>
+ <article class="command-card" data-tags="build" data-search="изменить код"><div class="card-top"><code>@D build [задача]</code><button class="copy" data-copy="@D build Добавь экспорт JSON в проект">Копировать</button></div><p>Выполнение, когда есть доступ к проекту.</p></article>
+ <article class="command-card" data-tags="prompt" data-search="fix ошибка баг первопричина"><div class="card-top"><code>@D fix [платформа] [ошибка]</code><button class="copy" data-copy="@D fix cursor Фильтр сбрасывается после обновления">Копировать</button></div><p>Задача на поиск первопричины и регрессионную проверку.</p></article>
+ <article class="command-card" data-tags="tools" data-search="rules AGENTS.md CLAUDE.md .cursor/rules"><div class="card-top"><code>@D rules [платформа] [проект]</code><button class="copy" data-copy="@D rules cursor Подготовь правила моего проекта">Копировать</button></div><p>Проектные правила для выбранного harness.</p></article>
+ <article class="command-card" data-tags="tools" data-search="audit сократить исправить промпт"><div class="card-top"><code>@D audit [промпт]</code><button class="copy" data-copy="@D audit Сократи мой промпт, не потеряв ограничения">Копировать</button></div><p>Сокращение и усиление постановки задачи.</p></article>
+ <article class="command-card" data-tags="tools" data-search="check тесты аудит качество"><div class="card-top"><code>@D check [результат]</code><button class="copy" data-copy="@D check Проверь фактически выполненные изменения">Копировать</button></div><p>Проверка доступных результатов и пробелов.</p></article>
+ <article class="command-card" data-tags="tools" data-search="help инструкция справка"><div class="card-top"><code>@D help</code><button class="copy" data-copy="@D help">Копировать</button></div><p>Краткая справка внутри ChatGPT.</p></article>
+ </div>
+ <div class="note"><span class="note-icon">↗</span><div>Порядок допускает обе формы: <code>@D ui cursor ...</code> и <code>@D cursor ui ...</code>. Название инструмента может быть и в обычной фразе: «составь промпт для Cursor».</div></div>
+</section>
+<section class="guide-section" id="platforms" data-search="платформы codex cursor claude grok grok build harness ide модель правила">
+ <span class="section-marker"></span><p class="eyebrow">03 / адаптеры</p><h2>Одна задача. Разные среды.</h2><p class="section-intro">D не пишет четыре длинных варианта. Он сохраняет смысл задачи и корректирует только полезные детали целевого harness.</p>
+ <div class="platform-grid">
+ <article class="platform-card"><div class="platform-id"><span class="platform-symbol">⌘</span><span>OpenAI / CODEX</span></div><h3>Codex</h3><p>Результат, ограничения, критерии готовности. Агент самостоятельно изучает релевантный код и выбирает реализацию. Файл правил — <code>AGENTS.md</code>, если используется в проекте.</p><div class="platform-foot">Не навязывать обязательный большой план и субагентов.</div></article>
+ <article class="platform-card"><div class="platform-id"><span class="platform-symbol">▣</span><span>IDE / CURSOR</span></div><h3>Cursor</h3><p>Контекст открытого проекта, существующие компоненты, референс. При доступности Browser — визуальная проверка адаптивности. Проектные правила — <code>.cursor/rules/*.mdc</code> или поддерживаемый <code>AGENTS.md</code>.</p><div class="platform-foot">Cursor — среда, а не одна модель.</div></article>
+ <article class="platform-card"><div class="platform-id"><span class="platform-symbol">◇</span><span>ANTHROPIC / CODE</span></div><h3>Claude Code</h3><p>Точный контекст, буквальные логи, осторожность с неизвестным API. <code>CLAUDE.md</code> — стабильные соглашения; Plan Mode полезен для сложных задач, но не обязателен.</p><div class="platform-foot">Не требовать бесконечных повторных проверок.</div></article>
+ <article class="platform-card"><div class="platform-id"><span class="platform-symbol">✦</span><span>XAI / GROK</span></div><h3>Grok / Grok Build</h3><p>Конкретный результат, границы, проверка. Отличать модель Grok от среды Grok Build: сама модель не гарантирует доступа к файлам, терминалу или браузеру.</p><div class="platform-foot">Не придумывать специальные обязательные ключевые слова.</div></article>
+ </div>
+ <h3 class="small-heading">Среда + модель</h3>
+ <p class="text">Для команды <code>@D cursor grok</code> главными остаются контекст, правила и инструменты Cursor. Grok — только выбранная модель. Аналогично работает <code>@D cursor claude</code>. Наличие модели в конкретной установке не гарантировано.</p>
+ <div class="examplebox"><div class="examplehead"><strong>Пример: Cursor с Grok</strong><button class="copy" data-copy="@D cursor grok Добавь фильтр по этажности в каталог. Не меняй базу и существующий дизайн.">Копировать</button></div><pre>@D cursor grok Добавь фильтр по этажности в каталог.
+Не меняй базу и существующий дизайн.</pre></div>
+</section>
+<section class="guide-section" id="ui" data-search="ui изображение макет референс дизайн скриншот верстка приложение desktop mobile скрин">
+ <span class="section-marker"></span><p class="eyebrow">04 / главное применение</p><h2>Сгенерировал UI? Теперь сделай его рабочим.</h2><p class="section-intro">Плоское изображение задаёт внешний вид, но не определяет API, данные и поведение. D помогает описать то, чего не хватает для реализации.</p>
+ <div class="two-col"><div class="plain-panel"><span class="mini-label">ВИДНО НА РЕФЕРЕНСЕ</span><ul><li>Композиция и расположение блоков</li><li>Цвета, шрифты, иерархия</li><li>Подписи и видимые контролы</li><li>Примерные пропорции</li></ul></div><div class="plain-panel"><span class="mini-label">НУЖНО ОПРЕДЕЛИТЬ</span><ul><li>Поведение кнопок и переключателей</li><li>Состояния и навигацию</li><li>Откуда берутся данные</li><li>Проверку desktop и mobile</li></ul></div></div>
+ <div class="examplebox"><div class="examplehead"><strong>Готовая команда для Cursor</strong><button class="copy" data-copy="@D ui cursor Создай рабочее приложение по приложенному изображению. Сохрани композицию и стиль. Все видимые элементы должны работать.">Копировать</button></div><pre>@D ui cursor Создай рабочее приложение по
+приложенному изображению. Сохрани композицию
+и стиль. Все видимые элементы должны работать.</pre></div>
+ <h3 class="small-heading">Что получит внешний coding agent</h3>
+ <p class="text">Точное описание референса, работающие компоненты вместо скриншота-подложки, осмысленные состояния элементов, ограничения по текущему проекту и способ проверки. Для больших интерфейсов есть <code>@D ui plan</code>.</p>
+ <div class="note"><span class="note-icon">!</span><div><strong>Изображение из ChatGPT не переносится автоматически в Cursor или Codex.</strong> После получения промпта приложи тот же макет непосредственно в целевом инструменте. Не требуй вымышленного пути к файлу.</div></div>
+</section>
+<section class="guide-section" id="plan" data-search="plan build fix разработка код сохранение изменения git push тестирование этапы">
+ <span class="section-marker"></span><p class="eyebrow">05 / проектирование и выполнение</p><h2>Plan, Prompt и Build — разные действия.</h2>
+ <div class="mode-list"><div class="mode"><span class="mode-num">01</span><div><h3>PROMPT · постановка задачи</h3><p>Один готовый текст для внешнего агента. Быстрое делегирование без подробного микроменеджмента.</p></div></div><div class="mode"><span class="mode-num">02</span><div><h3>PLAN · полный план</h3><p>Цель и MVP, экраны, данные, ограничения, проверяемые этапы, тесты, риски и короткий handoff-промпт. Код не изменяется.</p></div></div><div class="mode"><span class="mode-num">03</span><div><h3>BUILD · реализация</h3><p>D пытается изменить код доступными в чате средствами. Не подключается к запущенному Cursor/Claude Code сам по себе. Не делает деплой и опасные изменения без полномочий.</p></div></div><div class="mode"><span class="mode-num">04</span><div><h3>FIX / CHECK · исправление и проверка</h3><p>Fix формирует промпт на поиск первопричины ошибки. Check оценивает только фактически доступные результаты — не выдаёт непроведённые тесты за успешные.</p></div></div></div>
+ <div class="examplebox"><div class="examplehead"><strong>План для Claude Code</strong><button class="copy" data-copy="@D plan claude Спроектируй локальное приложение для школьной интерактивной доски без сервера">Копировать</button></div><pre>@D plan claude Спроектируй локальное приложение
+для школьной интерактивной доски без сервера</pre></div>
+</section>
+<section class="guide-section" id="builder" data-search="конструктор собрать команда копировать настроить тип запрос codex cursor claude grok">
+ <span class="section-marker"></span><p class="eyebrow">06 / интерактивный конструктор</p><h2>Собери свою команду.</h2><p class="section-intro">Здесь команда составляется локально в браузере. Ничего не отправляется в ChatGPT или на сервер.</p>
+ <form class="builder-form" id="builder-form">
+ <div class="form-row"><div><label for="builder-mode">Что требуется</label><select id="builder-mode"><option value="prompt">Короткий промпт</option><option value="plan">Полный план</option><option value="ui">UI из картинки</option><option value="ui plan">UI: подробный план</option><option value="fix">Исправить ошибку (промпт)</option><option value="rules">Правила проекта</option><option value="audit">Оптимизировать промпт</option><option value="check">Проверить результат</option><option value="build">Выполнить разработку</option><option value="ui build">Выполнить UI-разработку</option></select></div><div><label for="builder-platform">Целевая среда</label><select id="builder-platform"><option value="codex">Codex (по умолчанию)</option><option value="cursor">Cursor</option><option value="claude">Claude Code</option><option value="grok">Grok / Grok Build</option></select></div></div>
+ <div class="form-row"><div><label for="builder-model">Модель внутри Cursor (необязательно)</label><select id="builder-model" disabled><option value="">Автоматически / не указывать</option><option value="claude">Claude</option><option value="grok">Grok</option></select></div><div><label for="builder-detail">Дополнительное ограничение</label><input id="builder-detail" type="text" placeholder="Например: без сервера, БД не менять"></div></div>
+ <label for="builder-task">Описание задачи</label><textarea id="builder-task" rows="4" placeholder="Например: хочу превратить приложенный UI-макет в полноценное приложение с рабочими кнопками"></textarea>
+ <label class="checkline"><input type="checkbox" id="builder-reference"> У меня есть изображение интерфейса (прикреплю в ChatGPT)</label>
+ <div class="builder-preview"><div class="examplehead"><strong>Команда для ChatGPT</strong><button class="copy" id="copy-preview" type="button">Копировать</button></div><pre id="builder-output" aria-live="polite">@D prompt codex Опиши задачу...</pre></div>
+ <p id="builder-note" class="builder-note">Введите описание задачи, чтобы получить готовую команду.</p>
+ <button class="action-dark reset-btn" type="reset">Сбросить настройки</button>
+ </form>
+</section>
+<section class="guide-section" id="rules" data-search="постоянные правила AGENTS.md CLAUDE.md cursor rules grok файлы проекта инструкции">
+ <span class="section-marker"></span><p class="eyebrow">07 / долгоживущие правила</p><h2>Постоянный контекст — отдельно от задачи.</h2><p class="section-intro">Файлы правил описывают соглашения проекта. Не стоит вставлять в них весь текущий план разработки.</p>
+ <div class="table-scroll"><table><thead><tr><th>Среда</th><th>Где держать правила</th><th>Что хранить</th></tr></thead><tbody><tr><td>Codex</td><td><code>AGENTS.md</code></td><td>Соглашения, необходимые проверки, важные границы</td></tr><tr><td>Cursor</td><td><code>.cursor/rules/*.mdc</code> или поддерживаемый <code>AGENTS.md</code></td><td>Проектный контекст и conventions</td></tr><tr><td>Claude Code</td><td><code>CLAUDE.md</code></td><td>Стабильные правила проекта</td></tr><tr><td>Grok Build</td><td>Поддерживаемые проектные инструкции, в частности <code>AGENTS.md</code></td><td>Только если файл поддерживается конкретной средой</td></tr></tbody></table></div>
+ <div class="examplebox"><div class="examplehead"><strong>Пример запроса на правила</strong><button class="copy" data-copy="@D rules cursor Подготовь краткие правила для текущего проекта. Не дублируй техническое задание.">Копировать</button></div><pre>@D rules cursor Подготовь краткие правила
+для текущего проекта.
+Не дублируй техническое задание.</pre></div>
+</section>
+<section class="guide-section" id="faq" data-search="faq вопросы ответы что может плагины исправление как начать model screenshot image">
+ <span class="section-marker"></span><p class="eyebrow">08 / вопросы и ответы</p><h2>Частые вопросы.</h2>
+ <div class="faq-list">
+ <details><summary>Нужно ли для Codex писать очень подробный промпт?</summary><p>Обычно нет. Для обычной задачи достаточно цели, значимых ограничений и проверки. Детализация нужна для сложных правил, интеграций и точных требований.</p></details>
+ <details><summary>Чем отличается «@D cursor» от «@D prompt cursor»?</summary><p>Это две равнозначные формы. Вторая явно указывает режим prompt. Оба варианта формируют промпт для Cursor.</p></details>
+ <details><summary>Что значит «@D cursor grok»?</summary><p>Целевая среда — Cursor, модель — Grok. Плагин использует особенности среды как основной контекст. Доступность конкретной модели в Cursor требуется проверить отдельно.</p></details>
+ <details><summary>Может ли D сам открыть Cursor и запустить код?</summary><p>Нет, не только по названию среды. D может работать с кодом через реальные инструменты данного чата, если они подключены и действие разрешено. Иначе выдаст промпт для внешнего агента.</p></details>
+ <details><summary>Почему кнопки на картинке не равны работающему приложению?</summary><p>Референс показывает только внешний вид. Поведение кнопок, хранение данных и связи с сервером нужно определить отдельно. D предлагает минимальные рабочие состояния без фиктивного API.</p></details>
+ <details><summary>Если назвать Cursor в обычной фразе, D учтёт это?</summary><p>Да, когда Cursor явно назван целевой средой: например, «составь промпт для Cursor». Если Cursor является объектом разработки, автоматического переключения не будет.</p></details>
+ <details><summary>Сохраняется ли выбор инструмента между чатами?</summary><p>Нет. Выбор действует для текущей задачи. По умолчанию используется Codex.</p></details>
+ <details><summary>Как выбрать между prompt, plan и build?</summary><p>Prompt — передать задачу coding agent. Plan — спроектировать этапы. Build — пытаться реализовать прямо сейчас через доступные инструменты.</p></details>
+ </div>
+ <div class="last-cta"><p>Нужен промпт для текущего проекта?</p><a class="action-dark" href="#builder">Собрать команду ↑</a></div>
+</section>
+<footer> D / справочник v0.1.1 · Документация создана по активному навыку плагина · <a href="https://chatgpt.com/plugins/plugins_6aef6a93393481919e7300c22efd2897" target="_blank" rel="noopener">Открыть D ↗</a> · <a href="./source.md">Исходный текст</a></footer>
+</main></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
