@@ -1,9 +1,17 @@
 <!doctype html>
 <html lang="ru">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GPT Output</title>
-<style>:root{--ink:#1f2328;--muted:#59636e;--line:#d0d7de;--soft:#f6f8fa;--accent:#0969da}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.55 system-ui}main{max-width:860px;margin:auto;padding:48px 24px}.muted,.path{color:var(--muted)}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filter{border:1px solid var(--line);background:white;border-radius:999px;padding:7px 12px}.filter[aria-pressed=true]{background:var(--accent);color:white}.card{display:block;margin:20px 0;padding:20px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit}.card:hover{background:var(--soft)}.card[hidden]{display:none}</style></head>
-<body><main><h1>GPT Output</h1><p class="muted">Публичные материалы, подготовленные GPT.</p><nav id="filters" class="filters"></nav><p id="result" class="muted"></p>
-<section>
+<style>:root{--ink:#1f2328;--muted:#59636e;--line:#d0d7de;--soft:#f6f8fa;--accent:#0969da}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.55 system-ui}main{max-width:860px;margin:auto;padding:48px 24px}.muted,.path{color:var(--muted)}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filter{border:1px solid var(--line);background:white;border-radius:999px;padding:7px 12px}.filter[aria-pressed=true]{background:var(--accent);color:white}.card{display:block;margin:20px 0;padding:20px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit}.card:hover{background:var(--soft)}.card[hidden]{display:none}
+.toolbar{margin-top:24px}.search-label{display:block;font-weight:600;margin-bottom:6px}.search-row{display:flex;gap:10px}.search-row input{flex:1;min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit}.reset{border:1px solid var(--line);border-radius:10px;background:var(--soft);padding:10px 14px;font:inherit;cursor:pointer}.filter{font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px}.count{font-size:.85em;opacity:.8}.filter:hover{border-color:var(--accent)}:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.path{overflow-wrap:anywhere;font-size:.85em}.card h2{font-size:1.25rem;margin:0 0 8px}.empty{padding:24px;border:1px dashed var(--line);border-radius:10px}.empty[hidden]{display:none}@media(max-width:540px){main{padding:28px 16px}.search-row{flex-wrap:wrap}.search-row input{flex-basis:100%}.filter{padding:7px 10px;font-size:.9rem}}
+</style></head>
+<body><main><h1>GPT Output</h1><p class="muted">Публичные материалы, подготовленные GPT.</p><div class="toolbar" id="catalog-tools" hidden>
+<label class="search-label" for="search">Поиск по публикациям</label>
+<div class="search-row"><input id="search" type="search" placeholder="Название, описание или путь" autocomplete="off" aria-controls="publications"><button id="reset" class="reset" type="button">Сбросить</button></div>
+<nav id="filters" class="filters" aria-label="Разделы публикаций"></nav>
+<p id="result" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
+<p id="empty" class="empty" hidden>Ничего не найдено. Измените запрос или сбросьте фильтры.</p>
+</div>
+<section id="publications" aria-label="Публикации">
 <a class="card" href="ш/труды/трафареты/"><h2>Многослойные трафареты — урок и граффити</h2><div>8 разделов, 10 рисунков, 20 печатных масок А4, фильтр материалов, YouTube, безопасность и учебный план.</div><div class="path">ш/труды/трафареты/</div></a>
 
 <a class="card" href="ds/gpt-erotica-jailbreak-analysis-2026-10-31/"><h2>GPT и эротический контент — анализ jailbreak</h2><div>12 классов атак, 36 разобранных примеров, подменю, фильтры, матрица достоверности, академические и архивные источники.</div><div class="path">ds/gpt-erotica-jailbreak-analysis-2026-10-31/</div></a>
@@ -40,4 +48,79 @@
 <a class="card" href="s/pobeg-iz-pesochnicy-2026-08-11/"><h2>Побег из песочницы</h2><div>Полный текст статьи Ильи Белых из «Троицкого варианта — Наука», без комментариев, со ссылкой на оригинал.</div><div class="path">s/pobeg-iz-pesochnicy-2026-08-11/</div></a>
 <a class="card" href="s/pobeg-iz-pesochnicy-full-compilation-2026-09-07/"><h2>Побег из песочницы — полная компиляция</h2><div>Расширенный разбор OpenAI/Hugging Face, трёх инцидентов Claude, AISI и последующих обновлений компаний.</div><div class="path">s/pobeg-iz-pesochnicy-full-compilation-2026-09-07/</div></a>
 </section></main>
-<script>const cards=[...document.querySelectorAll('.card')],f=document.querySelector('#filters'),r=document.querySelector('#result'),tags=new Map();cards.forEach(c=>{let t=c.href.split('/').filter(Boolean).at(-2)||c.href.split('/').filter(Boolean)[0];c.dataset.tag=t;tags.set(t,(tags.get(t)||0)+1)});function b(t,n){let x=document.createElement('button');x.className='filter';x.textContent=n+' '+(tags.get(n)||cards.length);x.dataset.f=t;return x}f.append(b('all','Все'));tags.forEach((v,k)=>f.append(b(k,k)));function set(t){let n=0;cards.forEach(c=>{let s=t==='all'||c.dataset.tag===t;c.hidden=!s;if(s)n++});f.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===t));r.textContent='Показано: '+n}f.onclick=e=>e.target.dataset.f&&set(e.target.dataset.f);set('all');</script></body></html>
+<script>
+const cards = [...document.querySelectorAll('.card')];
+const filters = document.querySelector('#filters');
+const search = document.querySelector('#search');
+const result = document.querySelector('#result');
+const empty = document.querySelector('#empty');
+const labels = new Map([
+  ['ш', 'Школа'], ['шк', 'Класс'], ['ds', 'Исследования'],
+  ['man', 'Справочники'], ['tool', 'Инструменты'], ['plg', 'Плагины'],
+  ['wd', 'Дизайн'], ['dv', 'Инфографика'], ['r', 'Разборы'],
+  ['s', 'Материалы'], ['php', 'PHP'], ['dc', 'Документы']
+]);
+function decode(value) {
+  try { return decodeURIComponent(value); } catch { return value; }
+}
+function normalize(value) {
+  return value.normalize('NFKC').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+}
+// Read the repository-relative attribute: absolute .href encodes Cyrillic
+// and adds the host and /gp/ prefix. The first directory is the section.
+const entries = cards.map(card => {
+  const path = decode(card.getAttribute('href')).replace(/^\.\//, '');
+  return { card, category: path.split('/').filter(Boolean)[0], text: normalize(card.textContent + ' ' + path) };
+});
+const categories = [...new Set(entries.map(entry => entry.category))];
+categories.sort((a, b) => (labels.get(a) || a).localeCompare(labels.get(b) || b, 'ru'));
+let selected = 'all';
+const buttons = new Map();
+function addFilter(category, label) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'filter';
+  button.setAttribute('aria-controls', 'publications');
+  const title = document.createElement('span');
+  title.textContent = label;
+  const count = document.createElement('span');
+  count.className = 'count';
+  button.append(title, count);
+  button.addEventListener('click', () => { selected = category; render(); });
+  filters.append(button);
+  buttons.set(category, { button, count });
+}
+addFilter('all', 'Все');
+categories.forEach(category => addFilter(category, labels.get(category) || category));
+function render() {
+  const words = normalize(search.value).trim().split(/\s+/).filter(Boolean);
+  const counts = new Map(categories.map(category => [category, 0]));
+  let matched = 0;
+  let visible = 0;
+  entries.forEach(entry => {
+    const matches = words.every(word => entry.text.includes(word));
+    if (matches) {
+      matched++;
+      counts.set(entry.category, counts.get(entry.category) + 1);
+    }
+    entry.card.hidden = !(matches && (selected === 'all' || selected === entry.category));
+    if (!entry.card.hidden) visible++;
+  });
+  buttons.forEach(({ button, count }, category) => {
+    const total = category === 'all' ? matched : counts.get(category);
+    count.textContent = total;
+    button.setAttribute('aria-pressed', String(category === selected));
+  });
+  result.textContent = `Показано: ${visible} из ${cards.length}`;
+  empty.hidden = visible !== 0;
+}
+search.addEventListener('input', render);
+document.querySelector('#reset').addEventListener('click', () => {
+  selected = 'all';
+  search.value = '';
+  render();
+  search.focus();
+});
+document.querySelector('#catalog-tools').hidden = false;
+render();
+</script></body></html>
