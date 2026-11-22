@@ -14,7 +14,7 @@
 <div class="mobile-scrim" id="scrim"></div>
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="Навигация по руководству">
- <div class="brand-row"><a href="#overview" class="brand" aria-label="GP — начало">gp<span class="brand-dot">.</span></a><span class="brand-mark" title="Версия 0.2.6">↗</span></div>
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="GP — начало">gp<span class="brand-dot">.</span></a><span class="brand-mark" title="Версия 0.2.7">↗</span></div>
  <a class="install" href="https://chatgpt.com/plugins/plugins_6acea158c1208191b1b1c4f66733f31e" target="_blank" rel="noopener noreferrer">Открыть GP в ChatGPT <span aria-hidden="true">↗</span></a>
  <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки"><a class="nav-item active" href="#overview"><span class="ico" aria-hidden="true">⌂</span>Начало<span class="num">01</span></a>
 <a class="nav-item" href="#vns"><span class="ico" aria-hidden="true">▧</span>Изображения · VNS<span class="num">02</span></a>
@@ -24,7 +24,7 @@
 <a class="nav-item" href="#io"><span class="ico" aria-hidden="true">↗</span>GitHub Pages · IO<span class="num">05</span></a>
 <a class="nav-item" href="#upd"><span class="ico" aria-hidden="true">↻</span>Обновить страницу · UPD<span class="num">06</span></a>
 <a class="nav-item" href="#fnd-my"><span class="ico" aria-hidden="true">⌕</span>Личный поиск · FND-MY<span class="num">07</span></a>
-<a class="nav-item" href="#commands"><span class="ico" aria-hidden="true">⌘</span>Все команды<span class="num">06</span></a>
+<a class="nav-item" href="#man"><span class="ico" aria-hidden="true">▣</span>Справочники · MAN<span class="num">08</span></a> <a class="nav-item" href="#commands"><span class="ico" aria-hidden="true">⌘</span>Все команды<span class="num">06</span></a>
 <a class="nav-item" href="#builder"><span class="ico" aria-hidden="true">⚙</span>Конструктор<span class="num">07</span></a>
 <a class="nav-item" href="#faq"><span class="ico" aria-hidden="true">?</span>Вопросы и ответы<span class="num">08</span></a></nav></div>
  <div class="side-divider"></div>
@@ -70,7 +70,7 @@
   <button type="button" class="stat landing-menu-item" data-focus="drive"><strong>Drive</strong><span>Файлы и журнал чата</span></button>
   <button type="button" class="stat landing-menu-item" data-focus="doc"><strong>Docs</strong><span>Вкладки Google Документов</span></button>
   <button type="button" class="stat landing-menu-item" data-focus="io"><strong>IO</strong><span>Публичные веб-страницы</span></button>
-<button type="button" class="stat landing-menu-item" data-focus="upd"><strong>UPD</strong><span>Обновить существующую страницу по ключу</span></button>
+<button type="button" class="stat landing-menu-item" data-focus="upd"><strong>UPD</strong><span>Обновить существующую страницу по ключу</span></button>   <button type="button" class="stat landing-menu-item" data-focus="man"><strong>MAN</strong><span>Читать и пополнять справочники</span></button>
  </nav>
  <div class="note"><span aria-hidden="true">✳</span><div><strong>Как начать.</strong> Выберите команду ниже, нажмите «Копировать» и вставьте её в беседу с подключённым GP. Примеры не запускают действия на этой справочной странице.</div></div>
 </section>
@@ -173,6 +173,18 @@
 <div class="note"><span>✓</span><div><strong>Сохраняются URL и существующий UI:</strong> работающие разделы, адаптивность, поиск, JS и копирование команд. Сторонние файлы не перезаписываются, старые страницы не удаляются. Права записи и успешный коммит проверяются отдельно.</div></div>
 </section>
 <section class="section" id="fnd-my"><p class="eyebrow">GP 0.2.6 / личный поиск</p><h2 class="section-title">FND-MY — найти свою последнюю версию.</h2><p class="section-intro">Ищет в доступных Gmail, Google Drive, Docs, Sheets, ChatGPT Library (картинки и тексты) и прошлых чатах. Источники проверяются по датам и содержимому; отсутствие доступа отличается от нулевого результата.</p><div class="cmd-grid"><div class="cmd-card"><div class="top"><code>@gp fnd-my последняя рассадка в автобусе</code><button class="copy" data-copy="@gp fnd-my последняя рассадка в автобусе">Копировать</button></div><p>Поиск по всем доступным личным источникам с сопоставлением версий.</p></div><div class="cmd-card"><div class="top"><code>@gp fnd-my-gmail поездка в Новгород</code><button class="copy" data-copy="@gp fnd-my-gmail поездка в Новгород">Копировать</button></div><p>Проверка писем и приложенных документов.</p></div></div><p class="section-intro">Точные команды: <code>fnd-my</code>, <code>fnd-my-gmail</code>, <code>fnd-my-drive</code>, <code>fnd-my-docs</code>, <code>fnd-my-sheets</code>, <code>fnd-my-gpt</code>, <code>fnd-my-chat</code>, <code>fnd-my-lib</code>, <code>fnd-my-images</code>, <code>fnd-my-text</code>. Не гарантируется доступ ко всем прежним изображениям и беседам; последней считается только версия с подтверждённой датой и содержимым.</p></section>
+<section class="section" id="man">
+ <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">GP 0.2.7 / личные справочники</p>
+ <h2 class="section-title">MAN. Читать или обновлять базу знаний.</h2>
+ <p class="section-intro">Короткий ключ определяет существующую страницу в <code>greenn/gp/man/</code>. Без <code>upd</code> GP читает опубликованные записи и отвечает на вопрос. С <code>upd</code> изменяет эту страницу, не меняя её адрес.</p>
+ <div class="cmd-grid">
+ <div class="cmd-card"><div class="top"><code>@gp man-ai</code><button class="copy" data-copy="@gp man-ai">Копировать</button></div><p>Прочитать <a href="../ai/">энциклопедию искусственного интеллекта</a>: компании, программирование, ИИ-сервисы, люди, понятия, практика.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp upd man-ai</code><button class="copy" data-copy="@gp upd man-ai">Копировать</button></div><p>Добавить информацию в справочник AI, распределив её по тематическим категориям, не удаляя прежние записи.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp plg-t2f</code><button class="copy" data-copy="@gp plg-t2f">Копировать</button></div><p>Получить ответ из <a href="../plg-t2f/">справки T2F</a>. Для изменения использовать <code>@gp upd plg-t2f</code>.</p></div>
+ <div class="cmd-card"><div class="top"><code>@gp plg-gp</code><button class="copy" data-copy="@gp plg-gp">Копировать</button></div><p>Получить ответ из текущей справки GP. Для изменения использовать <code>@gp upd plg-gp</code>.</p></div>
+ </div>
+ <div class="note"><span>i</span><div><strong>Разделение команд:</strong> чтение само по себе ничего не редактирует. Изменения требуют явной команды <code>upd</code>, подтверждённого доступа к GitHub и проверки существующей страницы. MAN не является отдельным фоновым сервисом или индексом.</div></div>
+ </section>
 <section class="section" id="commands">
  <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">05 / справочник</p>
  <h2 class="section-title">Команды без поиска по чату.</h2>
@@ -185,7 +197,7 @@
   <button class="filter" data-filter="archive" aria-pressed="false">Журнал</button>
   <button class="filter" data-filter="doc" aria-pressed="false">Docs</button>
   <button class="filter" data-filter="io" aria-pressed="false">IO</button><button class="filter" data-filter="upd" aria-pressed="false">UPD</button>
-  <button class="filter" data-filter="fnd-my" aria-pressed="false">FND-MY</button>
+  <button class="filter" data-filter="fnd-my" aria-pressed="false">FND-MY</button>   <button class="filter" data-filter="man" aria-pressed="false">MAN</button>
 <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
  </div>
  <p class="search-status" id="search-count" aria-live="polite">Найдено команд: 36 из 36</p>
@@ -228,7 +240,12 @@
 <div class="command-row" data-group="general" data-keywords="помощь список"><code class="syntax">@gp list</code><span class="desc">Показать список зарегистрированных команд</span><button class="copy" data-copy="@gp list" aria-label="Скопировать @gp list">Копировать</button></div>
 <div class="command-row" data-group="upd" data-keywords="обновление существующая страница название ключ t2f"><code class="syntax">@gp upd plg-t2f</code><span class="desc">Найти и обновить существующую страницу по фрагменту имени</span><button class="copy" data-copy="@gp upd plg-t2f">Копировать</button></div>
 <div class="command-row" data-group="upd" data-keywords="обновить точный путь"><code class="syntax">@gp upd man/plg-gp</code><span class="desc">Обновить по точному каталогу</span><button class="copy" data-copy="@gp upd man/plg-gp">Копировать</button></div>
-<div class="command-row" data-group="upd" data-keywords="частичный ключ задача"><code class="syntax">@gp upd plg-t2f добавь частые команды</code><span class="desc">Ключ + конкретная задача правки</span><button class="copy" data-copy="@gp upd plg-t2f добавь частые команды">Копировать</button></div></div><div id="empty-state" class="empty-state">Ничего не найдено. Попробуйте другой запрос или выберите «Все».</div>
+<div class="command-row" data-group="upd" data-keywords="частичный ключ задача"><code class="syntax">@gp upd plg-t2f добавь частые команды</code><span class="desc">Ключ + конкретная задача правки</span><button class="copy" data-copy="@gp upd plg-t2f добавь частые команды">Копировать</button></div><div class="command-row" data-group="man" data-keywords="справка мануал читать информация знания искусственный интеллект codex"><code class="syntax">@gp man-ai</code><span class="desc">Читать энциклопедию AI</span><button class="copy" data-copy="@gp man-ai">Копировать</button></div>
+<div class="command-row" data-group="man" data-keywords="справка обновить записать категория добавить статьи ai"><code class="syntax">@gp upd man-ai</code><span class="desc">Дополнить энциклопедию AI</span><button class="copy" data-copy="@gp upd man-ai">Копировать</button></div>
+<div class="command-row" data-group="man" data-keywords="справка t2f мануал читать фото команды"><code class="syntax">@gp plg-t2f</code><span class="desc">Читать справку T2F</span><button class="copy" data-copy="@gp plg-t2f">Копировать</button></div>
+<div class="command-row" data-group="man" data-keywords="справка t2f обновить"><code class="syntax">@gp upd plg-t2f</code><span class="desc">Обновить справку T2F</span><button class="copy" data-copy="@gp upd plg-t2f">Копировать</button></div>
+<div class="command-row" data-group="man" data-keywords="справка gp мануал читать"><code class="syntax">@gp plg-gp</code><span class="desc">Читать справку GP</span><button class="copy" data-copy="@gp plg-gp">Копировать</button></div>
+<div class="command-row" data-group="man" data-keywords="справка gp обновить"><code class="syntax">@gp upd plg-gp</code><span class="desc">Обновить справку GP</span><button class="copy" data-copy="@gp upd plg-gp">Копировать</button></div></div><div id="empty-state" class="empty-state">Ничего не найдено. Попробуйте другой запрос или выберите «Все».</div>
 </section>
 <section class="section" id="builder">
  <span class="section-marker" aria-hidden="true"></span><p class="eyebrow">06 / попробовать</p>
@@ -241,9 +258,9 @@
     <option value="drive">drive</option><option value="drive-all">drive-all</option><option value="drive-all-gpt">drive-all-gpt</option>
     <option value="drive-log">drive-log</option><option value="drive-log-gpt">drive-log-gpt</option><option value="drive-log-my">drive-log-my</option>
     <option value="drive-txt">drive-txt</option><option value="drive-txt-all">drive-txt-all</option><option value="drive-txt-my">drive-txt-my</option>
-    <option value="vns-drive">vns drive</option><option value="vns-next-drive">vns next drive</option><option value="doc-tab">doc tab</option><option value="io">io</option><option value="io-ds">io ds</option><option value="upd">upd</option><option value="fnd-my">fnd-my</option><option value="fnd-my-gmail">fnd-my-gmail</option><option value="fnd-my-drive">fnd-my-drive</option><option value="fnd-my-docs">fnd-my-docs</option><option value="fnd-my-sheets">fnd-my-sheets</option><option value="fnd-my-gpt">fnd-my-gpt</option><option value="fnd-my-chat">fnd-my-chat</option><option value="fnd-my-lib">fnd-my-lib</option><option value="fnd-my-images">fnd-my-images</option><option value="fnd-my-text">fnd-my-text</option>
+    <option value="vns-drive">vns drive</option><option value="vns-next-drive">vns next drive</option><option value="doc-tab">doc tab</option><option value="io">io</option><option value="io-ds">io ds</option><option value="upd">upd</option><option value="man-read">man · чтение</option><option value="man-upd">man · обновление</option><option value="fnd-my">fnd-my</option><option value="fnd-my-gmail">fnd-my-gmail</option><option value="fnd-my-drive">fnd-my-drive</option><option value="fnd-my-docs">fnd-my-docs</option><option value="fnd-my-sheets">fnd-my-sheets</option><option value="fnd-my-gpt">fnd-my-gpt</option><option value="fnd-my-chat">fnd-my-chat</option><option value="fnd-my-lib">fnd-my-lib</option><option value="fnd-my-images">fnd-my-images</option><option value="fnd-my-text">fnd-my-text</option>
    </select></div>
-   <div><label for="build-path">Подпапка или поисковый запрос</label><input type="text" id="build-path" autocomplete="off" placeholder="например, vns или s/2025"></div>
+   <div><label for="build-path">Ключ справки, подпапка или поисковый запрос</label><input type="text" id="build-path" autocomplete="off" placeholder="например, vns или s/2025"></div>
    <div class="doc-builder-extra" id="doc-builder-title-wrap" hidden><label for="build-tab-title">Название вкладки (необязательно)</label><input id="build-tab-title" type="text" autocomplete="off" placeholder="Deep Research"></div>
    <div class="doc-builder-extra" id="doc-builder-mode-wrap" hidden><label for="build-doc-mode">Источник</label><select id="build-doc-mode"><option value="current">current — текущий ответ</option><option value="file">file — PDF/DOCX</option><option value="all">all — оба источника</option></select></div>
    <div class="last" id="build-date-wrap"><label for="build-date">Каталог по дате</label><select id="build-date"><option value="none">Без</option><option value="cur">cur</option><option value="cur+">cur+</option></select></div>

@@ -30,12 +30,13 @@ const guideAliases={
  doc:"doc docs google документы вкладки pdf docx deep research file all",
  io:"io github github-pages публикация сайт страница web",
   upd:"upd update обновить обновление исправить изменить страница подпуть неполное название ключ существующая публикация",
+  man:"man-ai plg-t2f plg-gp читать справка руководство база знаний энциклопедия искусственный интеллект",
  "fnd-my":"fnd-my личный поиск найти рассадка архив gmail google docs sheets chatgpt библиотека library картинки тексты прошлые чаты",
  commands:"commands команды справочник каталог",
  builder:"builder конструктор генератор",
  faq:"faq вопросы ответы ограничения помощь"
 };
-const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",doc:"Google Docs",io:"IO",upd:"UPD · Обновить страницу","fnd-my":"FND-MY · Поиск личных материалов",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
+const topicNames={overview:"Начало",vns:"VNS",drive:"Drive",archive:"История и архив",doc:"Google Docs",io:"IO",upd:"UPD · Обновить страницу",man:"MAN · Читать и пополнять","fnd-my":"FND-MY · Поиск личных материалов",commands:"Все команды",builder:"Конструктор",faq:"Вопросы и ответы"};
 let pageMode="landing";
 function normalQuery(value){return String(value).toLocaleLowerCase("ru").replace(/ё/g,"е").trim().replace(/\s+/g," ")}
 function exactGuideTopic(value){
@@ -44,6 +45,7 @@ function exactGuideTopic(value){
  if(/^(drive-(log|txt|all))([\s-]|$)/.test(q) || /^(лог|архив|журнал|история|zip)(\s|$)/.test(q))return "archive";
  if(/^(doc|docs|вкладк|документ)(\s|$)/.test(q))return "doc";
  if(/^(upd|update|обнов|изменить|правка)(\s|$)/.test(q))return "upd";
+ if(/^(man-ai|man\/|plg-t2f|plg-gp|man)(\s|$)/.test(q))return "man";
   if(/^(io|github|публикац|сайт)(\s|$)/.test(q))return "io";
  if(/^(vns|collect|фото|изображения|картинки)(\s|$)/.test(q))return "vns";
  if(/^(drive|google|облако)(\s|$)/.test(q))return "drive";
@@ -208,6 +210,8 @@ const labels={
  "io":"Публикация страницы на GitHub Pages",
  "io-ds":"Интерактивная страница исследования",
   "upd":"Обновить существующую опубликованную страницу по ключу или части пути",
+  "man-read":"Читать существующую справку man-ai, plg-t2f или plg-gp",
+  "man-upd":"Обновить существующую справку по короткому ключу",
   "fnd-my":"Поиск личных материалов: fnd-my",
   "fnd-my-gmail":"Поиск личных материалов: fnd-my-gmail",
   "fnd-my-drive":"Поиск личных материалов: fnd-my-drive",
@@ -226,14 +230,15 @@ function build(){
  const isIo=kind.startsWith("io");
  const isDoc=kind==="doc-tab";
   const isUpd=kind==="upd";
+ const isMan=kind==="man-read"||kind==="man-upd";
  const isFind=kind.startsWith("fnd-my");
- const supportDate=!isVns&&!isIo&&!isDoc&&!isUpd&&!isFind;
+ const supportDate=!isVns&&!isIo&&!isDoc&&!isUpd&&!isFind&&!isMan;
  if(docTitleWrap)docTitleWrap.hidden=!isDoc;
  if(docModeWrap)docModeWrap.hidden=!isDoc;
- if(dateWrap)dateWrap.hidden=isDoc||isUpd||isFind;
+ if(dateWrap)dateWrap.hidden=isDoc||isUpd||isFind||isMan;
  date.disabled=!supportDate;
  date.closest(".last")?.classList.toggle("disabled",!supportDate);
- path.placeholder=isFind?"Например, последняя рассадка в автобусе":isUpd?"Например, plg-t2f или man/plg-t2f":isDoc?"@nws или ссылка Google Docs":isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
+ path.placeholder=isMan?"man-ai, plg-t2f или plg-gp":isFind?"Например, последняя рассадка в автобусе":isUpd?"Например, plg-t2f или man/plg-t2f":isDoc?"@nws или ссылка Google Docs":isVns?"например, 1014-2":isIo?"раздел выбирается автоматически":"например, vns или s/2025";
  path.disabled=isIo;
  const sub=path.value.trim().replace(/^\/+|\/+$/g,"");
  let command="";
@@ -243,10 +248,11 @@ function build(){
   command="@gp doc tab "+target+(title?' "'+title+'"':"")+(docMode?.value&&docMode.value!=="current"?" "+docMode.value:"");
  }else if(isFind)command="@gp "+kind;
  else if(isUpd)command="@gp upd";
+ else if(isMan)command=kind==="man-upd"?"@gp upd":"@gp";
   else if(isIo)command=kind==="io-ds"?"@gp io ds":"@gp io";
  else if(isVns)command=kind==="vns-next-drive"?"@gp vns next drive":"@gp vns drive";
  else command="@gp "+kind;
- if(!isIo&&!isDoc&&sub)command+=" "+sub;
+ if(!isIo&&!isDoc&&(sub||isMan))command+=" "+(sub||"man-ai");
  if(supportDate&&date.value!=="none")command+=" "+date.value;
  output.textContent=command;
  copyBuild.setAttribute("data-copy",command);
