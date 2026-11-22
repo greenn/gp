@@ -7,8 +7,8 @@
  const sections=[...document.querySelectorAll("main.doc > section[id]")];
  const navs=[...document.querySelectorAll(".sidebar .nav-item")];
  const groups=[...document.querySelectorAll(".sidebar .side-group")];
- const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",mode11:"Режим 11 · Fashion Series",next:"22 next",new:"NEW · изоляция",clean:"clean",frequent:"Частые команды",commands:"Все команды",faq:"Вопросы и ответы"};
- const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",mode11:"11 lineup height fashion scale стройный хрупкий разные роста фигуры fit лишь камера не одинаковые numbers off start continue group seq jeans top looks fashion studio групповая студия четыре кадра модели рост нумерация джинсы одежда",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",new:"new 1 2 3 независимая изоляция чистый контекст генерация отдельный чат fresh independent",clean:"clean сброс очистить контекст новая картинка",frequent:"часто используемые команды real max full body outpaint кресло снизу широкоугольный белая студия solo clean next new keep face",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения полный рост вертикальный 9:16 прищур взгляд в кадр открытая поза живое фото спокойные тени фотореализм реализм супер модель супермодель ментор кафе кофе доверие кресло нога на ногу"};
+ const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",mode11:"Режим 11 · Fashion Series",vnx:"VNX · одежда на вешалке",next:"22 next",new:"NEW · изоляция",clean:"clean",frequent:"Частые команды",commands:"Все команды",faq:"Вопросы и ответы"};
+ const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",vnx:"vnx each v одежда на вешалке персональные кадры 3:4 9:16 вертикальная модель стойка смущение сцена гардеробная",mode11:"11 lineup height fashion scale стройный хрупкий разные роста фигуры fit лишь камера не одинаковые numbers off start continue group seq jeans top looks fashion studio групповая студия четыре кадра модели рост нумерация джинсы одежда",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",new:"new 1 2 3 независимая изоляция чистый контекст генерация отдельный чат fresh independent",clean:"clean сброс очистить контекст новая картинка",frequent:"часто используемые команды real max full body outpaint кресло снизу широкоугольный белая студия solo clean next new keep face",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения полный рост вертикальный 9:16 прищур взгляд в кадр открытая поза живое фото спокойные тени фотореализм реализм супер модель супермодель ментор кафе кофе доверие кресло нога на ногу"};
  let current="landing";
  function norm(x){return String(x||"").toLocaleLowerCase("ru").replace(/ё/g,"е").replace(/\s+/g," ").trim();}
  function navClose(){sidebar.classList.remove("open");scrim.classList.remove("show");toggle?.setAttribute("aria-expanded","false");}
@@ -42,6 +42,7 @@
  function exact(q){
   q=q.replace(/^@t2f\s*/,"");
   if(/^(new(?:\s|$)|изоляц|независим)/.test(q))return "new";
+  if(/^(vnx(?:\s|$)|вешалк|стойк)/.test(q))return "vnx";
   if(/^(11(?:\s|$)|lineup|seq\s|fashion series)/.test(q))return "mode11";
   if(/^(77|школ|лагер|outfit|одежд|lookbook|каталог|camp|school|съемк|съёмк)/.test(q))return "mode77";
   if(/^(55|пленк|плёнк|свободн|воплощен)/.test(q))return "mode55";
@@ -167,7 +168,8 @@
  ["55","55 p","Выдать только текст промпта, не генерировать фото","текст"],
  ["55","55 help","Справка и перечень пресетов","помощь"],
  ["11","11","Все модели в полный рост без обрезания, соразмерный масштаб, белая студия и номера 01…","lineup group fit scale"],
- ["11","11 fit","Подчеркнуть обязательные полный рост, поля кадра и масштаб","fit no crop полный рост без обрезания"],
+ ["11","11 full","Все уникальные модели на белом контактном листе в 2–3 ряда, полный рост и сквозные номера над фигурами","full contact sheet"],
+  ["11","11 fit","Подчеркнуть обязательные полный рост, поля кадра и масштаб","fit no crop полный рост без обрезания"],
  ["11","11 lineup height","Все модели на одной линии пола с относительным ростом","рост высота"],
  ["11","11 numbers off","Убрать двузначные подписи","без номеров"],
  ["11","11 lineup start 07","Начать номера с 07","нумерация"],
@@ -177,7 +179,13 @@
  ["11","11 seq looks","Четыре закрытых каталожных образа, подходит школьникам","lookbook"],
  ["11","11 p lineup height","Вернуть подробный промпт, без картинки","промпт"],
  ["11","11 help","Справка и подкоманды","помощь"],
- ["new","NEW 1 11 lineup","Новые фото для независимой групповой студийной съёмки","11 независимая"],
+ ["vnx","vnx","Общий студийный коллаж: модели и их оригинальные наряды на вешалках","коллаж вешалки одежда"],
+  ["vnx","vnx each","Отдельное вертикальное фото 3:4 для каждой модели, полный рост","каждая модель вертикальная"],
+  ["vnx","vnx each v","Отдельное вертикальное фото 9:16 каждой модели со стойкой и одеждой","вертикальная v полный рост 9:16"],
+  ["vnx","vnx p","Только промпт общего коллажа без генерации","промпт"],
+  ["vnx","vnx each p","Только персональные промпты без генерации","промпт"],
+  ["vnx","vnx help","Справка VNX без генерации","помощь"],
+  ["new","NEW 1 11 lineup","Новые фото для независимой групповой студийной съёмки","11 независимая"],
  ["77","77","Школа по умолчанию, создать модельную фотосъёмку по лицу","лицо одежда школа"],
  ["77","77 школа","Школьный lookbook без дополнительной настройки","школа"],
  ["77","77 лагерь","Школьная фотосъёмка для лагеря","camp"],
