@@ -27,13 +27,17 @@ a{color:var(--accent)}button,input{font:inherit}button{cursor:pointer}
 <section id="articles" aria-label="Материалы"><label for="search">Поиск по справочнику</label><div class="search"><input id="search" type="search" placeholder="Например, Codex, Skills, установка…" autocomplete="off"></div>
 <div class="pills" aria-label="Фильтр категорий"><button class="pill" data-category="all" aria-pressed="true">Все</button><button class="pill" data-category="development" aria-pressed="false">Программирование</button><button class="pill" data-category="companies" aria-pressed="false">Компании</button><button class="pill" data-category="services" aria-pressed="false">Сервисы</button><button class="pill" data-category="people" aria-pressed="false">Люди</button><button class="pill" data-category="concepts" aria-pressed="false">Понятия</button><button class="pill" data-category="practice" aria-pressed="false">Практика</button></div>
 <div class="status" id="status" role="status" aria-live="polite">1 материал</div>
-<article class="entry" data-category="development" data-search="codex skills install-game-helper slash skills доллар dollar вызов установка навык разработка"><div class="tag">Программирование / Codex</div><h2>Codex: два способа вызвать Skill</h2><p>В предоставленной заметке указано два варианта использования навыка (Skill) в Codex:</p>
-<p><strong>1. Через меню Skills.</strong> Открыть список с помощью <code>/skills</code> и выбрать нужный навык, например <code>install-game-helper</code>.</p>
-<div class="code">/skills</div>
-<p><strong>2. Через прямое упоминание.</strong> Указать имя навыка после знака <code>$</code> и передать аргументы в сообщении.</p>
-<div class="code" id="sample">$install-game-helper J:\Games\MyGame</div><button type="button" class="copy" id="copy">Скопировать пример</button>
-<div class="callout"><strong>Статус сведений:</strong> запись перенесена из пользовательского скриншота. В исходном тексте утверждается, что оба способа описаны в документации OpenAI, но конкретная ссылка на документацию не предоставлена и здесь отдельно не проверялась. Пример пути условный.</div>
-<div class="meta">Источник: скриншот пользователя · добавлено 22.11.2026 · рубрика «Программирование / Codex»</div></article>
+<article class="entry" data-category="development" data-search="codex skills install-game-helper slash skills доллар dollar вызов установка навык разработка"><div class="tag">Программирование / Codex</div>
+<h2>Codex: два способа вызвать Skill</h2>
+<p>Да, вы правы — я ответил слишком категорично. В Codex можно использовать <strong>оба способа</strong>:</p>
+<ul>
+<li>Через <code>/skills</code> — открыть список скиллов и выбрать <code>install-game-helper</code>.</li>
+<li>Через <code>$</code> — прямо указать скилл в сообщении: <code id="sample">$install-game-helper J:\Games\MyGame</code>.</li>
+</ul>
+<p>Оба способа описаны в документации OpenAI. Ссылку из вашего примера мне открыть не удалось, поэтому её конкретное содержимое подтвердить не могу.</p>
+<button type="button" class="copy" id="copy">Скопировать пример</button>
+<div class="meta">Дословная запись из скриншота пользователя · 22.11.2026 · Программирование / Codex</div>
+</article>
 <p class="empty" id="empty" hidden>По выбранной категории или запросу пока нет записей.</p>
 </section>
 <div class="note"><strong>Как пополнять справочник:</strong> <code>@gp upd man-ai</code> — добавить или изменить материал на этой странице; <code>@gp man-ai</code> — получить ответ по опубликованным сведениям. Другие справки: <code>@gp plg-t2f</code>, <code>@gp plg-gp</code>. Для обновления: <code>@gp upd plg-t2f</code>, <code>@gp upd plg-gp</code>. Команды доступны при наличии соответствующей версии GP и доступа к GitHub.</div>
