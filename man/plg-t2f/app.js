@@ -7,8 +7,8 @@
  const sections=[...document.querySelectorAll("main.doc > section[id]")];
  const navs=[...document.querySelectorAll(".sidebar .nav-item")];
  const groups=[...document.querySelectorAll(".sidebar .side-group")];
- const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",mode11:"Режим 11 · Fashion Series",vnx:"VNX · одежда на вешалке",next:"22 next",new:"NEW · изоляция",clean:"clean",frequent:"Частые команды",commands:"Все команды",faq:"Вопросы и ответы"};
- const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",vnx:"vnx true each v sport thermal body shorts leggings casual under одежда на вешалке персональные кадры 3:4 9:16 вертикальная модель стойка спортивное боди термобелье",mode11:"11 lineup height fashion scale стройный хрупкий разные роста фигуры fit лишь камера не одинаковые numbers off start continue group seq jeans top looks fashion studio групповая студия четыре кадра модели рост нумерация джинсы одежда",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",new:"new 1 2 3 независимая изоляция чистый контекст генерация отдельный чат fresh independent",clean:"clean сброс очистить контекст новая картинка",frequent:"часто используемые команды real max full body outpaint кресло снизу широкоугольный белая студия solo clean next new keep face",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения полный рост вертикальный 9:16 прищур взгляд в кадр открытая поза живое фото спокойные тени фотореализм реализм супер модель супермодель ментор кафе кофе доверие кресло нога на ногу"};
+ const names={overview:"Обзор",start:"Как использовать",real:"REAL 1–10",mode12:"Режим 12",mode22:"Режим 22",mode32:"Режим 32",mode55:"Режим 55 · Живое фото",mode77:"Режим 77 · Одежда и сцена",mode11:"Режим 11 · Fashion Series",vnx:"VNX · одежда на вешалке",vnb:"VNB · модель на кровати",next:"22 next",new:"NEW · изоляция",clean:"clean",frequent:"Частые команды",commands:"Все команды",faq:"Вопросы и ответы"};
+ const aliases={overview:"начало главная т2ф t2f изображения",start:"начало вызов режим использовать @t2f фото",real:"real up down max reset status seed реализм 1 10 ступени уровень",mode12:"12 photo 3d ps1 ps2 ps3 ps4 ps5 aaaaa voxel retro фото в 3д",mode22:"22 pose позы эмоции ракурс cam лицо одежда keep change s r fashion visual novel",mode32:"32 параметры p01 p32 камера свет материал объектив iso photorealism",mode55:"55 пленка film 50 60 70 80 90 00 10 20 десятилетие живое фото естественное воплощение grain freedom keep",mode77:"77 школа по умолчанию face outfit scene лицо одежда локация лагерь лето school camp summer lookbook model keep face match outfit",vnx:"vnx true each v sport thermal body shorts leggings casual under одежда на вешалке персональные кадры 3:4 9:16 вертикальная модель стойка спортивное боди термобелье",vnb:"vnb under sport thermal casual each v p help кровать спальня вид сверху одежда разложена на кровати flat lay bed",mode11:"11 lineup height fashion scale стройный хрупкий разные роста фигуры fit лишь камера не одинаковые numbers off start continue group seq jeans top looks fashion studio групповая студия четыре кадра модели рост нумерация джинсы одежда",next:"22 next s m h d w mo y секунда минута час день неделя месяц год раньше позже время",new:"new 1 2 3 независимая изоляция чистый контекст генерация отдельный чат fresh independent",clean:"clean сброс очистить контекст новая картинка",frequent:"часто используемые команды real max full body outpaint кресло снизу широкоугольный белая студия solo clean next new keep face",commands:"команды быстрые синтаксис каталог копирование",faq:"вопросы ответы ограничения полный рост вертикальный 9:16 прищур взгляд в кадр открытая поза живое фото спокойные тени фотореализм реализм супер модель супермодель ментор кафе кофе доверие кресло нога на ногу"};
  let current="landing";
  function norm(x){return String(x||"").toLocaleLowerCase("ru").replace(/ё/g,"е").replace(/\s+/g," ").trim();}
  function navClose(){sidebar.classList.remove("open");scrim.classList.remove("show");toggle?.setAttribute("aria-expanded","false");}
@@ -42,6 +42,7 @@
  function exact(q){
   q=q.replace(/^@t2f\s*/,"");
   if(/^(new(?:\s|$)|изоляц|независим)/.test(q))return "new";
+  if(/^(vnb(?:\s|$)|кроват|flat lay)/.test(q))return "vnb";
   if(/^(vnx(?:\s|$)|вешалк|стойк)/.test(q))return "vnx";
   if(/^(11(?:\s|$)|lineup|seq\s|fashion series)/.test(q))return "mode11";
   if(/^(77|школ|лагер|outfit|одежд|lookbook|каталог|camp|school|съемк|съёмк)/.test(q))return "mode77";
@@ -89,6 +90,16 @@
   copy(b.getAttribute("data-copy")||"");
  });
  const items=[
+ ["vnb","vnb","Лежащая на кровати модель, исходные вещи на матрасе","flat lay спальня"],
+ ["vnb","vnb under","Непрозрачный скромный нижний слой для взрослых при допустимых условиях","бельевой каталог"],
+ ["vnb","vnb sport","На модели спортивный комплект, вокруг её верхняя одежда","спорт"],
+ ["vnb","vnb thermal","Закрытый термокомплект","термо"],
+ ["vnb","vnb casual","Обычная закрытая одежда","повседневная"],
+ ["vnb","vnb v","Вертикальный кадр сверху","вертикальный"],
+ ["vnb","vnb each","Отдельная постановка каждому, своя одежда","персональная"],
+ ["vnb","vnb each v","Отдельные вертикальные кадры","съемка"],
+ ["vnb","vnb p","Промпт без генерации","текст"],
+ ["vnb","vnb help","Краткая справка по VNB","справка"],
  ["general","@T2F","Один максимально реалистичный кадр исходного 3D-рендера","основная команда фото"],
  ["general","@T2F clean","Сбросить настройки и начать обработку нового изображения","сброс контекста новый старт"],
  ["new","NEW","NEW 1: независимая генерация по текущему сообщению","новый кадр"],

@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#e5e7e6">
-<meta name="description" content="Интерактивный справочник T2F 0.10.10: фото и 3D, REAL 1–10, режимы 11, 12, 22, 32, 55, 77, 22 next, NEW 1–3, clean, примеры, поиск и копирование команд.">
+<meta name="description" content="Интерактивный справочник T2F 0.10.11: фото и 3D, REAL 1–10, режимы 11, 12, 22, 32, 55, 77, 22 next, NEW 1–3, clean, примеры, поиск и копирование команд.">
 <title>T2F — руководство по командам</title>
 <link rel="stylesheet" href="./style.css">
 <script src="./app.js" defer></script>
 <script src="./builder-vnx.js" defer></script>
+<script src="./builder-vnb.js" defer></script>
 <script src="./builder77.js" defer></script>
 <script src="./builder11.js" defer></script>
 </head>
@@ -17,7 +18,7 @@
 <div class="mobile-scrim" id="scrim"></div>
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="Навигация по руководству T2F">
- <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.10.10">↗</span></div>
+ <div class="brand-row"><a href="#overview" class="brand" aria-label="T2F — начало">t2f<span class="brand-dot">.</span></a><span class="brand-mark" title="T2F 0.10.11">↗</span></div>
  <a class="install" href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener noreferrer">Открыть T2F в ChatGPT <span aria-hidden="true">↗</span></a>
  <div class="side-group"><h3>Навигация</h3><nav aria-label="Разделы справки">
   <a class="nav-item active" href="#overview"><span class="ico">⌂</span>Обзор<span class="num">01</span></a>
@@ -30,6 +31,7 @@
   <a class="nav-item" href="#mode77"><span class="ico">▤</span>77 · Одежда и сцена<span class="num">08</span></a>
   <a class="nav-item" href="#mode11"><span class="ico">▥</span>11 · Fashion Series<span class="num">09</span></a>
    <a class="nav-item" href="#vnx"><span class="ico">▣</span>VNX · вешалка и модель<span class="num">10</span></a>
+   <a class="nav-item" href="#vnb"><span class="ico">▢</span>VNB · одежда на кровати<span class="num">11</span></a>
   <a class="nav-item" href="#next"><span class="ico">◷</span>22 next · время<span class="num">09</span></a>
   <a class="nav-item" href="#new"><span class="ico">◌</span>NEW · изоляция<span class="num">10</span></a>
   <a class="nav-item" href="#clean"><span class="ico">↺</span>clean · сброс<span class="num">11</span></a>
@@ -45,10 +47,10 @@
    <a class="folder" href="../plg-gp/" target="_blank" rel="noopener"><span aria-hidden="true">⌘</span> Справочник GP ↗</a>
  </div>
  <div class="side-divider"></div>
- <div class="side-foot"><strong>T2F / Справочник</strong><div>Актуальная схема плагина 0.10.10<br>Обновлено 22 ноября 2026<br>Документация; не запускает генерацию на сайте.</div></div>
+ <div class="side-foot"><strong>T2F / Справочник</strong><div>Актуальная схема плагина 0.10.11<br>Обновлено 23 ноября 2026<br>Документация; не запускает генерацию на сайте.</div></div>
 </aside>
 <div class="main">
- <div class="mobile-top"><button type="button" id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>t2f<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.10.10</span></div>
+ <div class="mobile-top"><button type="button" id="menu-toggle" aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false">☰</button><strong>t2f<span style="color:#13a67b">.</span></strong><span class="sub">СПРАВКА 0.10.11</span></div>
  <div class="guide-search" role="search" aria-label="Поиск по справке">
   <div class="guide-search-inner"><label for="guide-search-input" class="guide-search-label">Поиск по справке</label>
    <div class="guide-search-control"><span class="guide-search-icon" aria-hidden="true">⌕</span><input id="guide-search-input" type="search" autocomplete="off" placeholder="Например: 11 lineup, NEW 1, REAL UP…" aria-controls="content" aria-describedby="guide-search-status"><button id="guide-search-clear" class="guide-search-clear" type="button" hidden>Сбросить ×</button></div>
@@ -73,6 +75,7 @@
    <button type="button" class="stat landing-menu-item" data-focus="mode77"><strong>77</strong><span>Лицо + одежда + сцена</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="mode11"><strong>11</strong><span>Группа, полный лист и серии</span></button>
     <button type="button" class="stat landing-menu-item" data-focus="vnx"><strong>VNX</strong><span>Модель и одежда на вешалке</span></button>
+    <button type="button" class="stat landing-menu-item" data-focus="vnb"><strong>VNB</strong><span>Модель и одежда на кровати</span></button>
    <button type="button" class="stat landing-menu-item" data-focus="new"><strong>NEW</strong><span>Независимые генерации 1–3</span></button>
   </nav>
   <div class="note"><span aria-hidden="true">✳</span><div><strong>По умолчанию — один кадр.</strong> Простой вызов T2F с 3D-рендером превращает его в максимально правдоподобную фотографию. Исходные поза, ракурс, выражение лица, одежда и фон сохраняются. Несколько кадров — только по явному запросу.</div></div>
@@ -86,7 +89,8 @@
    <div class="cmd-card"><div class="top"><code>12</code><button class="copy" data-copy="12">Копировать</button></div><p>Фото → стилизованное или реалистичное 3D-изображение. По умолчанию AAAAA.</p></div>
    <div class="cmd-card"><div class="top"><code>22 фото</code><button class="copy" data-copy="22 фото">Копировать</button></div><p>Фотопреобразование с управлением позой, кадром и сохранением деталей.</p></div>
    <div class="cmd-card"><div class="top"><code>REAL 10</code><button class="copy" data-copy="REAL 10">Копировать</button></div><p>Абсолютный уровень 10/10 по накопительной шкале фотореализма.</p></div>
-   <div class="cmd-card"><div class="top"><code>vnx true each</code><button class="copy" data-copy="vnx true each">Копировать</button></div><p>Отдельный кадр для каждого уникального человека, с его исходной одеждой на стойке и допустимыми настройками true.</p></div>
+   <div class="cmd-card"><div class="top"><code>vnb</code><button class="copy" data-copy="vnb">Копировать</button></div><p>Съёмка сверху: модель лежит на кровати в непрозрачном базовом комплекте, исходные вещи разложены на простыне.</p></div>
+    <div class="cmd-card"><div class="top"><code>vnx true each</code><button class="copy" data-copy="vnx true each">Копировать</button></div><p>Отдельный кадр для каждого уникального человека, с его исходной одеждой на стойке и допустимыми настройками true.</p></div>
    <div class="cmd-card"><div class="top"><code>vnx true each v</code><button class="copy" data-copy="vnx true each v">Копировать</button></div><p>Для каждой модели — отдельная картинка 9:16 в полный рост; N разных моделей = N разных файлов.</p></div>
    <div class="cmd-card"><div class="top"><code>vnx each v</code><button class="copy" data-copy="vnx each v">Копировать</button></div><p>Для каждой модели — отдельный вертикальный студийный кадр 9:16 в полный рост, рядом стойка с её одеждой.</p></div>
     <div class="cmd-card"><div class="top"><code>NEW 1 77 studio full body</code><button class="copy" data-copy="NEW 1 77 studio full body">Копировать</button></div><p>Новая самостоятельная съёмка в режиме 77 без наследования прошлых изображений.</p></div>
@@ -344,7 +348,35 @@
   <div class="note warn"><span>!</span><div>Сцена является художественной реконструкцией, а не реальной фотографией переодевания. Нижний слой одежды выбирается условно: нельзя утверждать, что на исходнике под верхней одеждой был именно он. В <code>vnx true</code> закрытый бельевой вариант допустим только для совершеннолетних моделей при согласии и разрешении генератора; иначе используется плотный топ и шорты. Для несовершеннолетних и при сомнении в возрасте — только обычная полностью закрытая одежда. Не создавать интимные или сексуализированные изображения реальных людей без согласия.</div></div>
  </section>
  
- <section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">08 / развитие сцены во времени</p>
+ 
+<section class="section" id="vnb"><span class="section-marker"></span><p class="eyebrow">VNB / спальня · flat lay · 0.10.11</p>
+<h2 class="section-title">VNB. Модель и одежда на кровати.</h2>
+<p class="section-intro">Отдельно от VNX: модель естественно лежит на кровати, её исходная одежда разложена вокруг на том же матрасе. Камера сверху, один непрерывный кадр. Без вешалок, стоек и группового коллажа.</p>
+<div class="cmd-grid">
+<div class="cmd-card"><div class="top"><code>vnb</code><button class="copy" data-copy="vnb">Копировать</button></div><p>Базовая постановка сверху. Для взрослой модели — скромный непрозрачный нижний слой under.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb under</code><button class="copy" data-copy="vnb under">Копировать</button></div><p>Консервативный бельевой каталог только при однозначно совершеннолетней модели и допустимых условиях.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb sport</code><button class="copy" data-copy="vnb sport">Копировать</button></div><p>Непрозрачный спортивный топ и шорты или легинсы; внешняя одежда разложена на кровати.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb thermal</code><button class="copy" data-copy="vnb thermal">Копировать</button></div><p>Закрытый термолонгслив и длинные легинсы.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb casual</code><button class="copy" data-copy="vnb casual">Копировать</button></div><p>Обычная закрытая футболка и брюки или шорты.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb v</code><button class="copy" data-copy="vnb v">Копировать</button></div><p>Вертикальная композиция сверху с моделью и её вещами целиком.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb each</code><button class="copy" data-copy="vnb each">Копировать</button></div><p>Каждому выбранному уникальному человеку — отдельное фото на кровати со своими вещами.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb each v</code><button class="copy" data-copy="vnb each v">Копировать</button></div><p>Каждому отдельный вертикальный кадр.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb p</code><button class="copy" data-copy="vnb p">Копировать</button></div><p>Выдать рабочий промпт без генерации.</p></div>
+<div class="cmd-card"><div class="top"><code>vnb help</code><button class="copy" data-copy="vnb help">Копировать</button></div><p>Краткая справка по режиму.</p></div>
+</div>
+<h3>Конструктор команды VNB</h3>
+<div class="builder" id="vnb-builder"><p>Конструктор составляет текст команды для T2F, изображения сайт не генерирует.</p>
+<div class="builder-grid">
+<div><label for="vnb-layout">Кадры</label><select id="vnb-layout"><option value="">Один кадр</option><option value="each">Отдельный каждому (each)</option></select></div>
+<div><label for="vnb-profile">Базовый комплект</label><select id="vnb-profile"><option value="">under (по умолчанию)</option><option value="sport">sport</option><option value="thermal">thermal</option><option value="casual">casual</option></select></div>
+<div><label for="vnb-v">Ориентация</label><select id="vnb-v"><option value="">Обычная</option><option value="v">Вертикальная (v)</option></select></div>
+</div><div class="builder-output"><code id="vnb-result">vnb</code><button class="copy" id="vnb-copy" data-copy="vnb">Копировать</button></div></div>
+<h3>Правила постановки</h3>
+<p class="text">Вид почти строго сверху (75–90°). Светлая простыня, подушки, мягкий дневной свет. Вещи — только из исходного комплекта, разложены отдельно и узнаваемо на матрасе. В кадре целиком видны человек и ключевые предметы. Сохраняются лицо, возраст, волосы и естественные пропорции. Сцена художественная, не документирует реальное переодевание.</p>
+<div class="note warn"><span>!</span><div>Непрозрачный under — условный комплект, а не попытка восстановить скрытое бельё по фото. Бельевая постановка возможна только для взрослых при допустимых условиях. Для несовершеннолетних, при сомнении в возрасте или неподходящем исходнике — обычная закрытая спортивная или повседневная одежда. Без наготы и эротизации.</div></div>
+</section>
+
+<section class="section" id="next"><span class="section-marker"></span><p class="eyebrow">08 / развитие сцены во времени</p>
   <h2 class="section-title">22 next. Следующий момент истории.</h2>
   <p class="section-intro">Переход вперёд или назад относительно последнего кадра. Результат — одна новая фотография, а не видео и не точный прогноз.</p>
   <div class="cmd-grid">
@@ -484,6 +516,7 @@ keep face keep age match outfit, full body solo, natural light, 3:2">Копир�
    <button class="filter" data-filter="77" aria-pressed="false">77</button>
    <button class="filter" data-filter="11" aria-pressed="false">11</button>
     <button class="filter" data-filter="vnx" aria-pressed="false">VNX</button>
+    <button class="filter" data-filter="vnb" aria-pressed="false">VNB</button>
    <button class="filter" data-filter="next" aria-pressed="false">22 next</button>
    <button class="filter" data-filter="new" aria-pressed="false">NEW</button>
    <button class="filter" data-filter="general" aria-pressed="false">Другие</button>
@@ -660,7 +693,7 @@ full body solo, clean white studio, soft light, 3:2" aria-label="Скопиро�
   <details class="details"><summary>Что означает quality=max или Sunburst?</summary><p>Это предпочтения, заложенные в правилах плагина. Они применимы лишь если реальный инструмент предоставляет выбор модели и уровня качества. Текст плагина не переключает скрытые настройки ChatGPT.</p></details>
   <details class="details"><summary>Можно ли сделать 3D-модель для Blender?</summary><p>Режим 12 формирует 3D-выглядящее изображение, не 3D-файл с сеткой, материалами и костями.</p></details>
   <details class="details"><summary>Для чего отдельный конструктор T2FB?</summary><p>Он помогает собрать команды 12, 22 и 32 с выбором параметров и примерами, а также 22 next. Справочник описывает логику работы; конструктор выдаёт готовый текст для чата с T2F.</p></details>
-  <footer class="footer"><span>T2F · Справочник 0.10.10</span><a href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин ↗</a><a href="../../plg/t2fb/" target="_blank" rel="noopener">Конструктор ↗</a><a href="../../">Каталог GP ↗</a><span>GitHub Pages</span></footer>
+  <footer class="footer"><span>T2F · Справочник 0.10.11</span><a href="https://chatgpt.com/plugins/plugins_6aca023840e881919cb72c5b6c5e7d34" target="_blank" rel="noopener">Плагин ↗</a><a href="../../plg/t2fb/" target="_blank" rel="noopener">Конструктор ↗</a><a href="../../">Каталог GP ↗</a><span>GitHub Pages</span></footer>
  </section>
  </main>
 </div>
