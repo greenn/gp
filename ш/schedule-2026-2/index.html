@@ -42,7 +42,7 @@ tr:last-child td{border-bottom:none}
 .uncertain{background:#fff0d4;color:var(--orange)}
 .text-muted{color:var(--muted)}
 .subject{font-weight:650}
-.flags{font-size:12px;color:var(--orange);margin-top:3px}
+.flags{font-size:12px;color:var(--orange);margin-top:3px}.extra-note{color:#286a56;font-size:12px;margin-top:3px;font-weight:600}
 details>summary{cursor:pointer;font-weight:700}
 li{margin:5px 0}
 .old{color:var(--muted);text-decoration:line-through}
@@ -58,7 +58,7 @@ li{margin:5px 0}
 <header>
   <div class="eyebrow">МАОУ СОШ · 2026/2027</div>
   <h1>Расписание · II четверть</h1>
-  <p class="sub">Расшифровка бумажного расписания с пометкой «со 2 четверти». Обновлено 4 ноября 2026 года. Исходный вариант первой четверти сохранён без изменений.</p>
+  <p class="sub">Расшифровка бумажного расписания с пометкой «со 2 четверти». Фото получено 4 ноября 2026 года; внеурочная деятельность уточнена 25 ноября 2026 года. Исходный вариант первой четверти сохранён без изменений.</p>
   <nav><a href="../schedule-2026/">I четверть</a><a href="./schedule.json">JSON II четверти</a><a href="./schedule-first-quarter.json">Исходная база I четверти</a><a href="#check">Сверка и спорные места</a></nav>
 </header>
 <div class="panel warning"><strong>Предварительная версия.</strong> Фото имеет разрешение 960×557. Часть цифр, индексов 7А/7Б и исправлений неразборчива. Спорные записи отмечены, а не выданы за проверенные. По этому сайту нельзя без дополнительной проверки утверждать точное расписание занятий.</div>
@@ -82,6 +82,7 @@ li{margin:5px 0}
   <h3>Как читать данные</h3>
   <ul>
     <li><b>7?</b> — по фотографии не удалось подтвердить, 7А это или 7Б. Отдельные совпавшие позиции 7А/7Б восстановлены по прежним согласованным записям.</li>
+    <li><b>6 класс, внеурочная деятельность:</b> вторник, 7-й — «Спортивные игры» (Ксения); среда, 7-й — «География» (Фетисова Н.Е.), 8-й — «Мы разные, мы вместе» (Рожков С.); четверг, 8-й — «Спортивные игры» (Ксения). Фамилия Ксении не указана.</li>
     <li><strong>7Б (занятия у преподавателя по информатике): только информатика.</strong> Алгебру и геометрию в 7Б он не ведёт. Для 7А математические предметы сохраняются по прежним правилам.</li>
     <li>Названия предметов определяются по правилам I четверти, если на фото указаны только классы; это предположение, не новая ведомость предметов.</li>
     <li>Сентябрьские временные замены не переносились автоматически. Учителей, добавленных на новом фото, можно выбрать в фильтре.</li>
@@ -163,6 +164,13 @@ li{margin:5px 0}
     }
   }
   all.forEach(e=>{if(e.special)return;if(e.day==='Понедельник'&&e.lesson===1)e.subject='Разговоры о важном';else if(e.day==='Четверг'&&e.lesson===1)e.subject='Билет в будущее'});
+  // Внеурочная деятельность: уточнения пользователя имеют приоритет над распознанной фотографией.
+  for(const x of (db.extracurricular||[])){
+    const c=String(x.class),tid=x.teacherId;
+    let lesson=all.find(e=>e.day===x.day&&e.lesson===x.lesson&&e.klass===c&&e.teacherId===tid);
+    if(lesson){lesson.subject=x.subject;lesson.special=x.subject;lesson.extracurricular=true;}
+    else all.push({day:x.day,lesson:x.lesson,teacherId:tid,teacher:x.teacherName||teacherMap.get(tid)?.name||'—',klass:c,raw:c,uncertain:false,special:x.subject,subject:x.subject,extracurricular:true});
+  }
   const classes=[...new Set(all.map(e=>e.klass))].sort((a,b)=>(parseInt(a)-parseInt(b))||a.localeCompare(b,'ru'));
   klass.append(choice('','Все классы'));classes.forEach(c=>klass.append(choice(c,c+' класс')));
   const qp=new URLSearchParams(location.search);if(qp.get('teacher'))teachers.value=qp.get('teacher');if(qp.get('class'))klass.value=qp.get('class');if(qp.get('day'))weekday.value=qp.get('day');
@@ -196,11 +204,11 @@ li{margin:5px 0}
         rr.forEach((e,j)=>{
           const flags=ambiguous.filter(a=>a.day===e.day&&a.lesson===e.lesson&&a.teacherId===e.teacherId);
           const tr=document.createElement('tr');
-          tr.innerHTML='<td class="lesson-num">'+(j===0?l:'')+'</td><td class="time">'+(j===0?times[l]:'')+'</td><td><span class="classpill'+(e.uncertain?' uncertain':'')+'">'+esc(e.klass)+'</span></td><td><div class="subject">'+esc(e.subject)+'</div>'+(flags.length?'<div class="flags" title="'+esc(flags.map(a=>a.note).join('; '))+'">Требует проверки</div>':'')+'</td><td>'+esc(e.teacher)+'</td>';tbody.append(tr);
+          tr.innerHTML='<td class="lesson-num">'+(j===0?l:'')+'</td><td class="time">'+(j===0?times[l]:'')+'</td><td><span class="classpill'+(e.uncertain?' uncertain':'')+'">'+esc(e.klass)+'</span></td><td><div class="subject">'+esc(e.subject)+'</div>'+(flags.length?'<div class="flags" title="'+esc(flags.map(a=>a.note).join('; '))+'">Требует проверки</div>':'')+(e.extracurricular?'<div class="extra-note">Внеурочная деятельность</div>':'')+'</td><td>'+esc(e.teacher)+'</td>';tbody.append(tr);
         });
       }
       const btn=sec.querySelector('button');btn.disabled=!dayRows.length;
-      btn.onclick=()=>copy(d+'\n'+dayRows.map(e=>e.lesson+'. '+e.klass+' — '+e.subject+' — '+e.teacher).join('\n'),btn);
+      btn.onclick=()=>copy(d+'\n'+dayRows.map(e=>e.lesson+'. '+e.klass+' — '+e.subject+' — '+e.teacher+(e.extracurricular?' (внеурочная деятельность)':'')).join('\n'),btn);
       output.append(sec);
     }
     $('diffSummary').textContent='Показать отличия ('+dr.length+')';
