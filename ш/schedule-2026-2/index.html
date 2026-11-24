@@ -82,6 +82,7 @@ li{margin:5px 0}
   <h3>Как читать данные</h3>
   <ul>
     <li><b>7?</b> — по фотографии не удалось подтвердить, 7А это или 7Б. Отдельные совпавшие позиции 7А/7Б восстановлены по прежним согласованным записям.</li>
+    <li><b>Подтверждено для 6 класса:</b> среда, 5-й урок (12:30–13:10) — математика, Рожков С.</li>
     <li><b>6 класс, внеурочная деятельность:</b> вторник, 7-й — «Спортивные игры» (Ксения); среда, 7-й — «География» (Фетисова Н.Е.), 8-й — «Мы разные, мы вместе» (Рожков С.); четверг, 8-й — «Спортивные игры» (Ксения). Фамилия Ксении не указана.</li>
     <li><strong>7Б (занятия у преподавателя по информатике): только информатика.</strong> Алгебру и геометрию в 7Б он не ведёт. Для 7А математические предметы сохраняются по прежним правилам.</li>
     <li>Названия предметов определяются по правилам I четверти, если на фото указаны только классы; это предположение, не новая ведомость предметов.</li>
@@ -170,6 +171,13 @@ li{margin:5px 0}
     let lesson=all.find(e=>e.day===x.day&&e.lesson===x.lesson&&e.klass===c&&e.teacherId===tid);
     if(lesson){lesson.subject=x.subject;lesson.special=x.subject;lesson.extracurricular=true;}
     else all.push({day:x.day,lesson:x.lesson,teacherId:tid,teacher:x.teacherName||teacherMap.get(tid)?.name||'—',klass:c,raw:c,uncertain:false,special:x.subject,subject:x.subject,extracurricular:true});
+  }
+  // Подтверждённые пользователем уроки имеют приоритет над автоматическим определением предмета.
+  for(const x of (db.confirmedLessons||[])){
+    const c=String(x.class);
+    const existing=all.find(e=>e.day===x.day&&e.lesson===x.lesson&&e.klass===c&&e.teacherId===x.teacherId);
+    if(existing){existing.subject=x.subject;existing.special=x.subject;existing.confirmed=true;}
+    else all.push({day:x.day,lesson:x.lesson,teacherId:x.teacherId,teacher:x.teacherName||teacherMap.get(x.teacherId)?.name||'—',klass:c,raw:c,uncertain:false,special:x.subject,subject:x.subject,confirmed:true});
   }
   const classes=[...new Set(all.map(e=>e.klass))].sort((a,b)=>(parseInt(a)-parseInt(b))||a.localeCompare(b,'ru'));
   klass.append(choice('','Все классы'));classes.forEach(c=>klass.append(choice(c,c+' класс')));
